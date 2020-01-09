@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
 
   helper_method :logged_in?, :current_user
 
+  private
+
   def logged_in?
     !current_user.nil?
   end
@@ -12,8 +14,6 @@ class ApplicationController < ActionController::Base
 
     @current_user ||= User.find_by_session_token(session[:session_token])
   end
-
-  private
 
   def login(user)
     session[:session_token] = user.session_token
