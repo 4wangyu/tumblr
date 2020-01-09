@@ -29,11 +29,12 @@ module Thumblr
 
     # Don't generate system test files.
     config.generators do |generate|
+      generate.javascripts false
       generate.template_engine false
       generate.helper false
       generate.system_tests false
       generate.view_specs false
-      generate.helper_specs    false
+      generate.helper_specs false
     end
   end
 end
