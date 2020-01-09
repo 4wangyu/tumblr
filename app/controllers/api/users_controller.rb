@@ -6,22 +6,13 @@ class Api::UsersController < ApplicationController
     unless @user.save
       render json: @user.errors.full_messages, status: :unprocessable_entity #422
     else
+      login(@user)
       render :show, status: :created # 201
     end
   end
 
-  def update
-    if !@user
-      render json: ['User not found'], status: :not_found # 404
-    elsif !@user.update_attributes(user_params)
-      render json: @user.errors.full_messages, status: :unprocessable_entity # 422
-    else
-      render :show
-    end
-  end
-
   def show
-    unless @user
+    if !@user
       render json: ['User not found'], status: :not_found # 404
     else
       render :show
