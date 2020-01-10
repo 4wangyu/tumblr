@@ -1,13 +1,15 @@
 import { connect } from 'react-redux';
-import Dashboard from './Dashboard';
-import { selectCurrentUser } from '../../reducers/selectors'
+import PostIndex from './PostIndex';
+import { selectCurrentUser, selectPosts } from '../../reducers/selectors'
+import { fetchPosts } from '../../actions/posts_actions'
 
 const mapStateToProps = state => ({
-  currentUser: selectCurrentUser(state)
+  currentUser: selectCurrentUser(state),
+  posts: selectPosts(state)
 });
 
 const mapDispatchToProps = dispatch => ({
-
+  fetchPosts: () => dispatch(fetchPosts())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default connect(mapStateToProps, mapDispatchToProps)(PostIndex);
