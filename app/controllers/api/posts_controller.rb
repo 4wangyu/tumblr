@@ -1,4 +1,4 @@
-class Api::UserPostsController < ApplicationController
+class Api::PostsController < ApplicationController
   before_action :select_user_post, only: [:show, :update, :destroy]
 
   def index

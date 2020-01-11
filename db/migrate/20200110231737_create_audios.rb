@@ -7,6 +7,7 @@ class CreateAudios < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
-    add_index :audios, [:track, :artist], unique: true
+    add_index :audios, :track
+    add_index :audios, :artist
   end
 end

@@ -1,0 +1,1 @@
+json.partial! 'user_post', user_post: user_post
