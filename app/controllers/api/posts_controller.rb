@@ -25,11 +25,11 @@ class Api::PostsController < ApplicationController
     post_type = post_type_param()
 
     case post_type
-      when 'image_gallery'
+      when 'ImageGallery'
         @user_post = ImageGallery.new(image_gallery_params)
-      when 'audio'
+      when 'Audio'
         @user_post = Audio.new(audio_params)
-      when 'video'
+      when 'Video'
         @user_post = Video.new(video_params)
       else
         nil
