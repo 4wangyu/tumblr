@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
-import PostIndexItem from './PostIndexItem'
+import AudioPost from './AudioPost';
+import VideoPost from './VideoPost';
+import ImageGalleryPost from './ImageGalleryPost';
 import CreatePostFormContainer from './CreatePostFormContainer'
 const PostIndex = ({ fetchPosts, posts }) => {
 
@@ -16,12 +18,20 @@ const PostIndex = ({ fetchPosts, posts }) => {
     <div>
       <h2>Create Post</h2>
       <CreatePostFormContainer />
-      <ul>
-        {posts.map(post => (
-
-          <PostIndexItem key={post.id} post={post} />
-        ))}
-      </ul>
+      <div>
+        {posts.map(post => {
+          switch (post.post_type) {
+            case "Audio":
+              return <AudioPost post={post} />
+            case "Video":
+              return <VideoPost post={post} />
+            case "ImageGallery":
+              return <ImageGalleryPost post={post} />
+            default:
+              return null
+          }
+        })}
+      </div>
     </div>
   )
 }
