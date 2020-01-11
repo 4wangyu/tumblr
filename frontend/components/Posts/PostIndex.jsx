@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import PostIndexItem from './PostIndexItem'
-
+import CreatePostFormContainer from './CreatePostFormContainer'
 const PostIndex = ({ fetchPosts, posts }) => {
 
   useEffect(() => {
@@ -14,8 +14,11 @@ const PostIndex = ({ fetchPosts, posts }) => {
 
   return (
     <div>
+      <h2>Create Post</h2>
+      <CreatePostFormContainer />
       <ul>
         {posts.map(post => (
+
           <PostIndexItem key={post.id} post={post} />
         ))}
       </ul>
