@@ -1,4 +1,3 @@
-json.extract! image_gallery, :caption
-json.image_urls(image_gallery.image_files) do |image_file|
-  url_for(image_file)
-end
+json.caption image_gallery.caption
+json.image_urls image_gallery.image_files.collect {|f| url_for(f)}
+json.user_id image_gallery.caption

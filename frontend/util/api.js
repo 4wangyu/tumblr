@@ -1,3 +1,4 @@
+// --------------------------------- Session
 export const signup = user => {
   return $.post({ url: '/api/users', data: { user } })
 }
@@ -14,6 +15,12 @@ export const fetchPosts = () => {
   return $.get({ url: '/api/posts' })
 }
 
+// --------------------------------- Users
+export const fetchUsers = () => {
+  return $.get({ url: '/api/users' })
+}
+
+// --------------------------------- Posts
 export const fetchPost = postId => {
   return $.get({ url: '/api/posts', data: { id: postId } })
 }

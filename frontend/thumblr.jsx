@@ -2,10 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import configureStore from './store/store';
 import Root from './components/Root';
-
+import Styled from './styled/Styled';
 document.addEventListener('DOMContentLoaded', () => {
   const root = document.getElementById('root');
-  
+
   let preloadedState = undefined;
   if (window.currentUser) {
     preloadedState = {
@@ -14,9 +14,10 @@ document.addEventListener('DOMContentLoaded', () => {
       },
       session: { id: window.currentUser.id }
     };
+    delete window.currentUser;
   }
 
   const store = configureStore(preloadedState);
 
-  ReactDOM.render(<Root store={store} />, root)
+  ReactDOM.render(<Styled><Root store={store} /></Styled>, root)
 })

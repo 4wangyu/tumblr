@@ -1,4 +1,10 @@
 class User < ApplicationRecord
+  # ----------------------------- Associations
+  has_many :user_posts, dependent: :destroy
+
+  # ----------------------------- ActiveStorage
+  has_one_attached :avatar_file
+
   # ----------------------------- Validations
   validates :email, :username, presence: true, uniqueness: true
   validates :session_token, uniqueness: true
@@ -14,8 +20,5 @@ class User < ApplicationRecord
     return nil unless user
     user.authenticate(password)
   end
-
-  # ----------------------------- Associations
-  has_many :user_posts, dependent: :destroy
 
 end

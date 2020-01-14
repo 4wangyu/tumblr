@@ -1,16 +1,15 @@
 import React from 'react'
-
-const ImageGalleryPost = ({ post: { imageUrls, caption } }) => (
-  <div>
+import { ImageGallery, Username, Image, Caption } from './ImageGalleryPost.styled';
+const ImageGalleryPost = ({ username, post: { imageUrls, caption } }) => (
+  <ImageGallery>
+    <Username>{username}</Username>
     <div>
-      {imageUrls.map(url => (
-        <div>
-          <img src={url} width="70px" />
-        </div>
+      {imageUrls.map((url, idx) => (
+        <Image src={url} key={idx} />
       ))}
     </div>
-    {caption && <p>{caption}</p>}
-  </div>
+    <Caption>{caption}</Caption>
+  </ImageGallery>
 )
 
 export default ImageGalleryPost;

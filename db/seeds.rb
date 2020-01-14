@@ -6,13 +6,37 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 User.destroy_all
+UserPost.destroy_all
+ImageGallery.destroy_all
 
-User.create!(email: 'a.segers.dev@gmail.com', password: 'password', username: 'alex')
-
-4.times do
-  email = Faker::Internet.unique.email
-  username = Faker::Internet.unique.username
-  User.create!(email: email, password: 'password', username: username)
+5.times do |i|
+  # User
+  email = i == 0 ? 'a.segers.dev@gmail.com ': Faker::Internet.unique.email
+  username = i == 0 ? 'alex' : Faker::Internet.unique.username
+  user = User.create!(email: email, password: 'password', username: username)
+  user.avatar_file.attach(
+    io: File.open(
+      File.join(Rails.root, "db/fixtures/avatars/avatar-#{i}.jpg")
+    ), 
+    filename: "avatar-#{i}"
+  )
+  
+  # UserPost > ImageGallery 
+  (rand(3)+1).times do
+    caption = Faker::Hipster.unique.word
+    image_gallery = ImageGallery.new(caption: caption)
+    [1,1,1,2,3,1].sample.times do
+      rand_int = rand(21)
+      image_gallery.image_files.attach(
+        io: File.open(
+          File.join(Rails.root, "db/fixtures/images/image-#{rand_int}.jpg")
+        ), 
+        filename: "image-#{rand_int}"
+      )
+      image_gallery.save! 
+    end
+    user.user_posts.create!({ post: image_gallery })
+  end
 end
 
-puts "Created #{User.count} Users!"
+puts "Created #{User.count} Users & #{UserPost.count} UserPosts!"

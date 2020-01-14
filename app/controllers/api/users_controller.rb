@@ -1,6 +1,10 @@
 class Api::UsersController < ApplicationController
   before_action :select_user, only: [:update, :show]
 
+  def index
+    @users = User.all.includes(:user_posts)
+  end
+
   def create
     @user = User.new(user_params)
     unless @user.save
@@ -23,9 +27,5 @@ class Api::UsersController < ApplicationController
 
   def select_user
     @user = User.find_by(id: params[:id])
-  end
-
-  def user_params
-    params.require(:user).permit(:email, :password, :username)
   end
 end

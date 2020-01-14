@@ -3,7 +3,7 @@ class Api::PostsController < ApplicationController
 
   def index
     # All posts (filter by params)
-    @user_posts = UserPost.all
+    @user_posts = UserPost.all.includes(:user)
   end
 
   # def dashboard

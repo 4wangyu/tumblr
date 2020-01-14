@@ -9,3 +9,5 @@ export const selectPostErrors = state => state.ui.errors.post;
 export const selectPosts = state => Object.values(state.entities.posts);
 
 // export const selectPost = postId => state.entities.posts[postId];
+
+export const selectUserById = userId => state.entities.users[userId];
