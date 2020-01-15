@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import α from 'color-alpha';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 export const NavBar = styled.nav`
   height: 5.4rem;
   display: flex;
@@ -25,7 +26,7 @@ export const RightNav = styled(NavSection)`
 `;
 
 export const Logo = styled.span`
-  text-shadow: 2px 2px 3px ${α('#404040', .15)};;
+  text-shadow: 2px 2px 3px ${α('#404040', .15)};
   font-family: ${({ theme: T }) => T.font.family.title};
   color: white;
   font-weight: ${({ theme: T }) => T.font.weight.bold};
@@ -95,9 +96,10 @@ export const TabBtn = styled.button`
   height: 3.2rem;
   border-radius: 3px;
   background-color: ${({ theme: T }) => T.colors.dodgerBlue};
-  padding: 0 1.6rem;
+  padding: 0 1rem 0 1rem;
   color: ${({ theme: T }) => T.colors.midnightBlue};
   border: none;
+  margin-left: 1rem;
 `;
 
 export const TabIcon = styled(FontAwesomeIcon)`

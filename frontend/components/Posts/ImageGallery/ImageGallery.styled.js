@@ -7,11 +7,10 @@ export const Post = styled.div`
   background-color: white;
   color: ${α('black', .65)};
   padding: 15px 0px;
-  margin-left: 2rem;
   font-size: 1.5rem;
 `;
 
-export const ImageGallery = styled(Post)`
+export const Wrapper = styled(Post)`
 
 `;
 

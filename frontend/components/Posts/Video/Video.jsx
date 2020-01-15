@@ -1,6 +1,6 @@
 import React from 'react';
 
-const VideoPost = ({ post: { caption, videoUrl } }) => (
+const Video = ({ post: { caption, videoUrl } }) => (
   <div>
     <video width="320" height="240" controls>
       <source src={videoUrl} type="video/mp4" />
@@ -10,4 +10,4 @@ const VideoPost = ({ post: { caption, videoUrl } }) => (
   </div>
 );
 
-export default VideoPost;
+export default Video;

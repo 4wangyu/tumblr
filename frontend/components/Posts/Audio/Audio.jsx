@@ -1,6 +1,6 @@
 import React from 'react';
 
-const AudioPost = ({ post: { track, artist, description, audioUrl, albumArtUrl } }) => (
+const Audio = ({ post: { track, artist, description, audioUrl, albumArtUrl } }) => (
   <div>
     <strong>{track}</strong> by <strong>{artist}</strong>
     <audio controls>
@@ -12,4 +12,4 @@ const AudioPost = ({ post: { track, artist, description, audioUrl, albumArtUrl }
   </div>
 );
 
-export default AudioPost;
+export default Audio;

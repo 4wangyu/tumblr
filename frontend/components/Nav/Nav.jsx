@@ -8,7 +8,7 @@ import { NavBar, LeftNav, RightNav, Logo, SearchBar, Tabs, TabLink, TabIcon, Tab
 
 
 
-const Nav = ({ loggedIn, currentUser, logout }) => {
+const Nav = ({ loggedIn, currentUser, logout, openModal }) => {
 
   return (
     <NavBar>
@@ -24,7 +24,7 @@ const Nav = ({ loggedIn, currentUser, logout }) => {
       <RightNav>
         <Tabs>
           <TabLink to="/dashboard">
-            <TabIcon icon={faHome} size="1.5x" />
+            <TabIcon icon={faHome} />
           </TabLink>
           <TabLink to="/test">
             <TabIcon icon={faCompass} />
@@ -41,7 +41,7 @@ const Nav = ({ loggedIn, currentUser, logout }) => {
           <TabLink to="/test">
             <TabIcon icon={faUser} />
           </TabLink>
-          <TabBtn>
+          <TabBtn onClick={()=>openModal('PostTypes')}>
             <TabIcon icon={faPencilAlt} />
           </TabBtn>
         </Tabs>

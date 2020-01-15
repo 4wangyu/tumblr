@@ -30,6 +30,15 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     background-color: ${colors.midnightBlue};
   }
+
+  input, textarea {
+    appearance: none;
+    box-shadow: none;
+    border: none;
+    &:focus, &:hover {
+      outline: none;
+    }
+  }
 `;
 
 export default GlobalStyle;

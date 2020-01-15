@@ -10,4 +10,6 @@ export const selectPosts = state => Object.values(state.entities.posts);
 
 // export const selectPost = postId => state.entities.posts[postId];
 
-export const selectUserById = userId => state.entities.users[userId];
+export const selectUserById = (userId, state) => state.entities.users[userId];
+
+export const selectModal = state => state.ui.modal;
