@@ -11,7 +11,7 @@ ImageGallery.destroy_all
 
 5.times do |i|
   # User
-  email = i == 0 ? 'a.segers.dev@gmail.com ': Faker::Internet.unique.email
+  email = i == 0 ? 'a.segers.dev@gmail.com': Faker::Internet.unique.email
   username = i == 0 ? 'alex' : Faker::Internet.unique.username
   user = User.create!(email: email, password: 'password', username: username)
   user.avatar_file.attach(

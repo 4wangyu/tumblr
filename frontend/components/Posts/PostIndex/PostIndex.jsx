@@ -1,12 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Fragment as F } from 'react';
 import Audio from '../Audio/Audio';
 import Video from '../Video/Video';
 import ImageGallery from '../ImageGallery/ImageGallery';
-import MasterFormContainer from '../MasterForm/MasterFormContainer';
-import { PostsWrapper, PostWrapper, UserAvatar } from './PostIndex.styled';
-
-
-
+import NewPostButtonsContainer from './NewPostButtons/NewPostButtonsContainer';
+import { Main, Sidebar, Row, UserAvatar } from './PostIndex.styled';
+import Post from '../Post/Post';
 const PostIndex = ({ currentUser, fetchUsers, fetchPosts, users, posts }) => {
 
   useEffect(() => {
@@ -19,38 +17,43 @@ const PostIndex = ({ currentUser, fetchUsers, fetchPosts, users, posts }) => {
     return <h2>Loading</h2>
   }
 
-  const renderAppropriatePost = ({ username }, post) => {
+  const renderPostContent = post => {
     switch (post.postType) {
       case "Audio":
-        return <Audio username={username} post={post} />
+        return <Audio post={post} />
       case "Video":
-        return <Video username={username} post={post} />
+        return <Video post={post} />
       case "ImageGallery":
-        return <ImageGallery username={username} post={post} />
+        return <ImageGallery post={post} />
       default:
         return null
     }
   }
-  // <CreatePostFormContainer />
+
   return (
-    <div>
-      <PostsWrapper>
-        <PostWrapper masterForm>
+    <F>
+      <Main>
+        <Row>
           <UserAvatar src={currentUser.avatarUrl} />
-          <MasterFormContainer />
-        </PostWrapper>
+          <NewPostButtonsContainer />
+        </Row>
         {posts.map(post => {
-          const user = users[post.userId];
+          const author = users[post.userId];
 
           return (
-            <PostWrapper key={`post-${post.id}`}>
-              <UserAvatar src={user.avatarUrl} />
-              {renderAppropriatePost(user, post)}
-            </PostWrapper>
+            <Row key={post.id}>
+              <UserAvatar src={author.avatarUrl} />
+              <Post author={author} post={post} currentUser={currentUser}>
+                {renderPostContent(post)}
+              </Post>
+            </Row>
           )
         })}
-      </PostsWrapper>
-    </div>
+      </Main>
+      <Sidebar>
+
+      </Sidebar>
+    </F>
   )
 }
 

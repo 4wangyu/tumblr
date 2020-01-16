@@ -1,6 +1,6 @@
 class Api::SessionsController < ApplicationController
   def create
-    @user = User.find_by_credentials(username: user_params[:username], password: user_params[:password])
+    @user = User.find_by_credentials(email: user_params[:email], password: user_params[:password])
     if @user.nil?
       render json: ['Invalid credentials'], status: :unauthorized
     else

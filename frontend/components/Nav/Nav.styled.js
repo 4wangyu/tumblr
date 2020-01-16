@@ -109,5 +109,21 @@ export const TabIcon = styled(FontAwesomeIcon)`
 export const Tabs = styled.div`
 
 `
+export const NavBtn = styled(NavLink).attrs(P => ({
+  activeClassName: 'selected'
+}))`
+  background-color: ${P => P.secondary ? α('black', .2) : α('white', .9)};
+  border: none;
+  border-radius: 2px;
+  color: ${P => P.secondary ? 'white' : 'black'};
+  cursor: pointer;
+  font-weight: ${({ theme: T }) => T.font.weight.semiBold};
+  font-size: 1.5rem;
+  padding: 8px 13px;
+  text-decoration: none;
+  margin-left: 1rem;
 
-
+  /* &.selected {
+    display: none;
+  } */
+`;

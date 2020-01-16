@@ -1,15 +1,15 @@
-import React from 'react'
-import { Wrapper, Username, Image, Caption } from './ImageGallery.styled';
-const ImageGallery = ({ username, post: { imageUrls, caption } }) => (
-  <Wrapper>
-    <Username>{username}</Username>
-    <div>
+import React, { Fragment as F } from 'react'
+import { Gallery, Image, Caption } from './ImageGallery.styled';
+
+const ImageGallery = ({ post: { imageUrls, caption } }) => (
+  <F>
+    <Gallery>
       {imageUrls.map((url, idx) => (
         <Image src={url} key={idx} />
       ))}
-    </div>
+    </Gallery>
     <Caption>{caption}</Caption>
-  </Wrapper>
+  </F>
 )
 
 export default ImageGallery;

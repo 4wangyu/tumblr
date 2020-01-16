@@ -3,18 +3,16 @@ import {
   faFont, faCameraRetro, faQuoteLeft, faVideo,
   faLink, faComments, faHeadphones
 } from "@fortawesome/free-solid-svg-icons";
-import { Wrapper, Link, Icon, Text } from './MasterForm.styled';
-import ImageGalleryForm from '../ImageGallery/ImageGalleryForm';
+import { Wrapper, Link, Icon, Text } from './NewPostButtons.styled';
 
 
-const MasterForm = ({ currentUser, openModal }) => {
+const NewPostButtons = ({ currentUser, openModal }) => {
 
   return (
     <div>
-      <ImageGalleryForm currentUser={currentUser} />
       <Wrapper>
         <Link>
-          <Icon icon={faFont} />
+          <Icon icon={faFont} onClick={()=> {this.handler1(); this.handler2()}} />
           <Text>Text</Text>
         </Link>
         <Link>
@@ -47,4 +45,4 @@ const MasterForm = ({ currentUser, openModal }) => {
   )
 }
 
-export default MasterForm;
+export default NewPostButtons;

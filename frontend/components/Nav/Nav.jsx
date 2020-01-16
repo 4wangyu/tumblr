@@ -1,12 +1,6 @@
 import React from 'react';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCompass } from "@fortawesome/free-regular-svg-icons";
-import { faHome, faEnvelope, faCommentDots, faBolt, faUser, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
-import { Link } from 'react-router-dom';
-import { NavBar, LeftNav, RightNav, Logo, SearchBar, Tabs, TabLink, TabIcon, TabBtn } from './Nav.styled';
-
-
-
+import { NavBar, LeftNav, RightNav, Logo, SearchBar, NavBtn } from './Nav.styled';
+import MenuTabs from './MenuTabs';
 
 const Nav = ({ loggedIn, currentUser, logout, openModal }) => {
 
@@ -22,29 +16,13 @@ const Nav = ({ loggedIn, currentUser, logout, openModal }) => {
         </SearchBar>
       </LeftNav>
       <RightNav>
-        <Tabs>
-          <TabLink to="/dashboard">
-            <TabIcon icon={faHome} />
-          </TabLink>
-          <TabLink to="/test">
-            <TabIcon icon={faCompass} />
-          </TabLink>
-          <TabLink to="/test">
-            <TabIcon icon={faEnvelope} />
-          </TabLink>
-          <TabLink to="/test">
-            <TabIcon icon={faCommentDots} />
-          </TabLink>
-          <TabLink to="/test">
-            <TabIcon icon={faBolt} />
-          </TabLink>
-          <TabLink to="/test">
-            <TabIcon icon={faUser} />
-          </TabLink>
-          <TabBtn onClick={()=>openModal('PostTypes')}>
-            <TabIcon icon={faPencilAlt} />
-          </TabBtn>
-        </Tabs>
+        {loggedIn ? <MenuTabs openModal={openModal} /> : (
+          <span>
+            <NavBtn to="/login" secondary>Log in</NavBtn>
+            <NavBtn to="/">Sign up</NavBtn>
+          </span>
+
+        )}
       </RightNav>
     </NavBar>
   )

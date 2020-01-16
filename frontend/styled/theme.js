@@ -1,3 +1,5 @@
+import α from 'color-alpha';
+
 export const font = {
   url: 'https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,900|Open+Sans:400,600,700,800&display=swap',
   family: {
@@ -16,7 +18,8 @@ export const font = {
 
 export const colors = {
   midnightBlue: '#001935',
-  dodgerBlue: '#00b8ff'
+  dodgerBlue: '#00b8ff',
+  fadedBlack: α('black', .65)
 };
 
 export default {

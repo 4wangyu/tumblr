@@ -3,7 +3,16 @@ class Api::PostsController < ApplicationController
 
   def index
     # All posts (filter by params)
+    # 3395ms
     @user_posts = UserPost.all.includes(:user)
+    # @user_posts = UserPost.all.includes(:user, post: {
+    #   # Audio
+    #   audio_file_attachment: :blob, album_art_file_attachment: :blob,
+    #   # Video
+    #   video_file_attachment: :blob,
+    #   # Image Gallery
+    #   image_files_attachments: :blob,
+    # })
   end
 
   # def dashboard

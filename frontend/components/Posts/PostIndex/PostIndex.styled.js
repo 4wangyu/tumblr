@@ -1,12 +1,18 @@
 import styled from 'styled-components';
 
-export const PostsWrapper = styled.div`
+export const Main = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
 
-export const PostWrapper = styled.div`
+export const Sidebar = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const Row = styled.div`
   display: flex;
   margin: 2rem;
 `;
