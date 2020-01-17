@@ -1,5 +1,5 @@
 import React from 'react';
-import { AuthRoute, ProtectedRoute } from '../util/route_util';
+import { AuthRoute, ProtectedRoute } from '../util/route';
 import BackgroundContainer from './Background/BackgroundContainer';
 import Splash from './Auth/Splash';
 import NavContainer from './Nav/NavContainer';

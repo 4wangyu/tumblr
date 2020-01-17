@@ -3,10 +3,10 @@ import {
   faFont, faCameraRetro, faQuoteLeft, faVideo,
   faLink, faComments, faHeadphones
 } from "@fortawesome/free-solid-svg-icons";
-import { Wrapper, Link, Icon, Text } from './NewPostButtons.styled';
+import { Wrapper, Link, Icon, Text } from './TypeButtons.styled';
 
 
-const NewPostButtons = ({ currentUser, openModal }) => {
+const TypeButtons = ({ currentUser, openModal }) => {
 
   return (
     <div>
@@ -45,4 +45,4 @@ const NewPostButtons = ({ currentUser, openModal }) => {
   )
 }
 
-export default NewPostButtons;
+export default TypeButtons;

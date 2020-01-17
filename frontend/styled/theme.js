@@ -20,7 +20,8 @@ export const colors = {
   midnightBlue: '#001935',
   dodgerBlue: '#00B8FF',
   fadedBlack: α('black', .65),
-  redOrange: '#FF492F'
+  redOrange: '#FF492F',
+  emerald: '#33DA58'
 };
 
 export default {

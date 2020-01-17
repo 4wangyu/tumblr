@@ -2,7 +2,7 @@ import React, { useEffect, useState, Fragment as F } from 'react';
 import Audio from '../Audio/Audio';
 import Video from '../Video/Video';
 import ImageGallery from '../ImageGallery/ImageGallery';
-import NewPostButtonsContainer from './NewPostButtons/NewPostButtonsContainer';
+import TypeButtonsContainer from './TypeButtons/TypeButtonsContainer';
 import { Main, Sidebar, Row, UserAvatar } from './PostIndex.styled';
 import Post from '../Post/Post';
 
@@ -57,7 +57,7 @@ const PostIndex = ({ currentUser, fetchUsers, fetchPosts, users, posts }) => {
       <Main>
         <Row>
           <UserAvatar src={currentUser.avatarUrl} />
-          <NewPostButtonsContainer />
+          <TypeButtonsContainer />
         </Row>
         {posts.map(post => {
           const author = users[post.userId];

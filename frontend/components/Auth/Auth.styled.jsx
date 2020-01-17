@@ -1,6 +1,16 @@
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import α from 'color-alpha';
-import { animated } from "react-spring";
+import { animated } from 'react-spring';
+
+const thump = keyframes`
+  0% {
+
+  }
+  100% {
+    transform: scale(1.03) translateY(-.1rem);
+    box-shadow: 2px 2px 3px ${α('#404040', .35)};
+  }
+`;
 
 const flexColumnHelper = css`
   display: flex;
@@ -12,7 +22,7 @@ export const AuthForm = styled.div`
   ${flexColumnHelper}
   width: 30rem;
   margin: 0 auto;
-  margin-top: 5rem;
+  margin-top: 25vh;
   position: relative;
   &:after {
     content: "";
@@ -89,6 +99,8 @@ export const ActionBtn = styled.button`
       return '#9da6af';
     } else if (P.tertiary) {
       return 'white';
+    } else if (P.quarternary) {
+      return P.theme.colors.emerald;
     } else {
       return P.theme.colors.dodgerBlue;
     }
@@ -98,10 +110,17 @@ export const ActionBtn = styled.button`
   cursor: pointer;
   color: ${P => P.tertiary ? '#444' : 'white'};
   font-weight: ${({ theme: T }) => T.font.weight.medium};
+  ${P => P.quarternary && css`animation: ${thump} .45s ease alternate infinite; margin-top: 3rem;`};
   padding: 1.1rem 1.3rem;
   text-align: center;
   text-decoration: none;
   width: 100%;
+  box-shadow: 1px 1px 2px ${α('#404040', .35)};
+  transition: all .15s ease;
+  &:active {
+    transform: translateY(.15rem);
+    box-shadow: none;
+  }
 `;
 
 

@@ -11,35 +11,6 @@ import {
   ActionLink
 } from './Auth.styled';
 
-const Step1 = ({ toggleNext }) => (
-  <F>
-    <ActionBtn onClick={toggleNext}>Get Started</ActionBtn>
-    <ActionBtn tertiary as={Link} to='/login'>Log In</ActionBtn>
-  </F>
-);
-
-const Step2 = ({ handleInput, handleSubmit, formData }) => (
-  <F>
-    <FormGroup>
-      <InputField
-        onChange={handleInput}
-        name="email" placeholder="Email"
-        value={formData.email}
-      />
-      <InputField
-        onChange={handleInput}
-        name="password" placeholder="Password"
-        value={formData.password}
-      />
-      <InputField
-        onChange={handleInput}
-        name="username" placeholder="Username"
-        value={formData.username}
-      />
-    </FormGroup>
-    <ActionBtn onClick={handleSubmit}>Sign up</ActionBtn>
-  </F>
-);
 
 const Splash = ({ processForm, errors, history }) => {
 
@@ -60,6 +31,36 @@ const Splash = ({ processForm, errors, history }) => {
 
 
   // ----------------------- Steps
+  const Step1 = () => (
+    <F>
+      <ActionBtn onClick={toggleNext}>Get Started</ActionBtn>
+      <ActionBtn tertiary as={Link} to='/login'>Log In</ActionBtn>
+    </F>
+  );
+
+  const Step2 = () => (
+    <F>
+      <FormGroup>
+        <InputField
+          onChange={handleInput}
+          name="email" placeholder="Email"
+          value={formData.email}
+        />
+        <InputField
+          onChange={handleInput}
+          name="password" placeholder="Password"
+          value={formData.password}
+        />
+        <InputField
+          onChange={handleInput}
+          name="username" placeholder="Username"
+          value={formData.username}
+        />
+      </FormGroup>
+      <ActionBtn onClick={handleSubmit}>Sign up</ActionBtn>
+    </F>
+  );
+
   const [step, setStep] = useState(0);
   const [reverse, setReverse] = useState(false);
   const Steps = [Step1, Step2];
@@ -86,14 +87,6 @@ const Splash = ({ processForm, errors, history }) => {
     setReverse(false);
   };
 
-  const _stepProps = {
-    formData,
-    handleInput,
-    toggleBack,
-    toggleNext,
-    handleSubmit
-  }
-
   return (
     <AuthForm>
       <Logo large>thumblr</Logo>
@@ -103,7 +96,7 @@ const Splash = ({ processForm, errors, history }) => {
       </SubHeading>
       {transitions.map(({ item, props, key }) => (
         <StepWrapper key={key} style={props}>
-          {React.createElement(Steps[item], _stepProps, null)}
+          {React.createElement(Steps[item])}
         </StepWrapper>
       ))}
     </AuthForm>

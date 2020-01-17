@@ -1,5 +1,6 @@
-import React, { Fragment as F, useState } from 'react';
+import React, { Fragment as F, useState, useRef } from 'react';
 import { useTransition } from 'react-spring';
+import { sleep, simulateTyping } from '../../util/bot';
 
 import {
   AuthForm,
@@ -10,50 +11,9 @@ import {
   ActionLink
 } from './Auth.styled';
 
-const Step1 = ({ formData, handleInput, toggleNext }) => (
-  <F>
-    <FormGroup>
-      <InputField
-        onChange={handleInput}
-        name="email" placeholder="Email"
-        value={formData.email}
-      />
-    </FormGroup>
-    <ActionBtn onClick={toggleNext}>Next</ActionBtn>
-  </F>
-);
-
-const Step2 = ({ toggleBack, toggleNext }) => (
-  <F>
-    <ActionBtn secondary>Send me a magic link</ActionBtn>
-    <ActionBtn onClick={toggleNext}>Use password to log in</ActionBtn>
-    <ActionLink onClick={toggleBack}>back</ActionLink>
-  </F>
-);
-
-const Step3 = ({ formData, handleInput, handleSubmit }) => (
-  <F>
-    <FormGroup>
-      <InputField
-        onChange={handleInput}
-        name="email" placeholder="Email"
-        value={formData.email}
-      />
-      <InputField
-        onChange={handleInput}
-        type="password"
-        name="password" placeholder="Password"
-        value={formData.password}
-      />
-    </FormGroup>
-    <ActionBtn onClick={handleSubmit}>Login</ActionBtn>
-    <ActionLink>Forgot password?</ActionLink>
-  </F>
-)
-
 const Login = ({ processForm, errors, history }) => {
 
-  // ----------------------- FormData
+  // --------------------------------- FormData
   const _initialFormData = { email: '', password: '' }
   const [formData, setFormData] = useState(_initialFormData)
 
@@ -69,7 +29,48 @@ const Login = ({ processForm, errors, history }) => {
   }
 
 
-  // ----------------------- Steps
+  // --------------------------------- Steps
+  const Step1 = () => (
+    <F>
+      <FormGroup>
+        <InputField
+          onChange={handleInput}
+          name="email" placeholder="Email"
+          value={formData.email}
+        />
+      </FormGroup>
+      <ActionBtn ref={$nextBtn} onClick={toggleNext}>Next</ActionBtn>
+      <ActionBtn quarternary animate onClick={startDemoBot}>Demo</ActionBtn>
+    </F>
+  );
+
+  const Step2 = () => (
+    <F>
+      <ActionBtn secondary>Send me a magic link</ActionBtn>
+      <ActionBtn ref={$enterPassBtn} onClick={toggleNext}>Use password to log in</ActionBtn>
+      <ActionLink onClick={toggleBack}>back</ActionLink>
+    </F>
+  );
+
+  const Step3 = () => (
+    <F>
+      <FormGroup>
+        <InputField
+          onChange={handleInput}
+          name="email" placeholder="Email"
+          value={formData.email}
+        />
+        <InputField
+          onChange={handleInput}
+          type="password"
+          name="password" placeholder="Password"
+          value={formData.password}
+        />
+      </FormGroup>
+      <ActionBtn ref={$loginBtn} onClick={handleSubmit}>Login</ActionBtn>
+      <ActionLink>Forgot password?</ActionLink>
+    </F>
+  )
   const [step, setStep] = useState(0);
   const [reverse, setReverse] = useState(false);
   const Steps = [Step1, Step2, Step3];
@@ -95,21 +96,42 @@ const Login = ({ processForm, errors, history }) => {
     setStep(nextStep);
     setReverse(false);
   };
+  // ----------------------------------------------
 
-  const _stepProps = {
-    formData,
-    handleInput,
-    toggleBack,
-    toggleNext,
-    handleSubmit
+  // --------------------------------- Demo Bot
+  const [botRunning, setBotRunning] = useState(false);
+  const $nextBtn = useRef(null);
+  const $enterPassBtn = useRef(null);
+  const $loginBtn = useRef(null);
+  const startDemoBot = () => {
+    if (botRunning) { return };
+
+    setBotRunning(true);
+    setFormData(_initialFormData);
+    simulateTyping('a.segers.dev@gmail.com ', letter => {
+      setFormData(prev => Object.assign({}, prev, { email: prev.email + letter }))
+    }, 1500)
+      .then(() => sleep(500))
+      .then(() => $nextBtn.current.click())
+      .then(() => sleep(1000))
+      .then(() => $enterPassBtn.current.click())
+      .then(() => sleep(1000))
+      .then(() => {
+        return simulateTyping('password', letter => {
+          setFormData(prev => Object.assign({}, prev, { password: prev.password + letter }))
+        }, 1000)
+      })
+      .then(() => sleep(2000))
+      .then(() => { setBotRunning(false); $loginBtn.current.click(); });
   }
+  // ----------------------------------------------  
 
   return (
     <AuthForm>
       <Logo large>thumblr</Logo>
       {transitions.map(({ item, props, key }) => (
         <StepWrapper key={key} style={props}>
-          {React.createElement(Steps[item], _stepProps, null)}
+          {React.createElement(Steps[item])}
         </StepWrapper>
       ))}
     </AuthForm>
