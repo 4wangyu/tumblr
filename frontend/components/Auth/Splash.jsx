@@ -17,9 +17,9 @@ const Splash = ({ processForm, errors, history }) => {
   // ----------------------- FormData
   const _initialFormData = { email: '', password: '', username: '' }
   const [formData, setFormData] = useState(_initialFormData)
-
   const handleInput = e => {
     const { name, value } = e.target;
+    console.log(value);
     setFormData(prev => Object.assign({}, prev, { [name]: value }))
   }
 
@@ -42,18 +42,21 @@ const Splash = ({ processForm, errors, history }) => {
     <F>
       <FormGroup>
         <InputField
+          key={'step2-email'}
           onChange={handleInput}
-          name="email" placeholder="Email"
+          name="email"
           value={formData.email}
         />
         <InputField
+          key={'step2-password'}
           onChange={handleInput}
-          name="password" placeholder="Password"
+          name="password"
           value={formData.password}
         />
         <InputField
+          key={'step2-username'}
           onChange={handleInput}
-          name="username" placeholder="Username"
+          name="username"
           value={formData.username}
         />
       </FormGroup>

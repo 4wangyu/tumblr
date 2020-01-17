@@ -1,14 +1,15 @@
 import React, { useState } from 'react'
-import { faImages, faGlobe } from "@fortawesome/free-solid-svg-icons";
+import { faImages, faGlobe, faTimes as iRemove } from "@fortawesome/free-solid-svg-icons";
 import { faSmile } from "@fortawesome/free-regular-svg-icons";
 import {
   Card,
   PreviewBox, PreviewImg,
   Header, Form,
-  UploadBox, NativeFileBox, InvisibleFileInput, UrlInput, UrlBox, Icon, Text,
+  UploadBox, NativeFileBox, InvisibleFileInput, UrlBox, Icon, Text,
   ContentBox, CaptionInput,
-  Footer, CloseBtn, PostBtn
-} from './ImageGalleryForm.styled';
+  Footer, CloseBtn, PostBtn,
+  Preview, RemoveBtn, RemoveIcon
+} from '../Form/Form.styled';
 
 
 const ImageGalleryForm = ({ currentUser, closeModal, processForm }) => {
@@ -55,8 +56,26 @@ const ImageGalleryForm = ({ currentUser, closeModal, processForm }) => {
       .then(() => closeModal());
   }
 
+  const handleRemovePrev = e => {
+    e.stopPropagation();
+    const idx = parseInt(e.currentTarget.dataset.id);
+    setPost(prevPost => Object.assign(
+      {}, prevPost,
+      {
+        imageFiles: prevPost.imageFiles.filter((p, i) => i !== idx),
+        previewUrls: prevPost.previewUrls.filter((p, i) => i !== idx)
+      }
+    ))
+  }
+
   const renderPreviews = () => post.previewUrls.map((url, i) => (
-    <PreviewImg src={url} key={i} />
+    <Preview key={i}>
+      <PreviewImg src={url} />
+      <RemoveBtn onClick={handleRemovePrev} data-id={i}>
+        <RemoveIcon icon={iRemove} />
+      </RemoveBtn>
+    </Preview>
+
   ))
 
   const { previewUrls } = post;

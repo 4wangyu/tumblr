@@ -71,7 +71,10 @@ export const FormGroup = styled.div`
   overflow: hidden;
 `;
 
-export const InputField = styled.input`
+export const InputField = styled.input.attrs(({ name }) => ({
+  autoFocus: true,
+  placeholder: name.charAt(0).toUpperCase() + name.slice(1)
+}))`
   padding: 1.1rem 1.3rem;
   width: inherit;
   &::placeholder {

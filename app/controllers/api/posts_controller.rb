@@ -4,10 +4,14 @@ class Api::PostsController < ApplicationController
   def index
     # All posts (filter by params)
     # 3395ms
-    @user_posts = UserPost.includes(:post, :user).all
+    # @user_posts = UserPost.includes(:post, :user).all
     headers['X-Post-Count'] = UserPost.count
     # count = @user_post.length
     # headers['Post-Count'] = count
+
+    image_posts = UserPost.where(post_type: :ImageGallery).includes(:user, post: {image_files_attachments: :blob})
+    @user_posts = image_posts
+
     # @user_posts = UserPost.includes(:user, post: [
     #   {image_files_attachments: :blob},
     #   {audio_file_attachment: :blob},

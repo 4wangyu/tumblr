@@ -16,7 +16,7 @@ export const Bg = styled.div`
   background-repeat: no-repeat;
   background-position: center;
   background-blend-mode: darken;
-  padding: 10px 0;
+  padding: 0;
 `;
 
 

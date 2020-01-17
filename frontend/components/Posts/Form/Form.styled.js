@@ -100,13 +100,56 @@ export const UrlInput = styled.input.attrs({ type: 'url' })`
 
 // ------------------------- Preview
 export const PreviewBox = styled.div`
-  padding: 0 2rem;
+  overflow: hidden;
+`;
+export const Preview = styled.div`
+  display: block;
+  position: relative;
+  margin: ${P => P.video ? '0' : '1.7rem'};
+  &:hover {
+    > * {
+      opacity: 1;
+    }
+  }
+`;
 
+export const RemoveBtn = styled.div`
+  width: 2.3rem;
+  height: 2.3rem;
+  display: flex;
+  opacity: 0;
+  transition: opacity ease .1s; 
+  align-items: center;
+  justify-content: center;
+  background-color: ${({ theme: T }) => T.colors.redOrange};
+  border-radius: 10rem;
+  position: absolute;
+  right: -1rem;
+  top: -1rem;
+`;
+
+export const RemoveIcon = styled(Icon)`
+  color: white;
+  font-size: 1.5rem;
 `;
 
 export const PreviewImg = styled.img.attrs({ alt: 'image preview' })`
   height: 15rem;
+  max-width: 100%;
 `;
+
+export const PreviewVideo = styled.video.attrs({
+  controls: true
+})`
+  display: block;
+  width: 100%;
+`;
+
+export const VideoSrc = styled.source.attrs({
+  type: 'video/mp4'
+})`
+`;
+
 
 // ------------------------- Content
 

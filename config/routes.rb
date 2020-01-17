@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   end
 
   get '*path', to: 'static_pages#root', constraints: lambda { |req|
-    req.path.exclude? 'rails/active_storage'
+    ['rails/active_storage', 'assets'].all? { |v_path| req.path.exclude? v_path }
   }
 
   root "static_pages#root"

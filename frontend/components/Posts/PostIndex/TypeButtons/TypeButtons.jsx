@@ -36,7 +36,7 @@ const TypeButtons = ({ currentUser, openModal }) => {
           <Text>Audio</Text>
         </Link>
         <Link>
-          <Icon icon={faVideo} data-post-type="video" />
+          <Icon icon={faVideo} data-post-type="video" onClick={() => openModal('VideoForm')} />
           <Text>Video</Text>
         </Link>
       </Wrapper>

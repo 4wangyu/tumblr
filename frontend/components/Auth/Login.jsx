@@ -35,7 +35,8 @@ const Login = ({ processForm, errors, history }) => {
       <FormGroup>
         <InputField
           onChange={handleInput}
-          name="email" placeholder="Email"
+          name="email"
+          key={'step1-email'}
           value={formData.email}
         />
       </FormGroup>
@@ -56,14 +57,16 @@ const Login = ({ processForm, errors, history }) => {
     <F>
       <FormGroup>
         <InputField
+          key={'step3-email'}
           onChange={handleInput}
-          name="email" placeholder="Email"
+          name="email"
           value={formData.email}
         />
         <InputField
+          key={'step3-password'}
           onChange={handleInput}
           type="password"
-          name="password" placeholder="Password"
+          name="password"
           value={formData.password}
         />
       </FormGroup>
@@ -108,7 +111,7 @@ const Login = ({ processForm, errors, history }) => {
 
     setBotRunning(true);
     setFormData(_initialFormData);
-    simulateTyping('a.segers.dev@gmail.com ', letter => {
+    simulateTyping('demo@bot.com', letter => {
       setFormData(prev => Object.assign({}, prev, { email: prev.email + letter }))
     }, 1500)
       .then(() => sleep(500))
@@ -122,7 +125,7 @@ const Login = ({ processForm, errors, history }) => {
         }, 1000)
       })
       .then(() => sleep(2000))
-      .then(() => { setBotRunning(false); $loginBtn.current.click(); });
+      .then(() => { setBotRunning(false); /*$loginBtn.current.click(); */ });
   }
   // ----------------------------------------------  
 

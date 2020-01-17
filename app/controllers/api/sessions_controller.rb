@@ -14,7 +14,7 @@ class Api::SessionsController < ApplicationController
       logout()
       render json: ['Logout success']
     else 
-      render ['There was an issue configuring your session'], status: :not_found
+      render ['There was an isssue configuring your session'], status: :not_found
     end
   end
 end
