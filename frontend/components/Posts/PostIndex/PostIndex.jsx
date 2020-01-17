@@ -1,16 +1,38 @@
-import React, { useEffect, Fragment as F } from 'react';
+import React, { useEffect, useState, Fragment as F } from 'react';
 import Audio from '../Audio/Audio';
 import Video from '../Video/Video';
 import ImageGallery from '../ImageGallery/ImageGallery';
 import NewPostButtonsContainer from './NewPostButtons/NewPostButtonsContainer';
 import { Main, Sidebar, Row, UserAvatar } from './PostIndex.styled';
 import Post from '../Post/Post';
+
 const PostIndex = ({ currentUser, fetchUsers, fetchPosts, users, posts }) => {
+
+  const [pagination, setPagination] = useState({
+    per_page: 3,
+    page: 1,
+    count: null,
+    loading: false
+  })
 
   useEffect(() => {
     fetchUsers()
-    fetchPosts()
+    fetchPosts({ per_page: 8, page: 1 })
+      .then(obj => {
+        debugger
+      })
   }, [])
+
+  const loadPosts = () => {
+    const { per_page, page, loading } = pagination;
+    if (loading) { return }
+    setPagination(prev => Object.assign({}, prev, { loading: true }))
+
+    fetchPosts({ per_page, page })
+      .then(() => {
+        setPagination(prev => Object.assign({}, prev, { page: prev.page++, loading: false }))
+      });
+  };
 
 
   if (posts.length === 0) {

@@ -18,8 +18,9 @@ export const font = {
 
 export const colors = {
   midnightBlue: '#001935',
-  dodgerBlue: '#00b8ff',
-  fadedBlack: α('black', .65)
+  dodgerBlue: '#00B8FF',
+  fadedBlack: α('black', .65),
+  redOrange: '#FF492F'
 };
 
 export default {

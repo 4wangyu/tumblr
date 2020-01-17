@@ -4,15 +4,16 @@ class Api::PostsController < ApplicationController
   def index
     # All posts (filter by params)
     # 3395ms
-    @user_posts = UserPost.all.includes(:user)
-    # @user_posts = UserPost.all.includes(:user, post: {
-    #   # Audio
-    #   audio_file_attachment: :blob, album_art_file_attachment: :blob,
-    #   # Video
-    #   video_file_attachment: :blob,
-    #   # Image Gallery
-    #   image_files_attachments: :blob,
-    # })
+    @user_posts = UserPost.pagination(pagination_params).includes(:post, :user)
+    headers['X-Post-Count'] = UserPost.count
+    # count = @user_post.length
+    # headers['Post-Count'] = count
+    # @user_posts = UserPost.includes(:user, post: [
+    #   {image_files_attachments: :blob},
+    #   {audio_file_attachment: :blob},
+    #   {album_art_file_attachment: :blob},
+    #   {video_file_attachment: :blob},
+    # ]).all
   end
 
   # def dashboard
@@ -71,7 +72,10 @@ class Api::PostsController < ApplicationController
   end
 
   private
-     # with_attached_images simply is a macro of includes("#{name}_attachment": :blob)
+  
+  def pagination_params
+    params.require(:filters).permit(:per_page, :page)
+  end
 
   def post_type_param
     params.require(:post).permit(:post_type)

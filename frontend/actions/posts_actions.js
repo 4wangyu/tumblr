@@ -19,9 +19,13 @@ export const receivePost = post => ({
 })
 
 // --------------------------------- Thunks
-export const fetchPosts = () => (dispatch, getState) => {
-  return APIUtil.fetchPosts()
-    .then(posts => dispatch(receivePosts(posts)));
+export const fetchPosts = filters => (dispatch, getState) => {
+  return APIUtil.fetchPosts(filters)
+    .then((posts, status, xhr) => {
+      let count = xhr.getResponseHeader('X-Post-Count');
+      dispatch(receivePosts(posts))
+      return ({ count })
+    });
 }
 
 export const fetchPost = postId => dispatch => {

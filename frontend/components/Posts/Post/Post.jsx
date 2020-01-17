@@ -1,6 +1,6 @@
 import React from 'react'
 import { faShareSquare as iShare, faHeart as iHeartEmpty } from "@fortawesome/free-regular-svg-icons";
-import { faTweet as iReblog, faCog as iConfig, faHeart as iHeartFull } from "@fortawesome/free-solid-svg-icons";
+import { faCog as iConfig, faHeart as iHeartFull } from "@fortawesome/free-solid-svg-icons";
 import { Card, Content } from './Post.styled';
 import { HLink, FollowBtn } from './Header.styled';
 import { ShareBox, Notes, NoteCount, Controls, IconBox, FAIcon } from './Footer.styled';
@@ -32,6 +32,9 @@ export const Footer = ({ post, currentUser }) => {
   //   return [likeIds, reblogIds].reduce((acc, arr) => acc + arr.length)
   // }
 
+  const liked = true
+  const authorIsUser = true
+
   return (
     <ShareBox>
       <Notes>
@@ -42,12 +45,15 @@ export const Footer = ({ post, currentUser }) => {
           <FAIcon icon={iShare} />
         </IconBox>
         <IconBox>
-          <FAIcon icon={iReblog} />
-        </IconBox>
-        <IconBox>
-          <FAIcon icon={iConfig} />
-          <FAIcon icon={iHeartEmpty} />
-          <FAIcon icon={iHeartFull} />
+          <FAIcon 
+            icon={iConfig} 
+            hidden={!authorIsUser}
+          />
+          <FAIcon 
+            icon={liked ? iHeartFull : iHeartEmpty}
+            hidden={authorIsUser}
+            liked={liked} 
+          />
         </IconBox>
       </Controls>
     </ShareBox>

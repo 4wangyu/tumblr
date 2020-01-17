@@ -12,7 +12,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchPosts: () => dispatch(fetchPosts()),
+  fetchPosts: filters => dispatch(fetchPosts(filters)),
   fetchUsers: () => dispatch(fetchUsers())
 });
 

@@ -11,8 +11,8 @@ export const logout = () => {
   return $.ajax({ method: 'DELETE', url: '/api/sessions' })
 }
 
-export const fetchPosts = () => {
-  return $.get({ url: '/api/posts' })
+export const fetchPosts = (filters) => {
+  return $.get({ url: '/api/posts', data: { filters } })
 }
 
 // --------------------------------- Users
