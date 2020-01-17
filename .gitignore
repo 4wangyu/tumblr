@@ -30,7 +30,3 @@ bundle.js**
 
 # Ignore misc
 .DS_Store
-
-# Database seed fixtures
-db/fixtures/**
-
