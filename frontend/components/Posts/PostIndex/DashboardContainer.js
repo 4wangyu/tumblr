@@ -7,8 +7,7 @@ import { fetchUsers } from '../../../actions/users_actions'
 const mapStateToProps = state => ({
   currentUser: selectCurrentUser(state),
   users: state.entities.users,
-  posts: selectPosts(state),
-
+  posts: selectPosts(state).reverse(),
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -1,6 +1,6 @@
-import styled, {css} from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const standardPadding = css`padding: 1.5rem 2rem`;
+export const standardPadding = css`padding: 1.5rem 2rem;`;
 
 export const Gallery = styled.div``;
 
@@ -10,4 +10,5 @@ export const Image = styled.img`
 
 export const Caption = styled.p`
   ${standardPadding}
+  font-weight: ${({ theme: T }) => T.font.weight.regular};
 `;

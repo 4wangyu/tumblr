@@ -56,6 +56,10 @@ const InputBox = styled.div`
   }
 `;
 
+// <UrlBox className={inPreview && 'small'}>
+// <Icon icon={faGlobe} smallSize={inPreview} />
+// <Text>{inPreview ? 'Add Another' : 'Add photo from web'}</Text>
+// </UrlBox>
 
 export const NativeFileBox = styled(InputBox)`
 
@@ -115,8 +119,7 @@ export const ContentBox = styled.div`
 export const CaptionInput = styled.textarea`
   width: 50rem;
   min-height: 8rem;
-  border: 1px solid orangered;
-  padding: 1rem;
+  padding: .5rem;
 `;
 
 // ------------------------- Footer
@@ -139,6 +142,6 @@ export const CloseBtn = styled(Btn)`
   background-color: #cfcfcf;
 `;
 
-export const PostBtn = styled(Btn)`
+export const PostBtn = styled(Btn).attrs({ type: 'submit' })`
   background-color: ${({ theme: T }) => T.colors.dodgerBlue};
 `;

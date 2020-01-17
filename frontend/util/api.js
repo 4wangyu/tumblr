@@ -25,8 +25,8 @@ export const fetchPost = postId => {
   return $.get({ url: '/api/posts', data: { id: postId } })
 }
 
-export const createPost = post => {
-  return $.post({ url: '/api/posts', data: { post } })
+export const createPost = data => {
+  return $.post({ url: '/api/posts', data, contentType: false, processData: false })
 }
 
 export const updatePost = post => {

@@ -11,7 +11,7 @@ import {
 } from './ImageGalleryForm.styled';
 
 
-const ImageGalleryForm = ({ currentUser }) => {
+const ImageGalleryForm = ({ currentUser, closeModal, processForm }) => {
 
   const _initialPost = {
     postType: 'ImageGallery',
@@ -43,10 +43,16 @@ const ImageGalleryForm = ({ currentUser }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    const { postType: post_type, caption, imageFiles: image_files } = post;
+    const formPost = new FormData();
+    formPost.append('post[post_type]', post_type)
+    formPost.append('post[caption]', caption)
+    for (const image_file of image_files) {
+      formPost.append('post[image_files][]', image_file)
+    }
 
-    // const formPost = {}
-    // processForm(formPost)
-    // .then(post => {});
+    processForm(formPost)
+      .then(() => closeModal());
   }
 
   const renderPreviews = () => post.previewUrls.map((url, i) => (
@@ -67,15 +73,12 @@ const ImageGalleryForm = ({ currentUser }) => {
             <InvisibleFileInput
               onChange={handleFileInput}
               multiple
+              accept="image/png, image/jpeg"
             />
             <Icon icon={faImages} smallSize={inPreview} />
             <Text>{inPreview ? 'Add Another' : 'Upload photos'}</Text>
             <Icon smallSize icon={faSmile} hidden={inPreview} />
           </NativeFileBox>
-          <UrlBox className={inPreview && 'small'}>
-            <Icon icon={faGlobe} smallSize={inPreview} />
-            <Text>{inPreview ? 'Add Another' : 'Add photo from web'}</Text>
-          </UrlBox>
         </UploadBox>
         <ContentBox>
           <CaptionInput
@@ -86,7 +89,7 @@ const ImageGalleryForm = ({ currentUser }) => {
           />
         </ContentBox>
         <Footer>
-          <CloseBtn>Close</CloseBtn>
+          <CloseBtn onClick={closeModal}>Close</CloseBtn>
           <PostBtn>Post</PostBtn>
         </Footer>
       </Form>

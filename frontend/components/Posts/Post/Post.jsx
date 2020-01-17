@@ -33,7 +33,7 @@ export const Footer = ({ post, currentUser }) => {
   // }
 
   const liked = true
-  const authorIsUser = true
+  const currentUserIsAuthor = true
 
   return (
     <ShareBox>
@@ -47,11 +47,11 @@ export const Footer = ({ post, currentUser }) => {
         <IconBox>
           <FAIcon 
             icon={iConfig} 
-            hidden={!authorIsUser}
+            hidden={!currentUserIsAuthor}
           />
           <FAIcon 
             icon={liked ? iHeartFull : iHeartEmpty}
-            hidden={authorIsUser}
+            hidden={currentUserIsAuthor}
             liked={liked} 
           />
         </IconBox>

@@ -19,7 +19,7 @@ const PostIndex = ({ currentUser, fetchUsers, fetchPosts, users, posts }) => {
     fetchUsers()
     fetchPosts({ per_page: 8, page: 1 })
       .then(obj => {
-        debugger
+        // debugger
       })
   }, [])
 

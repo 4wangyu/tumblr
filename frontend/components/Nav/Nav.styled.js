@@ -26,6 +26,7 @@ export const RightNav = styled(NavSection)`
 `;
 
 export const Logo = styled.span`
+  cursor: default;
   text-shadow: 2px 2px 3px ${α('#404040', .15)};
   font-family: ${({ theme: T }) => T.font.family.title};
   color: white;

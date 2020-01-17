@@ -1,7 +1,7 @@
 import React from 'react'
 import { ModalBackground, ModalComponentWrapper } from './Modal.styled';
 import PostTypesContainer from './PostTypesContainer';
-import ImageGalleryForm from '../Posts/ImageGallery/ImageGalleryForm'
+import ImageGalleryFormContainer from '../Posts/ImageGallery/ImageGalleryFormContainer';
 const Modal = ({ modal, closeModal, currentUser }) => {
   if (!modal) {
     return null;
@@ -12,7 +12,7 @@ const Modal = ({ modal, closeModal, currentUser }) => {
       Component = <PostTypesContainer />;
       break;
     case 'ImageGalleryForm':
-      Component = <ImageGalleryForm currentUser={currentUser} />;
+      Component = <ImageGalleryFormContainer />;
       break;
     default:
       return null;

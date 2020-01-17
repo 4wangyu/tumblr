@@ -4,7 +4,7 @@ class Api::PostsController < ApplicationController
   def index
     # All posts (filter by params)
     # 3395ms
-    @user_posts = UserPost.pagination(pagination_params).includes(:post, :user)
+    @user_posts = UserPost.includes(:post, :user).all
     headers['X-Post-Count'] = UserPost.count
     # count = @user_post.length
     # headers['Post-Count'] = count
@@ -32,20 +32,21 @@ class Api::PostsController < ApplicationController
   end
 
   def create
-    post_type = post_type_param()
+    post_type = post_type_param[:post_type]
 
     case post_type
       when 'ImageGallery'
-        @user_post = ImageGallery.new(image_gallery_params)
+        post = ImageGallery.new(image_gallery_params)
       when 'Audio'
-        @user_post = Audio.new(audio_params)
+        post = Audio.new(audio_params)
       when 'Video'
-        @user_post = Video.new(video_params)
+        post = Video.new(video_params)
       else
         nil
     end
-    
-    if @user_post.save && current_user.user_posts.create({ post: @user_post })
+
+    @user_post = current_user.user_posts.create({ post: post })
+    if @user_post
       render :show, status: :created # 201
     else
       render json: @user_post.errors.full_messages, status: :unprocessable_entity # 422
