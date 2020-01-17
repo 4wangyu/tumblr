@@ -3,7 +3,11 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.3'
 
+# Use to view Heroku logs and will precompile our asset
+gem 'rails_12factor'
+# Sync active storage w/ AWS S3
 gem 'aws-sdk-s3'
+# Make AJAX requests w/ authentication token automatically added to header
 gem 'jquery-rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.3'
