@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_10_231737) do
+ActiveRecord::Schema.define(version: 2020_01_27_060933) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,15 @@ ActiveRecord::Schema.define(version: 2020_01_10_231737) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "likes", force: :cascade do |t|
+    t.bigint "user_post_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_likes_on_user_id"
+    t.index ["user_post_id"], name: "index_likes_on_user_post_id"
+  end
+
   create_table "user_posts", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "post_type", null: false
@@ -81,5 +90,7 @@ ActiveRecord::Schema.define(version: 2020_01_10_231737) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "likes", "user_posts"
+  add_foreign_key "likes", "users"
   add_foreign_key "user_posts", "users"
 end

@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     resources :users, only: [:index, :create, :show]
     resource :sessions, only: [:create, :destroy]
-    resources :posts, only: [:index, :create, :show, :destroy]
+    resources :posts, only: [:index, :create, :show, :destroy] do
+      resource :likes, only: [:create, :destroy]
+    end
   end
 
   get '*path', to: 'static_pages#root', constraints: lambda { |req|

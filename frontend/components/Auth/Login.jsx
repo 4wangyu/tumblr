@@ -1,4 +1,4 @@
-import React, { Fragment as F, useState, useRef } from 'react';
+import React, { Fragment as F, useState, useRef, memo } from 'react';
 import { useTransition } from 'react-spring';
 import { sleep, simulateTyping } from '../../util/bot';
 
@@ -125,7 +125,7 @@ const Login = ({ processForm, errors, history }) => {
         }, 1000)
       })
       .then(() => sleep(2000))
-      .then(() => { setBotRunning(false); /*$loginBtn.current.click(); */ });
+      .then(() => { setBotRunning(false); $loginBtn.current.click(); });
   }
   // ----------------------------------------------  
 

@@ -8,6 +8,7 @@ export const ModalBackground = styled.div`
   right: 0;
   left: 0;
   background: ${({ theme: T }) => α(T.colors.midnightBlue, .95)};
+  backdrop-filter: blur(.5rem);
   z-index: 10;
 `;
 

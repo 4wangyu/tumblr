@@ -32,8 +32,8 @@ export const Footer = ({ post, currentUser }) => {
   //   return [likeIds, reblogIds].reduce((acc, arr) => acc + arr.length)
   // }
 
-  const liked = true
-  const currentUserIsAuthor = true
+  const liked = post.likerIds.includes(currentUser.id);
+  const currentUserIsAuthor = post.userId === currentUser.id;
 
   return (
     <ShareBox>
@@ -45,14 +45,14 @@ export const Footer = ({ post, currentUser }) => {
           <FAIcon icon={iShare} />
         </IconBox>
         <IconBox>
-          <FAIcon 
-            icon={iConfig} 
+          <FAIcon
+            icon={iConfig}
             hidden={!currentUserIsAuthor}
           />
-          <FAIcon 
+          <FAIcon
             icon={liked ? iHeartFull : iHeartEmpty}
             hidden={currentUserIsAuthor}
-            liked={liked} 
+            liked={liked}
           />
         </IconBox>
       </Controls>

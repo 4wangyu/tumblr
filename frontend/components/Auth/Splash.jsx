@@ -1,4 +1,4 @@
-import React, { Fragment as F, useState } from 'react';
+import React, { Fragment as F, useState, memo } from 'react';
 import { useTransition } from 'react-spring';
 import { Link } from 'react-router-dom';
 import {
@@ -31,14 +31,14 @@ const Splash = ({ processForm, errors, history }) => {
 
 
   // ----------------------- Steps
-  const Step1 = () => (
+  const Step1 = memo(() => (
     <F>
       <ActionBtn onClick={toggleNext}>Get Started</ActionBtn>
       <ActionBtn tertiary as={Link} to='/login'>Log In</ActionBtn>
     </F>
-  );
+  ));
 
-  const Step2 = () => (
+  const Step2 = memo(() => (
     <F>
       <FormGroup>
         <InputField
@@ -62,7 +62,7 @@ const Splash = ({ processForm, errors, history }) => {
       </FormGroup>
       <ActionBtn onClick={handleSubmit}>Sign up</ActionBtn>
     </F>
-  );
+  ));
 
   const [step, setStep] = useState(0);
   const [reverse, setReverse] = useState(false);

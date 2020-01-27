@@ -2,6 +2,14 @@ class User < ApplicationRecord
   # ----------------------------- Associations
   has_many :user_posts, dependent: :destroy
 
+  has_many :likes,
+    class_name: :Like,
+    foreign_key: :user_id
+
+  has_many :liked_posts,
+    through: :likes,
+    source: :post
+
   # ----------------------------- ActiveStorage
   has_one_attached :avatar_file
 

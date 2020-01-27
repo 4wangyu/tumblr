@@ -9,7 +9,7 @@ class Api::PostsController < ApplicationController
     # count = @user_post.length
     # headers['Post-Count'] = count
 
-    image_posts = UserPost.where(post_type: :ImageGallery).includes(:user, post: {image_files_attachments: :blob})
+    image_posts = UserPost.where(post_type: :ImageGallery).includes(:user, likes: :user, post: {image_files_attachments: :blob})
     @user_posts = image_posts
 
     # @user_posts = UserPost.includes(:user, post: [

@@ -9,3 +9,4 @@ case user_post.post_type
     json.partial! 'video', video: user_post.post
 end
 json.user_id user_post.user_id
+json.liker_ids user_post.liker_ids

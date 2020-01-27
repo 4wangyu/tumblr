@@ -65,7 +65,7 @@ const PostIndex = ({ currentUser, fetchUsers, fetchPosts, users, posts }) => {
           return (
             <Row key={post.id}>
               <UserAvatar src={author.avatarUrl} />
-              <Post author={author} post={post} currentUser={currentUser}>
+              <Post post={post} currentUser={currentUser} likePost={()=>{}}>
                 {renderPostContent(post)}
               </Post>
             </Row>
