@@ -2,16 +2,14 @@ class Api::PostsController < ApplicationController
   before_action :select_user_post, only: [:show, :update, :destroy]
 
   def index
-    # All posts (filter by params)
-    # 3395ms
-    # @user_posts = UserPost.includes(:post, :user).all
-    headers['X-Post-Count'] = UserPost.count
-    # count = @user_post.length
-    # headers['Post-Count'] = count
 
-    image_posts = UserPost.where(post_type: :ImageGallery).includes(:user, likes: :user, post: {image_files_attachments: :blob})
-    @user_posts = image_posts
-
+    image_posts = UserPost.where(post_type: :ImageGallery).includes(:user, likes: :liker, post: {image_files_attachments: :blob})
+    video_posts = UserPost.where(post_type: :Video).includes(:user, likes: :liker, post: {video_file_attachment: :blob})
+    @user_posts = (image_posts + video_posts).sort {|a, b| b.created_at <=> a.created_at}
+    headers['X-Post-Count'] = @user_posts.count
+    if (params[:offset] && params[:limit])
+      @user_posts = @user_posts.drop(params[:offset].to_i).first(params[:limit].to_i)
+    end
     # @user_posts = UserPost.includes(:user, post: [
     #   {image_files_attachments: :blob},
     #   {audio_file_attachment: :blob},
@@ -77,10 +75,6 @@ class Api::PostsController < ApplicationController
   end
 
   private
-  
-  def pagination_params
-    params.require(:filters).permit(:per_page, :page)
-  end
 
   def post_type_param
     params.require(:post).permit(:post_type)

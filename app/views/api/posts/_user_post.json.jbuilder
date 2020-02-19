@@ -1,12 +1,10 @@
-json.id user_post.id
-json.post_type user_post.post_type
+json.extract! user_post, :id, :post_type
 case user_post.post_type
   when 'ImageGallery'
-    json.partial! 'image_gallery', image_gallery: user_post.post
+    json.partial! '/api/posts/image_gallery', image_gallery: user_post.post
   when 'Audio'
-    json.partial! 'audio', audio: user_post.post
+    json.partial! '/api/posts/audio', audio: user_post.post
   when 'Video'
-    json.partial! 'video', video: user_post.post
+    json.partial! '/api/posts/video', video: user_post.post
 end
-json.user_id user_post.user_id
-json.liker_ids user_post.liker_ids
+json.extract! user_post, :user_id, :liker_ids, :created_at

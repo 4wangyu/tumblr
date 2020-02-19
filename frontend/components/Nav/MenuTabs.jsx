@@ -1,32 +1,39 @@
 import React from 'react';
-import { faCompass } from "@fortawesome/free-regular-svg-icons";
-import { faHome, faEnvelope, faCommentDots, faBolt, faUser, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
-import { Tabs, TabLink, TabIcon, TabBtn } from './Nav.styled';
+import { faCompass as iTrending } from "@fortawesome/free-regular-svg-icons";
+import {
+  faHome as iHome,
+  faEnvelope as iMessages,
+  faCommentDots as iChat,
+  faBolt as iNotifs,
+  faUser as iProfile,
+  faPencilAlt as iPost
+} from "@fortawesome/free-solid-svg-icons";
+import { TabIndex, TabItemLink, TabItemBtn, FAIcon } from './MenuTabs.styled';
 
 const MenuTabs = ({ openModal }) => (
-  <Tabs>
-    <TabLink to="/dashboard">
-      <TabIcon icon={faHome} />
-    </TabLink>
-    <TabLink to="/test">
-      <TabIcon icon={faCompass} />
-    </TabLink>
-    <TabLink to="/test">
-      <TabIcon icon={faEnvelope} />
-    </TabLink>
-    <TabLink to="/test">
-      <TabIcon icon={faCommentDots} />
-    </TabLink>
-    <TabLink to="/test">
-      <TabIcon icon={faBolt} />
-    </TabLink>
-    <TabLink to="/test">
-      <TabIcon icon={faUser} />
-    </TabLink>
-    <TabBtn onClick={() => openModal('PostTypes')}>
-      <TabIcon icon={faPencilAlt} />
-    </TabBtn>
-  </Tabs>
+  <TabIndex>
+    <TabItemLink to="/dashboard">
+      <FAIcon icon={iHome} />
+    </TabItemLink>
+    <TabItemLink to="/test">
+      <FAIcon icon={iTrending} />
+    </TabItemLink>
+    <TabItemLink to="/test">
+      <FAIcon icon={iMessages} />
+    </TabItemLink>
+    <TabItemLink to="/test">
+      <FAIcon icon={iChat} />
+    </TabItemLink>
+    <TabItemLink to="/test">
+      <FAIcon icon={iNotifs} />
+    </TabItemLink>
+    <TabItemLink to="/test">
+      <FAIcon icon={iProfile} />
+    </TabItemLink>
+    <TabItemBtn onClick={() => openModal('CreatePost')}>
+      <FAIcon icon={iPost} />
+    </TabItemBtn>
+  </TabIndex>
 )
 
 export default MenuTabs;

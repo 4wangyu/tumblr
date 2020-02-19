@@ -9,17 +9,20 @@ module.exports = {
   module: {
     rules: [
       {
-        test: [/\.jsx?$/],
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['env', 'react']
+        use: {
+          loader: "babel-loader",
+          query: {
+            presets: ["@babel/preset-env", "@babel/preset-react"]
+          }
         }
       }
     ]
   },
   devtool: 'source-map',
   resolve: {
+    modules: [path.resolve(__dirname, 'frontend'), 'node_modules'],
     extensions: ['.js', '.jsx', '*'],
   }
 };

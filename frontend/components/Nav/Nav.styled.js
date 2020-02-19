@@ -1,7 +1,8 @@
 import styled from 'styled-components';
+import styledMap from 'styled-map';
 import α from 'color-alpha';
 import { NavLink } from 'react-router-dom';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { font } from 'styled/theme';
 
 export const NavBar = styled.nav`
   height: 5.4rem;
@@ -12,26 +13,25 @@ export const NavBar = styled.nav`
   padding: 0 2rem;
 `;
 
-const NavSection = styled.div`
+export const NavSection = styled.div`
   display: flex;
-    align-items: center;
+  align-items: center;
 `;
 
-export const LeftNav = styled(NavSection)`
+export const LeftNav = styled(NavSection)``;
 
-`;
-
-export const RightNav = styled(NavSection)`
-
-`;
+export const RightNav = styled(NavSection)``;
 
 export const Logo = styled.span`
   cursor: default;
   text-shadow: 2px 2px 3px ${α('#404040', .15)};
-  font-family: ${({ theme: T }) => T.font.family.title};
+  font-family: ${font.family.title};
   color: white;
-  font-weight: ${({ theme: T }) => T.font.weight.bold};
-  font-size: ${P => P.large ? '6rem' : '4rem'};
+  font-weight: ${font.weight.bold};
+  font-size: ${styledMap`
+    default: 4rem;
+    large: 6rem;
+  `};
 `;
 
 export const SearchBar = styled.form`
@@ -39,7 +39,8 @@ export const SearchBar = styled.form`
   margin-left: 2rem;
   width: 45rem;
   font-size: 1.5rem;
-  font-weight: ${({ theme: T }) => T.font.weight.medium};
+  font-weight: ${font.weight.medium};
+
   &::before {
     content: '\f002';
     font-family: 'Font Awesome 5 Free';
@@ -50,14 +51,13 @@ export const SearchBar = styled.form`
     color: ${α('white', .65)};
     font-weight: 600;
   }
+
   &:hover {
-    &::before {
-      color: ${α('black', .65)};
-    }
+    &::before {color: ${α('black', .65)};}
   }
 `;
 
-const SearchBarInput = styled.input`
+export const SearchInput = styled.input`
   border: none;
   border-radius: 3px;
   background-color: ${α('white', .25)};
@@ -67,9 +67,7 @@ const SearchBarInput = styled.input`
   height: 100%;
   padding: 7px 15px 7px 35px;
   
-  &::placeholder {
-    color: ${α('white', .65)};
-  }
+  &::placeholder {color: ${α('white', .65)};}
 
   &:hover {
     background-color: white;
@@ -80,51 +78,27 @@ const SearchBarInput = styled.input`
   }
 `;
 
-SearchBar.Input = SearchBarInput
-
-export const TabLink = styled(NavLink).attrs(P => ({
+export const NavBtn = styled(NavLink).attrs({
   activeClassName: 'selected'
-}))`
-  padding: 0 1.6rem;
-  color: ${α('white', .65)};
-  &.selected {
-    color: white;
-  }
-`;
-
-export const TabBtn = styled.button`
-  width: 4.5rem;
-  height: 3.2rem;
-  border-radius: 3px;
-  background-color: ${({ theme: T }) => T.colors.dodgerBlue};
-  padding: 0 1rem 0 1rem;
-  color: ${({ theme: T }) => T.colors.midnightBlue};
-  border: none;
-  margin-left: 1rem;
-`;
-
-export const TabIcon = styled(FontAwesomeIcon)`
-  font-size: 2rem;
-  
-`
-export const Tabs = styled.div`
-
-`
-export const NavBtn = styled(NavLink).attrs(P => ({
-  activeClassName: 'selected'
-}))`
-  background-color: ${P => P.secondary ? α('black', .2) : α('white', .9)};
+})`
+  background-color: ${styledMap`
+    default: ${α('white', .9)};
+    secondary: ${α('black', .2)};
+  `};
   border: none;
   border-radius: 2px;
-  color: ${P => P.secondary ? 'white' : 'black'};
+  color: ${styledMap`
+    default: #000;
+    secondary: #fff;
+  `};
   cursor: pointer;
-  font-weight: ${({ theme: T }) => T.font.weight.semiBold};
+  font-weight: ${font.weight.semiBold};
   font-size: 1.5rem;
   padding: 8px 13px;
   text-decoration: none;
   margin-left: 1rem;
 
   /* &.selected {
-    display: none;
+    
   } */
 `;

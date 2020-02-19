@@ -1,6 +1,9 @@
 import React, { Fragment as F, useState, useRef, memo } from 'react';
+import { useDispatch } from 'react-redux';
+import { Thunks as Session } from 'store/session/actions';
+import { useHistory } from 'react-router-dom';
 import { useTransition } from 'react-spring';
-import { sleep, simulateTyping } from '../../util/bot';
+import { sleep, ghostType } from 'util/ghost_bot';
 
 import {
   AuthForm,
@@ -11,20 +14,24 @@ import {
   ActionLink
 } from './Auth.styled';
 
-const Login = ({ processForm, errors, history }) => {
+const Login = () => {
 
-  // --------------------------------- FormData
-  const _initialFormData = { email: '', password: '' }
-  const [formData, setFormData] = useState(_initialFormData)
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const processForm = formUser => dispatch(Session.login(formUser))
+
+  // --------------------------------- FormUser
+  const _initialFormUser = { email: '', password: '' }
+  const [formUser, setFormUser] = useState(_initialFormUser)
 
   const handleInput = e => {
     const { name, value } = e.target;
-    setFormData(prev => Object.assign({}, prev, { [name]: value }))
+    setFormUser(prev => Object.assign({}, prev, { [name]: value }))
   }
 
   const handleSubmit = e => {
     e.preventDefault();
-    processForm(formData)
+    processForm(formUser)
       .then(() => history.push("/dashboard"));
   }
 
@@ -37,7 +44,7 @@ const Login = ({ processForm, errors, history }) => {
           onChange={handleInput}
           name="email"
           key={'step1-email'}
-          value={formData.email}
+          value={formUser.email}
         />
       </FormGroup>
       <ActionBtn ref={$nextBtn} onClick={toggleNext}>Next</ActionBtn>
@@ -60,14 +67,14 @@ const Login = ({ processForm, errors, history }) => {
           key={'step3-email'}
           onChange={handleInput}
           name="email"
-          value={formData.email}
+          value={formUser.email}
         />
         <InputField
           key={'step3-password'}
           onChange={handleInput}
           type="password"
           name="password"
-          value={formData.password}
+          value={formUser.password}
         />
       </FormGroup>
       <ActionBtn ref={$loginBtn} onClick={handleSubmit}>Login</ActionBtn>
@@ -110,9 +117,9 @@ const Login = ({ processForm, errors, history }) => {
     if (botRunning) { return };
 
     setBotRunning(true);
-    setFormData(_initialFormData);
-    simulateTyping('demo@bot.com', letter => {
-      setFormData(prev => Object.assign({}, prev, { email: prev.email + letter }))
+    setFormUser(_initialFormUser);
+    ghostType('demo@bot.com', letter => {
+      setFormUser(prev => Object.assign({}, prev, { email: prev.email + letter }))
     }, 1500)
       .then(() => sleep(500))
       .then(() => $nextBtn.current.click())
@@ -120,8 +127,8 @@ const Login = ({ processForm, errors, history }) => {
       .then(() => $enterPassBtn.current.click())
       .then(() => sleep(1000))
       .then(() => {
-        return simulateTyping('password', letter => {
-          setFormData(prev => Object.assign({}, prev, { password: prev.password + letter }))
+        return ghostType('password', letter => {
+          setFormUser(prev => Object.assign({}, prev, { password: prev.password + letter }))
         }, 1000)
       })
       .then(() => sleep(2000))

@@ -1,27 +1,34 @@
 import React from 'react';
-import { NavBar, LeftNav, RightNav, Logo, SearchBar, NavBtn } from './Nav.styled';
+import { NavBar, LeftNav, RightNav, Logo, SearchBar, SearchInput, NavBtn } from './Nav.styled';
 import MenuTabs from './MenuTabs';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectCurrentUser } from 'store/session/selectors';
+import { Thunks as Session } from 'store/session/actions';
+import { Creators as Modal } from 'store/modal/actions';
+const Nav = () => {
 
-const Nav = ({ loggedIn, currentUser, logout, openModal }) => {
-
+  const currentUser = useSelector(state => selectCurrentUser(state))
+  const isLoggedIn = Boolean(currentUser);
+  const dispatch = useDispatch();
+  const logout = () => dispatch(Session.logout());
+  const openModal = modal => dispatch(Modal.openModal(modal));
   return (
     <NavBar>
       <LeftNav>
         <Logo>th</Logo>
         <SearchBar>
-          <SearchBar.Input
+          <SearchInput
             type='text'
             placeholder='Search Thumblr'
           />
         </SearchBar>
       </LeftNav>
       <RightNav>
-        {loggedIn ? <MenuTabs openModal={openModal} /> : (
+        {isLoggedIn ? <MenuTabs openModal={openModal} /> : (
           <span>
             <NavBtn to="/login" secondary>Log in</NavBtn>
             <NavBtn to="/">Sign up</NavBtn>
           </span>
-
         )}
       </RightNav>
     </NavBar>
