@@ -9,6 +9,8 @@ class Api::PostsController < ApplicationController
     headers['X-Post-Count'] = @user_posts.count
     if (params[:offset] && params[:limit])
       @user_posts = @user_posts.drop(params[:offset].to_i).first(params[:limit].to_i)
+    else 
+      @user_posts = @user_posts.first(50)
     end
     # @user_posts = UserPost.includes(:user, post: [
     #   {image_files_attachments: :blob},

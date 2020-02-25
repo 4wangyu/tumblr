@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import configureStore from 'store/index';
 import Root from 'components/Root';
-import Styled from 'styled/Styled';
+import Styled from 'styled/StyleProvider';
 
 document.addEventListener('DOMContentLoaded', () => {
   const root = document.querySelector('#root');

@@ -1,18 +1,13 @@
 import { createGlobalStyle } from 'styled-components';
-import { font, colors } from './theme';
+import { mapToTheme as theme } from 'styled-map';
 
 const GlobalStyle = createGlobalStyle`
-  @import url(${font.url});
+  @import url(${theme('fontUrl')});
 
   @import url('https://use.fontawesome.com/releases/v5.8.1/css/all.css');
 
   *, *:before, *:after {
     box-sizing: border-box; 
-    /*  content-box (default) 
-          -> height is only content, padding is added
-        border-box 
-          -> height includes padding and content 
-    */
     margin: 0px;
     padding: 0px;
   }
@@ -23,12 +18,12 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     color: white;
-    font-family: ${font.family.primary};
-    font-size: 2rem;
-    font-weight: ${font.weight.regular};
+    font-family: ${theme('font')};
+    font-size: ${theme('fontSizes', 'md')};
+    font-weight: ${theme('fontWeights', 'text')};
     margin: 0;
     padding: 0;
-    background-color: ${colors.midnightBlue};
+    background-color: ${theme('colors', 'primary')};
   }
 
   input, textarea {

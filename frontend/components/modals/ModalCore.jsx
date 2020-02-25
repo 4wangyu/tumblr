@@ -6,7 +6,7 @@ import { Creators } from 'store/modal/actions';
 
 import { ModalBackground, ModalComponentWrapper } from './ModalCore.styled';
 
-import CreatePost from './CreatePostModal';
+import ComposePost from './ComposePostModal';
 import ImageGalleryForm from '../post_forms/ImageGalleryForm';
 import VideoForm from '../post_forms/VideoForm';
 
@@ -21,8 +21,8 @@ const ModalCore = () => {
   let Component;
 
   switch (modal) {
-    case 'CreatePost':
-      Component = <CreatePost />;
+    case 'ComposePost':
+      Component = <ComposePost />;
       break;
     case 'ImageGalleryForm':
       Component = <ImageGalleryForm />;
