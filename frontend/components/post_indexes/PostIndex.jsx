@@ -5,9 +5,6 @@ import { Thunks as Posts } from 'store/posts/actions';
 import { selectCurrentUser, selectAllUsers, selectAllPosts } from 'store/selectors';
 import CreatePostBtns from './CreatePostBtns';
 import KnightLoader from './Loader';
-import ImageGallery from 'components/post/ImageGallery';
-import Video from 'components/post/Video';
-import Audio from 'components/post/Audio';
 import { Main, Sidebar, Row, UserAvatar } from './PostIndex.styled';
 import Post from 'components/post/PostBase';
 import compareCreatedAt from 'util/compare_created_at'
@@ -18,21 +15,18 @@ const PostIndex = () => {
   const dispatch = useDispatch();
   const fetchUsers = () => dispatch(Users.fetchUsers());
   const fetchPosts = filters => dispatch(Posts.fetchPosts(filters));
-  const togglePostLike = (postId, isLiked) => dispatch(Posts.togglePostLike(postId, isLiked));
 
   const [currentUser, users, posts] = useSelector(state => [
-    selectCurrentUser(state),
-    selectAllUsers(state),
-    selectAllPosts(state)
-  ])
+    selectCurrentUser(state), selectAllUsers(state), selectAllPosts(state)
+  ]);
 
   const [offset, limit, setCount, end] = usePagination(1);
-
   const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     fetchUsers()
     loadPosts()
-  }, [])
+  }, []);
 
   const observer = useRef();
   const lastPost = useCallback(node => {
@@ -52,28 +46,12 @@ const PostIndex = () => {
   const loadPosts = () => {
     if (loading) return;
     setLoading(true)
-    setTimeout(() => {
-      fetchPosts({ offset, limit })
-        .then(({ count }) => {
-          setCount(count);
-          console.log(count, end)
-          setLoading(false)
-        });
-    }, 5000)
+    fetchPosts({ offset, limit })
+      .then(({ count }) => {
+        setCount(count);
+        setLoading(false)
+      });
   };
-
-  const renderPostContent = post => {
-    switch (post.postType) {
-      case "Audio":
-        return <Audio post={post} />
-      case "Video":
-        return <Video post={post} />
-      case "ImageGallery":
-        return <ImageGallery post={post} />
-      default:
-        return null
-    }
-  }
 
   return (
     <>
@@ -89,14 +67,7 @@ const PostIndex = () => {
             return (
               <Row key={post.id} ref={idx === posts.length - 1 ? lastPost : null}>
                 <UserAvatar src={author.avatarUrl} />
-                <Post
-                  currentUser={currentUser}
-                  post={post}
-                  author={author}
-                  togglePostLike={togglePostLike}
-                >
-                  {renderPostContent(post)}
-                </Post>
+                <Post />
               </Row>
             )
           })}

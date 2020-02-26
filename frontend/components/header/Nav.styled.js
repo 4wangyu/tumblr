@@ -2,11 +2,10 @@ import styled from 'styled-components';
 import styledMap, { mapToTheme as theme } from 'styled-map';
 import α from 'color-alpha';
 import { NavLink } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export const Nav = styled.nav``;
 
-// AuthNav
+// -------------------- AuthNav
 export const NavBtn = styled(NavLink)`
   background-color: ${styledMap`
     default: ${α('#fff', .9)};
@@ -26,10 +25,8 @@ export const NavBtn = styled(NavLink)`
   margin-left: 1rem;
 `;
 
-// PrivateNav
-export const NavTabIndex = styled(Nav)`
-
-`;
+// -------------------- PrivateNav
+export const NavTabIndex = styled(Nav)``;
 
 export const TabLink = styled(NavLink).attrs(props => ({
   activeClassName: 'selected'
@@ -49,11 +46,3 @@ export const TabBtn = styled.button`
   border: none;
   margin-left: 1rem;
 `;
-
-export const TabIcon = styled(FontAwesomeIcon)`
-  font-size: ${theme('fontSizes', 'iconSm')};
-`;
-
-
-
-

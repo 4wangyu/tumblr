@@ -1,9 +1,9 @@
 import React from 'react';
 import {
   Nav, NavBtn,
-  NavTabIndex, TabLink, TabBtn, TabIcon
+  NavTabIndex, TabLink, TabBtn
 } from './Nav.styled';
-import { privateNavIconData } from 'styled/icons';
+import { privateNavIconData, IconSm } from 'styled/base/Icon.styled';
 
 export const AuthNav = () => (
   <Nav>
@@ -17,12 +17,12 @@ export const PrivateNav = ({ openModal }) => (
     {Object.entries(privateNavIconData).map(([name, { icon, path, modal }]) => {
       if (modal) return (
         <TabBtn onClick={() => openModal(modal)} key={name}>
-          <TabIcon icon={icon} />
+          <IconSm icon={icon} />
         </TabBtn>
       );
       return (
         <TabLink to={path} title={name.toUpperCase()} key={name}>
-          <TabIcon icon={icon} />
+          <IconSm icon={icon} />
         </TabLink>
       );
     })}

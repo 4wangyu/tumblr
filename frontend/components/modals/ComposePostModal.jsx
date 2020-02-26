@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
 import { Creators as Modal } from 'store/modal/actions';
-import { postTypeIconData } from 'styled/icons';
+import { postTypeIconData } from 'styled/base/Icon.styled';
 import { BtnIndex, PostBtn, BtnCoin, BtnIcon, BtnText } from './ComposePostModal.styled';
 
 const ComposePostModal = () => {

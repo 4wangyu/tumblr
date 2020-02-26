@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import styledMap, { mapToTheme as theme } from 'styled-map';
 import { flexCenter, flexCenterCol } from 'styled/helpers';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { IconLg } from 'styled/base/Icon.styled';
 import α from 'color-alpha';
 
 export const BtnIndex = styled.div`
@@ -29,8 +29,7 @@ export const BtnCoin = styled.div`
 `;
 
 
-export const BtnIcon = styled(FontAwesomeIcon)`
-  font-size: ${theme('fontSizes', 'iconLg')};
+export const BtnIcon = styled(IconLg)`
   color: ${theme('colors', 'primary')};
 `;
 
