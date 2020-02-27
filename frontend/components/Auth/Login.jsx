@@ -4,13 +4,12 @@ import { Thunks as Session } from 'store/session/actions';
 import { useHistory } from 'react-router-dom';
 import { useTransition } from 'react-spring';
 import { sleep, ghostType } from 'util/ghost_bot';
-
+import Btn from 'styled/base/Btn.styled';
 import {
   AuthForm,
   Logo,
   StepWrapper,
   FormGroup, InputField,
-  ActionBtn,
   ActionLink
 } from './Auth.styled';
 
@@ -47,15 +46,15 @@ const Login = () => {
           value={formUser.email}
         />
       </FormGroup>
-      <ActionBtn ref={$nextBtn} onClick={toggleNext}>Next</ActionBtn>
-      <ActionBtn quarternary animate onClick={startDemoBot}>Demo</ActionBtn>
+      <Btn large ref={$nextBtn} onClick={toggleNext}>Next</Btn>
+      <Btn large quarternary animate onClick={startDemoBot}>Demo</Btn>
     </F>
   );
 
   const Step2 = () => (
     <F>
-      <ActionBtn secondary>Send me a magic link</ActionBtn>
-      <ActionBtn ref={$enterPassBtn} onClick={toggleNext}>Use password to log in</ActionBtn>
+      <Btn secondary large>Send me a magic link</Btn>
+      <Btn large ref={$enterPassBtn} onClick={toggleNext}>Use password to log in</Btn>
       <ActionLink onClick={toggleBack}>back</ActionLink>
     </F>
   );
@@ -77,7 +76,7 @@ const Login = () => {
           value={formUser.password}
         />
       </FormGroup>
-      <ActionBtn ref={$loginBtn} onClick={handleSubmit}>Login</ActionBtn>
+      <Btn large ref={$loginBtn} onClick={handleSubmit}>Login</Btn>
       <ActionLink>Forgot password?</ActionLink>
     </F>
   )

@@ -1,7 +1,9 @@
 import styled from 'styled-components';
-import styledMap, { mapToTheme as theme } from 'styled-map';
+import styledMap from 'styled-map';
+import { key as theme } from 'styled-theme'
 import α from 'color-alpha';
 import { NavLink } from 'react-router-dom';
+import { flexCenter } from 'styled/helpers';
 
 export const Nav = styled.nav``;
 
@@ -18,7 +20,7 @@ export const NavBtn = styled(NavLink)`
     secondary: #fff;
   `};
   cursor: pointer;
-  font-weight: ${theme('fontWeights', 'heading')};
+  font-weight: ${theme('fontWeights.heading')};
   font-size: 1.5rem;
   padding: 8px 13px;
   text-decoration: none;
@@ -26,7 +28,9 @@ export const NavBtn = styled(NavLink)`
 `;
 
 // -------------------- PrivateNav
-export const NavTabIndex = styled(Nav)``;
+export const NavTabIndex = styled(Nav)`
+  ${flexCenter};
+`;
 
 export const TabLink = styled(NavLink).attrs(props => ({
   activeClassName: 'selected'
@@ -37,12 +41,16 @@ export const TabLink = styled(NavLink).attrs(props => ({
 `;
 
 export const TabBtn = styled.button`
+  cursor: pointer;
   width: 4.5rem;
   height: 3.2rem;
   border-radius: 3px;
-  background-color: ${theme('colors', 'highlight')};
+  background-color: ${theme('colors.highlight')};
   padding: 0 1rem 0 1rem;
-  color: transparent;
+  color: ${theme('colors.primary')};
+  &:hover {
+    color: ${theme('colors.primary')};
+  }
   border: none;
   margin-left: 1rem;
 `;

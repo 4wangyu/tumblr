@@ -6,7 +6,7 @@ import Header from './header/Header';
 // import Footer from './footer/Footer';
 import Signup from './auth/Signup';
 import Login from './auth/Login';
-import Dashboard from './post_indexes/PostIndex';
+import Dashboard from './post-feed/PostFeed';
 
 const App = () => (
   <Background>

@@ -10,3 +10,12 @@ export const flexCenterCol = css`
   ${flexCenter}
   flex-direction: column;
 `;
+
+export const absoluteCover = css`
+  width: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+`;

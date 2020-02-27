@@ -3,14 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Thunks as Users } from 'store/users/actions';
 import { Thunks as Posts } from 'store/posts/actions';
 import { selectCurrentUser, selectAllUsers, selectAllPosts } from 'store/selectors';
-import CreatePostBtns from './CreatePostBtns';
+import ComposePost from './ComposePost';
 import KnightLoader from './Loader';
-import { Main, Sidebar, Row, UserAvatar } from './PostIndex.styled';
-import Post from 'components/post/PostBase';
+import { FeedCol, FeedColRow, PostBlogImgCube } from './PostFeed.styled';
+
+import Post from 'components/post/Post';
 import compareCreatedAt from 'util/compare_created_at'
 import usePagination from 'hooks/usePagination';
 
-const PostIndex = () => {
+const PostFeed = () => {
 
   const dispatch = useDispatch();
   const fetchUsers = () => dispatch(Users.fetchUsers());
@@ -55,29 +56,24 @@ const PostIndex = () => {
 
   return (
     <>
-      <Main>
-        <Row>
-          <UserAvatar src={currentUser && currentUser.avatarUrl} />
-          <CreatePostBtns />
-        </Row>
+      <FeedCol>
+        <ComposePost avatarUrl={currentUser.avatarUrl} />
         {posts
           .sort(compareCreatedAt)
           .map((post, idx) => {
             const author = users[post.userId];
             return (
-              <Row key={post.id} ref={idx === posts.length - 1 ? lastPost : null}>
-                <UserAvatar src={author.avatarUrl} />
-                <Post />
-              </Row>
+              <FeedColRow key={post.id} ref={idx === posts.length - 1 ? lastPost : null}>
+                <PostBlogImgCube avatarUrl={author.avatarUrl} />
+                <Post post={post} />
+              </FeedColRow>
             )
           })}
         {loading && <KnightLoader />}
-      </Main>
-      <Sidebar>
-
-      </Sidebar>
+      </FeedCol>
+      <FeedCol></FeedCol>
     </>
-  )
+  );
 }
 
-export default PostIndex;
+export default PostFeed;

@@ -14,9 +14,9 @@ export const AuthNav = () => (
 
 export const PrivateNav = ({ openModal }) => (
   <NavTabIndex>
-    {Object.entries(privateNavIconData).map(([name, { icon, path, modal }]) => {
-      if (modal) return (
-        <TabBtn onClick={() => openModal(modal)} key={name}>
+    {Object.entries(privateNavIconData).map(([name, { icon, path }]) => {
+      if (name === 'compose') return (
+        <TabBtn onClick={() => openModal('ComposePost')} key={name}>
           <IconSm icon={icon} />
         </TabBtn>
       );

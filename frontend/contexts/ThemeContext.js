@@ -33,7 +33,7 @@ const ThemeProvider = ({ children }) => {
   return (
     <ThemeToggleContext.Provider value={{ toggle: toggle }}>
       <StyledProvider
-        theme={themeState.mode === 'light' ? lightTheme : darkTheme}
+        theme={themeState.mode === 'light' ? lightTheme : lightTheme}
       >
         <Wrapper>
           {children}

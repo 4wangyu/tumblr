@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { key as theme } from 'styled-theme';
 
 export const Bg = styled.div`
   width: 100vw;
@@ -7,7 +8,7 @@ export const Bg = styled.div`
     if (P.image) {
       return `background-image: url(${P.src})`
     } else {
-      return `background-color: ${P.theme.colors.midnightBlue}`
+      return `background-color: ${theme('colors.primary')}`
     }
   }};
   background-size: cover;

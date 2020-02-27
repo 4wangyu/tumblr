@@ -5,9 +5,8 @@ import { Thunks as Session } from 'store/session/actions';
 import { Creators as Modal } from 'store/modal/actions';
 import { Header, Logo, Searchbar, SearchbarInput } from './Header.styled';
 import { AuthNav, PrivateNav } from './Nav';
-å
-const Nav = () => {
 
+const Nav = () => {
   const currentUser = useSelector(state => selectCurrentUser(state))
   const isLoggedIn = Boolean(currentUser);
 

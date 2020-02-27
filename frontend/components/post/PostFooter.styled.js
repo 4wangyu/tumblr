@@ -1,14 +1,16 @@
 import styled from 'styled-components';
-import { mapToTheme as theme } from 'styled-map';
-import { postContentPadding } from './Post.styled';
+import { key as theme } from 'styled-theme';
+import { cardPadding } from 'styled/base/Card.styled';
 import { IconBox } from 'styled/base/Icon.styled';
 
 export const CardFooter = styled.div`
-  ${postContentPadding}
-  color: ${theme('colors', 'textLight')};
+  ${cardPadding}
+  color: ${theme('colors.textLight')};
   & > * { 
     cursor: pointer; 
   }
+  display: flex;
+  justify-content: space-between;
 `;
 
 export const Notes = styled.div``;

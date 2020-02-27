@@ -1,7 +1,7 @@
 import React from 'react'
-import { Gallery, Image, Caption } from './ImageGallery.styled';
+import { Gallery, Image, Caption } from './ImageGalleryContent.styled';
 
-const ImageGallery = ({ post: { imageUrls, caption } }) => (
+const ImageGalleryContent = ({ post: { imageUrls, caption } }) => (
   <>
     <Gallery>
       {imageUrls.map((url, idx) => (
@@ -12,4 +12,4 @@ const ImageGallery = ({ post: { imageUrls, caption } }) => (
   </>
 )
 
-export default ImageGallery;
+export default ImageGalleryContent;

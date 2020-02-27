@@ -1,9 +1,10 @@
 import styled, { css } from 'styled-components';
-import styledMap, { mapToTheme as theme } from 'styled-map';
+import styledMap from 'styled-map';
+import { key as theme } from 'styled-theme';
 import { flexCenterCol } from 'styled/helpers';
 import α from 'color-alpha';
 import { animated } from 'react-spring';
-
+import { thump } from 'styled/keyframes';
 export const AuthForm = styled.div`
   ${flexCenterCol}
   width: 30rem;
@@ -16,17 +17,16 @@ export const Logo = styled.h1`
   text-shadow: 2px 2px 3px ${α('#404040', .15)};
   font-family: ${theme('titleFont')};
   color: white;
-  font-weight: ${theme('fontWeights', 'title')};
+  font-weight: ${theme('fontWeights.title')};
   font-size: ${styledMap`
-    default: ${theme('fontSizes', 'title')};
-    large: ${theme('fontSizes', 'titleLg')};
+    default: ${theme('fontSizes.title')};
+    large: ${theme('fontSizes.titleLg')};
   `};
   margin: .5rem;
 `;
 
 export const SubHeading = styled.h2`
   font-size: 1.4rem;
-  /* font-weight: ${({ theme: T }) => T.font.weight.regular}; */
   line-height: 1.6rem;
   padding: 1rem 3rem;
   text-align: center;
@@ -72,19 +72,19 @@ export const InputField = styled.input.attrs(({ name }) => ({
 
 export const ActionBtn = styled.button`
   background-color: ${styledMap`
-    default: ${theme('colors', 'highlight')};
-    secondary: ${theme('colors', 'highlightAlt')};
+    default: ${theme('colors.highlight')};
+    secondary: ${theme('colors.highlightAlt')};
     tertiary: #fff;
-    quarternary: ${theme('colors', 'success')}
+    quarternary: ${theme('colors.success')}
   `};
   border: none;
   border-radius: 2px;
   cursor: pointer;
-  ${styledMap`
+  color: ${styledMap`
     default: #fff;
-    tertiary: ${theme('colors', 'support')};
+    tertiary: ${theme('colors.support')};
   `};
-  font-weight: ${theme('fontWeights', 'title')};
+  font-weight: ${theme('fontWeights.title')};
   ${props => props.quarternary && css`
     animation: ${thump} .45s ease alternate infinite; 
     margin-top: 3rem;

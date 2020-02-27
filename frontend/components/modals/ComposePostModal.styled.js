@@ -1,8 +1,9 @@
 import styled from 'styled-components';
-import styledMap, { mapToTheme as theme } from 'styled-map';
+import styledMap from 'styled-map';
+import { key as theme } from 'styled-theme';
+import α from 'color-alpha';
 import { flexCenter, flexCenterCol } from 'styled/helpers';
 import { IconLg } from 'styled/base/Icon.styled';
-import α from 'color-alpha';
 
 export const BtnIndex = styled.div`
   display: flex;
@@ -22,20 +23,20 @@ export const BtnCoin = styled.div`
   
   &:hover { transform: scale(1.1); }
 
-  background-color: ${styledMap(`
-    default: 'transparent';
+  background-color: ${styledMap`
+    default: white;
     bg-color: ${props => props['bg-color']};
-  `)};
+  `};
 `;
 
 
 export const BtnIcon = styled(IconLg)`
-  color: ${theme('colors', 'primary')};
+  color: ${theme('colors.primary')};
 `;
 
 export const BtnText = styled.span`
   color: white;
   text-shadow: 2px 2px 3px ${α('black', .35)};
-  font-size: 1.6rem;
-  font-weight: ${theme('fontWeights', 'text')};
+  font-size: ${theme('fontSizes.semiLg')};
+  font-weight: ${theme('fontWeights.text')};
 `;

@@ -1,8 +1,8 @@
 import React from 'react'
-import { CardHeader, BlogLink, ReblogLink, ReblogIcon, FollowBtn } from './PostHeader.styled';
+import { CardHeader, BlogLink, ReblogLink, FollowBtn } from './PostHeader.styled';
 import { ReblogIcon } from 'styled/base/Icon.styled';
 
-export const PostHeader = ({
+const PostHeader = ({
   currentUser,
   postAuthor,
   postReblogger = undefined
@@ -16,11 +16,13 @@ export const PostHeader = ({
 
   return (
     <CardHeader>
-      <BlogLink>{postAuthor.username}</BlogLink>
-      {postReblogger && <ReblogLink><ReblogIcon />{postReblogger}</ReblogLink>}
+      <BlogLink to='/'>{postAuthor.username}</BlogLink>
+      {postReblogger && <ReblogLink to='/'><ReblogIcon />{postReblogger}</ReblogLink>}
       {!currentUserIsAuthor && <FollowBtn onClick={handleFollow} />}
     </CardHeader>
   )
 };
+
+export default PostHeader;
 
 

@@ -1,6 +1,8 @@
 import styled from 'styled-components';
-import styledMap, { mapToTheme as theme } from 'styled-map';
+import styledMap from 'styled-map';
 import α from 'color-alpha';
+import { key as theme } from 'styled-theme';
+import { flexCenter } from 'styled/helpers';
 
 export const Header = styled.nav`
   height: 5.4rem;
@@ -15,10 +17,10 @@ export const Logo = styled.span`
   text-shadow: 2px 2px 3px ${α('#404040', .15)};
   font-family: ${theme('titleFont')};
   color: white;
-  font-weight: ${theme('fontWeights', 'title')};
+  font-weight: ${theme('fontWeights.title')};
   font-size: ${styledMap`
-    default: ${theme('fontSize', 'iconMd')};
-    large: ${theme('fontSize', 'iconLg')};
+    default: ${theme('fontSizes.title')};
+    large: ${theme('fontSizes.titleLg')};
   `};
 `;
 
@@ -27,7 +29,8 @@ export const Searchbar = styled.form`
   margin-left: 2rem;
   /* width: 45rem; */
   font-size: 1.5rem;
-  font-weight: ${theme('fontWeights', 'subHeading')};
+  font-weight: ${theme('fontWeights.subHeading')};
+  height: 3.4rem;
 
   &::before {
     content: '\f002';

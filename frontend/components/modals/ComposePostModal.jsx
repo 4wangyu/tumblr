@@ -6,16 +6,16 @@ import { BtnIndex, PostBtn, BtnCoin, BtnIcon, BtnText } from './ComposePostModal
 
 const ComposePostModal = () => {
   const dispatch = useDispatch();
-  const openModal = modal => dispatch(Modal.openModal(modal));
+  const openModal = (modal, options) => dispatch(Modal.openModal(modal, options));
 
   return (
     <BtnIndex>
-      {Object.entries(postTypeIconData).map(([type, { color, icon, modal }]) => (
-        <PostBtn key={type} onClick={() => openModal(modal)}>
+      {Object.entries(postTypeIconData).map(([type, { color, icon, postType }]) => (
+        <PostBtn key={type} onClick={() => openModal('PostForm', { postType })}>
           <BtnCoin bg-color={color}>
             <BtnIcon icon={icon} />
           </BtnCoin>
-          <BtnText>{type.toUpperCase()}</BtnText>
+          <BtnText>{type.charAt(0).toUpperCase() + type.slice(1)}</BtnText>
         </PostBtn>
       ))}
     </BtnIndex>

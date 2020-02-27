@@ -29,14 +29,15 @@ const lightPalette = {
 };
 
 const darkPalette = {
-  primary: '#050505',
+  primary: '#121212',
   secondary: '#222',
   tertiary: '#1c1c1c',
   text: '#fff',
-  textLight: α('#fff', .65),
+  textLight: α('#fff', .80),
 };
 
 export const lightTheme = {
+  fontUrl: 'https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,900|Open+Sans:400,600,700,800&display=swap',
   titleFont: "'Open Sans', sans-serif",
   font: "'Montserrat', sans-serif",
   fontWeights: {
@@ -56,7 +57,6 @@ export const lightTheme = {
     iconMd: '3.5rem',
     iconLg: '5rem'
   },
-  fontUrl: 'https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,900|Open+Sans:400,600,700,800&display=swap',
   colors: {
     ...popColors,
     ...baseColors,
@@ -66,8 +66,8 @@ export const lightTheme = {
 
 export const darkTheme = {
   ...lightTheme,
-  colors: { 
-    ...lightTheme.colors, 
-    ...darkPalette 
+  colors: {
+    ...lightTheme.colors,
+    ...darkPalette
   }
 };

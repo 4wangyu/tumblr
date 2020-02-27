@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { selectCurrentUser } from 'store/selectors';
-import { Card, CardContent } from './Post.styled';
+import { selectCurrentUser, selectUserById } from 'store/selectors';
+import { Card, CardContent } from 'styled/base/Card.styled';
 import PostHeader from './PostHeader';
 import ImageGallery from './post-content/ImageGalleryContent';
 import Video from './post-content/VideoContent';
@@ -9,8 +9,7 @@ import Audio from './post-content/AudioContent';
 import PostFooter from './PostFooter';
 
 const Post = ({ post }) => {
-  const currentUser = useSelector(selectCurrentUser);
-  const postAuthor = useSelect(state => selectUserById(state, { userId: post.userId }));
+  const [currentUser, postAuthor] = useSelector(state => [selectCurrentUser(state), selectUserById(state, { userId: post.userId })]);
   // const postReblogger = useSelect(state => selectUserById(state, { userId: ?}));
 
   const getContent = postData => ({
@@ -26,7 +25,7 @@ const Post = ({ post }) => {
         postAuthor={postAuthor}
         postReblogger={null}
       />
-      <CardContent>{getContent(post)[post.postType]}</CardContent>
+      <CardContent noPadding={true}>{getContent(post)[post.postType]}</CardContent>
       <PostFooter
         currentUser={currentUser}
         post={post}

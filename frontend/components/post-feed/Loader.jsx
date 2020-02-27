@@ -1,25 +1,10 @@
-import React from "react";
-import styled, { keyframes } from "styled-components";
-
-const Pulse = keyframes`
-  0% {
-    transform: scaleY(1.2);
-    opacity: 0.8;
-  }
-  50% {
-    transform: scaleY(1);
-    opacity: 0.6;
-  }
-  100% {
-    transform: scaleY(1.2);
-    opacity: 0.8;
-  }
-`;
+import React from 'react';
+import { flexCenter } from 'styled/helpers';
+import styled from 'styled-components';
+import { pulse } from 'styled/keyframes';
 
 const KnightRiderLoader = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  ${flexCenter};
   height: 2rem;
   margin: 1rem 0;
   margin-left: 8.4rem;
@@ -31,7 +16,7 @@ const KnightRiderBar = styled.div`
   width: 2rem;
   margin: 0 0.45rem;
   border-radius: 5px;
-  animation: 0.55s ${Pulse} infinite;
+  animation: 0.55s ${pulse} infinite;
   animation-delay: ${props => props.barId * 0.2}s;
 `;
 

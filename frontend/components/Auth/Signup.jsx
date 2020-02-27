@@ -4,14 +4,13 @@ import { Thunks as Session } from 'store/session/actions';
 import { useHistory } from 'react-router-dom';
 import { useTransition } from 'react-spring';
 import { Link } from 'react-router-dom';
-
+import Btn from 'styled/base/Btn.styled';
 import {
   AuthForm,
   Logo,
   SubHeading,
   StepWrapper,
   FormGroup, InputField,
-  ActionBtn,
   ActionLink
 } from './Auth.styled';
 
@@ -41,8 +40,8 @@ const Splash = () => {
   // ----------------------- Steps
   const Step1 = memo(() => (
     <F>
-      <ActionBtn onClick={toggleNext}>Get Started</ActionBtn>
-      <ActionBtn tertiary as={Link} to='/login'>Log In</ActionBtn>
+      <Btn large onClick={toggleNext}>Get Started</Btn>
+      <Btn large tertiary as={Link} to='/login'>Log In</Btn>
     </F>
   ));
 
@@ -68,7 +67,7 @@ const Splash = () => {
           value={userData.username}
         />
       </FormGroup>
-      <ActionBtn onClick={handleSubmit}>Sign up</ActionBtn>
+      <Btn large onClick={handleSubmit}>Sign up</Btn>
     </F>
   ));
 

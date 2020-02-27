@@ -7,28 +7,29 @@ import { Creators } from 'store/modal/actions';
 import { ModalBackground, ModalComponentWrapper } from './ModalCore.styled';
 
 import ComposePost from './ComposePostModal';
-import ImageGalleryForm from '../post_forms/ImageGalleryForm';
-import VideoForm from '../post_forms/VideoForm';
+import PostForm from 'components/post-form/PostForm';
 
 const ModalCore = () => {
 
-  const [modal, currentUser] = useSelector(state => [selectModal(state), selectCurrentUser(state)]);
+  const { modal: { component, options }, currentUser } = useSelector(state => ({
+    modal: selectModal(state),
+    currentUser: selectCurrentUser(state),
+  }));
   const dispatch = useDispatch();
   const closeModal = () => dispatch(Creators.closeModal())
 
-  if (!modal) return null;
+  if (!component) return null;
 
   let Component;
 
-  switch (modal) {
+  switch (component) {
     case 'ComposePost':
       Component = <ComposePost />;
       break;
-    case 'ImageGalleryForm':
-      Component = <ImageGalleryForm />;
-      break;
-    case 'VideoForm':
-      Component = <VideoForm />;
+    case 'PostForm':
+      const { postType } = options;
+      if (!postType) return null;
+      Component = <PostForm postType={postType} />;
       break;
     default:
       return null;

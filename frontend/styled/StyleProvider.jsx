@@ -2,7 +2,6 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 import { ThemeProvider } from 'styled-components';
 import GlobalStyle from './GlobalStyle';
 import { lightTheme, darkTheme } from './theme';
-import theme from './theme'
 const ThemeToggleContext = createContext();
 export const useTheme = () => useContext(ThemeToggleContext);
 

@@ -1,9 +1,8 @@
 import { createGlobalStyle } from 'styled-components';
-import { mapToTheme as theme } from 'styled-map';
+import { key as theme } from 'styled-theme';
 
 const GlobalStyle = createGlobalStyle`
   @import url(${theme('fontUrl')});
-
   @import url('https://use.fontawesome.com/releases/v5.8.1/css/all.css');
 
   *, *:before, *:after {
@@ -19,11 +18,11 @@ const GlobalStyle = createGlobalStyle`
   body {
     color: white;
     font-family: ${theme('font')};
-    font-size: ${theme('fontSizes', 'md')};
-    font-weight: ${theme('fontWeights', 'text')};
+    font-size: ${theme('fontSizes.md')};
+    font-weight: ${theme('fontWeights.text')};
     margin: 0;
     padding: 0;
-    background-color: ${theme('colors', 'primary')};
+    background-color: ${theme('colors.primary')};
   }
 
   input, textarea {
@@ -35,10 +34,12 @@ const GlobalStyle = createGlobalStyle`
     }
   }
 
-  button {
-    outline: none;
-    &:focus {
+  a, button {
+    &, &:focus, &:hover, &:active {
+      cursor: pointer;
       outline: none;
+      text-decoration: none;
+      color: inherit;
     }
   }
 

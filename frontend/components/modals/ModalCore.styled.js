@@ -1,7 +1,7 @@
-import styled from 'styled-components';
-import styledMap, { mapToTheme as theme } from 'styled-map';
-import α from 'color-alpha';
+import styled, { css } from 'styled-components';
+import { key as theme } from 'styled-theme';
 import { flexCenter } from 'styled/helpers';
+import α from 'color-alpha';
 
 export const ModalBackground = styled.div`
   position: fixed;
@@ -9,17 +9,16 @@ export const ModalBackground = styled.div`
   bottom: 0;
   right: 0;
   left: 0;
-  background: ${({ theme }) => α(theme.colors.primary, .95)};
-  backdrop-filter: blur(.5rem);
+  background: ${({ theme }) => α(theme.colors.primary, .96)};
+  backdrop-filter: blur(.4rem);
   z-index: 10;
 `;
 
 export const ModalComponentWrapper = styled.div`
-  ${flexCenter}
+  ${flexCenter};
   z-index: 50;
-  /* position: absolute;
+  position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); */
+  transform: translate(-50%, -50%);
 `;
-
