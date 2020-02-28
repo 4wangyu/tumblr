@@ -4,14 +4,23 @@ class User < ApplicationRecord
 
   has_many :likes,
     class_name: :Like,
-    foreign_key: :user_id
+    foreign_key: :user_id,
+    dependent: :destroy
 
   has_many :liked_posts,
     through: :likes,
     source: :post
 
+  has_many :followed_users, foreign_key: :follower_id, class_name: :Follow
+  has_many :followees, through: :followed_users
+  
+  has_many :following_users, foreign_key: :followee_id, class_name: :Follow
+  has_many :followers, through: :following_users
+
   # ----------------------------- ActiveStorage
   has_one_attached :avatar_file
+  # ----------------------------- Scope
+  default_scope { includes(avatar_file_attachment: :blob) }
 
   # ----------------------------- Validations
   validates :email, :username, presence: true, uniqueness: true

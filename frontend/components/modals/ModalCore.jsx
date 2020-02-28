@@ -8,6 +8,7 @@ import { ModalBackground, ModalComponentWrapper } from './ModalCore.styled';
 
 import ComposePost from './ComposePostModal';
 import PostForm from 'components/post-form/PostForm';
+import DeletePost from './DeletePostModal';
 
 const ModalCore = () => {
 
@@ -30,6 +31,11 @@ const ModalCore = () => {
       const { postType } = options;
       if (!postType) return null;
       Component = <PostForm postType={postType} />;
+      break;
+    case 'DeletePost':
+      const { postId } = options;
+      if (!postId) return null;
+      Component = <DeletePost postId={postId} />;
       break;
     default:
       return null;

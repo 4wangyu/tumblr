@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import styledMap from 'styled-map';
+import α from 'color-alpha';
 import { key as theme } from 'styled-theme';
 import { flexCenter, flexCenterCol } from 'styled/helpers';
 import { IconMd } from 'styled/base/Icon.styled';
@@ -36,7 +37,10 @@ export const CardBar = styled(Card)`
 `;
 
 export const CardBarCell = styled.a`
-  background-image: radial-gradient(#dbdbdb, ${theme('colors.secondary')});
+  background-image: radial-gradient(
+    ${α('#dbdbdb', .65)}, 
+    ${({ theme }) => α(theme.colors.secondary, .65)}
+  );
   background-size: 1px 100%;
   background-position: 100% 0;
   background-repeat: no-repeat;

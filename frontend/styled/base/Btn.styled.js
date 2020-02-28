@@ -15,8 +15,10 @@ const Btn = styled.button.attrs(props => ({
   `};
   border: none;
   border-radius: .3rem;
-  color: #fff;
-  font-weight: ${theme('fontWeights.title')};
+  &, &:hover {
+    color: #fff;
+  }
+  font-weight: ${theme('fontWeights.heading')};
   padding: ${styledMap`
     default: .8rem 1rem;
     large: 1.1rem 1.3rem;

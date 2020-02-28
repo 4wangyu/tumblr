@@ -5,7 +5,8 @@ class Video < ApplicationRecord
 
   # ----------------------------- ActiveStorage
   has_one_attached :video_file
-
+  # ----------------------------- Scope
+  default_scope { includes(video_file_attachment: :blob) }
   # ----------------------------- Validations
   
   

@@ -2,7 +2,7 @@ import { createActions } from 'reduxsauce'
 import * as APIUtil from './api_util';
 
 export const { Types, Creators } = createActions({
-  receiveCurrentUser: ['user'],
+  receiveCurrentUser: ['currentUser'],
   logoutCurrentUser: null,
 }, {});
 
@@ -11,14 +11,14 @@ export const Thunks = {};
 Thunks.signup = formUser => dispatch => {
   return APIUtil.signup(formUser)
     .then(
-      user => dispatch(Creators.receiveCurrentUser(user))
+      currentUser => dispatch(Creators.receiveCurrentUser(currentUser))
     );
 };
 
 Thunks.login = formUser => dispatch => {
   return APIUtil.login(formUser)
     .then(
-      user => dispatch(Creators.receiveCurrentUser(user))
+      currentUser => dispatch(Creators.receiveCurrentUser(currentUser))
     );
 };
 

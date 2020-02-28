@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import {
   PreviewIndex, Preview, PreviewImg, DeleteBtn, DeleteIcon,
   Form, Dropzone, DropzoneCell, DropzoneCellTitle,
@@ -6,7 +6,7 @@ import {
   Caption, CaptionTextarea
 } from './PostFormFields.styled';
 
-const ImageGalleryFields = ({ createPost, closeModal }) => {
+const ImageGalleryFields = ({ setPreProcess }) => {
 
   const _initialPost = {
     postType: 'ImageGallery',
@@ -36,8 +36,7 @@ const ImageGalleryFields = ({ createPost, closeModal }) => {
     ))
   }
 
-  const handleSubmit = e => {
-    e.preventDefault();
+  const handleFormData = () => {
     const { postType: post_type, caption, imageFiles: image_files } = post;
     const formPost = new FormData();
     formPost.append('post[post_type]', post_type)
@@ -45,10 +44,10 @@ const ImageGalleryFields = ({ createPost, closeModal }) => {
     for (const image_file of image_files) {
       formPost.append('post[image_files][]', image_file)
     }
-
-    createPost(formPost)
-      .then(() => closeModal());
+    return formPost;
   }
+
+  setPreProcess(handleFormData);
 
   const handleRemovePrev = e => {
     e.stopPropagation();
@@ -82,27 +81,25 @@ const ImageGalleryFields = ({ createPost, closeModal }) => {
       <PreviewIndex active>
         {renderPreviews()}
       </PreviewIndex>
-      <Form onSubmit={handleSubmit}>
-        <Dropzone>
-          <DropzoneCell minimize={inPreview}>
-            <HiddenFileInput
-              onChange={handleFileInput}
-              multiple
-              accept="image/png, image/jpeg"
-            />
-            <ImagesIcon large={!inPreview} />
-            <DropzoneCellTitle>{inPreview ? 'Add Another' : 'Upload photos'}</DropzoneCellTitle>
-            <SmileIcon hidden={inPreview} />
-          </DropzoneCell>
-        </Dropzone>
-        <Caption reveal={inPreview}>
-          <CaptionTextarea
-            name="caption"
-            onChange={handleTextInput}
-            value={post.caption}
+      <Dropzone>
+        <DropzoneCell minimize={inPreview}>
+          <HiddenFileInput
+            onChange={handleFileInput}
+            multiple
+            accept="image/png, image/jpeg"
           />
-        </Caption>
-      </Form>
+          <ImagesIcon large={!inPreview} />
+          <DropzoneCellTitle>{inPreview ? 'Add Another' : 'Upload photos'}</DropzoneCellTitle>
+          <SmileIcon hidden={inPreview} />
+        </DropzoneCell>
+      </Dropzone>
+      <Caption reveal={inPreview}>
+        <CaptionTextarea
+          name="caption"
+          onChange={handleTextInput}
+          value={post.caption}
+        />
+      </Caption>
     </>
   )
 }

@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { key as theme } from 'styled-theme';
+// import { key as theme } from 'styled-theme';
 import { flexCenter } from 'styled/helpers';
 import α from 'color-alpha';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { selectCurrentUser, selectUserById } from 'store/selectors';
-import { Card, CardContent } from 'styled/base/Card.styled';
+import { Card, CardContent, Tags, Tag } from 'styled/base/Card.styled';
 import PostHeader from './PostHeader';
 import ImageGallery from './post-content/ImageGalleryContent';
 import Video from './post-content/VideoContent';
@@ -25,7 +25,10 @@ const Post = ({ post }) => {
         postAuthor={postAuthor}
         postReblogger={null}
       />
-      <CardContent noPadding={true}>{getContent(post)[post.postType]}</CardContent>
+      <CardContent noPadding={true}>
+        {getContent(post)[post.postType]}
+        {(post.tags.length > 0) && <Tags>{post.tags.map(tag => <Tag>#{tag}</Tag>)}</Tags>}
+      </CardContent>
       <PostFooter
         currentUser={currentUser}
         post={post}

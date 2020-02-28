@@ -59,6 +59,10 @@ export const IconBox = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
+  display: ${styledMap`
+    default: inline-block;
+    hidden: none;
+  `};
 `;
 
 // -------------------- Post 

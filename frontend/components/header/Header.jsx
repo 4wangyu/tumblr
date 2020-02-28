@@ -29,28 +29,3 @@ const Nav = () => {
 }
 
 export default Nav;
-
-
-// const Nav = ({ loggedIn, currentUser, logout }) => {
-//   if (!loggedIn) {
-//     return (
-//       <div>
-//         <TabLink to="/signup">Signup</TabLink>
-//         <TabLink to="/login">Login</TabLink>
-//       </div>
-//     )
-//   }
-
-//   const handleLogout = e => {
-//     logout()
-//   }
-
-//   return (
-//     <div>
-//       <button onClick={handleLogout}>Logout</button>
-//       Welcome, <strong>{currentUser.username}</strong>
-//     </div>
-//   )
-// }
-
-// export default Nav;

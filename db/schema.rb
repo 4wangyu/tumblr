@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_27_060933) do
+ActiveRecord::Schema.define(version: 2020_02_27_065400) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,14 @@ ActiveRecord::Schema.define(version: 2020_01_27_060933) do
     t.index ["track"], name: "index_audios_on_track"
   end
 
+  create_table "follows", force: :cascade do |t|
+    t.integer "followee_id", null: false
+    t.integer "follower_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["followee_id", "follower_id"], name: "index_follows_on_followee_id_and_follower_id", unique: true
+  end
+
   create_table "image_galleries", force: :cascade do |t|
     t.text "caption"
     t.datetime "created_at", null: false
@@ -59,6 +67,22 @@ ActiveRecord::Schema.define(version: 2020_01_27_060933) do
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_likes_on_user_id"
     t.index ["user_post_id"], name: "index_likes_on_user_post_id"
+  end
+
+  create_table "taggings", force: :cascade do |t|
+    t.bigint "user_post_id"
+    t.bigint "tag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tag_id"], name: "index_taggings_on_tag_id"
+    t.index ["user_post_id"], name: "index_taggings_on_user_post_id"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_tags_on_name", unique: true
   end
 
   create_table "user_posts", force: :cascade do |t|
@@ -92,5 +116,7 @@ ActiveRecord::Schema.define(version: 2020_01_27_060933) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "likes", "user_posts"
   add_foreign_key "likes", "users"
+  add_foreign_key "taggings", "tags"
+  add_foreign_key "taggings", "user_posts"
   add_foreign_key "user_posts", "users"
 end

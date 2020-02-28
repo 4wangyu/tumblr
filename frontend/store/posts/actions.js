@@ -5,7 +5,8 @@ export const { Types, Creators } = createActions({
   receivePosts: ['posts'],
   receivePost: ['post'],
   createPost: ['post'],
-  updatePost: ['post']
+  updatePost: ['post'],
+  removePost: ['postId']
 }, {});
 
 export const Thunks = {};
@@ -31,6 +32,11 @@ Thunks.createPost = formPost => dispatch => {
 Thunks.updatePost = formPost => dispatch => {
   return APIUtil.updatePost(formPost)
     .then(post => dispatch(Creators.receivePost(post)));
+};
+
+Thunks.destroyPost = postId => dispatch => {
+  return APIUtil.destroyPost(postId)
+    .then(postId => dispatch(Creators.removePost(postId)));
 };
 
 Thunks.togglePostLike = (postId, isLiked = false) => dispatch => {

@@ -2,11 +2,9 @@ class Api::LikesController < ApplicationController
   before_action :select_post
 
   def create
-    # debugger
     @like = Like.new(liker: current_user, post: @user_post)
     if @like.save
       render partial: 'api/posts/user_post', locals: {user_post: @user_post}, status: :created # 201
-      # render 'api/posts#show'
     else
       render json: @like.errors.full_messages, status: :unprocessable_entity # 422
     end
@@ -19,7 +17,6 @@ class Api::LikesController < ApplicationController
     else 
       @like.destroy
       render partial: 'api/posts/user_post', locals: {user_post: @user_post}
-      # render 'api/posts#show'
     end
   end
 

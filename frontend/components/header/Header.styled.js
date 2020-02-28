@@ -42,9 +42,13 @@ export const Searchbar = styled.form`
     color: ${α('white', .65)};
     font-weight: 600;
   }
+  &, & * {
+    transition: color .3s, background-color .3s ease;
+  }
+
 
   &:hover {
-    &::before {color: ${α('black', .65)};}
+    &::before {color: ${({ theme }) => α(theme.colors.primary, .85)};}
   }
 `;
 
@@ -58,13 +62,15 @@ export const SearchbarInput = styled.input`
   height: 100%;
   padding: 7px 15px 7px 35px;
   
-  &::placeholder {color: ${α('white', .65)};}
+  &::placeholder {
+    color: ${α('white', .65)};
+    background-color: transparent
+  }
 
   &:hover {
     background-color: white;
     &::placeholder {
       color: ${α('black', .65)};
-      background-color: white;
     }
   }
 `;

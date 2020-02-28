@@ -2,7 +2,7 @@ class Api::UsersController < ApplicationController
   before_action :select_user, only: [:update, :show]
 
   def index
-    @users = User.includes(:avatar_file_attachment, :user_posts).all
+    @users = User.includes(:user_posts, :followees)
   end
 
   def create

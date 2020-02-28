@@ -7,4 +7,5 @@ case user_post.post_type
   when 'Video'
     json.partial! '/api/posts/video', video: user_post.post
 end
+json.tags user_post.all_tags
 json.extract! user_post, :user_id, :liker_ids, :created_at

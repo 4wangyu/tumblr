@@ -2,22 +2,13 @@ class Api::PostsController < ApplicationController
   before_action :select_user_post, only: [:show, :update, :destroy]
 
   def index
-
-    image_posts = UserPost.where(post_type: :ImageGallery).includes(:user, likes: :liker, post: {image_files_attachments: :blob})
-    video_posts = UserPost.where(post_type: :Video).includes(:user, likes: :liker, post: {video_file_attachment: :blob})
-    @user_posts = (image_posts + video_posts).sort {|a, b| b.created_at <=> a.created_at}
+    @user_posts = UserPost.includes(:user, :post, :tags, :likers)
     headers['X-Post-Count'] = @user_posts.count
     if (params[:offset] && params[:limit])
       @user_posts = @user_posts.drop(params[:offset].to_i).first(params[:limit].to_i)
     else 
       @user_posts = @user_posts.first(50)
     end
-    # @user_posts = UserPost.includes(:user, post: [
-    #   {image_files_attachments: :blob},
-    #   {audio_file_attachment: :blob},
-    #   {album_art_file_attachment: :blob},
-    #   {video_file_attachment: :blob},
-    # ]).all
   end
 
   # def dashboard
@@ -36,7 +27,7 @@ class Api::PostsController < ApplicationController
   end
 
   def create
-    post_type = post_type_param[:post_type]
+    post_type = post_type_param
 
     case post_type
       when 'ImageGallery'
@@ -49,7 +40,9 @@ class Api::PostsController < ApplicationController
         nil
     end
 
-    @user_post = current_user.user_posts.create({ post: post })
+    debugger
+
+    @user_post = current_user.user_posts.create(post: post, all_tags: all_tags_param)
     if @user_post
       render :show, status: :created # 201
     else
@@ -68,18 +61,22 @@ class Api::PostsController < ApplicationController
   end
 
   def destroy
-    if @user_post.author != current_user
+    if @user_post.user != current_user
       render json: ['Unauthorized'], status: :unauthorized # 401
     else 
       @user_post.destroy
-      render json: ['Success']
+      render json: @user_post.id
     end
   end
 
   private
 
   def post_type_param
-    params.require(:post).permit(:post_type)
+    params.require(:post).permit(:post_type)[:post_type]
+  end
+
+  def all_tags_param
+    params.require(:post).permit(all_tags: [])[:all_tags]
   end
 
   def select_user_post
@@ -90,7 +87,7 @@ class Api::PostsController < ApplicationController
   end
 
   def image_gallery_params
-    params.require(:post).permit(:caption, image_files: [])
+    params.require(:post).permit(:caption, image_files: [], )
   end
 
   def video_params

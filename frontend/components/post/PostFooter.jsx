@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Thunks as Posts } from 'store/posts/actions';
-import { CardFooter, Notes, Controls, PadBox } from './PostFooter.styled';
+import { Creators as Modal } from 'store/modal/actions';
+import { CardFooter, Notes, Controls, PadBox, ControlsPopover, Control } from './PostFooter.styled';
 import { ShareIcon, ReplyIcon, ReblogIcon, LikeIcon, ControlsIcon } from 'styled/base/Icon.styled';
 
 const PostFooter = ({ post, currentUser }) => {
@@ -10,6 +11,10 @@ const PostFooter = ({ post, currentUser }) => {
 
   const dispatch = useDispatch();
   const togglePostLike = (postId, isLiked) => dispatch(Posts.togglePostLike(postId, isLiked));
+  const openDeletePostModal = () => dispatch(Modal.openModal('DeletePost', { postId: post.id }));
+
+  const [popoverOpen, setPopoverOpen] = useState(false);
+  const togglePopover = () => setPopoverOpen(prev => !prev);
 
   const handleLike = () => togglePostLike(post.id, liked);
 
@@ -17,10 +22,10 @@ const PostFooter = ({ post, currentUser }) => {
     <CardFooter>
       <Notes>{'23,468'} notes</Notes>
       <Controls>
-        <PadBox>
+        <PadBox hidden>
           <ShareIcon />
         </PadBox>
-        <PadBox>
+        <PadBox hidden>
           <ReplyIcon />
         </PadBox>
         <PadBox>
@@ -29,7 +34,11 @@ const PostFooter = ({ post, currentUser }) => {
         <PadBox>
           <LikeIcon onClick={handleLike} liked={liked} />
         </PadBox>
-        {currentUserIsAuthor && <PadBox><ControlsIcon /></PadBox>}
+        {currentUserIsAuthor && <PadBox><ControlsIcon onClick={togglePopover} /></PadBox>}
+        <ControlsPopover open={popoverOpen}>
+          <Control>Edit</Control>
+          <Control onClick={openDeletePostModal}>Delete</Control>
+        </ControlsPopover>
       </Controls>
     </CardFooter>
   );

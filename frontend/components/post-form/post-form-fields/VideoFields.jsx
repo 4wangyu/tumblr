@@ -6,7 +6,8 @@ import {
   Caption, CaptionTextarea
 } from './PostFormFields.styled';
 
-const VideoFields = ({ createPost, closeModal }) => {
+const VideoFields = ({ setPreProcess }) => {
+
   const _initialPost = {
     postType: 'Video',
     caption: '',
@@ -31,15 +32,16 @@ const VideoFields = ({ createPost, closeModal }) => {
     ))
   }
 
-  const handleSubmit = e => {
-    e.preventDefault();
+  const handleFormData = () => {
     const { caption, postType, videoFile } = post;
     const formPost = new FormData();
     formPost.append('post[post_type]', postType)
     formPost.append('post[caption]', caption)
     formPost.append('post[video_file]', videoFile)
-    createPost(formPost).then(() => closeModal());
+    return formPost;
   }
+
+  setPreProcess(handleFormData);
 
   const renderPreview = () => (
     <Preview video>
@@ -55,25 +57,23 @@ const VideoFields = ({ createPost, closeModal }) => {
   return (
     <>
       <PreviewIndex active>{previewUrl && renderPreview()}</PreviewIndex>
-      <Form onSubmit={handleSubmit}>
-        <Dropzone>
-          <DropzoneCell minimize={inPreview}>
-            <HiddenFileInput
-              onChange={handleFileInput}
-              accept="video/mp4, video/ogg"
-            />
-            <VideoIcon large={!inPreview} />
-            <DropzoneCellTitle>{inPreview ? 'Replace video' : 'Upload a video'}</DropzoneCellTitle>
-          </DropzoneCell>
-        </Dropzone>
-        <Caption reveal={inPreview}>
-          <CaptionTextarea
-            name="caption"
-            onChange={handleTextInput}
-            value={post.caption}
+      <Dropzone>
+        <DropzoneCell minimize={inPreview}>
+          <HiddenFileInput
+            onChange={handleFileInput}
+            accept="video/mp4, video/ogg"
           />
-        </Caption>
-      </Form>
+          <VideoIcon large={!inPreview} />
+          <DropzoneCellTitle>{inPreview ? 'Replace video' : 'Upload a video'}</DropzoneCellTitle>
+        </DropzoneCell>
+      </Dropzone>
+      <Caption reveal={inPreview}>
+        <CaptionTextarea
+          name="caption"
+          onChange={handleTextInput}
+          value={post.caption}
+        />
+      </Caption>
     </>
   )
 }

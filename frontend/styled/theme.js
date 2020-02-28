@@ -1,4 +1,3 @@
-
 import α from 'color-alpha';
 
 export const popColors = {
