@@ -1,10 +1,6 @@
 class Api::UsersController < ApplicationController
   before_action :select_user, only: [:update, :show]
 
-  def index
-    @users = User.includes(:user_posts, :followees)
-  end
-
   def create
     @user = User.new(user_params)
     unless @user.save

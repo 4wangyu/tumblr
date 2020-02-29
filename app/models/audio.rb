@@ -1,12 +1,12 @@
 class Audio < ApplicationRecord
   # ----------------------------- Associations
-  has_one :user_post, as: :post, dependent: :destroy
-  has_one :user, through: :user_post
+  has_one :post, as: :content, dependent: :destroy
+  has_one :user, through: :post
 
   # ----------------------------- ActiveStorage
-  has_one_attached :audio_file
-  has_one_attached :album_art_file
+  has_one_attached :audio
+  has_one_attached :album
    # ----------------------------- Scope
-   default_scope { includes(audio_file_attachment: :blob, album_art_file_attachment: :blob) }
+   default_scope { includes(audio_attachment: :blob, album_art_attachment: :blob) }
   # ----------------------------- Validations
 end

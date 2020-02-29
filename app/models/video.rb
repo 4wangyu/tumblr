@@ -1,12 +1,12 @@
 class Video < ApplicationRecord
   # ----------------------------- Associations
-  has_one :user_post, as: :post, dependent: :destroy
-  has_one :user, through: :user_post
+  has_one :post, as: :content, dependent: :destroy
+  has_one :user, through: :post
 
   # ----------------------------- ActiveStorage
-  has_one_attached :video_file
+  has_one_attached :video
   # ----------------------------- Scope
-  default_scope { includes(video_file_attachment: :blob) }
+  default_scope { includes(video_attachment: :blob) }
   # ----------------------------- Validations
   
   

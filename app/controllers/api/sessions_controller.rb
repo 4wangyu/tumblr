@@ -12,9 +12,9 @@ class Api::SessionsController < ApplicationController
   def destroy
     if current_user
       logout()
-      render json: ['Logout success']
+      render json: ['Logout successful']
     else 
-      render ['There was an isssue configuring your session'], status: :not_found
+      render ['Session not found'], status: :not_found
     end
   end
 end

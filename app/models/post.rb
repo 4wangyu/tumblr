@@ -1,14 +1,16 @@
-class UserPost < ApplicationRecord
+class Post < ApplicationRecord
   # ----------------------------- Associations
   belongs_to :user
 
-  belongs_to :post, polymorphic: true
+  belongs_to :content, polymorphic: true
 
-  has_many :likes, class_name: :Like, foreign_key: :user_post_id
-  has_many :likers, through: :likes, source: :liker
+  has_many :likes, as: :likable, dependent: :destroy
+  has_many :likers, through: :likes
 
-  has_many :taggings, dependent: :destroy
+  has_many :taggings, as: :taggable, dependent: :destroy
   has_many :tags, through: :taggings
+
+  has_many :reblogs, as: :rebloggable, dependent: :destroy
   # ----------------------------- Scope
   default_scope { order(created_at: :desc) }
   # ----------------------------- Validations
