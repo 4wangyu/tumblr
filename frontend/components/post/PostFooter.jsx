@@ -11,7 +11,8 @@ const PostFooter = ({ post, currentUser }) => {
 
   const dispatch = useDispatch();
   const togglePostLike = (postId, isLiked) => dispatch(Posts.togglePostLike(postId, isLiked));
-  const openDeletePostModal = () => dispatch(Modal.openModal('DeletePost', { postId: post.id }));
+  const destoryPost = () => dispatch(Posts.destroyPost(post.id));
+  const openConfirmationModal = () => dispatch(Modal.openModal('Confirmation', { onConfirm: destoryPost, message: 'Are you sure you want to delete this post?' }));
 
   const [popoverOpen, setPopoverOpen] = useState(false);
   const togglePopover = () => setPopoverOpen(prev => !prev);
@@ -37,7 +38,7 @@ const PostFooter = ({ post, currentUser }) => {
         {currentUserIsAuthor && <PadBox><ControlsIcon onClick={togglePopover} /></PadBox>}
         <ControlsPopover open={popoverOpen}>
           <Control>Edit</Control>
-          <Control onClick={openDeletePostModal}>Delete</Control>
+          <Control onClick={openConfirmationModal}>Delete</Control>
         </ControlsPopover>
       </Controls>
     </CardFooter>

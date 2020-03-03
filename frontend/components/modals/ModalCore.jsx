@@ -8,7 +8,7 @@ import { ModalBackground, ModalComponentWrapper } from './ModalCore.styled';
 
 import ComposePost from './ComposePostModal';
 import PostForm from 'components/post-form/PostForm';
-import DeletePost from './DeletePostModal';
+import Confirmation from './ConfirmationModal';
 
 const ModalCore = () => {
 
@@ -19,7 +19,10 @@ const ModalCore = () => {
   const dispatch = useDispatch();
   const closeModal = () => dispatch(Creators.closeModal())
 
-  if (!component) return null;
+  if (!component) {
+    document.body.style.overflow = 'unset';
+    return null
+  };
 
   let Component;
 
@@ -32,15 +35,16 @@ const ModalCore = () => {
       if (!postType) return null;
       Component = <PostForm postType={postType} />;
       break;
-    case 'DeletePost':
-      const { postId } = options;
-      if (!postId) return null;
-      Component = <DeletePost postId={postId} />;
+    case 'Confirmation':
+      const { onConfirm, message } = options;
+      if (!onConfirm || !message) return null;
+      Component = <Confirmation onConfirm={onConfirm} message={message} />;
       break;
     default:
       return null;
   }
 
+  document.body.style.overflow = 'hidden';
   return (
     <ModalBackground onClick={closeModal}>
       <ModalComponentWrapper onClick={e => e.stopPropagation()}>

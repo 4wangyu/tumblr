@@ -1,4 +1,5 @@
 import { keyframes } from 'styled-components';
+import { key as theme } from 'styled-theme';
 import α from 'color-alpha';
 
 export const thump = keyframes`
@@ -13,15 +14,17 @@ export const thump = keyframes`
 
 export const pulse = keyframes`
   0% {
-    transform: scaleY(1.2);
-    opacity: 0.8;
+    background-color: ${theme('color.hightlight')};
   }
   50% {
-    transform: scaleY(1);
-    opacity: 0.6;
+    background-color: #7ad2ff;
   }
   100% {
-    transform: scaleY(1.2);
-    opacity: 0.8;
+    background-color: ${theme('color.hightlight')};
   }
 `;
+
+export const blurIn = keyframes`
+  from {opacity: 0;}
+  to {opacity: 1;}
+`

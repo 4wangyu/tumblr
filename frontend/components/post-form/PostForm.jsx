@@ -11,7 +11,7 @@ import Video from './post-form-fields/VideoFields';
 import TagManager from './TagManager';
 import pojoToFormData from 'util/pojo_to_form_data';
 
-const PostForm = ({ postType }) => {
+const PostForm = ({ postType, post = {} }) => {
   const currentUser = useSelector(selectCurrentUser);
   const dispatch = useDispatch();
   const closeModal = () => dispatch(Modal.closeModal());
@@ -22,7 +22,7 @@ const PostForm = ({ postType }) => {
     Video: <Video {...props} />,
   });
 
-  const [formData, setFormData] = useState({})
+  const [formData, setFormData] = useState(post);
 
   const processFormData = () => {
     const newPost = pojoToFormData(formData);

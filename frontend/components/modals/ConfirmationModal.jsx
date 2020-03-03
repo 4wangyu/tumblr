@@ -1,28 +1,24 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
-import { Thunks as Posts } from 'store/posts/actions'
 import { Creators as Modal } from 'store/modal/actions';
-import { Confirmation, ConfirmationTitle, ConfirmationBtns } from './DeletePostModal.styled'
+import { Confirmation, ConfirmationMsg, ConfirmationBtns } from './ConfirmationModal.styled'
 import Btn from 'styled/base/Btn.styled';
 
-const DeletePostModal = ({ postId }) => {
+const DeletePostModal = ({ onConfirm, message }) => {
   const dispatch = useDispatch();
-  const destroyPost = postId => dispatch(Posts.destroyPost(postId))
   const closeModal = () => dispatch(Modal.closeModal());
 
-  const handleDestroyPost = e => {
-    destroyPost(postId)
+  const handleConfirm = e => {
+    onConfirm()
       .then(closeModal);
   }
 
   return (
     <Confirmation>
-      <ConfirmationTitle>
-        Are you sure you want to delete this post?
-      </ConfirmationTitle>
+      <ConfirmationMsg>{message}</ConfirmationMsg>
       <ConfirmationBtns>
         <Btn large secondary onClick={closeModal}>Cancel</Btn>
-        <Btn large onClick={handleDestroyPost}>OK</Btn>
+        <Btn large onClick={handleConfirm}>OK</Btn>
       </ConfirmationBtns>
     </Confirmation>
   )

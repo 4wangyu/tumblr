@@ -1,9 +1,11 @@
 import styled, { css } from 'styled-components';
+import { blurIn } from 'styled/keyframes';
 // import { key as theme } from 'styled-theme';
 import { flexCenter } from 'styled/helpers';
 import α from 'color-alpha';
 
 export const ModalBackground = styled.div`
+  animation: ${blurIn} .2s cubic-bezier(.25,.8,.25,1);
   position: fixed;
   top: 0;
   bottom: 0;
