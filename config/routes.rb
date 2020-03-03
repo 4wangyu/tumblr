@@ -8,13 +8,9 @@ Rails.application.routes.draw do
     
     resources :posts, only: [:create, :show, :destroy] do
       resource :likes, only: [:create, :destroy]
-      post :all_tags, to: 'tags#all_tags'
     end
 
-    resources :reblogs, only: [:create, :show, :destroy] do
-      resource :likes, only: [:create, :destroy]
-      post :all_tags, to: 'tags#all_tags'
-    end
+    resources :reblogs, only: [:create, :show, :update, :destroy]
 
     get 'feed/dashboard'
     get 'feed/trending'

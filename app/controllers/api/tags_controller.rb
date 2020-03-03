@@ -3,10 +3,10 @@ class Api::TagsController < ApplicationController
 
   def all_tags
     @post.update(tag_params)
-    if @user_post
+    if @post
       render partial: 'api/posts/post', locals: {post: @post}, status: :created # 201
     else
-      render json: @user_post.errors.full_messages, status: :unprocessable_entity # 422
+      render json: @post.errors.full_messages, status: :unprocessable_entity # 422
     end
   end
 
@@ -17,6 +17,6 @@ class Api::TagsController < ApplicationController
   end
 
   def select_post
-    @post = UserPost.find_by(id: params[:post_id], user: current_user)
+    @post = Post.find_by(id: params[:post_id], user: current_user)
   end
 end

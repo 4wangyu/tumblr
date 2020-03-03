@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   PreviewIndex, Preview, PreviewVideo,
   Form, Dropzone, DropzoneCell, DropzoneCellTitle, VideoIcon,
@@ -6,57 +6,44 @@ import {
   Caption, CaptionTextarea
 } from './PostFormFields.styled';
 
-const VideoFields = ({ setPreProcess }) => {
+const VideoFields = ({ formData, setFormData }) => {
 
-  const _initialPost = {
-    postType: 'Video',
-    caption: '',
-    videoFile: '',
-    videoUrl: undefined,
-    previewUrl: undefined
-  }
+  const [preview, setPreview] = useState('');
 
-  const [post, setPost] = useState(_initialPost);
+  useEffect(() => {
+    setFormData(prev => ({
+      ...prev,
+      contentType: 'Video',
+      caption: '',
+      video: undefined,
+    }));
+  }, []);
 
   const handleTextInput = e => {
     const { name, value } = e.target;
-    setPost(prevPost => Object.assign({}, prevPost, { [name]: value }));
+    setFormData(prev => ({ ...prev, [name]: value }));
   }
 
   const handleFileInput = e => {
-    const [videoFile] = e.target.files;
-    // ajax contentType, processData ?
-    const previewUrl = URL.createObjectURL(videoFile)
-    setPost(prevPost => Object.assign(
-      {}, prevPost, { videoFile, previewUrl }
-    ))
+    const [video] = e.target.files;
+    setFormData(prev => ({ ...prev, video }));
+    setPreview(URL.createObjectURL(video));
   }
-
-  const handleFormData = () => {
-    const { caption, postType, videoFile } = post;
-    const formPost = new FormData();
-    formPost.append('post[post_type]', postType)
-    formPost.append('post[caption]', caption)
-    formPost.append('post[video_file]', videoFile)
-    return formPost;
-  }
-
-  setPreProcess(handleFormData);
 
   const renderPreview = () => (
     <Preview video>
       <PreviewVideo>
-        <source src={post.previewUrl} type="video/mp4" />
+        <source src={preview} type="video/mp4" />
         Your browser does not support the video tag.
       </PreviewVideo>
     </Preview>
   )
 
-  const { previewUrl } = post;
-  const inPreview = Boolean(previewUrl)
+  const { caption } = formData;
+  const inPreview = Boolean(preview);
   return (
     <>
-      <PreviewIndex active>{previewUrl && renderPreview()}</PreviewIndex>
+      <PreviewIndex active>{preview && renderPreview()}</PreviewIndex>
       <Dropzone>
         <DropzoneCell minimize={inPreview}>
           <HiddenFileInput
@@ -71,11 +58,11 @@ const VideoFields = ({ setPreProcess }) => {
         <CaptionTextarea
           name="caption"
           onChange={handleTextInput}
-          value={post.caption}
+          value={caption}
         />
       </Caption>
     </>
-  )
-}
+  );
+};
 
 export default VideoFields;

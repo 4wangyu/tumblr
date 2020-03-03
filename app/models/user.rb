@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   # ----------------------------- Associations
-  has_many :user_posts, dependent: :destroy
+  has_many :posts, dependent: :destroy
 
   has_many :likes,
     class_name: :Like,
@@ -18,9 +18,9 @@ class User < ApplicationRecord
   has_many :followers, through: :following_users
 
   # ----------------------------- ActiveStorage
-  has_one_attached :avatar_file
+  has_one_attached :avatar
   # ----------------------------- Scope
-  default_scope { includes(avatar_file_attachment: :blob) }
+  default_scope { includes(avatar_attachment: :blob) }
 
   # ----------------------------- Validations
   validates :email, :username, presence: true, uniqueness: true

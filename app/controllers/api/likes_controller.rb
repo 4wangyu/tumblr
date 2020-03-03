@@ -1,5 +1,5 @@
 class Api::LikesController < ApplicationController
-  before_action :select_postable
+  before_action :select_post
 
   def create
     @like = Like.new(liker: current_user, post: @post)
@@ -16,14 +16,13 @@ class Api::LikesController < ApplicationController
       render json: ['Unauthorized'], status: :unauthorized # 401
     else 
       @like.destroy
-      render partial: 'api/posts/user_post', locals: {post: @post}
+      render partial: 'api/posts/post', locals: {post: @post}
     end
   end
 
   private
 
-  def select_postable
-    if params[:post_id]
-      @postable = Post.find_by_id(params[:post_id])
+  def select_post
+    @post = Post.find_by_id(params[:post_id])
   end
 end

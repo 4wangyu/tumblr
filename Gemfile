@@ -3,8 +3,6 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.3'
 
-# Use to view Heroku logs and will precompile our asset
-gem 'rails_12factor'
 # Sync active storage w/ AWS S3
 gem 'aws-sdk-s3'
 # Make AJAX requests w/ authentication token automatically added to header
@@ -60,6 +58,12 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
+
+group :production do
+  # Use to view Heroku logs and will precompile our asset
+  gem 'rails_12factor'
+end
+
 
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

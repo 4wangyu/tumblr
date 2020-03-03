@@ -1,5 +1,5 @@
 import { css } from 'styled-components';
-
+import styledMap from 'styled-map';
 export const flexCenter = css`
   display: flex;
   align-items: center;

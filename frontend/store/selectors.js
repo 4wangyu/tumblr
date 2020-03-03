@@ -9,5 +9,8 @@ export const selectCurrentUser = ({ entities: { users }, session: { id } }) => u
 // ---------------------- Post
 export const selectAllPosts = state => Object.values(state.entities.posts);
 
-// ---------------------- Post
+// ---------------------- Modal
 export const selectModal = state => state.ui.modal;
+
+// ---------------------- Reblog
+export const selectAllReblogs = state => Object.values(state.entities.reblogs);

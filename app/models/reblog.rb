@@ -1,20 +1,29 @@
 class Reblog < ApplicationRecord
   # ----------------------------- Associations
-  belongs_to :user, as: :reblogger
+  belongs_to :user
 
-  has_many :likes, as: :likable, dependent: :destroy
-  has_many :likers, through: :likes
+  belongs_to :post
+
+  belongs_to :parent, class_name: :Reblog, foreign_key: :parent_id, optional: true
 
   has_many :taggings, as: :taggable, dependent: :destroy
   has_many :tags, through: :taggings
-
-  has_many :reblogs, as: :rebloggable, dependent: :destroy
-  belongs_to :rebloggable, polymorphic: true
   # ----------------------------- Scope
   default_scope { order(created_at: :desc) }
   # ----------------------------- Validations
+  #------------------------------ Queries
+  def all_tags=(names)
+    self.tags = names.map do |name|
+      Tag.where(name: name.strip).first_or_create
+    end
+  end
+  
+  def all_tags
+    self.tags.map(&:name)
+  end
 
-  def source
-    #the original user post
+
+  def associated_users
+
   end
 end

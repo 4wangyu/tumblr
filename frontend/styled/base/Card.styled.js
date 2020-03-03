@@ -23,21 +23,4 @@ export const CardContent = styled.div`
   font-weight: ${theme('fontWeights.text')};
 `;
 
-export const Tags = styled.div`
-  color: ${theme('colors.textLight')};
-  padding: .5rem 2rem 1rem 1.5rem;
-  margin-top: .5rem;
-  width: 100%;
-  display: flex;
-  flex-flow: row wrap;
-  align-items: center;
-`;
-
-export const Tag = styled.span`
-  cursor: pointer;
-  padding: 5px;
-  border-radius: 3px;
-  margin: 0 1px;
-`;
-
 export default Card;

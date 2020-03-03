@@ -1,1 +1,0 @@
-export const selectAllPosts = state => Object.values(state.entities.posts);

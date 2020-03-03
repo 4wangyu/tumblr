@@ -7,8 +7,8 @@ import { privateNavIconData, IconSm } from 'styled/base/Icon.styled';
 
 export const AuthNav = () => (
   <Nav>
-    <NavBtn secondary to='/login' >Log In</NavBtn>
-    <NavBtn secondary to='/'>Sign Up</NavBtn>
+    <NavBtn to='/login' >Log In</NavBtn>
+    <NavBtn to='/signup'>Sign Up</NavBtn>
   </Nav>
 );
 

@@ -15,7 +15,7 @@ export const CardFooter = styled.div`
   justify-content: space-between;
 `;
 
-export const Tags = styled.div`
+export const TagIndex = styled.div`
   min-height: 4rem;
   padding: .5rem 2rem 1rem 1.5rem;
   margin-top: .5rem;

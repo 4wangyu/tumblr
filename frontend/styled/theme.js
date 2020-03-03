@@ -25,10 +25,13 @@ const lightPalette = {
   tertiary: '#f2f2f2',
   text: '#000',
   textLight: α('#000', .65),
+  brandDark: '#444',
+  brandMedium: '#f2f2f2',
+  brandLight: '#fff',
 };
 
 const darkPalette = {
-  primary: '#121212',
+  primary: '#1A1A1A',
   secondary: '#222',
   tertiary: '#1c1c1c',
   text: '#fff',

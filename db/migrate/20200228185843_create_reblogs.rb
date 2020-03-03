@@ -1,9 +1,10 @@
 class CreateReblogs < ActiveRecord::Migration[5.2]
   def change
     create_table :reblogs do |t|
-      t.string :content
-      t.references :rebloggable, index: true, polymorphic: true, null: false
-      t.references :user, as: :reblogger, index: true, foreign_key: true, null: false
+      t.string :caption
+      t.integer :parent_id, foreign_key: true
+      t.references :user, index: true, foreign_key: true, null: false
+      t.references :post, index: true, foreign_key: true, null: false
 
       t.timestamps
     end

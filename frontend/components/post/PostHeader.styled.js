@@ -2,14 +2,22 @@ import styled from 'styled-components';
 import { key as theme } from 'styled-theme';
 import { Link } from 'react-router-dom';
 import { cardPadding } from 'styled/base/Card.styled';
+import { flexCenter } from 'styled/helpers';
+import { ReblogIcon } from 'styled/base/Icon.styled';
 
 export const CardHeader = styled.div`
+  ${flexCenter}
+  justify-content: start;
   ${cardPadding};
   & > * {
     padding-left: .5rem;
     &:first-child {
       padding-left: 0;
     }
+  }
+
+  ${ReblogIcon} {
+    color: ${theme('colors.textLight')};
   }
 `;
 

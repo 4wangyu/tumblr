@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_27_065400) do
+ActiveRecord::Schema.define(version: 2020_02_28_185843) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,21 +61,45 @@ ActiveRecord::Schema.define(version: 2020_02_27_065400) do
   end
 
   create_table "likes", force: :cascade do |t|
-    t.bigint "user_post_id"
-    t.bigint "user_id"
+    t.bigint "post_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["post_id", "user_id"], name: "index_likes_on_post_id_and_user_id", unique: true
+    t.index ["post_id"], name: "index_likes_on_post_id"
     t.index ["user_id"], name: "index_likes_on_user_id"
-    t.index ["user_post_id"], name: "index_likes_on_user_post_id"
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.string "content_type", null: false
+    t.bigint "content_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["content_type", "content_id"], name: "index_posts_on_content_type_and_content_id"
+    t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
+  create_table "reblogs", force: :cascade do |t|
+    t.string "caption"
+    t.integer "parent_id"
+    t.bigint "user_id", null: false
+    t.bigint "post_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_reblogs_on_post_id"
+    t.index ["user_id"], name: "index_reblogs_on_user_id"
   end
 
   create_table "taggings", force: :cascade do |t|
-    t.bigint "user_post_id"
-    t.bigint "tag_id"
+    t.string "taggable_type", null: false
+    t.bigint "taggable_id", null: false
+    t.bigint "tag_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["tag_id"], name: "index_taggings_on_tag_id"
-    t.index ["user_post_id"], name: "index_taggings_on_user_post_id"
+    t.index ["taggable_id", "tag_id"], name: "index_taggings_on_taggable_id_and_tag_id", unique: true
+    t.index ["taggable_type", "taggable_id"], name: "index_taggings_on_taggable_type_and_taggable_id"
   end
 
   create_table "tags", force: :cascade do |t|
@@ -83,16 +107,6 @@ ActiveRecord::Schema.define(version: 2020_02_27_065400) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_tags_on_name", unique: true
-  end
-
-  create_table "user_posts", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.string "post_type", null: false
-    t.bigint "post_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["post_type", "post_id"], name: "index_user_posts_on_post_type_and_post_id"
-    t.index ["user_id"], name: "index_user_posts_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -114,9 +128,10 @@ ActiveRecord::Schema.define(version: 2020_02_27_065400) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "likes", "user_posts"
+  add_foreign_key "likes", "posts"
   add_foreign_key "likes", "users"
+  add_foreign_key "posts", "users"
+  add_foreign_key "reblogs", "posts"
+  add_foreign_key "reblogs", "users"
   add_foreign_key "taggings", "tags"
-  add_foreign_key "taggings", "user_posts"
-  add_foreign_key "user_posts", "users"
 end

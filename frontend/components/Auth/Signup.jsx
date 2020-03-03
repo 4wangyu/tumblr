@@ -10,9 +10,8 @@ import {
   Logo,
   SubHeading,
   StepWrapper,
-  FormGroup, InputField,
-  ActionLink
 } from './Auth.styled';
+import { SignupStep1, SignupStep2 } from './SignupSteps';
 
 
 const Splash = () => {
@@ -36,50 +35,15 @@ const Splash = () => {
       .then(() => history.push("/dashboard"));
   }
 
-
-  // ----------------------- Steps
-  const Step1 = memo(() => (
-    <F>
-      <Btn large onClick={toggleNext}>Get Started</Btn>
-      <Btn large tertiary as={Link} to='/login'>Log In</Btn>
-    </F>
-  ));
-
-  const Step2 = memo(() => (
-    <F>
-      <FormGroup>
-        <InputField
-          key={'step2-email'}
-          onChange={handleInput}
-          name="email"
-          value={userData.email}
-        />
-        <InputField
-          key={'step2-password'}
-          onChange={handleInput}
-          name="password"
-          value={userData.password}
-        />
-        <InputField
-          key={'step2-username'}
-          onChange={handleInput}
-          name="username"
-          value={userData.username}
-        />
-      </FormGroup>
-      <Btn large onClick={handleSubmit}>Sign up</Btn>
-    </F>
-  ));
-
   const [step, setStep] = useState(0);
   const [reverse, setReverse] = useState(false);
-  const Steps = [Step1, Step2];
+  const Steps = [SignupStep1, SignupStep2];
   const transitions = useTransition([step], item => item, {
     from: {
       opacity: 0,
       marginLeft: reverse ? -500 : 500,
       position: 'absolute',
-      marginTop: 130
+      marginTop: 150
     },
     enter: { opacity: 1, marginLeft: 0 },
     leave: { opacity: 0, marginLeft: reverse ? 500 : -500 }
@@ -97,6 +61,7 @@ const Splash = () => {
     setReverse(false);
   };
 
+  const { email, password, username } = userData;
   return (
     <AuthForm>
       <Logo large>thumblr</Logo>
@@ -106,7 +71,15 @@ const Splash = () => {
       </SubHeading>
       {transitions.map(({ item, props, key }) => (
         <StepWrapper key={key} style={props}>
-          {React.createElement(Steps[item])}
+          {React.createElement(
+            Steps[item],
+            {
+              toggleNext,
+              Link,
+              handleInput, handleSubmit,
+              email, password, username
+            }
+          )}
         </StepWrapper>
       ))}
     </AuthForm>

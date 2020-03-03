@@ -10,14 +10,14 @@ export const { Types, Creators } = createActions({
 }, {});
 
 export const Thunks = {};
-Thunks.fetchPosts = filters => (dispatch, getState) => {
-  return APIUtil.fetchPosts(filters)
-    .then((posts, status, xhr) => {
-      let count = parseInt(xhr.getResponseHeader('X-Post-Count'));
-      dispatch(Creators.receivePosts(posts))
-      return ({ count })
-    });
-};
+// Thunks.fetchPosts = filters => (dispatch, getState) => {
+//   return APIUtil.fetchPosts(filters)
+//     .then((posts, status, xhr) => {
+//       let count = parseInt(xhr.getResponseHeader('X-Post-Count'));
+//       dispatch(Creators.receivePosts(posts))
+//       return ({ count })
+//     });
+// };
 
 Thunks.fetchPost = postId => dispatch => {
   return APIUtil.fetchPost(postId)

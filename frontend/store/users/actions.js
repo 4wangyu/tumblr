@@ -8,10 +8,10 @@ export const { Types, Creators } = createActions({
 
 export const Thunks = {};
 
-Thunks.fetchUsers = () => (dispatch, getState) => {
-  return APIUtil.fetchUsers()
-    .then(users => dispatch(Creators.receiveUsers(users)));
-};
+// Thunks.fetchUsers = () => (dispatch, getState) => {
+//   return APIUtil.fetchUsers()
+//     .then(users => dispatch(Creators.receiveUsers(users)));
+// };
 
 Thunks.toggleUserFollow = (userId, isFollowing = false) => dispatch => {
   return APIUtil.toggleUserFollow(userId, isFollowing)

@@ -20,7 +20,7 @@ const PostFooter = ({ post, currentUser }) => {
 
   return (
     <CardFooter>
-      <Notes>{'23,468'} notes</Notes>
+      <Notes>{post.likerIds.length + 1} note {post.likerIds.length > 0 && 's'}</Notes>
       <Controls>
         <PadBox hidden>
           <ShareIcon />
@@ -28,7 +28,7 @@ const PostFooter = ({ post, currentUser }) => {
         <PadBox hidden>
           <ReplyIcon />
         </PadBox>
-        <PadBox>
+        <PadBox hidden>
           <ReblogIcon />
         </PadBox>
         <PadBox>

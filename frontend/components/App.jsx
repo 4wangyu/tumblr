@@ -13,7 +13,7 @@ const App = () => (
     <Modal />
     <Header />
     <main>
-      <AuthRoute exact path='/' component={Signup} />
+      <AuthRoute exact path='/signup' component={Signup} />
       <AuthRoute path='/login' component={Login} />
       <ProtectedRoute exact path='/dashboard' component={Dashboard} />
     </main>

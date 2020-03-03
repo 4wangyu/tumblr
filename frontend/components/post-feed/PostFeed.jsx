@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Thunks as Users } from 'store/users/actions';
-import { Thunks as Posts } from 'store/posts/actions';
-import { selectCurrentUser, selectAllUsers, selectAllPosts } from 'store/selectors';
+import { Thunks as Feed } from 'store/feed/actions';
+import { selectCurrentUser, selectAllUsers, selectAllPosts, selectAllReblogs } from 'store/selectors';
 import ComposePost from './ComposePost';
 import KnightLoader from './Loader';
 import { FeedCol, FeedColRow, PostBlogImgCube } from './PostFeed.styled';
@@ -14,19 +13,18 @@ import usePagination from 'hooks/usePagination';
 const PostFeed = () => {
 
   const dispatch = useDispatch();
-  const fetchUsers = () => dispatch(Users.fetchUsers());
-  const fetchPosts = filters => dispatch(Posts.fetchPosts(filters));
+  const fetchDashboard = filters => dispatch(Feed.fetchDashboard(filters));
 
-  const [currentUser, users, posts] = useSelector(state => [
-    selectCurrentUser(state), selectAllUsers(state), selectAllPosts(state)
+
+  const [currentUser, users, posts, reblogs] = useSelector(state => [
+    selectCurrentUser(state), selectAllUsers(state), selectAllPosts(state), selectAllReblogs(state)
   ]);
 
   const [offset, limit, setCount, end] = usePagination(1);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    fetchUsers()
-    loadPosts()
+    loadPosts();
   }, []);
 
   const observer = useRef();
@@ -47,7 +45,7 @@ const PostFeed = () => {
   const loadPosts = () => {
     if (loading) return;
     setLoading(true)
-    fetchPosts({ offset, limit })
+    fetchDashboard({ offset, limit })
       .then(({ count }) => {
         setCount(count);
         setLoading(false)
@@ -60,12 +58,12 @@ const PostFeed = () => {
         <ComposePost avatarUrl={currentUser.avatarUrl} />
         {posts
           .sort(compareCreatedAt)
-          .map((post, idx) => {
-            const author = users[post.userId];
+          .map((postOrReblog, idx, collection) => {
+            const { avatarUrl } = postOrReblog.isReblog ? users[postOrReblog.rebloggerId] : users[postOrReblog.userId];
             return (
-              <FeedColRow key={post.id} ref={idx === posts.length - 1 ? lastPost : null}>
-                <PostBlogImgCube avatarUrl={author.avatarUrl} />
-                <Post post={post} />
+              <FeedColRow key={postOrReblog.isReblog ? `reblog-${postOrReblog.id}` : `post-${postOrReblog.id}`} ref={idx === collection.length - 1 ? lastPost : null}>
+                <PostBlogImgCube avatarUrl={avatarUrl} />
+                <Post post={postOrReblog} />
               </FeedColRow>
             )
           })}

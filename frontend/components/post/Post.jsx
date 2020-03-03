@@ -1,7 +1,11 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { selectCurrentUser, selectUserById } from 'store/selectors';
-import { Card, CardContent, Tags, Tag } from 'styled/base/Card.styled';
+import { Card, CardContent } from 'styled/base/Card.styled';
+import {
+  ReblogContent, ReblogImgCube, ReblogContentText, ReblogSourceLink,
+  TagIndex, Tag
+} from './Post.styled';
 import PostHeader from './PostHeader';
 import ImageGallery from './post-content/ImageGalleryContent';
 import Video from './post-content/VideoContent';
@@ -9,7 +13,11 @@ import Audio from './post-content/AudioContent';
 import PostFooter from './PostFooter';
 
 const Post = ({ post }) => {
-  const [currentUser, postAuthor] = useSelector(state => [selectCurrentUser(state), selectUserById(state, { userId: post.userId })]);
+  const [currentUser, postAuthor, postReblogger] = useSelector(state => [
+    selectCurrentUser(state),
+    selectUserById(state, { userId: post.userId }),
+    post.isReblog ? selectUserById(state, { userId: post.rebloggerId }) : null,
+  ]);
   // const postReblogger = useSelect(state => selectUserById(state, { userId: ?}));
 
   const getContent = postData => ({
@@ -18,22 +26,33 @@ const Post = ({ post }) => {
     Audio: <Audio post={postData} />,
   });
 
+
+  const showReblogSource = post.isReblog && post.parentId;
+  const showReblogContent = post.isReblog && post.reblogCaption;
+
   return (
     <Card>
       <PostHeader
         currentUser={currentUser}
         postAuthor={postAuthor}
-        postReblogger={null}
+        postReblogger={postReblogger}
       />
       <CardContent noPadding={true}>
-        {getContent(post)[post.postType]}
-        {(post.tags.length > 0) && <Tags>{post.tags.map(tag => <Tag>#{tag}</Tag>)}</Tags>}
+        {getContent(post)[post.contentType]}
+        {showReblogContent && (
+          <ReblogContent>
+            <ReblogImgCube avatarUrl={postReblogger.avatarUrl} />
+            <ReblogContentText>{post.reblogCaption}</ReblogContentText>
+          </ReblogContent>
+        )}
+        {showReblogSource && <ReblogSourceLink to="/">Source: {postAuthor.username}</ReblogSourceLink>}
+        {post.tags.length > 0 && <TagIndex>{post.tags.map((tag, idx) => <Tag key={`tag-${idx}`}>#{tag}</Tag>)}</TagIndex>}
       </CardContent>
       <PostFooter
         currentUser={currentUser}
         post={post}
       />
-    </Card>
+    </Card >
   );
 };
 

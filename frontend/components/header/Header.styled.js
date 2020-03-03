@@ -4,12 +4,18 @@ import α from 'color-alpha';
 import { key as theme } from 'styled-theme';
 import { flexCenter } from 'styled/helpers';
 
-export const Header = styled.nav`
-  height: 5.4rem;
+export const Header = styled.header`
+  // Grid ----->
   display: grid;
-  grid-template-columns: min-content minmax(20rem, 45rem) min-content;
+  grid-template-columns: min-content minmax(auto, 48rem) auto;
+  align-items: center;
+  justify-content: stretch;
+  
+  // <----------
+  height: 5.4rem;
   border-bottom: 1px solid ${α('white', .15)};
   padding: 0 2rem;
+  transition: default;
 `;
 
 export const Logo = styled.span`

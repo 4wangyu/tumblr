@@ -4,27 +4,36 @@ import { key as theme } from 'styled-theme'
 import α from 'color-alpha';
 import { NavLink } from 'react-router-dom';
 import { flexCenter } from 'styled/helpers';
-
-export const Nav = styled.nav``;
-
 // -------------------- AuthNav
-export const NavBtn = styled(NavLink)`
-  background-color: ${styledMap`
-    default: ${α('#fff', .9)};
-    secondary: ${α('#000', .2)};
-  `};
+export const Nav = styled.nav`
+  justify-self: end;
+`;
+
+export const NavBtn = styled(NavLink).attrs({
+  activeClassName: 'active'
+})`
+  background-color: ${α('#fff', .9)};
+  &, &:hover {
+    color: ${theme('colors.primary')};
+  }
+  
+
+  &.active{
+    background-color: ${α('#000', .1)};
+    &, &:hover {
+      color: #fff;
+    }
+  }
+
   border: none;
   border-radius: 2px;
-  color: ${styledMap`
-    default: #000;
-    secondary: #fff;
-  `};
   cursor: pointer;
   font-weight: ${theme('fontWeights.heading')};
   font-size: 1.5rem;
   padding: 8px 13px;
   text-decoration: none;
   margin-left: 1rem;
+  transition: default;
 `;
 
 // -------------------- PrivateNav

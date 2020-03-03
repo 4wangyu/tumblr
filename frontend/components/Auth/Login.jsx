@@ -4,14 +4,13 @@ import { Thunks as Session } from 'store/session/actions';
 import { useHistory } from 'react-router-dom';
 import { useTransition } from 'react-spring';
 import { sleep, ghostType } from 'util/ghost_bot';
-import Btn from 'styled/base/Btn.styled';
 import {
   AuthForm,
   Logo,
   StepWrapper,
-  FormGroup, InputField,
-  ActionLink
 } from './Auth.styled';
+import { LoginStep1, LoginStep2, LoginStep3 } from './LoginSteps'
+
 
 const Login = () => {
 
@@ -33,62 +32,16 @@ const Login = () => {
     processForm(formUser)
       .then(() => history.push("/dashboard"));
   }
-
-
-  // --------------------------------- Steps
-  const Step1 = () => (
-    <F>
-      <FormGroup>
-        <InputField
-          onChange={handleInput}
-          name="email"
-          key={'step1-email'}
-          value={formUser.email}
-        />
-      </FormGroup>
-      <Btn large ref={$nextBtn} onClick={toggleNext}>Next</Btn>
-      <Btn large quarternary animate onClick={startDemoBot}>Demo</Btn>
-    </F>
-  );
-
-  const Step2 = () => (
-    <F>
-      <Btn secondary large>Send me a magic link</Btn>
-      <Btn large ref={$enterPassBtn} onClick={toggleNext}>Use password to log in</Btn>
-      <ActionLink onClick={toggleBack}>back</ActionLink>
-    </F>
-  );
-
-  const Step3 = () => (
-    <F>
-      <FormGroup>
-        <InputField
-          key={'step3-email'}
-          onChange={handleInput}
-          name="email"
-          value={formUser.email}
-        />
-        <InputField
-          key={'step3-password'}
-          onChange={handleInput}
-          type="password"
-          name="password"
-          value={formUser.password}
-        />
-      </FormGroup>
-      <Btn large ref={$loginBtn} onClick={handleSubmit}>Login</Btn>
-      <ActionLink>Forgot password?</ActionLink>
-    </F>
-  )
   const [step, setStep] = useState(0);
   const [reverse, setReverse] = useState(false);
-  const Steps = [Step1, Step2, Step3];
+  const Steps = [LoginStep1, LoginStep2, LoginStep3];
+
   const transitions = useTransition([step], item => item, {
     from: {
       opacity: 0,
       marginLeft: reverse ? -500 : 500,
       position: 'absolute',
-      marginTop: 80
+      marginTop: 130
     },
     enter: { opacity: 1, marginLeft: 0 },
     leave: { opacity: 0, marginLeft: reverse ? 500 : -500 }
@@ -130,17 +83,27 @@ const Login = () => {
           setFormUser(prev => Object.assign({}, prev, { password: prev.password + letter }))
         }, 1000)
       })
-      .then(() => sleep(2000))
+      .then(() => sleep(400))
       .then(() => { setBotRunning(false); $loginBtn.current.click(); });
   }
   // ----------------------------------------------  
 
+  const { email, password } = formUser;
   return (
     <AuthForm>
       <Logo large>thumblr</Logo>
       {transitions.map(({ item, props, key }) => (
         <StepWrapper key={key} style={props}>
-          {React.createElement(Steps[item])}
+          {React.createElement(
+            Steps[item],
+            {
+              handleInput, handleSubmit,
+              email, password,
+              $nextBtn, $enterPassBtn, $loginBtn,
+              toggleNext, toggleBack,
+              startDemoBot
+            }
+          )}
         </StepWrapper>
       ))}
     </AuthForm>

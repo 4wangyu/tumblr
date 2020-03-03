@@ -1,17 +1,18 @@
 class Api::ReblogsController < ApplicationController
-  before_action :select_rebloggable, only: :create
   before_action :select_reblog, except: :create
 
   def create
     @reblog = Reblog.new(reblog_params);
-    @reblog.user = current_user
-    @reblog.reblogable = @reblogable
+    @reblog.user = User.first
 
     if @reblog.save
       render :show, status: :created # 201
     else
       render json: @reblog.errors.full_messages, status: :unprocessable_entity # 422
     end
+  end
+
+  def show
 
   end
 
@@ -31,19 +32,7 @@ class Api::ReblogsController < ApplicationController
   private
 
   def reblog_params
-    params.require(:reblog).permit(:content, :all_tags)
-  end
-
-  def select_rebloggable
-    if params[:reblog_id]
-      @reblogable = Reblog.find_by_id(params[:reblog_id]) 
-    elsif params[:post_id]
-      @reblogable = UserPost.find_by_id(params[:post_id])
-    end
-
-    unless @reblogable
-      render json: ['Post or Reblog not found'], status: :not_found and return # 404
-    end
+    params.require(:reblog).permit(:post_id, :parent_id, :caption, :all_tags)
   end
 
   def select_reblog
