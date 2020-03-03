@@ -8,6 +8,7 @@
 User.destroy_all
 Post.destroy_all
 ImageGallery.destroy_all
+Video.destroy_all
 
 5.times do |i|
   # User
