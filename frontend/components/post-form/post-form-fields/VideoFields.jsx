@@ -8,14 +8,14 @@ import {
 
 const VideoFields = ({ formData, setFormData }) => {
 
-  const [preview, setPreview] = useState('');
+  const [preview, setPreview] = useState(formData.videoUrl || '');
 
   useEffect(() => {
     setFormData(prev => ({
-      ...prev,
       contentType: 'Video',
       caption: '',
       video: undefined,
+      ...prev,
     }));
   }, []);
 

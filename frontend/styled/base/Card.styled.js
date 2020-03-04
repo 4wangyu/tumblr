@@ -11,7 +11,9 @@ export const Card = styled.div`
   font-weight: ${theme('fontWeights.heading')};
   width: ${styledMap`
     default: 54rem;
+    fullWidth: 100%;
   `};
+  overflow: hidden;
 `;
 
 export const cardPadding = css`

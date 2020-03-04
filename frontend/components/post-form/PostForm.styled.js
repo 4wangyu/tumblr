@@ -46,5 +46,8 @@ export const TagInput = styled.input.attrs(props => ({
   name: 'tags'
 }))`
   background-color: transparent;
+  &, &::placeholder {
+    color: ${theme('colors.textLight')}
+  }
 `;
 

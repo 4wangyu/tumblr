@@ -8,14 +8,14 @@ import {
 
 const ImageGalleryFields = ({ formData, setFormData }) => {
 
-  const [previews, setPreviews] = useState([]);
+  const [previews, setPreviews] = useState(formData.imageUrls || []);
 
   useEffect(() => {
     setFormData(prev => ({
-      ...prev,
       contentType: 'ImageGallery',
       caption: '',
       images: [],
+      ...prev,
     }));
   }, []);
 

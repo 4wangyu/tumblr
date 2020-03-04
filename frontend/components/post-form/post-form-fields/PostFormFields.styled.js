@@ -61,6 +61,7 @@ export const UrlInput = styled.input.attrs({ type: 'url' })``;
 
 export const DeleteBtn = styled.button`
   ${flexCenter};
+  border: none;
   background-color: ${theme('colors.warning')};
   border-radius: 50%;
   position: absolute;
@@ -68,12 +69,15 @@ export const DeleteBtn = styled.button`
   top: -1rem;
   height: 2.3rem;
   width: 2.3rem;
-  transition: opacity ease .1s; 
+  transition: all ease .1s; 
+  &:hover {
+    transform: scale(1.1);
+  }
 `;
 
 export const DeleteIcon = styled(Icon).attrs({ icon: faTimes })`
   color: #fff;
-  font-size: 1.5rem;
+  font-size: 1.1rem;
 `;
 
 export const Caption = styled.div`
@@ -102,7 +106,10 @@ export const PreviewIndex = styled.div`
 `;
 
 export const Preview = styled.div`
-  display: block;
+  display: ${styledMap`
+    default: inline-block;
+    video: block;
+  `};
   position: relative;
   margin: ${styledMap`
     default: 1.7rem;

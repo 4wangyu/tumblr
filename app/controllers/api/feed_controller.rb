@@ -15,7 +15,7 @@ class Api::FeedController < ApplicationController
     # reblogs_parent_user_id = @reblogs.pluck(:parent_id)
     # reblogs_user_id =
 
-    @users = User.includes(:posts, :followees).all
+    @users = User.includes(:posts, :followees, :followers).all
     # .find(@posts.pluck(:user_id))
     @reblogs = Reblog.includes(:post, :parent, :user).all
   end
@@ -24,5 +24,10 @@ class Api::FeedController < ApplicationController
   end
 
   def search
+  end
+
+
+  def recommended_blogs
+    # find the users that the user isn't following
   end
 end

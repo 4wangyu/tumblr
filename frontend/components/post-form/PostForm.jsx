@@ -17,6 +17,8 @@ const PostForm = ({ postType, post = {} }) => {
   const closeModal = () => dispatch(Modal.closeModal());
   const createPost = formData => dispatch(Posts.createPost(formData));
 
+  const updatePost = (postId, formData) => dispatch(Posts.updatePost(postId, formData));
+
   const getFields = props => ({
     ImageGallery: <ImageGallery {...props} />,
     Video: <Video {...props} />,
@@ -26,7 +28,15 @@ const PostForm = ({ postType, post = {} }) => {
 
   const processFormData = () => {
     const newPost = pojoToFormData(formData);
-    createPost(newPost).then(() => closeModal())
+    debugger;
+    if (formData.id) {
+      updatePost(formData.id, newPost)
+        .then(() => closeModal());
+    } else {
+      createPost(newPost)
+        .then(() => closeModal());
+    }
+
   };
 
   return (

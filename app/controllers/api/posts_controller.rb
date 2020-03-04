@@ -27,13 +27,30 @@ class Api::PostsController < ApplicationController
   end
 
   def update
-    # if @post.author != current_user
-    #   render json: ['Unauthorized'], status: :unauthorized # 401
-    # elsif !@post.update_attributes(post_params)
-    #   render json: @post.errors.full_messages, status: :unprocessable_entity # 422
-    # else 
-    #   render :show
-    # end
+    if @post.user != current_user
+      render json: ['Unauthorized'], status: :unauthorized and return# 401
+    end
+
+    content_type = content_type_param
+
+    case content_type
+      when 'ImageGallery'
+        @post.content.update_attributes(image_gallery_params)
+      when 'Audio'
+        @post.content.update_attributes(audio_params)
+      when 'Video'
+        @post.content.update_attributes(video_params)
+      else
+        nil
+    end
+
+    @post.update_attributes(all_tags: all_tags_param)
+   
+    if @post
+      render :show
+    else
+      render json: @post.errors.full_messages, status: :unprocessable_entity # 422
+    end
   end
 
   def destroy

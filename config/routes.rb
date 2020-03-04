@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   namespace :api, defaults: { format: :json } do
     resource :sessions, only: [:create, :destroy]
 
@@ -6,7 +7,7 @@ Rails.application.routes.draw do
       resource :follows, only: [:create, :destroy]
     end
     
-    resources :posts, only: [:create, :show, :destroy] do
+    resources :posts, only: [:create, :update, :show, :destroy] do
       resource :likes, only: [:create, :destroy]
     end
 
@@ -15,6 +16,9 @@ Rails.application.routes.draw do
     get 'feed/dashboard'
     get 'feed/trending'
     get 'feed/search'
+
+    get 'sidebar/recommended_users'
+    get 'sidebar/radar_post'
   end
 
   get '*path', to: 'static_pages#root', constraints: lambda { |req|

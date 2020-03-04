@@ -5,6 +5,7 @@ json.posts do
     end
   end
 end
+
 json.users do 
   @users.each do |user|
     json.set! user.id do

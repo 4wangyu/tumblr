@@ -5,6 +5,7 @@ import { flexCenterCol } from 'styled/helpers';
 import α from 'color-alpha';
 import { animated } from 'react-spring';
 import { thump } from 'styled/keyframes';
+
 export const AuthForm = styled.div`
   ${flexCenterCol}
   width: 30rem;

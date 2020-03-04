@@ -29,8 +29,8 @@ Thunks.createPost = formPost => dispatch => {
     .then(post => dispatch(Creators.receivePost(post)));
 };
 
-Thunks.updatePost = formPost => dispatch => {
-  return APIUtil.updatePost(formPost)
+Thunks.updatePost = (postId, formPost) => dispatch => {
+  return APIUtil.updatePost(postId, formPost)
     .then(post => dispatch(Creators.receivePost(post)));
 };
 

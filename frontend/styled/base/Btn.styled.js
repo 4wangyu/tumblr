@@ -15,7 +15,7 @@ const Btn = styled.button.attrs(props => ({
   `};
   border: none;
   border-radius: .3rem;
-  &, &:hover {
+  &, &:hover, &:active {
     color: ${styledMap`
       default: white;
       tertiary: #444;

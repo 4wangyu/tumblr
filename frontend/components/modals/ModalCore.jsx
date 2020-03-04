@@ -31,9 +31,9 @@ const ModalCore = () => {
       Component = <ComposePost />;
       break;
     case 'PostForm':
-      const { postType } = options;
+      const { postType, post } = options;
       if (!postType) return null;
-      Component = <PostForm postType={postType} />;
+      Component = <PostForm postType={postType} post={post} />;
       break;
     case 'Confirmation':
       const { onConfirm, message } = options;

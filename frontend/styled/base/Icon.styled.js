@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faFont, faCameraRetro, faQuoteLeft, faVideo, faLink, faComments, faHeadphones,
   faHome, faEnvelope, faCommentDots, faBolt, faUser, faPencilAlt,
-  faCog, faRetweet, faHeart as faHeartS, faUserFriends
+  faCog, faRetweet, faHeart as faHeartS, faUserFriends, faArrowAltCircleUp, faPlus, faTimes
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faCompass,
@@ -34,8 +34,8 @@ export const privateNavIconData = {
 };
 
 export const navPopoverIconData = {
-  likes: { icon: faHeartS, path: '/likes', userProp: 'likedPostIds' },
-  following: { icon: faUserFriends, path: '/following', userProp: 'followeeIds' },
+  likes: { icon: faHeartS, path: '/dashboard', userProp: 'likedPostIds' },
+  following: { icon: faUserFriends, path: '/dashboard', userProp: 'followeeIds' },
   // settings:{},
   // help:{},
 };
@@ -72,6 +72,7 @@ export const IconBox = styled.span`
   `};
 `;
 
+
 // -------------------- Post 
 export const ShareIcon = styled(IconSm).attrs({ icon: faPaperPlane })``;
 
@@ -90,3 +91,7 @@ export const LikeIcon = styled(IconSm).attrs(props => ({
 
 export const ControlsIcon = styled(IconSm).attrs({ icon: faCog })``;
 
+export const ToTopIcon = styled(IconMd).attrs({ icon: faArrowAltCircleUp })``;
+
+export const PlusIcon = styled(IconSm).attrs({ icon: faPlus })``;
+export const TimesIcon = styled(IconSm).attrs({ icon: faTimes })``;

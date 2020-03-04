@@ -37,6 +37,7 @@ const darkPalette = {
   tertiary: '#1c1c1c',
   text: '#fff',
   textLight: α('#fff', .80),
+  highlightHover: α('#fff', .25),
 };
 
 export const lightTheme = {

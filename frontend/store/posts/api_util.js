@@ -10,8 +10,8 @@ export const createPost = data => {
   return $.post({ url: '/api/posts', data, contentType: false, processData: false });
 };
 
-export const updatePost = post => {
-  return $.ajax({ method: 'PATCH', url: `/api/posts/${post.id}`, data: { post } });
+export const updatePost = (postId, data) => {
+  return $.ajax({ method: 'PATCH', url: `/api/posts/${postId}`, data, contentType: false, processData: false });
 };
 
 export const destroyPost = postId => {

@@ -15,7 +15,6 @@ const pojoToFormData = (pojo, root_key = 'post') => {
 
   for (const [key, val] of Object.entries(pojo)) {
     const snakeKey = toSnakecase(key);
-
     if (val instanceof Array) {
       if (val.length === 0) continue;
       for (const el of val) formData.append(`${root_key}[${snakeKey}][]`, el);

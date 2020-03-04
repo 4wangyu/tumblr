@@ -4,12 +4,13 @@ import { Thunks as Feed } from 'store/feed/actions';
 import { selectCurrentUser, selectAllUsers, selectAllPosts, selectAllReblogs } from 'store/selectors';
 import ComposePost from './ComposePost';
 import KnightLoader from './Loader';
-import { FeedCol, FeedColRow, PostBlogImgCube } from './PostFeed.styled';
+import { FeedContainer, FeedCol, FeedColRow, PostBlogImgCube } from './PostFeed.styled';
+import ScrollToTopBtn from './ScrollToTopBtn';
 
 import Post from 'components/post/Post';
 import compareCreatedAt from 'util/compare_created_at'
 import usePagination from 'hooks/usePagination';
-
+import RecommendedBlogs from 'components/sidebar-widgets/RecommendedBlogs';
 const PostFeed = () => {
 
   const dispatch = useDispatch();
@@ -53,7 +54,7 @@ const PostFeed = () => {
   };
 
   return (
-    <>
+    <FeedContainer>
       <FeedCol>
         <ComposePost avatarUrl={currentUser.avatarUrl} />
         {posts
@@ -69,8 +70,11 @@ const PostFeed = () => {
           })}
         {loading && <KnightLoader />}
       </FeedCol>
-      <FeedCol></FeedCol>
-    </>
+      <FeedCol>
+        <RecommendedBlogs />
+      </FeedCol>
+      <ScrollToTopBtn />
+    </FeedContainer>
   );
 }
 

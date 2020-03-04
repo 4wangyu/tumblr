@@ -1,4 +1,5 @@
 import React from 'react';
+import { CardContent } from 'styled/base/Card.styled';
 
 const VideoContent = ({ post: { caption, videoUrl } }) => (
   <div>
@@ -6,7 +7,7 @@ const VideoContent = ({ post: { caption, videoUrl } }) => (
       <source src={videoUrl} type="video/mp4" />
       Your browser does not support the video tag.
     </video>
-    {caption && <p>{caption}</p>}
+    {caption && <CardContent>{caption}</CardContent>}
   </div>
 );
 

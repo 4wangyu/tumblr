@@ -15,7 +15,7 @@ import {
 import { navPopoverIconData, } from 'styled/base/Icon.styled';
 
 const sectionTwoData = {
-  posts: { userProp: 'likedPostIds' },
+  posts: { userProp: 'postIds' },
   followers: { userProp: 'followerIds' }
 }
 
@@ -60,14 +60,14 @@ const NavPopover = () => {
         </PopoverHeader>
         <ThumblrPopoverMenu>
           <MenuItem>
-            <MenuItemLink className='avatar' to={`/blog/${username}`}>
+            <MenuItemLink className='avatar' to={`/dashboard`}>
               <MenuItemAvatar src={avatarUrl} />
               <MenuItemText><strong>{username}</strong><br />Untitled </MenuItemText>
             </MenuItemLink>
           </MenuItem>
           {Object.entries(sectionTwoData).map(([name, { userProp }]) => (
             <MenuItem>
-              <MenuItemLink to={`/blog/${username}/${name}`}>
+              <MenuItemLink to={`/dashboard`}>
                 <MenuItemText>{name.charAt(0).toUpperCase() + name.slice(1)}</MenuItemText>
                 <MenuItemStat>{printUserStat(userProp)}</MenuItemStat>
               </MenuItemLink>

@@ -1,9 +1,6 @@
 import styled from 'styled-components';
-import styledMap from 'styled-map';
 import { key as theme } from 'styled-theme';
-import α from 'color-alpha';
 import { Link } from 'react-router-dom';
-import { flexCenter } from 'styled/helpers';
 import { IconSm } from 'styled/base/Icon.styled';
 import { blurInFromAbove } from 'styled/keyframes';
 
@@ -18,6 +15,7 @@ export const Popover = styled.div`
   position: absolute;
   top: 3.7rem;
   right: 0;
+  z-index: 25;
 `;
 
 export const PopoverSubsection = styled.div`

@@ -6,7 +6,7 @@ const TagManager = ({ formData, setFormData }) => {
   const [tagInput, setTagInput] = useState('');
 
   useEffect(() => {
-    setFormData(prev => ({ ...prev, allTags: [] }))
+    setFormData(prev => ({ allTags: prev.tags ? [...prev.tags] : [], ...prev }))
   }, [])
 
   const handleTagInput = e => {
