@@ -56,6 +56,6 @@ export const Control = styled.span`
   align-items: start;
   padding: .5rem 2.5rem .5rem 1.4rem;
   &:hover {
-    background-color: ${({ theme }) => α(theme.colors.highlight, .1)};
+    background-color: ${theme('colors.highlightHover')};
   }
 `;

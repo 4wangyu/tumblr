@@ -7,11 +7,13 @@ export const popColors = {
   dodgerBlue: '#00b8ff',
   cornflowerBlue: '#7c5cff',
   hotPink: '#ff62ce',
-  emerald: '#33da58'
-};;
+  emerald: '#33da58',
+  linkWater: '#e6eff7'
+};
 
 const baseColors = {
   highlight: popColors.dodgerBlue,
+  highlightHover: popColors.linkWater,
   highlightAlt: '#9da6af',
   warning: popColors.redOrange,
   success: popColors.malachite,
@@ -23,11 +25,10 @@ const lightPalette = {
   primary: '#001935',
   secondary: '#fff',
   tertiary: '#f2f2f2',
+  quaternary: '#8f8f8f',
+  border: '#e7e7e7',
   text: '#000',
   textLight: α('#000', .65),
-  brandDark: '#444',
-  brandMedium: '#f2f2f2',
-  brandLight: '#fff',
 };
 
 const darkPalette = {

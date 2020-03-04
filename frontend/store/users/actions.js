@@ -13,6 +13,11 @@ export const Thunks = {};
 //     .then(users => dispatch(Creators.receiveUsers(users)));
 // };
 
+Thunks.fetchUser = userId => dispatch => {
+  return APIUtil.fetchUser(userId)
+    .then(user => dispatch(Creators.receiveUser(user)));
+};
+
 Thunks.toggleUserFollow = (userId, isFollowing = false) => dispatch => {
   return APIUtil.toggleUserFollow(userId, isFollowing)
     .then(user => dispatch(Creators.receiveUser(user)));

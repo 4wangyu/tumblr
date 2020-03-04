@@ -36,6 +36,7 @@ const GlobalStyle = createGlobalStyle`
 
   a, button {
     &, &:focus, &:hover, &:active {
+      appearance: none;
       cursor: pointer;
       outline: none;
       text-decoration: none;

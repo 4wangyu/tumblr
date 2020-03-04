@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faFont, faCameraRetro, faQuoteLeft, faVideo, faLink, faComments, faHeadphones,
   faHome, faEnvelope, faCommentDots, faBolt, faUser, faPencilAlt,
-  faCog, faRetweet, faHeart as faHeartS
+  faCog, faRetweet, faHeart as faHeartS, faUserFriends
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faCompass,
@@ -29,8 +29,15 @@ export const privateNavIconData = {
   inbox: { icon: faEnvelope, path: '/dashboard' },
   messaging: { icon: faCommentDots, path: '/dashboard' },
   activity: { icon: faBolt, path: '/dashboard' },
-  account: { icon: faUser, path: '/dashboard' },
+  account: { icon: faUser },
   compose: { icon: faPencilAlt }
+};
+
+export const navPopoverIconData = {
+  likes: { icon: faHeartS, path: '/likes', userProp: 'likedPostIds' },
+  following: { icon: faUserFriends, path: '/following', userProp: 'followeeIds' },
+  // settings:{},
+  // help:{},
 };
 
 

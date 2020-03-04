@@ -10,7 +10,6 @@ export const Header = styled.header`
   grid-template-columns: min-content minmax(auto, 48rem) auto;
   align-items: center;
   justify-content: stretch;
-  
   // <----------
   height: 5.4rem;
   border-bottom: 1px solid ${α('white', .15)};

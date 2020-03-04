@@ -28,3 +28,14 @@ export const blurIn = keyframes`
   from {opacity: 0;}
   to {opacity: 1;}
 `
+
+export const blurInFromAbove = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(-7rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`

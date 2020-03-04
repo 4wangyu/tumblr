@@ -7,6 +7,7 @@ import { flexCenter } from 'styled/helpers';
 // -------------------- AuthNav
 export const Nav = styled.nav`
   justify-self: end;
+  position: relative;
 `;
 
 export const NavBtn = styled(NavLink).attrs({
@@ -49,7 +50,13 @@ export const TabLink = styled(NavLink).attrs(props => ({
   &.selected {color: #fff;}
 `;
 
-export const TabBtn = styled.button`
+export const TabBtn = styled(TabLink).attrs(props => ({
+  as: 'a'
+}))`
+  &, &:hover {color: #fff;}
+`;
+
+export const ComposeBtn = styled.button`
   cursor: pointer;
   width: 4.5rem;
   height: 3.2rem;

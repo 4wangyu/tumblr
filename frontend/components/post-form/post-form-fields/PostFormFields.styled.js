@@ -10,10 +10,10 @@ import { faSmile } from '@fortawesome/free-regular-svg-icons';
 export const Form = styled.form``;
 
 export const Dropzone = styled.div`
-  border: 0 dashed #989898;
+  border: 0 dashed ${theme('colors.border')};
   border-width: 2px 0;
   background-color: ${theme('colors.tertiary')};
-  color: #989898;
+  color: ${theme('colors.border')};
   display: flex;
 `;
 
