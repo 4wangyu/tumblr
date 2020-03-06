@@ -13,7 +13,6 @@ export const Card = styled.div`
     default: 54rem;
     fullWidth: 100%;
   `};
-  overflow: hidden;
 `;
 
 export const cardPadding = css`

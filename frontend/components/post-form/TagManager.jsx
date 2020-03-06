@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { TagIndex, Tag, TagForm, TagInput } from './PostForm.styled';
+
 const TagManager = ({ formData, setFormData }) => {
 
   const [selectedTag, setSelectedTag] = useState(-1);
   const [tagInput, setTagInput] = useState('');
+  const $tagInput = useRef(null);
 
   useEffect(() => {
     setFormData(prev => ({ allTags: prev.tags ? [...prev.tags] : [], ...prev }))
@@ -28,7 +30,8 @@ const TagManager = ({ formData, setFormData }) => {
 
   const handleSelectTag = e => {
     const idx = parseInt(e.target.dataset.tag);
-    setSelectedTag(selectedTag === idx ? -1 : idx);
+    setSelectedTag(prev => prev === idx ? -1 : idx);
+    $tagInput.current.focus();
   }
 
   const handleRemoveTag = e => {
@@ -55,6 +58,7 @@ const TagManager = ({ formData, setFormData }) => {
       ))}
       <TagForm onSubmit={handleAddTag}>
         <TagInput
+          ref={$tagInput}
           showPlaceholder={allTags && !allTags.length}
           value={tagInput}
           onChange={handleTagInput}

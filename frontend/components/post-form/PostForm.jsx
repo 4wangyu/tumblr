@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectCurrentUser } from 'store/selectors';
 import { Creators as Modal } from 'store/modal/actions';
@@ -16,7 +16,6 @@ const PostForm = ({ postType, post = {} }) => {
   const dispatch = useDispatch();
   const closeModal = () => dispatch(Modal.closeModal());
   const createPost = formData => dispatch(Posts.createPost(formData));
-
   const updatePost = (postId, formData) => dispatch(Posts.updatePost(postId, formData));
 
   const getFields = props => ({
@@ -48,7 +47,7 @@ const PostForm = ({ postType, post = {} }) => {
       </CardContent>
       <CardFooter>
         <Btn secondary onClick={closeModal}>Close</Btn>
-        <Btn submit onClick={processFormData}>Post</Btn>
+        <Btn onClick={processFormData}>Post</Btn>
       </CardFooter>
     </Card>
   );

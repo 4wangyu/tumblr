@@ -106,7 +106,9 @@ export const AddBlogIcon = styled(PlusIcon)`
   font-size: 1.5rem;
 `;
 
-export const SidebarCard = styled(Card)``;
+export const SidebarCard = styled(Card)`
+  overflow: hidden;
+`;
 
 export const SidebarCardImg = styled.img`
   width: 100%;

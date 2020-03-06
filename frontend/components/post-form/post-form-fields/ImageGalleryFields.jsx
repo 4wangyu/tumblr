@@ -36,7 +36,7 @@ const ImageGalleryFields = ({ formData, setFormData }) => {
     setPreviews(prev => [...prev, ...previewUrls]);
   };
 
-  const handleRemovePrev = e => {
+  const handleRemovePreview = e => {
     e.stopPropagation();
     const idx = parseInt(e.currentTarget.dataset.id);
 
@@ -51,7 +51,7 @@ const ImageGalleryFields = ({ formData, setFormData }) => {
     <Preview key={i}>
       <PreviewImg src={url} />
       <DeleteBtn
-        onClick={handleRemovePrev}
+        onClick={handleRemovePreview}
         data-id={i}
       >
         <DeleteIcon />

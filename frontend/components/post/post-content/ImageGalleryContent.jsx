@@ -1,11 +1,15 @@
 import React from 'react'
 import { Gallery, Image, Caption } from './ImageGalleryContent.styled';
 
-const ImageGalleryContent = ({ post: { imageUrls, caption } }) => (
+const ImageGalleryContent = ({ post: { images, caption } }) => (
   <>
     <Gallery>
-      {imageUrls.map((url, idx) => (
-        <Image src={url} key={idx} />
+      {images.map(({ url, filename }, idx) => (
+        <Image
+          key={idx}
+          src={url}
+          alt={filename}
+        />
       ))}
     </Gallery>
     <Caption>{caption}</Caption>

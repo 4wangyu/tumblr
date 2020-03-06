@@ -13,7 +13,7 @@ export const ModalBackground = styled.div`
   left: 0;
   background: ${({ theme }) => α(theme.colors.primary, .96)};
   backdrop-filter: blur(.4rem);
-  z-index: 10;
+  z-index: 100;
 `;
 
 export const ModalComponentWrapper = styled.div`

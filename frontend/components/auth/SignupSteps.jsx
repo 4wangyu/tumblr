@@ -27,12 +27,14 @@ export const SignupStep2 = memo(({
           onChange={handleInput}
           name="email"
           value={email}
+          type='email'
         />
         <InputField
           key={'step2-password'}
           onChange={handleInput}
           name="password"
           value={password}
+          type='password'
         />
         <InputField
           key={'step2-username'}

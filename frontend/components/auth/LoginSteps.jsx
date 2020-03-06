@@ -20,6 +20,7 @@ export const LoginStep1 = memo(({
           name="email"
           key={'step1-email'}
           value={email}
+          type='email'
         />
       </FormGroup>
       <Btn large ref={$nextBtn} onClick={toggleNext}>Next</Btn>

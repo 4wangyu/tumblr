@@ -15,7 +15,7 @@ export const Popover = styled.div`
   position: absolute;
   top: 3.7rem;
   right: 0;
-  z-index: 25;
+  z-index: 8;
 `;
 
 export const PopoverSubsection = styled.div`
