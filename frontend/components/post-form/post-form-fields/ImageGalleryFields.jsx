@@ -8,65 +8,80 @@ import {
 
 const ImageGalleryFields = ({ formData, setFormData }) => {
 
-  const [previews, setPreviews] = useState(formData.imageUrls || []);
-
   useEffect(() => {
     setFormData(prev => ({
       contentType: 'ImageGallery',
       caption: '',
       images: [],
+      imageAttachments: [],
+      purgeImageIds: [],
       ...prev,
     }));
   }, []);
 
   const handleTextInput = e => {
     const { name, value } = e.target;
-
     setFormData(prev => ({ ...prev, [name]: value }));
   }
 
   const handleFileInput = e => {
-    const images = Array.from(e.target.files);
-    const previewUrls = images.map(f => URL.createObjectURL(f));
 
-    setFormData(prev => ({
-      ...prev, images: [...prev.images, ...images]
+    const { files } = e.target
+    setFormData(({ images, ...prev }) => ({
+      ...prev, images: [...images, ...files]
     }));
-
-    setPreviews(prev => [...prev, ...previewUrls]);
   };
 
-  const handleRemovePreview = e => {
+  const handleRemoveFile = e => {
     e.stopPropagation();
-    const idx = parseInt(e.currentTarget.dataset.id);
-
-    setFormData(prev => ({
-      ...prev, images: prev.images.filter((p, i) => i !== idx)
+    const fileIdx = parseInt(e.currentTarget.dataset.fileIdx);
+    debugger;
+    setFormData(({ images, ...prev }) => ({
+      ...prev, images: images.filter((p, i) => i !== fileIdx)
     }));
-
-    setPreviews(prev => prev.filter((p, i) => i !== idx));
   };
 
-  const renderPreviews = () => previews.map((url, i) => (
-    <Preview key={i}>
-      <PreviewImg src={url} />
-      <DeleteBtn
-        onClick={handleRemovePreview}
-        data-id={i}
-      >
-        <DeleteIcon />
-      </DeleteBtn>
-    </Preview>
+  const handlePurgeAttachment = e => {
+    e.stopPropagation();
+    const attachmentId = parseInt(e.currentTarget.dataset.attachmentId);
+    debugger;
+    setFormData(({ purgeImageIds, ...prev }) => ({
+      ...prev, purgeImageIds: [...purgeImageIds, attachmentId]
+    }));
+  };
 
-  ))
+  const renderFilePreviews = () => formData.images.map((file, idx) => {
+    const url = URL.createObjectURL(file);
+    return (
+      <Preview key={`file-${idx}`}>
+        <PreviewImg src={url} />
+        <DeleteBtn onClick={handleRemoveFile} data-file-idx={idx}>
+          <DeleteIcon />
+        </DeleteBtn>
+      </Preview >
+    )
+  })
 
-  const { caption } = formData;
-  const inPreview = previews.length !== 0;
+  const renderAttachmentPreviews = () => formData.imageAttachments.map(({ id, url }) => {
+    if (formData.purgeImageIds.includes(id)) return null;
+    return (
+      <Preview key={`attachment-${id}`}>
+        <PreviewImg src={url} />
+        <DeleteBtn onClick={handlePurgeAttachment} data-attachment-id={id}>
+          <DeleteIcon />
+        </DeleteBtn>
+      </Preview>
+    )
+  })
 
-  return (
+  const { caption, images, imageAttachments, purgeImageIds } = formData;
+  const inPreview = true;
+
+  return purgeImageIds ? (
     <>
       <PreviewIndex active>
-        {renderPreviews()}
+        {renderFilePreviews()}
+        {renderAttachmentPreviews()}
       </PreviewIndex>
       <Dropzone>
         <DropzoneCell minimize={inPreview}>
@@ -88,7 +103,7 @@ const ImageGalleryFields = ({ formData, setFormData }) => {
         />
       </Caption>
     </>
-  );
+  ) : null;
 };
 
 export default ImageGalleryFields;

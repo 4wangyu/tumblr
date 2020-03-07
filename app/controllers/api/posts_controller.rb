@@ -36,6 +36,11 @@ class Api::PostsController < ApplicationController
     case content_type
       when 'ImageGallery'
         @post.content.update_attributes(image_gallery_params)
+        if (params[:post][:purge_image_ids])
+          params[:post][:purge_image_ids].each do |id|
+            @post.content.images.find_by_id(id).purge
+          end
+        end
       when 'Audio'
         @post.content.update_attributes(audio_params)
       when 'Video'

@@ -1,10 +1,10 @@
 import React from 'react'
 import { Gallery, Image, Caption } from './ImageGalleryContent.styled';
 
-const ImageGalleryContent = ({ post: { images, caption } }) => (
+const ImageGalleryContent = ({ post: { imageAttachments, caption } }) => (
   <>
     <Gallery>
-      {images.map(({ url, filename }, idx) => (
+      {imageAttachments.map(({ url, filename }, idx) => (
         <Image
           key={idx}
           src={url}

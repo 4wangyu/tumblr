@@ -31,7 +31,7 @@ const PostFeed = () => {
   const observer = useRef();
   const lastPost = useCallback(node => {
     if (loading) return;
-    if .current) observer.current.disconnect();
+    if (observer.current) observer.current.disconnect();
     observer.current = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting && !end) {
         loadPosts()
