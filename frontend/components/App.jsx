@@ -1,4 +1,5 @@
 import React from 'react';
+import { Switch, Redirect } from 'react-router-dom';
 import { AuthRoute, ProtectedRoute } from 'util/routes';
 import Background from './background/Background';
 import Modal from './modals/ModalCore';
@@ -13,9 +14,12 @@ const App = () => (
     <Modal />
     <Header />
     <main>
-      <AuthRoute exact path='/signup' component={Signup} />
-      <AuthRoute path='/login' component={Login} />
-      <ProtectedRoute exact path='/dashboard' component={Dashboard} />
+      <Switch>
+        <Redirect exact from='/' to='/dashboard' />
+        <AuthRoute exact path='/signup' component={Signup} />
+        <AuthRoute path='/login' component={Login} />
+        <ProtectedRoute exact path='/dashboard' component={Dashboard} />
+      </Switch>
     </main>
   </Background>
 );
