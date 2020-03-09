@@ -19,7 +19,8 @@ const pojoToFormData = (pojo, root_key = 'post') => {
     if (val instanceof Array) {
       if (val.length === 0) continue;
 
-      for (const el of val) formData.append(`${root_key}[${snakeKey}][]`, el);
+      for (const el of val)
+        formData.append(`${root_key}[${snakeKey}][]`, el);
     } else {
       if (val === undefined || val === null) continue;
 

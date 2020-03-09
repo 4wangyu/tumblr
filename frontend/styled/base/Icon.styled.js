@@ -19,7 +19,7 @@ export const postTypeIconData = {
   quote: { icon: faQuoteLeft, color: popColors.pizzazz, postType: 'ImageGallery' },
   link: { icon: faLink, color: popColors.malachite, postType: 'ImageGallery' },
   chat: { icon: faComments, color: popColors.dodgerBlue, postType: 'ImageGallery' },
-  audio: { icon: faHeadphones, color: popColors.cornflowerBlue, postType: 'ImageGallery' },
+  audio: { icon: faHeadphones, color: popColors.cornflowerBlue, postType: 'Audio' },
   video: { icon: faVideo, color: popColors.hotPink, postType: 'Video' },
 };
 

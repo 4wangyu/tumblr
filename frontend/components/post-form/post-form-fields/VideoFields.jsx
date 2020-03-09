@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import {
   PreviewIndex, Preview, PreviewVideo,
   Form, Dropzone, DropzoneCell, DropzoneCellTitle, VideoIcon,
@@ -6,9 +6,9 @@ import {
   Caption, CaptionTextarea
 } from './PostFormFields.styled';
 
-const VideoFields = ({ formData, setFormData }) => {
+const VideoFields = ({ formData, setFormData, handleTextInput }) => {
 
-  const [preview, setPreview] = useState(formData.videoUrl || '');
+  const [previewUrl, setPreviewUrl] = useState(null);
 
   useEffect(() => {
     setFormData(prev => ({
@@ -19,31 +19,28 @@ const VideoFields = ({ formData, setFormData }) => {
     }));
   }, []);
 
-  const handleTextInput = e => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  }
-
   const handleFileInput = e => {
     const [video] = e.target.files;
+    setPreviewUrl(URL.createObjectURL(video))
     setFormData(prev => ({ ...prev, video }));
-    setPreview(URL.createObjectURL(video));
-  }
+  };
 
-  const renderPreview = () => (
-    <Preview video>
-      <PreviewVideo>
-        <source src={preview} type="video/mp4" />
-        Your browser does not support the video tag.
-      </PreviewVideo>
-    </Preview>
-  )
+  const renderPreview = useCallback(() => {
+    const { videoAttachment } = formData;
+    const url = previewUrl || videoAttachment.url;
+    return (
+      <Preview video key={url}>
+        <PreviewVideo src={url} type="video/mp4">Your browser does not support the video tag.</PreviewVideo>
+      </Preview>
+    );
+  }, [formData.video, formData.videoAttachment]);
 
-  const { caption } = formData;
-  const inPreview = Boolean(preview);
+  const { caption, video, videoAttachment } = formData;
+  const inPreview = video || videoAttachment;
+
   return (
     <>
-      <PreviewIndex active>{preview && renderPreview()}</PreviewIndex>
+      <PreviewIndex active>{inPreview && renderPreview()}</PreviewIndex>
       <Dropzone>
         <DropzoneCell minimize={inPreview}>
           <HiddenFileInput

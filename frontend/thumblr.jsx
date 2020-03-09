@@ -5,8 +5,6 @@ import Root from 'components/Root';
 import Styled from 'styled/StyleProvider';
 
 document.addEventListener('DOMContentLoaded', () => {
-  const root = document.querySelector('#root');
-
   let preloadedState = undefined;
 
   if (window.currentUser) {
@@ -17,9 +15,11 @@ document.addEventListener('DOMContentLoaded', () => {
       session: { id: window.currentUser.id }
     };
     delete window.currentUser;
+
+    document.querySelector('#set-current-user').outerHTML = "";
   }
 
   const store = configureStore(preloadedState);
 
-  ReactDOM.render(<Styled><Root store={store} /></Styled>, root)
+  ReactDOM.render(<Styled><Root store={store} /></Styled>, document.querySelector('#root'));
 })

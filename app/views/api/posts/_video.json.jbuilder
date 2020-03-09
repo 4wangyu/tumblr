@@ -1,2 +1,4 @@
 json.extract! video, :caption
-json.video_url video.video.attached? ? url_for(video.video) : nil
+json.video_attachment do
+  video.video.attached? ? (json.partial! '/api/shared/attachment', attachment: video.video) : nil
+end

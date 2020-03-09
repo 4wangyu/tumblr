@@ -9,16 +9,21 @@ Rails.application.routes.draw do
     
     resources :posts, only: [:create, :update, :show, :destroy] do
       resource :likes, only: [:create, :destroy]
+      delete :purge_attachment, on: :member
     end
 
     resources :reblogs, only: [:create, :show, :update, :destroy]
 
-    get 'feed/dashboard'
-    get 'feed/trending'
-    get 'feed/search'
+    namespace :feed do
+      get 'dashboard'
+      get 'trending'
+      get 'search'
+    end
 
-    get 'sidebar/recommended_users'
-    get 'sidebar/radar_post'
+    namespace :sidebar do
+      get 'recommended_users'
+      get 'radar_post'
+    end
   end
 
   get '*path', to: 'static_pages#root', constraints: lambda { |req|

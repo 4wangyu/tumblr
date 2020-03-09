@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import {
   PreviewIndex, Preview, PreviewImg, DeleteBtn, DeleteIcon,
   Form, Dropzone, DropzoneCell, DropzoneCellTitle,
@@ -6,7 +6,7 @@ import {
   Caption, CaptionTextarea
 } from './PostFormFields.styled';
 
-const ImageGalleryFields = ({ formData, setFormData }) => {
+const ImageGalleryFields = ({ formData, setFormData, handleTextInput }) => {
 
   useEffect(() => {
     setFormData(prev => ({
@@ -19,14 +19,9 @@ const ImageGalleryFields = ({ formData, setFormData }) => {
     }));
   }, []);
 
-  const handleTextInput = e => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  }
-
   const handleFileInput = e => {
+    const { files } = e.target;
 
-    const { files } = e.target
     setFormData(({ images, ...prev }) => ({
       ...prev, images: [...images, ...files]
     }));
@@ -35,7 +30,6 @@ const ImageGalleryFields = ({ formData, setFormData }) => {
   const handleRemoveFile = e => {
     e.stopPropagation();
     const fileIdx = parseInt(e.currentTarget.dataset.fileIdx);
-    debugger;
     setFormData(({ images, ...prev }) => ({
       ...prev, images: images.filter((p, i) => i !== fileIdx)
     }));
@@ -44,7 +38,6 @@ const ImageGalleryFields = ({ formData, setFormData }) => {
   const handlePurgeAttachment = e => {
     e.stopPropagation();
     const attachmentId = parseInt(e.currentTarget.dataset.attachmentId);
-    debugger;
     setFormData(({ purgeImageIds, ...prev }) => ({
       ...prev, purgeImageIds: [...purgeImageIds, attachmentId]
     }));
@@ -75,9 +68,10 @@ const ImageGalleryFields = ({ formData, setFormData }) => {
   })
 
   const { caption, images, imageAttachments, purgeImageIds } = formData;
-  const inPreview = true;
+  if (purgeImageIds === undefined) return null;
+  const inPreview = ((images.length + imageAttachments.length) > 0);
 
-  return purgeImageIds ? (
+  return (
     <>
       <PreviewIndex active>
         {renderFilePreviews()}
@@ -88,9 +82,9 @@ const ImageGalleryFields = ({ formData, setFormData }) => {
           <HiddenFileInput
             onChange={handleFileInput}
             multiple
-            accept="image/png, image/jpeg"
+            accept=".png,.jpeg,image/*"
           />
-          <ImagesIcon large={!inPreview} />
+          <ImagesIcon lg={!inPreview} />
           <DropzoneCellTitle>{inPreview ? 'Add Another' : 'Upload photos'}</DropzoneCellTitle>
           <SmileIcon hidden={inPreview} />
         </DropzoneCell>
@@ -103,7 +97,7 @@ const ImageGalleryFields = ({ formData, setFormData }) => {
         />
       </Caption>
     </>
-  ) : null;
+  );
 };
 
 export default ImageGalleryFields;

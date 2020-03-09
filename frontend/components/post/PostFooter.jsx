@@ -12,8 +12,20 @@ const PostFooter = ({ post, currentUser }) => {
   const dispatch = useDispatch();
   const togglePostLike = (postId, isLiked) => dispatch(Posts.togglePostLike(postId, isLiked));
   const destoryPost = () => dispatch(Posts.destroyPost(post.id));
-  const openConfirmationModal = () => dispatch(Modal.openModal('Confirmation', { onConfirm: destoryPost, message: 'Are you sure you want to delete this post?' }));
-  const openEditPostModal = () => dispatch(Modal.openModal('PostForm', { post, postType: post.contentType }));
+  const openConfirmationModal = () => {
+    dispatch(Modal.openModal('Confirmation', {
+      onConfirm: destoryPost,
+      message: 'Are you sure you want to delete this post?'
+    }));
+    setPopoverOpen(false)
+  };
+  const openEditPostModal = () => {
+    dispatch(Modal.openModal('PostForm', {
+      post,
+      postType: post.contentType
+    }));
+    setPopoverOpen(false)
+  };
 
   const [popoverOpen, setPopoverOpen] = useState(false);
   const togglePopover = () => setPopoverOpen(prev => !prev);

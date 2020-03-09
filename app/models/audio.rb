@@ -4,7 +4,7 @@ class Audio < ApplicationRecord
   has_one :user, through: :post
   # ----------------------------- ActiveStorage
   has_one_attached :audio
-  has_one_attached :album
+  has_one_attached :album_art
   # ----------------------------- Scope
   default_scope { includes(audio_attachment: :blob, album_art_attachment: :blob) }
   # ----------------------------- Validations

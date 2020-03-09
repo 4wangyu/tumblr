@@ -3,8 +3,8 @@ import styledMap from 'styled-map';
 import { key as theme } from 'styled-theme';
 import α from 'color-alpha';
 import { flexCenter, absoluteCover } from 'styled/helpers';
-import Icon, { IconSm } from 'styled/base/Icon.styled';
-import { faImages, faTimes, faVideo } from '@fortawesome/free-solid-svg-icons';
+import Icon, { IconSm, IconMd } from 'styled/base/Icon.styled';
+import { faImages, faTimes, faVideo, faHeadphones } from '@fortawesome/free-solid-svg-icons';
 import { faSmile } from '@fortawesome/free-regular-svg-icons';
 
 export const Form = styled.form``;
@@ -45,6 +45,9 @@ export const ImagesIcon = styled(Icon).attrs({ icon: faImages })``;
 export const VideoIcon = styled(Icon).attrs({ icon: faVideo })``;
 
 export const SmileIcon = styled(IconSm).attrs({ icon: faSmile })``;
+
+export const AudioIcon = styled(IconMd).attrs({ icon: faHeadphones })``;
+
 
 export const DropzoneCellTitle = styled.span`
   padding: 1rem;

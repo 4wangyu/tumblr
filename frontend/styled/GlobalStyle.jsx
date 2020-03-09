@@ -25,8 +25,9 @@ const GlobalStyle = createGlobalStyle`
     background-color: ${theme('colors.primary')};
   }
 
-  input, textarea {
+  input, textarea, video {
     appearance: none;
+    background-color: transparent;
     box-shadow: none;
     border: none;
     &:focus, &:hover {
@@ -37,10 +38,11 @@ const GlobalStyle = createGlobalStyle`
   a, button {
     &, &:focus, &:hover, &:active {
       appearance: none;
+      border: none;
+      color: inherit;
       cursor: pointer;
       outline: none;
       text-decoration: none;
-      color: inherit;
     }
   }
 

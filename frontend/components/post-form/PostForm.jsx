@@ -8,6 +8,7 @@ import { CardHeader, CardFooter } from './PostForm.styled';
 import Btn from 'styled/base/Btn.styled';
 import ImageGallery from './post-form-fields/ImageGalleryFields';
 import Video from './post-form-fields/VideoFields';
+import Audio from './post-form-fields/AudioFields';
 import TagManager from './TagManager';
 import pojoToFormData from 'util/pojo_to_form_data';
 
@@ -21,28 +22,33 @@ const PostForm = ({ postType, post = {} }) => {
   const getFields = props => ({
     ImageGallery: <ImageGallery {...props} />,
     Video: <Video {...props} />,
+    Audio: <Audio {...props} />,
   });
+
+  const handleTextInput = e => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
 
   const [formData, setFormData] = useState(post);
 
   const processFormData = () => {
     const newPost = pojoToFormData(formData);
-    debugger;
+
     if (formData.id) {
       updatePost(formData.id, newPost)
         .then(() => closeModal());
     } else {
       createPost(newPost)
         .then(() => closeModal());
-    }
-
+    };
   };
 
   return (
     <Card>
       <CardHeader>{currentUser.username}</CardHeader>
       <CardContent noPadding>
-        {getFields({ formData, setFormData })[postType]}
+        {getFields({ formData, setFormData, handleTextInput })[postType]}
         <TagManager formData={formData} setFormData={setFormData} />
       </CardContent>
       <CardFooter>
