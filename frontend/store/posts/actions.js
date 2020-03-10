@@ -43,3 +43,8 @@ Thunks.togglePostLike = (postId, isLiked = false) => dispatch => {
   return APIUtil.togglePostLike(postId, isLiked)
     .then(post => dispatch(Creators.receivePost(post)));
 };
+
+Thunks.purgePostAttachment = (postId, attachmentId) => dispatch => {
+  return APIUtil.purgePostAttachment(postId, attachmentId)
+    .then(post => dispatch(Creators.receivePost(post)));
+};

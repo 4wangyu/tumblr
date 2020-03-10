@@ -13,9 +13,8 @@ const AudioFields = ({ formData, setFormData, handleTextInput }) => {
       audio: undefined,
       ...prev,
     }));
-
     const { audioAttachment } = formData;
-
+    console.log(audioAttachment)
     if (audioAttachment) setAudioPreview(audioAttachment.url);
   }, []);
 

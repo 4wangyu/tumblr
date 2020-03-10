@@ -1,6 +1,6 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectCurrentUser } from 'store/selectors';
+import { selectCurrentUser, selectPostById } from 'store/selectors';
 import { Creators as Modal } from 'store/modal/actions';
 import { Thunks as Posts } from 'store/posts/actions';
 import { Card, CardContent } from 'styled/base/Card.styled';
@@ -12,12 +12,21 @@ import Audio from './post-form-fields/AudioFields/index';
 import TagManager from './TagManager';
 import pojoToFormData from 'util/pojo_to_form_data';
 
-const PostForm = ({ postType, post = {} }) => {
-  const currentUser = useSelector(selectCurrentUser);
+const PostForm = ({ postType, postId = null }) => {
+  const { currentUser, post } = useSelector(state => ({
+    currentUser: selectCurrentUser(state),
+    post: selectPostById(state, { postId })
+  }));
+
   const dispatch = useDispatch();
   const closeModal = () => dispatch(Modal.closeModal());
   const createPost = formData => dispatch(Posts.createPost(formData));
   const updatePost = (postId, formData) => dispatch(Posts.updatePost(postId, formData));
+  const [formData, setFormData] = useState(post || {});
+
+  useEffect(() => {
+    if (post) setFormData(prev => ({ ...post, ...prev }));
+  }, [post])
 
   const getFields = props => ({
     ImageGallery: <ImageGallery {...props} />,
@@ -29,8 +38,6 @@ const PostForm = ({ postType, post = {} }) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   }, [formData]);
-
-  const [formData, setFormData] = useState(post);
 
   const processFormData = useCallback(() => {
     const newPost = pojoToFormData(formData);

@@ -21,7 +21,7 @@ const PostFooter = ({ post, currentUser }) => {
   };
   const openEditPostModal = () => {
     dispatch(Modal.openModal('PostForm', {
-      post,
+      postId: post.id,
       postType: post.contentType
     }));
     setPopoverOpen(false)

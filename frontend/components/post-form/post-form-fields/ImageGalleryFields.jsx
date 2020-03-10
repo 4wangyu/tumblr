@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { Thunks as Posts } from 'store/posts/actions';
 import {
   PreviewIndex, Preview, PreviewImg, DeleteBtn, DeleteIcon,
   Form, Dropzone, DropzoneCell, DropzoneCellTitle,
@@ -8,13 +10,17 @@ import {
 
 const ImageGalleryFields = ({ formData, setFormData, handleTextInput }) => {
 
+  const { id: postId, caption, images, imageAttachments } = formData;
+
+  const dispatch = useDispatch();
+  const purgeAttachment = attachmentId => dispatch(Posts.purgePostAttachment(postId, attachmentId));
+
   useEffect(() => {
     setFormData(prev => ({
       contentType: 'ImageGallery',
       caption: '',
       images: [],
       imageAttachments: [],
-      purgeImageIds: [],
       ...prev,
     }));
   }, []);
@@ -38,12 +44,10 @@ const ImageGalleryFields = ({ formData, setFormData, handleTextInput }) => {
   const handlePurgeAttachment = e => {
     e.stopPropagation();
     const attachmentId = parseInt(e.currentTarget.dataset.attachmentId);
-    setFormData(({ purgeImageIds, ...prev }) => ({
-      ...prev, purgeImageIds: [...purgeImageIds, attachmentId]
-    }));
+    purgeAttachment(attachmentId)
   };
 
-  const renderFilePreviews = () => formData.images.map((file, idx) => {
+  const renderFilePreviews = () => images.map((file, idx) => {
     const url = URL.createObjectURL(file);
     return (
       <Preview key={`file-${idx}`}>
@@ -55,27 +59,22 @@ const ImageGalleryFields = ({ formData, setFormData, handleTextInput }) => {
     )
   })
 
-  const renderAttachmentPreviews = () => formData.imageAttachments.map(({ id, url }) => {
-    if (formData.purgeImageIds.includes(id)) return null;
-    return (
-      <Preview key={`attachment-${id}`}>
-        <PreviewImg src={url} />
-        <DeleteBtn onClick={handlePurgeAttachment} data-attachment-id={id}>
-          <DeleteIcon />
-        </DeleteBtn>
-      </Preview>
-    )
-  })
+  const renderAttachmentPreviews = () => imageAttachments.map(({ id, url }) => (
+    <Preview key={`attachment-${id}`}>
+      <PreviewImg src={url} />
+      <DeleteBtn onClick={handlePurgeAttachment} data-attachment-id={id}>
+        <DeleteIcon />
+      </DeleteBtn>
+    </Preview>
+  ));
 
-  const { caption, images, imageAttachments, purgeImageIds } = formData;
-  if (purgeImageIds === undefined) return null;
   const inPreview = ((images.length + imageAttachments.length) > 0);
 
   return (
     <>
       <PreviewIndex active>
-        {renderFilePreviews()}
         {renderAttachmentPreviews()}
+        {renderFilePreviews()}
       </PreviewIndex>
       <Dropzone>
         <DropzoneCell minimize={inPreview}>

@@ -22,3 +22,7 @@ export const togglePostLike = (postId, isLiked) => {
   const method = isLiked ? 'DELETE' : 'POST';
   return $.ajax({ method, url: `/api/posts/${postId}/likes` });
 };
+
+export const purgePostAttachment = (postId, attachmentId) => {
+  return $.ajax({ method: 'DELETE', url: `/api/posts/${postId}/purge_attachment`, data: { attachment_id: attachmentId } });
+};

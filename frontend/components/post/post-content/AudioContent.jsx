@@ -11,12 +11,8 @@ const AudioContent = ({
   post: {
     track,
     artist,
-    audioAttachment: {
-      url: audioUrl
-    },
-    albumArtAttachment: {
-      url: albumArtUrl
-    }
+    audioAttachment,
+    albumArtAttachment
   }
 }) => {
   const $audio = useRef();
@@ -26,7 +22,7 @@ const AudioContent = ({
 
   return (
     <AudioPlayer>
-      <HiddenAudio ref={$audio} src={audioUrl} />
+      <HiddenAudio ref={$audio} src={audioAttachment.url} />
       <AudioProgress
         style={{ width: trackProgress }}
       />
@@ -37,9 +33,9 @@ const AudioContent = ({
         <AudioInfoText boldText={true}>{track}</AudioInfoText>
         <AudioInfoText>{artist}</AudioInfoText>
       </AudioInfo>
-      <AlbumArtBox>
-        <AlbumArtImg src={albumArtUrl} />
-      </AlbumArtBox>
+      {albumArtAttachment && <AlbumArtBox>
+        <AlbumArtImg src={albumArtAttachment.url} />
+      </AlbumArtBox>}
     </AudioPlayer>
   );
 };

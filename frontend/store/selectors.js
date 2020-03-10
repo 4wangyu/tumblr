@@ -9,6 +9,8 @@ export const selectCurrentUser = ({ entities: { users }, session: { id } }) => u
 // ---------------------- Post
 export const selectAllPosts = state => Object.values(state.entities.posts);
 
+export const selectPostById = (state, { postId }) => state.entities.posts[postId];
+
 // ---------------------- Modal
 export const selectModal = state => state.ui.modal;
 

@@ -1,5 +1,5 @@
 class Api::PostsController < ApplicationController
-  before_action :select_post, only: [:show, :update, :destroy]
+  before_action :select_post, only: [:show, :update, :destroy, :purge_attachment]
 
   def show
   end
@@ -64,6 +64,17 @@ class Api::PostsController < ApplicationController
     else 
       @post.destroy
       render json: @post.id
+    end
+  end
+
+  def purge_attachment
+    @attachment = ActiveStorage::Attachment.find_by_id(params[:attachment_id])
+    
+    if @attachment && @attachment.record.post == @post
+      @attachment.destroy
+      render :show
+    else
+      render json: ['Attachment not found'], status: :not_found
     end
   end
 
