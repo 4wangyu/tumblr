@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectCurrentUser } from 'store/selectors';
 import { Creators as Modal } from 'store/modal/actions';
@@ -8,7 +8,7 @@ import { CardHeader, CardFooter } from './PostForm.styled';
 import Btn from 'styled/base/Btn.styled';
 import ImageGallery from './post-form-fields/ImageGalleryFields';
 import Video from './post-form-fields/VideoFields';
-import Audio from './post-form-fields/AudioFields';
+import Audio from './post-form-fields/AudioFields/index';
 import TagManager from './TagManager';
 import pojoToFormData from 'util/pojo_to_form_data';
 
@@ -25,14 +25,14 @@ const PostForm = ({ postType, post = {} }) => {
     Audio: <Audio {...props} />,
   });
 
-  const handleTextInput = e => {
+  const handleTextInput = useCallback(e => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
-  };
+  }, [formData]);
 
   const [formData, setFormData] = useState(post);
 
-  const processFormData = () => {
+  const processFormData = useCallback(() => {
     const newPost = pojoToFormData(formData);
 
     if (formData.id) {
@@ -42,7 +42,7 @@ const PostForm = ({ postType, post = {} }) => {
       createPost(newPost)
         .then(() => closeModal());
     };
-  };
+  }, [formData]);
 
   return (
     <Card>

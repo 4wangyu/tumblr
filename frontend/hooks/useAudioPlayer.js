@@ -4,44 +4,41 @@ const useAudioPlayer = ref => {
   const [duration, setDuration] = useState(0);
   const [time, setTime] = useState(0);
   const [playing, setPlaying] = useState(false);
-  const [srcAttr, setSrcAttr] = useState(undefined);
-
-  let $audio;
-
-  const reset = () => {
-    setPlaying(false);
-    setSrcAttr(undefined)
-  };
+  const [$audio, setAudioRef] = useState(null);
 
   useEffect(() => {
-    $audio = ref;
+    setAudioRef(ref);
+
+    if (!$audio || !$audio.current) return;
 
     const setAudioData = () => {
-      setDuration($audio.current.duration);
-      setTime($audio.current.currentTime);
+      const { duration, currentTime } = $audio.current;
+      setDuration(duration);
+      setTime(currentTime);
     };
 
-    const setAudioTime = () => setTime($audio.current.currentTime);
+    const setAudioTime = () => {
+      const { currentTime } = $audio.current;
+      setTime(currentTime)
+    };
 
     $audio.current.addEventListener("loadeddata", setAudioData);
-
     $audio.current.addEventListener("timeupdate", setAudioTime);
 
-    playing ? $audio.current.play() : $audio.current.pause();
-
-
     return () => {
-      $audio.current.pause();
       $audio.current.removeEventListener("loadeddata", setAudioData);
       $audio.current.removeEventListener("timeupdate", setAudioTime);
     };
-  });
+
+  }, [$audio]);
 
   useEffect(() => {
-    $audio.current.src = srcAttr
-  }, [srcAttr]);
+    if ($audio && $audio.current) {
+      playing ? $audio.current.play() : $audio.current.pause();
+    }
+  }, [playing]);
 
-  return { time, duration, playing, setPlaying, srcAttr, setSrcAttr, reset };
+  return { time, duration, playing, setPlaying };
 }
 
 export default useAudioPlayer;

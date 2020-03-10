@@ -5,7 +5,7 @@ import α from 'color-alpha';
 import { flexCenter, flexCol, absoluteCover } from 'styled/helpers';
 import { IconLg } from 'styled/base/Icon.styled';
 import { faPlayCircle, faPauseCircle } from '@fortawesome/free-solid-svg-icons';
-import { DeleteBtn } from './PostFormFields.styled';
+import { DeleteBtn } from  '../PostFormFields.styled';
 
 export const AudioPlayer = styled.div`
   display: grid;
@@ -30,11 +30,16 @@ export const AudioPlayer = styled.div`
   }
 `;
 
+export const HiddenAudio = styled.audio`
+  display: none;
+`;
+
 export const AudioProgress = styled.div`
   ${absoluteCover};
   background-color: ${α('#000', .2)};
   width: 0%;
 `;
+
 // -------------------- PlayPauseBtn
 export const PlayPauseBtn = styled.button`
   ${flexCenter};
