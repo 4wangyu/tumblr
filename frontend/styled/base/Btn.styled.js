@@ -3,9 +3,7 @@ import styledMap from 'styled-map';
 import { key as theme } from 'styled-theme';
 import { thump } from 'styled/keyframes';
 
-const Btn = styled.button.attrs(props => ({
-  type: props.submit ? 'submit' : 'button'
-}))`
+const Btn = styled.button`
   cursor: pointer;
   background-color: ${styledMap`
     default: ${theme('colors.highlight')};
