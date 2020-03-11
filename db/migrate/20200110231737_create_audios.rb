@@ -3,7 +3,6 @@ class CreateAudios < ActiveRecord::Migration[5.2]
     create_table :audios do |t|
       t.string :track
       t.string :artist
-      t.text :description
 
       t.timestamps
     end

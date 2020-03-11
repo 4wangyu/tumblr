@@ -39,7 +39,6 @@ ActiveRecord::Schema.define(version: 2020_02_28_185843) do
   create_table "audios", force: :cascade do |t|
     t.string "track"
     t.string "artist"
-    t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["artist"], name: "index_audios_on_artist"
@@ -55,7 +54,6 @@ ActiveRecord::Schema.define(version: 2020_02_28_185843) do
   end
 
   create_table "image_galleries", force: :cascade do |t|
-    t.text "caption"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -71,9 +69,10 @@ ActiveRecord::Schema.define(version: 2020_02_28_185843) do
   end
 
   create_table "posts", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.text "body"
     t.string "content_type", null: false
     t.bigint "content_id", null: false
-    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["content_type", "content_id"], name: "index_posts_on_content_type_and_content_id"
@@ -81,10 +80,10 @@ ActiveRecord::Schema.define(version: 2020_02_28_185843) do
   end
 
   create_table "reblogs", force: :cascade do |t|
-    t.string "caption"
     t.integer "parent_id"
     t.bigint "user_id", null: false
     t.bigint "post_id", null: false
+    t.text "caption"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_reblogs_on_post_id"
@@ -122,7 +121,6 @@ ActiveRecord::Schema.define(version: 2020_02_28_185843) do
   end
 
   create_table "videos", force: :cascade do |t|
-    t.text "caption"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

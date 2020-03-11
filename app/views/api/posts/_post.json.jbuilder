@@ -1,4 +1,4 @@
-json.extract! post, :id, :content_type
+json.extract! post, :id, :content_type, :body
 json.is_reblog false
 case post.content_type
   when 'ImageGallery'

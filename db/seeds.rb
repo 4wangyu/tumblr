@@ -24,8 +24,7 @@ Video.destroy_all
   
   # ImageGallery 
   (rand(3)+1).times do
-    caption = Faker::Hipster.unique.word
-    image_gallery = ImageGallery.new(caption: caption)
+    image_gallery = ImageGallery.new()
     [1,1,1,2,3,1].sample.times do
       rand_int = rand(21)
       image_gallery.images.attach(
@@ -36,7 +35,7 @@ Video.destroy_all
       )
       image_gallery.save! 
     end
-    user.posts.create!({ content: image_gallery })
+    user.posts.create!({ content: image_gallery, body: Faker::Hipster.paragraph(sentence_count: 2) })
   end
 end
 

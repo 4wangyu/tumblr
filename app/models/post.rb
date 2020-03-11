@@ -11,6 +11,8 @@ class Post < ApplicationRecord
   has_many :tags, through: :taggings
 
   has_many :reblogs, dependent: :destroy
+  # ----------------------------- ActiveStorage
+  
   # ----------------------------- Scope
   default_scope { order(created_at: :desc) }
   # ----------------------------- Validations
