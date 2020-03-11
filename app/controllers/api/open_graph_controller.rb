@@ -5,7 +5,7 @@ class Api::OpenGraphController < ApplicationController
     if req
       @og = req.og
     else 
-      render json: {message: 'Endpoint could not be read'}, status: :unprocessable_entity 
+      render json: {message: 'Target url could not be scraped'}, status: :unprocessable_entity 
     end
   end
 
