@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Thunks as Posts } from 'store/posts/actions';
 import {
@@ -7,18 +7,18 @@ import {
   HiddenFileInput, ImagesIcon, SmileIcon,
   Caption, CaptionTextarea
 } from './PostFormFields.styled';
+import { FormContext } from '../PostForm';
 
-const ImageGalleryFields = ({ formData, setFormData, handleTextInput }) => {
-
-  const { id: postId, caption, images, imageAttachments } = formData;
+const ImageGalleryFields = () => {
+  const { formFields: { id: postId, body, images, imageAttachments }, setFormFields, handleTextInput } = useContext(FormContext);
 
   const dispatch = useDispatch();
   const purgeAttachment = attachmentId => dispatch(Posts.purgePostAttachment(postId, attachmentId));
 
   useEffect(() => {
-    setFormData(prev => ({
+    setFormFields(prev => ({
       contentType: 'ImageGallery',
-      caption: '',
+      body: '',
       images: [],
       imageAttachments: [],
       ...prev,
@@ -28,7 +28,7 @@ const ImageGalleryFields = ({ formData, setFormData, handleTextInput }) => {
   const handleFileInput = e => {
     const { files } = e.target;
 
-    setFormData(({ images, ...prev }) => ({
+    setFormFields(({ images, ...prev }) => ({
       ...prev, images: [...images, ...files]
     }));
   };
@@ -36,7 +36,7 @@ const ImageGalleryFields = ({ formData, setFormData, handleTextInput }) => {
   const handleRemoveFile = e => {
     e.stopPropagation();
     const fileIdx = parseInt(e.currentTarget.dataset.fileIdx);
-    setFormData(({ images, ...prev }) => ({
+    setFormFields(({ images, ...prev }) => ({
       ...prev, images: images.filter((p, i) => i !== fileIdx)
     }));
   };
@@ -68,6 +68,7 @@ const ImageGalleryFields = ({ formData, setFormData, handleTextInput }) => {
     </Preview>
   ));
 
+  if (images === undefined) return null;
   const inPreview = ((images.length + imageAttachments.length) > 0);
 
   return (
@@ -90,9 +91,9 @@ const ImageGalleryFields = ({ formData, setFormData, handleTextInput }) => {
       </Dropzone>
       <Caption reveal={inPreview}>
         <CaptionTextarea
-          name="caption"
+          name="body"
           onChange={handleTextInput}
-          value={caption}
+          value={body}
         />
       </Caption>
     </>

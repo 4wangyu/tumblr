@@ -1,7 +1,7 @@
 import React from 'react'
-import { Gallery, Image, Caption } from './ImageGalleryContent.styled';
+import { Gallery, Image, Body } from './ImageGalleryContent.styled';
 
-const ImageGalleryContent = ({ post: { imageAttachments, caption } }) => (
+const ImageGalleryContent = ({ post: { imageAttachments, body } }) => (
   <>
     <Gallery>
       {imageAttachments.map(({ url, filename }, idx) => (
@@ -12,7 +12,7 @@ const ImageGalleryContent = ({ post: { imageAttachments, caption } }) => (
         />
       ))}
     </Gallery>
-    <Caption>{caption}</Caption>
+    <Body>{body}</Body>
   </>
 )
 

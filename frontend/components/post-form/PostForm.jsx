@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, createContext } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectCurrentUser, selectPostById } from 'store/selectors';
 import { Creators as Modal } from 'store/modal/actions';
@@ -12,6 +12,8 @@ import Audio from './post-form-fields/AudioFields/index';
 import TagManager from './TagManager';
 import pojoToFormData from 'util/pojo_to_form_data';
 
+export const FormContext = createContext();
+
 const PostForm = ({ postType, postId = null }) => {
   const { currentUser, post } = useSelector(state => ({
     currentUser: selectCurrentUser(state),
@@ -20,43 +22,46 @@ const PostForm = ({ postType, postId = null }) => {
 
   const dispatch = useDispatch();
   const closeModal = () => dispatch(Modal.closeModal());
-  const createPost = formData => dispatch(Posts.createPost(formData));
-  const updatePost = (postId, formData) => dispatch(Posts.updatePost(postId, formData));
-  const [formData, setFormData] = useState(post || {});
+  const createPost = formFields => dispatch(Posts.createPost(formFields));
+  const updatePost = (postId, formFields) => dispatch(Posts.updatePost(postId, formFields));
+  const [formFields, setFormFields] = useState(post || {});
+  // const setFormField = useCallback((name, value) => setFormFields(prev => ({ ...prev, [name]: value })), [formFields])
 
   useEffect(() => {
-    if (post) setFormData(prev => ({ ...post, ...prev }));
+    if (post) setFormFields(prev => ({ ...post, ...prev }));
   }, [post])
 
-  const getFields = props => ({
-    ImageGallery: <ImageGallery {...props} />,
-    Video: <Video {...props} />,
-    Audio: <Audio {...props} />,
+  const getFields = () => ({
+    ImageGallery: <ImageGallery />,
+    Video: <Video />,
+    Audio: <Audio />,
   });
 
   const handleTextInput = useCallback(e => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  }, [formData]);
+    setFormFields(prev => ({ ...prev, [name]: value }));
+  }, [formFields]);
 
   const processFormData = useCallback(() => {
-    const newPost = pojoToFormData(formData);
+    const newPost = pojoToFormData(formFields);
 
-    if (formData.id) {
-      updatePost(formData.id, newPost)
+    if (formFields.id) {
+      updatePost(formFields.id, newPost)
         .then(() => closeModal());
     } else {
       createPost(newPost)
         .then(() => closeModal());
     };
-  }, [formData]);
+  }, [formFields]);
 
   return (
     <Card>
       <CardHeader>{currentUser.username}</CardHeader>
       <CardContent noPadding>
-        {getFields({ formData, setFormData, handleTextInput })[postType]}
-        <TagManager formData={formData} setFormData={setFormData} />
+        <FormContext.Provider value={{ formFields, setFormFields, handleTextInput }}>
+          {getFields()[postType]}
+          <TagManager />
+        </FormContext.Provider>
       </CardContent>
       <CardFooter>
         <Btn secondary onClick={closeModal}>Close</Btn>

@@ -9,7 +9,6 @@ const AudioDropzone = memo(({ handleAudioInput }) => (
     <DropzoneCell minimize={true} style={{ height: '8rem' }}>
       <HiddenFileInput
         onChange={handleAudioInput}
-        multiple
         accept=".mp3,audio/*"
       />
       <AudioIcon />

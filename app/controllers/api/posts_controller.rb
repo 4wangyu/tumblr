@@ -18,7 +18,7 @@ class Api::PostsController < ApplicationController
         nil
     end
 
-    @post = current_user.posts.create(content: content, all_tags: all_tags_param)
+    @post = current_user.posts.create(content: content, all_tags: post_params[:all_tags], body: post_params[:body])
     if @post
       render :show, status: :created # 201
     else
@@ -49,7 +49,7 @@ class Api::PostsController < ApplicationController
         nil
     end
 
-    @post.update_attributes(all_tags: all_tags_param)
+    @post.update_attributes(post_params)
    
     if @post
       render :show
@@ -84,8 +84,8 @@ class Api::PostsController < ApplicationController
     params.require(:post).permit(:content_type)[:content_type]
   end
 
-  def all_tags_param
-    params.require(:post).permit(all_tags: [])[:all_tags]
+  def post_params
+    params.require(:post).permit(:body, all_tags: [])
   end
 
   def select_post
@@ -96,11 +96,11 @@ class Api::PostsController < ApplicationController
   end
 
   def image_gallery_params
-    params.require(:post).permit(:caption, images: [])
+    params.require(:post).permit(images: [])
   end
 
   def video_params
-    params.require(:post).permit(:caption, :video)
+    params.require(:post).permit(:video)
   end
 
   def audio_params

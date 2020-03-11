@@ -35,6 +35,10 @@ const GlobalStyle = createGlobalStyle`
     }
   }
 
+  textarea {
+    resize: none;
+  }
+
   a, button {
     &, &:focus, &:hover, &:active {
       appearance: none;

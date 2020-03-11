@@ -9,6 +9,7 @@ export const Card = styled.div`
   color: ${theme('colors.text')};
   font-size: ${theme('fontSizes.md')};
   font-weight: ${theme('fontWeights.heading')};
+  line-height: 1.8;
   width: ${styledMap`
     default: 54rem;
     fullWidth: 100%;

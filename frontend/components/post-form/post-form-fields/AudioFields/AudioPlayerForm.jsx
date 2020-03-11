@@ -1,4 +1,4 @@
-import React, { useRef, useMemo, useCallback } from 'react'
+import React, { useContext, useRef, useMemo, useCallback } from 'react'
 import useAudioPlayer from 'hooks/useAudioPlayer';
 import {
   AudioPlayer, HiddenAudio, AudioProgress,
@@ -7,20 +7,17 @@ import {
 } from './AudioFields.styled';
 import AlbumArt from './AlbumArt';
 import { DeleteBtn, DeleteIcon } from '../PostFormFields.styled';
+import { FormContext } from '../../PostForm';
 
 const AudioPlayerForm = ({
   audioPreview,
-  handleTextInput,
   removeAudio,
-  formData,
-  setFormData
 }) => {
+  const { formFields: { track, artist }, handleTextInput } = useContext(FormContext);
   const $audioInput = useRef(null);
   const { time, duration, playing, setPlaying } = useAudioPlayer($audioInput);
   const trackProgress = useMemo(() => `${time / duration * 100}%`, [time, duration])
   const toggleAudioPlaying = useCallback(() => setPlaying(prev => !prev), [playing]);
-
-  const { track, artist } = formData;
 
   return (
     <AudioPlayer>
@@ -45,10 +42,7 @@ const AudioPlayerForm = ({
           <InfoLabel>Artist</InfoLabel>
         </InfoGroup>
       </AudioInfo>
-      <AlbumArt
-        formData={formData}
-        setFormData={setFormData}
-      />
+      <AlbumArt />
       <DeleteBtn onClick={removeAudio}>
         <DeleteIcon />
       </DeleteBtn>

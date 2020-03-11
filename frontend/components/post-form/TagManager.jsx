@@ -1,14 +1,15 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useContext, useState, useEffect, useRef } from 'react';
 import { TagIndex, Tag, TagForm, TagInput } from './PostForm.styled';
+import { FormContext } from './PostForm';
 
-const TagManager = ({ formData, setFormData }) => {
-
+const TagManager = () => {
+  const { formFields, setFormFields } = useContext(FormContext);
   const [selectedTag, setSelectedTag] = useState(-1);
   const [tagInput, setTagInput] = useState('');
   const $tagInput = useRef(null);
 
   useEffect(() => {
-    setFormData(prev => ({ allTags: prev.tags ? [...prev.tags] : [], ...prev }))
+    setFormFields(prev => ({ allTags: prev.tags ? [...prev.tags] : [], ...prev }))
   }, [])
 
   const handleTagInput = e => {
@@ -19,12 +20,12 @@ const TagManager = ({ formData, setFormData }) => {
   const handleAddTag = e => {
     e.preventDefault();
     const newTag = tagInput.toLowerCase().replace(/#/, '').trim();
-    if (newTag.length && !formData.allTags.includes(newTag)) {
-      setFormData(prev => ({ ...prev, allTags: [...prev.allTags, newTag] }));
+    if (newTag.length && !formFields.allTags.includes(newTag)) {
+      setFormFields(prev => ({ ...prev, allTags: [...prev.allTags, newTag] }));
     }
     setTagInput('');
-    if (formData.allTags.length > 20) {
-      setFormData(prev => ({ ...prev, allTags: prev.allTags.filter((tag, idx) => idx !== 0) }));
+    if (formFields.allTags.length > 20) {
+      setFormFields(prev => ({ ...prev, allTags: prev.allTags.filter((tag, idx) => idx !== 0) }));
     }
   }
 
@@ -35,13 +36,13 @@ const TagManager = ({ formData, setFormData }) => {
   }
 
   const handleRemoveTag = e => {
-    if (!tagInput.length && formData.allTags.length && e.keyCode === 8) {
-      const removeTagIdx = selectedTag > -1 ? selectedTag : formData.allTags.length - 1;
-      setFormData(prev => ({ ...prev, allTags: prev.allTags.filter((tag, idx) => idx !== removeTagIdx) }));
+    if (!tagInput.length && formFields.allTags.length && e.keyCode === 8) {
+      const removeTagIdx = selectedTag > -1 ? selectedTag : formFields.allTags.length - 1;
+      setFormFields(prev => ({ ...prev, allTags: prev.allTags.filter((tag, idx) => idx !== removeTagIdx) }));
     }
   }
 
-  const { allTags } = formData;
+  const { allTags } = formFields;
   return (
     <TagIndex>
       {allTags && allTags.map((tag, idx) => (

@@ -7,6 +7,6 @@ export const Image = styled.img`
   width: 100%;
 `;
 
-export const Caption = styled.p`
+export const Body = styled.p`
   ${cardPadding};
 `;

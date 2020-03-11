@@ -5,7 +5,7 @@ import α from 'color-alpha';
 import { flexCenter, flexCol, absoluteCover } from 'styled/helpers';
 import { IconLg } from 'styled/base/Icon.styled';
 import { faPlayCircle, faPauseCircle } from '@fortawesome/free-solid-svg-icons';
-import { DeleteBtn } from  '../PostFormFields.styled';
+import { DeleteBtn } from '../PostFormFields.styled';
 
 export const AudioPlayer = styled.div`
   display: grid;
@@ -122,6 +122,7 @@ export const AlbumArtDropzone = styled(AlbumArtBox)`
 export const DropzoneBox = styled.span`
   ${flexCenter};
   height: 100%;
+  line-height: 1.2;
   border-radius: 2px;
   border: 2px dashed ${α('#000', .1)};
   background-color: ${α('#fff', .5)};

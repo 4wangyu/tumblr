@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Thunks as Posts } from 'store/posts/actions';
 import {
@@ -6,9 +6,11 @@ import {
   AlbumArtDropzone, DropzoneBox
 } from './AudioFields.styled';
 import { HiddenFileInput } from '../PostFormFields.styled';
+import { FormContext } from '../../PostForm';
 
-const AlbumArt = ({ formData, setFormData }) => {
-  const { id: postId, albumArtAttachment } = formData;
+const AlbumArt = () => {
+  const { formFields, setFormFields } = useContext(FormContext);
+  const { id: postId, albumArtAttachment } = formFields;
 
   const [albumArtPreview, setAlbumArtPreview] = useState(null);
   const dispatch = useDispatch();
@@ -16,7 +18,7 @@ const AlbumArt = ({ formData, setFormData }) => {
   const purgeAttachment = attachmentId => dispatch(Posts.purgePostAttachment(postId, attachmentId));
 
   useEffect(() => {
-    setFormData(prev => ({
+    setFormFields(prev => ({
       albumArt: undefined,
       ...prev,
     }));
@@ -28,7 +30,7 @@ const AlbumArt = ({ formData, setFormData }) => {
   const handleAlbumArtInput = e => {
     const [albumArt] = e.target.files;
     setAlbumArtPreview(URL.createObjectURL(albumArt))
-    setFormData(prev => ({ ...prev, albumArt }));
+    setFormFields(prev => ({ ...prev, albumArt }));
   };
 
   const removeAlbumArt = e => {
@@ -36,7 +38,7 @@ const AlbumArt = ({ formData, setFormData }) => {
       purgeAttachment(albumArtAttachment.id).then(() => setAlbumArtPreview(null));
     } else {
       setAlbumArtPreview(null)
-      setFormData(prev => ({ ...prev, albumArt: undefined }));
+      setFormFields(prev => ({ ...prev, albumArt: undefined }));
     };
   };
 
