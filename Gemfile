@@ -2,7 +2,8 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.3'
-
+# Fetch and parse OpenGraph properties from an URL or a given string
+gem 'open_graph_reader'
 # Sync active storage w/ AWS S3
 gem 'aws-sdk-s3'
 # Make AJAX requests w/ authentication token automatically added to header

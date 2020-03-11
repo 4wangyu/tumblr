@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   namespace :api, defaults: { format: :json } do
     resource :sessions, only: [:create, :destroy]
 
@@ -23,6 +22,10 @@ Rails.application.routes.draw do
     namespace :sidebar do
       get 'recommended_users'
       get 'radar_post'
+    end
+
+    namespace :open_graph do
+      post 'fetch'
     end
   end
 
