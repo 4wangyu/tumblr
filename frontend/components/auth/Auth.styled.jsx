@@ -3,7 +3,6 @@ import styledMap from 'styled-map';
 import { key as theme } from 'styled-theme';
 import { flexCenterCol } from 'styled/helpers';
 import α from 'color-alpha';
-import { animated } from 'react-spring';
 import { thump } from 'styled/keyframes';
 
 export const AuthForm = styled.div`
@@ -36,7 +35,7 @@ export const SubHeading = styled.h2`
   }
 `;
 
-export const StepWrapper = styled(animated.div)`
+export const StepWrapper = styled.div`
   ${flexCenterCol}
   font-size: 1.5rem;
   width: inherit;
@@ -47,6 +46,7 @@ export const StepWrapper = styled(animated.div)`
 
 export const FormGroup = styled.div`
   ${flexCenterCol}
+  background-color: ${theme('colors.secondary')} !important;
   width: 100%;
   border-radius: 2px;
   overflow: hidden;
@@ -58,17 +58,15 @@ export const InputField = styled.input.attrs(({ name }) => ({
 }))`
   padding: 1.1rem 1.3rem;
   width: inherit;
+  color: ${theme('colors.text')};
   &::placeholder {
-    color: #b3b3b3;
+    color: ${({ theme }) => α(theme.colors.textLight, 0.7)};
   }
-  border-bottom: 1px solid ${α('#b3b3b3', .6)};
-
-  &:last-child {
-    border-bottom: none;
+  &:not(:last-child) {
+    border-bottom: 1px solid ${α('#b3b3b3', .6)};
   }
-  &[type='passoword'] {
-    font-size: 2rem;
-  }
+  &[type='passoword'] { font-size: 2rem; }
+  
 `;
 
 export const ActionBtn = styled.button`
@@ -105,6 +103,3 @@ export const ActionBtn = styled.button`
 export const ActionLink = styled.a`
   cursor: pointer;
 `;
-
-
-
