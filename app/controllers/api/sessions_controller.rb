@@ -1,20 +1,20 @@
 class Api::SessionsController < ApplicationController
   def create
     @user = User.find_by_credentials(email: user_params[:email], password: user_params[:password])
-    if @user.nil?
-      render json: ['Invalid credentials'], status: :unauthorized
-    else
+    if  @user
       login(@user)
       render partial: 'api/users/user', locals: {user: @user}
+    else
+      render json: {password: ['Your email or password were incorrect.']}, status: :unauthorized
     end
   end
 
   def destroy
     if current_user
       logout()
-      render json: ['Logout successful']
+      render json: { message: 'Success.' }
     else 
-      render ['Session not found'], status: :not_found
+      render json: { message: 'Session error.' }, status: :not_found
     end
   end
 end

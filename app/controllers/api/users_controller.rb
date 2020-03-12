@@ -4,7 +4,7 @@ class Api::UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     unless @user.save
-      render json: @user.errors.full_messages, status: :unprocessable_entity #422
+      render json: @user.group_error_messages, status: :unprocessable_entity #422
     else
       login(@user)
       render :show, status: :created # 201
