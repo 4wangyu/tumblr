@@ -3,7 +3,7 @@ import {
   PreviewIndex, Preview, PreviewVideo,
   Form, Dropzone, DropzoneCell, DropzoneCellTitle, VideoIcon,
   HiddenFileInput,
-  Caption, CaptionTextarea
+  Body, BodyTextarea
 } from './PostFormFields.styled';
 import { FormContext } from '../PostForm';
 
@@ -52,13 +52,13 @@ const VideoFields = () => {
           <DropzoneCellTitle>{inPreview ? 'Replace video' : 'Upload a video'}</DropzoneCellTitle>
         </DropzoneCell>
       </Dropzone>
-      <Caption reveal={inPreview}>
-        <CaptionTextarea
+      <Body reveal={inPreview}>
+        <BodyTextarea
           name="body"
           onChange={handleTextInput}
           value={body}
         />
-      </Caption>
+      </Body>
     </>
   );
 };

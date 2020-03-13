@@ -83,7 +83,7 @@ export const DeleteIcon = styled(Icon).attrs({ icon: faTimes })`
   font-size: 1.1rem;
 `;
 
-export const Caption = styled.div`
+export const Body = styled.div`
   border-bottom: 1px solid ${α('#cfcfcf', .55)};
   display: ${styledMap`
     default: none;
@@ -93,7 +93,7 @@ export const Caption = styled.div`
   padding-top: 1.5rem;
 `;
 
-export const CaptionTextarea = styled.textarea.attrs({
+export const BodyTextarea = styled.textarea.attrs({
   placeholder: 'Add a caption, if you like'
 })`
   width: 50rem;
