@@ -15,13 +15,12 @@ const useFormValidation = ({
   useEffect(() => {
     if (isSubmitting) {
       if (noErrors) {
-        const submitted = onSubmit()
+        const submitted = onSubmit(values)
 
         if (submitted instanceof Promise) {
-          submitted
+          return submitted
             .catch(errors => setErrors(errors))
             .finally(() => setSubmitting(false));
-          return
         }
       }
       setSubmitting(false);
@@ -37,7 +36,6 @@ const useFormValidation = ({
     e.preventDefault();
     validateValues();
     setSubmitting(true);
-    console.log(validationErrors);
   };
 
   return {
@@ -50,5 +48,12 @@ const useFormValidation = ({
     isSubmitting,
   };
 };
+
+// Example onSubmit func
+export const mockApiRequest = () => new Promise((res, rej) => {
+  setTimeout(() => {
+    rej({ email: "Not valid", password: "Not secure" });
+  }, 3000);
+});
 
 export default useFormValidation;

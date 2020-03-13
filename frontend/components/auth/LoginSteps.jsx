@@ -1,66 +1,49 @@
-import React, { memo } from 'react';
+import React, { useContext } from 'react';
 import Btn from 'styled/base/Btn.styled';
-import {
-  FormGroup, InputField,
-  ActionLink
-} from './Auth.styled';
+import { FormGroup, ActionLink } from './Auth.styled';
+import AuthField from './AuthField';
+import { AuthFormContext } from './AuthStepSlider';
 
+export const LoginStep1 = () => {
+  const { $nextBtn, slideRight, startGhostLogin } = useContext(AuthFormContext);
 
-export const LoginStep1 = memo(({
-  handleInput,
-  email,
-  $nextBtn,
-  toggleNext,
-  startDemoBot
-}) => (
+  return (
     <>
       <FormGroup>
-        <InputField
-          onChange={handleInput}
-          name="email"
-          key={'step1-email'}
-          value={email}
-          type='email'
-        />
+        <AuthField field='email' />
       </FormGroup>
-      <Btn large ref={$nextBtn} onClick={toggleNext}>Next</Btn>
-      <Btn large quarternary animate onClick={startDemoBot}>Demo</Btn>
+      <Btn large ref={$nextBtn} onClick={slideRight}>Next</Btn>
+      <Btn large quarternary animate onClick={startGhostLogin}>Demo</Btn>
     </>
-  ));
+  );
+};
 
-export const LoginStep2 = memo(({
-  $enterPassBtn,
-  toggleNext, toggleBack
-}) => (
+export const LoginStep2 = () => {
+  const { $enterPassBtn, slideRight, slideLeft } = useContext(AuthFormContext);
+
+  return (
     <>
       <Btn secondary large>Send me a magic link</Btn>
-      <Btn large ref={$enterPassBtn} onClick={toggleNext}>Use password to log in</Btn>
-      <ActionLink onClick={toggleBack}>back</ActionLink>
+      <Btn large ref={$enterPassBtn} onClick={slideRight}>Use password to log in</Btn>
+      <ActionLink onClick={slideLeft}>back</ActionLink>
     </>
-  ));
+  );
+};
 
-export const LoginStep3 = memo(({
-  handleInput, handleSubmit,
-  email, password,
-  $loginBtn,
-}) => (
+export const LoginStep3 = () => {
+  const { $loginBtn, handleSubmit } = useContext(AuthFormContext);
+
+  return (
     <>
       <FormGroup>
-        <InputField
-          key={'step3-email'}
-          onChange={handleInput}
-          name="email"
-          value={email}
-        />
-        <InputField
-          key={'step3-password'}
-          onChange={handleInput}
-          type="password"
-          name="password"
-          value={password}
-        />
+        <AuthField field='email' />
+        <AuthField field='password' />
       </FormGroup>
       <Btn large ref={$loginBtn} onClick={handleSubmit}>Login</Btn>
-      <ActionLink>Forgot password?</ActionLink>
+      <ActionLink to="/">Forgot password?</ActionLink>
     </>
-  ));
+  );
+};
+
+export default [LoginStep1, LoginStep2, LoginStep3];
+

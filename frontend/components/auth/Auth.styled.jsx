@@ -98,7 +98,7 @@ export const ActionLink = styled.a`
   cursor: pointer;
 `;
 
-export const StepsBox = styled.div`
+export const StepSlider = styled.div`
   /* overflow-x: hidden; */
   position: relative;
   width: inherit;
