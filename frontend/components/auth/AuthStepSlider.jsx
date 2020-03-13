@@ -1,4 +1,4 @@
-import React, { createContext, useState, useRef } from 'react'
+import React, { createContext, useState, useRef, useMemo } from 'react'
 import { useDispatch } from 'react-redux';
 import { useLocation, useHistory } from 'react-router-dom';
 import { Thunks as Session } from 'store/session/actions';
@@ -44,6 +44,7 @@ const AuthStepSlider = () => {
   const { pathname } = useLocation();
   const dispatch = useDispatch();
   const history = useHistory();
+  const atSignup = useMemo(() => pathname === '/signup', [pathname])
 
   const validationSchema = new Schema({
     email: {
@@ -54,15 +55,17 @@ const AuthStepSlider = () => {
       type: String,
       required: true,
     },
-    // username: {
-    //   type: String,
-    //   required: true,
-    // }
+    ...(atSignup && {
+      username: {
+        type: String,
+        required: true,
+      }
+    })
   });
 
-  const authSteps = (pathname === '/signup') ? SignupSteps : LoginSteps;
+  const authSteps = atSignup ? SignupSteps : LoginSteps;
 
-  const initialValues = (pathname === '/signup') ? { email: '', password: '', username: '' } : { email: '', password: '' }
+  const initialValues = { email: '', password: '', ...(atSignup && { username: '' }) };
 
   const onSubmit = formUser => {
     return (
