@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useCallback } from 'react';
+import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Thunks as Feed } from 'store/feed/actions';
 import { selectCurrentUser, selectAllUsers, selectAllPosts, selectAllReblogs } from 'store/selectors';
@@ -18,7 +18,10 @@ const PostFeed = () => {
 
 
   const [currentUser, users, posts, reblogs] = useSelector(state => [
-    selectCurrentUser(state), selectAllUsers(state), selectAllPosts(state), selectAllReblogs(state)
+    selectCurrentUser(state),
+    selectAllUsers(state),
+    selectAllPosts(state),
+    selectAllReblogs(state)
   ]);
 
   const [offset, limit, setCount, end] = usePagination(1);
@@ -40,9 +43,6 @@ const PostFeed = () => {
     if (node) observer.current.observe(node)
   }, [loading, end]);
 
-
-
-
   const loadPosts = () => {
     if (loading) return;
     setLoading(true)
@@ -53,22 +53,28 @@ const PostFeed = () => {
       });
   };
 
+  const feedColumns = posts
+    .sort(compareCreatedAt)
+    .map((post, listItemIdx, { length: listLength }) => {
+      const { avatarUrl } = users[post.userId];
+      return (
+        <FeedColRow key={post.id} ref={listItemIdx === listLength - 1 ? lastPost : null}>
+          <PostBlogImgCube avatarUrl={avatarUrl} />
+          <Post post={post} />
+        </FeedColRow>
+      );
+    });
+
+  const knightLoader = useMemo(() => loading && KnightLoader, [loading]);
+
+  const { avatarUrl } = currentUser;
+
   return (
     <FeedContainer>
       <FeedCol>
-        <ComposePost avatarUrl={currentUser.avatarUrl} />
-        {posts
-          .sort(compareCreatedAt)
-          .map((postOrReblog, idx, collection) => {
-            const { avatarUrl } = postOrReblog.isReblog ? users[postOrReblog.rebloggerId] : users[postOrReblog.userId];
-            return (
-              <FeedColRow key={postOrReblog.isReblog ? `reblog-${postOrReblog.id}` : `post-${postOrReblog.id}`} ref={idx === collection.length - 1 ? lastPost : null}>
-                <PostBlogImgCube avatarUrl={avatarUrl} />
-                <Post post={postOrReblog} />
-              </FeedColRow>
-            )
-          })}
-        {loading && <KnightLoader />}
+        <ComposePost avatarUrl={avatarUrl} />
+        {feedColumns}
+        {knightLoader}
       </FeedCol>
       <FeedCol>
         <RecommendedBlogs />
