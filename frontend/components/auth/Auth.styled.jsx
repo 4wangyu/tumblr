@@ -4,6 +4,7 @@ import { key as theme } from 'styled-theme';
 import { flexCenterCol } from 'styled/helpers';
 import α from 'color-alpha';
 import { thump } from 'styled/keyframes';
+import Btn from 'styled/base/Btn.styled';
 
 export const AuthForm = styled.div`
   ${flexCenterCol}
@@ -35,18 +36,11 @@ export const SubHeading = styled.h2`
   }
 `;
 
-export const StepWrapper = styled.div`
-  ${flexCenterCol}
-  font-size: 1.5rem;
-  width: inherit;
-  & > * {
-    margin: .6rem 0;
-  }
-`;
+
 
 export const FormGroup = styled.div`
   ${flexCenterCol}
-  background-color: ${theme('colors.secondary')} !important;
+  background-color: ${theme('colors.secondary')};
   width: 100%;
   border-radius: 2px;
   overflow: hidden;
@@ -103,3 +97,19 @@ export const ActionBtn = styled.button`
 export const ActionLink = styled.a`
   cursor: pointer;
 `;
+
+export const StepsBox = styled.div`
+  /* overflow-x: hidden; */
+  position: relative;
+  width: inherit;
+`;
+
+export const StepContainer = styled.div`
+  ${flexCenterCol}
+  position: absolute;
+  z-index: 1;
+  font-size: 1.5rem;
+  width: 100%;
+  ${FormGroup}, ${Btn}, ${ActionLink} { margin: .6rem 0; }
+`;
+
