@@ -14,6 +14,8 @@ class Api::PostsController < ApplicationController
         content = Audio.new(audio_params)
       when 'Video'
         content = Video.new(video_params)
+      when 'Link'
+        content = Link.new(link_params)
       else
         nil
     end
@@ -36,15 +38,12 @@ class Api::PostsController < ApplicationController
     case content_type
       when 'ImageGallery'
         @post.content.update_attributes(image_gallery_params)
-        if (params[:post][:purge_image_ids])
-          params[:post][:purge_image_ids].each do |id|
-            @post.content.images.find_by_id(id).purge
-          end
-        end
       when 'Audio'
         @post.content.update_attributes(audio_params)
       when 'Video'
         @post.content.update_attributes(video_params)
+      when 'Link'
+        @post.content.update_attributes(link_params)
       else
         nil
     end
@@ -105,5 +104,9 @@ class Api::PostsController < ApplicationController
 
   def audio_params
     params.require(:post).permit(:track, :artist, :audio, :album_art)
+  end
+
+  def link_params
+    params.require(:post).permit(:url, :title, :description, :site_name, :image_url)
   end
 end
