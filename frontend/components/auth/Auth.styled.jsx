@@ -1,9 +1,8 @@
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import styledMap from 'styled-map';
 import { key as theme } from 'styled-theme';
 import { flexCenterCol } from 'styled/helpers';
 import α from 'color-alpha';
-import { thump } from 'styled/keyframes';
 import Btn from 'styled/base/Btn.styled';
 
 export const AuthForm = styled.div`
@@ -63,37 +62,6 @@ export const InputField = styled.input.attrs(({ name }) => ({
   
 `;
 
-export const ActionBtn = styled.button`
-  background-color: ${styledMap`
-    default: ${theme('colors.highlight')};
-    secondary: ${theme('colors.highlightAlt')};
-    tertiary: #fff;
-    quarternary: ${theme('colors.success')}
-  `};
-  border: none;
-  border-radius: 2px;
-  cursor: pointer;
-  color: ${styledMap`
-    default: #fff;
-    tertiary: ${theme('colors.support')};
-  `};
-  font-weight: ${theme('fontWeights.title')};
-  ${props => props.quarternary && css`
-    animation: ${thump} .45s ease alternate infinite; 
-    margin-top: 3rem;
-  `};
-  padding: 1.1rem 1.3rem;
-  text-align: center;
-  text-decoration: none;
-  width: 100%;
-  box-shadow: 1px 1px 2px ${α('#404040', .35)};
-  transition: all .15s ease;
-  &:active {
-    transform: translateY(.15rem);
-    box-shadow: none;
-  }
-`;
-
 export const ActionLink = styled.a`
   cursor: pointer;
 `;
@@ -113,3 +81,11 @@ export const StepContainer = styled.div`
   ${FormGroup}, ${Btn}, ${ActionLink} { margin: .6rem 0; }
 `;
 
+export const ErrorMsg = styled.div`
+  align-self: stretch;
+  background-color: ${α('#000', .33)};
+  border-radius: 3px;
+  color: #fff;
+  padding: 1.5rem;
+  text-align: center;
+`;

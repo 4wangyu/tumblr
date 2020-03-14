@@ -38,6 +38,10 @@ const motionTransitions = {
   ease: 'easeInOut'
 };
 
+const errorMessages = {
+  validateRequired(key) { return `A ${key} is required`; },
+};
+
 export const AuthFormContext = createContext();
 
 const AuthStepSlider = () => {
@@ -45,7 +49,6 @@ const AuthStepSlider = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const atSignup = useMemo(() => pathname === '/signup', [pathname])
-
   const validationSchema = new Schema({
     email: {
       type: String,
@@ -61,7 +64,8 @@ const AuthStepSlider = () => {
         required: true,
       }
     })
-  });
+  }, errorMessages);
+
 
   const authSteps = atSignup ? SignupSteps : LoginSteps;
 

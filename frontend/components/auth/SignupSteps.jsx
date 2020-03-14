@@ -24,7 +24,7 @@ export const SignupStep2 = () => {
     <>
       <FormGroup>
         <AuthField field='email' />
-        <AuthField field='password' />
+        <AuthField field='password' type="password" />
         <AuthField field='username' />
       </FormGroup>
       <Btn large onClick={handleSubmit}>Sign up</Btn>

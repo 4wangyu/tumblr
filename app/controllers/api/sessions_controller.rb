@@ -5,16 +5,16 @@ class Api::SessionsController < ApplicationController
       login(@user)
       render partial: 'api/users/user', locals: {user: @user}
     else
-      render json: {password: ['Your email or password were incorrect']}, status: :unauthorized
+      render json: {password: ['Your email or password were incorrect.']}, status: :unauthorized
     end
   end
 
   def destroy
     if current_user
       logout()
-      render json: { message: 'Success' }
+      render json: { message: 'Success.' }
     else 
-      render json: { message: 'Session error' }, status: :not_found
+      render json: { message: 'Session error.' }, status: :not_found
     end
   end
 end

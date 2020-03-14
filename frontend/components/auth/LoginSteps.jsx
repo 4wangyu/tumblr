@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import Btn from 'styled/base/Btn.styled';
 import { FormGroup, ActionLink } from './Auth.styled';
 import AuthField from './AuthField';
+import AuthError from './AuthError';
 import { AuthFormContext } from './AuthStepSlider';
 
 export const LoginStep1 = () => {
@@ -37,8 +38,9 @@ export const LoginStep3 = () => {
     <>
       <FormGroup>
         <AuthField field='email' />
-        <AuthField field='password' />
+        <AuthField field='password' type="password"/>
       </FormGroup>
+      <AuthError field='password' />
       <Btn large ref={$loginBtn} onClick={handleSubmit}>Login</Btn>
       <ActionLink to="/">Forgot password?</ActionLink>
     </>
