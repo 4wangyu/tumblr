@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import AudioDropzone from './AudioDropzone';
+import AudioEditor from './AudioEditor';
 import AudioPlayerForm from './AudioPlayerForm';
 import { FormContext } from '../../PostForm';
 
@@ -38,7 +38,7 @@ const AudioFields = () => {
     />
   )
   return (
-    <AudioDropzone
+    <AudioEditor
       handleAudioInput={handleAudioInput}
     />
   );

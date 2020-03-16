@@ -8,6 +8,7 @@ import { ReblogIcon } from 'styled/base/Icon.styled';
 export const CardHeader = styled.div`
   ${flexCenter}
   justify-content: start;
+  border-bottom: .5px solid ${theme('colors.divider')};
   ${cardPadding};
   & > * {
     padding-left: .5rem;

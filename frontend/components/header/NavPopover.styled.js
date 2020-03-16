@@ -27,7 +27,7 @@ export const PopoverHeader = styled.div`
   justify-content: space-between;
   align-items: baseline;
   background-color: ${theme('colors.tertiary')};
-  border-bottom: 1px solid ${theme('colors.border')};
+  border-bottom: 1px solid ${theme('colors.divider')};
   font-size: 1.2rem;
   font-weight: ${theme('fontWeights.heading')};
   padding: .8rem 1rem;
@@ -72,8 +72,6 @@ export const AccountPopoverMenu = styled(PopoverMenu)`
   }
 `;
 
-
-
 export const MenuItemIcon = styled(IconSm)`
   font-size: 1.4rem;
 `;
@@ -104,9 +102,3 @@ export const MenuItemStat = styled.span`
   color: ${theme('colors.quaternary')};
   font-weight: ${theme('fontWeights.text')};
 `;
-
-
-
-
-
-

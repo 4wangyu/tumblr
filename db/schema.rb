@@ -72,8 +72,7 @@ ActiveRecord::Schema.define(version: 2020_03_14_175500) do
     t.string "url", null: false
     t.string "title", null: false
     t.string "description"
-    t.string "site_name"
-    t.string "image_url"
+    t.string "thumbnail_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["title"], name: "index_links_on_title"

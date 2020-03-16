@@ -1,2 +1,2 @@
-json.extract! @og, :title, :description, :site_name, :url
-json.image_url @og.image.url
+json.extract! @og, :title, :description, :url
+json.thumbnail_url @og.image.url

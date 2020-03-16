@@ -6,11 +6,13 @@ import { cardPadding } from 'styled/base/Card.styled';
 // -------------------- Header
 export const CardHeader = styled.div`
   ${cardPadding};
+  border-bottom: .5px solid ${theme('colors.divider')};
 `;
 
 // -------------------- Footer
 export const CardFooter = styled.div`
   ${cardPadding};
+  border-top: .5px solid ${theme('colors.divider')};
   display: flex;
   justify-content: space-between;
 `;

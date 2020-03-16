@@ -36,6 +36,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   textarea {
+    line-height: 1.8;
     resize: none;
   }
 

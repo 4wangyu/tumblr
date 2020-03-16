@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect, useCallback } from 'react'
 import {
   PreviewIndex, Preview, PreviewVideo,
-  Form, Dropzone, DropzoneCell, DropzoneCellTitle, VideoIcon,
+  Form, Editor, EditorCell, EditorCellTitle, VideoIcon,
   HiddenFileInput,
   Body, BodyTextarea
 } from './PostFormFields.styled';
@@ -42,16 +42,16 @@ const VideoFields = () => {
   return (
     <>
       <PreviewIndex active>{inPreview && renderPreview()}</PreviewIndex>
-      <Dropzone>
-        <DropzoneCell minimize={inPreview}>
+      <Editor>
+        <EditorCell minimize={inPreview}>
           <HiddenFileInput
             onChange={handleFileInput}
             accept="video/mp4, video/ogg"
           />
           <VideoIcon large={!inPreview} />
-          <DropzoneCellTitle>{inPreview ? 'Replace video' : 'Upload a video'}</DropzoneCellTitle>
-        </DropzoneCell>
-      </Dropzone>
+          <EditorCellTitle>{inPreview ? 'Replace video' : 'Upload a video'}</EditorCellTitle>
+        </EditorCell>
+      </Editor>
       <Body reveal={inPreview}>
         <BodyTextarea
           name="body"

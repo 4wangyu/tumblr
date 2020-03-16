@@ -10,6 +10,7 @@ export const CardFooter = styled.div`
   ${flexCenter};
   justify-content: space-between;
   ${cardPadding}
+  border-top: .5px solid ${theme('colors.divider')};
   color: ${theme('colors.textLight')};
   & > * { 
     cursor: pointer; 

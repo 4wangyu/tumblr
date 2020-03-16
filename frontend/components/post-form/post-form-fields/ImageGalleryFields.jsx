@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Thunks as Posts } from 'store/posts/actions';
 import {
   PreviewIndex, Preview, PreviewImg, DeleteBtn, DeleteIcon,
-  Form, Dropzone, DropzoneCell, DropzoneCellTitle,
+  Form, Editor, EditorCell, EditorCellTitle,
   HiddenFileInput, ImagesIcon, SmileIcon,
   Body, BodyTextarea
 } from './PostFormFields.styled';
@@ -77,18 +77,18 @@ const ImageGalleryFields = () => {
         {renderAttachmentPreviews()}
         {renderFilePreviews()}
       </PreviewIndex>
-      <Dropzone>
-        <DropzoneCell minimize={inPreview}>
+      <Editor>
+        <EditorCell minimize={inPreview}>
           <HiddenFileInput
             onChange={handleFileInput}
             multiple
             accept=".png,.jpeg,image/*"
           />
           <ImagesIcon lg={!inPreview} />
-          <DropzoneCellTitle>{inPreview ? 'Add Another' : 'Upload photos'}</DropzoneCellTitle>
+          <EditorCellTitle>{inPreview ? 'Add Another' : 'Upload photos'}</EditorCellTitle>
           <SmileIcon hidden={inPreview} />
-        </DropzoneCell>
-      </Dropzone>
+        </EditorCell>
+      </Editor>
       <Body reveal={inPreview}>
         <BodyTextarea
           name="body"

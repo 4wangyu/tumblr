@@ -26,17 +26,20 @@ const lightPalette = {
   secondary: '#fff',
   tertiary: '#f2f2f2',
   quaternary: '#8f8f8f',
-  border: '#e7e7e7',
+  border: '#e4e4e4',
+  divider: '#e9e9e9',
   text: '#000',
-  textLight: α('#000', .65),
+  textLight: α('#000', .50),
 };
 
 const darkPalette = {
   primary: '#1A1A1A',
   secondary: '#222',
   tertiary: '#1c1c1c',
+  border: '#606060',
+  divider: '#1f1f1f',
   text: '#fff',
-  textLight: α('#fff', .80),
+  textLight: α('#fff', .75),
   highlightHover: α('#fff', .25),
 };
 

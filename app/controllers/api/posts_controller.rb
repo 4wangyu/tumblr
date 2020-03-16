@@ -107,6 +107,6 @@ class Api::PostsController < ApplicationController
   end
 
   def link_params
-    params.require(:post).permit(:url, :title, :description, :site_name, :image_url)
+    params.require(:post).permit(:url, :title, :description, :thumbnail_url)
   end
 end

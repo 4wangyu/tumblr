@@ -4,8 +4,7 @@ class CreateLinks < ActiveRecord::Migration[5.2]
       t.string :url, index: true, null: false
       t.string :title, index: true, null: false
       t.string :description
-      t.string :site_name
-      t.string :image_url
+      t.string :thumbnail_url
 
       t.timestamps
     end

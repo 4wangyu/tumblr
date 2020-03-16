@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Thunks as Posts } from 'store/posts/actions';
 import {
   AlbumArtPreview, PreviewImg, PreviewOverlay,
-  AlbumArtDropzone, DropzoneBox
+  AlbumArtEditor, EditorBox
 } from './AudioFields.styled';
 import { HiddenFileInput } from '../PostFormFields.styled';
 import { FormContext } from '../../PostForm';
@@ -50,13 +50,13 @@ const AlbumArt = () => {
   )
 
   return (
-    <AlbumArtDropzone>
+    <AlbumArtEditor>
       <HiddenFileInput
         onChange={handleAlbumArtInput}
         accept=".png,.jpeg,image/*"
       />
-      <DropzoneBox>Select album art</DropzoneBox>
-    </AlbumArtDropzone>
+      <EditorBox>Select album art</EditorBox>
+    </AlbumArtEditor>
   );
 };
 

@@ -80,7 +80,6 @@ export const InfoInput = styled.input`
 
 export const InfoLabel = styled.label`
   align-self: end;
-  padding-bottom: 5px;
   color: ${α('#fff', .5)};
   font-size: 1.1rem;
   font-style: italic;
@@ -114,12 +113,12 @@ export const AlbumArtPreview = styled(AlbumArtBox)`
   overflow: hidden;
   &:hover ${PreviewOverlay} { opacity: 1; }
 `;
-// ---------- Dropzone
-export const AlbumArtDropzone = styled(AlbumArtBox)`
+// ---------- Editor
+export const AlbumArtEditor = styled(AlbumArtBox)`
   padding: .5rem;
 `;
 
-export const DropzoneBox = styled.span`
+export const EditorBox = styled.span`
   ${flexCenter};
   height: 100%;
   line-height: 1.2;

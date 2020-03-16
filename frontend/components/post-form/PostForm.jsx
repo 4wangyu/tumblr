@@ -9,6 +9,7 @@ import Btn from 'styled/base/Btn.styled';
 import ImageGallery from './post-form-fields/ImageGalleryFields';
 import Video from './post-form-fields/VideoFields';
 import Audio from './post-form-fields/AudioFields/index';
+import Link from './post-form-fields/LinkFields/index';
 import TagManager from './TagManager';
 import pojoToFormData from 'util/pojo_to_form_data';
 
@@ -25,7 +26,6 @@ const PostForm = ({ postType, postId = null }) => {
   const createPost = formFields => dispatch(Posts.createPost(formFields));
   const updatePost = (postId, formFields) => dispatch(Posts.updatePost(postId, formFields));
   const [formFields, setFormFields] = useState(post || {});
-  // const setFormField = useCallback((name, value) => setFormFields(prev => ({ ...prev, [name]: value })), [formFields])
 
   useEffect(() => {
     if (post) setFormFields(prev => ({ ...post, ...prev }));
@@ -35,6 +35,7 @@ const PostForm = ({ postType, postId = null }) => {
     ImageGallery: <ImageGallery />,
     Video: <Video />,
     Audio: <Audio />,
+    Link: <Link />
   });
 
   const handleTextInput = useCallback(e => {
@@ -58,7 +59,7 @@ const PostForm = ({ postType, postId = null }) => {
     <Card>
       <CardHeader>{currentUser.username}</CardHeader>
       <CardContent noPadding>
-        <FormContext.Provider value={{ formFields, setFormFields, handleTextInput }}>
+        <FormContext.Provider value={{ formFields, ...formFields, setFormFields, handleTextInput }}>
           {getFields()[postType]}
           <TagManager />
         </FormContext.Provider>

@@ -10,6 +10,7 @@ import PostHeader from './PostHeader';
 import ImageGallery from './post-content/ImageGalleryContent';
 import Video from './post-content/VideoContent';
 import Audio from './post-content/AudioContent';
+import Link from './post-content/LinkContent';
 import PostFooter from './PostFooter';
 
 const Post = ({ post }) => {
@@ -24,6 +25,7 @@ const Post = ({ post }) => {
     ImageGallery: <ImageGallery post={postData} />,
     Video: <Video post={postData} />,
     Audio: <Audio post={postData} />,
+    Link: <Link post={postData} />,
   });
 
 

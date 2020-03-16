@@ -9,15 +9,20 @@ import { faSmile } from '@fortawesome/free-regular-svg-icons';
 
 export const Form = styled.form``;
 
-export const Dropzone = styled.div`
-  border: 0 dashed ${theme('colors.border')};
+export const Editor = styled.div`
+  border: 2px dashed ${theme('colors.border')};
   border-width: 2px 0;
   background-color: ${theme('colors.tertiary')};
-  color: ${theme('colors.border')};
+  color: ${theme('colors.textLight')};
   display: flex;
 `;
 
-export const DropzoneCell = styled.div`
+export const EditorCellTitle = styled.span`
+  padding: 1rem;
+  font-size: 1.4rem;
+`;
+
+export const EditorCell = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
@@ -40,6 +45,15 @@ export const DropzoneCell = styled.div`
   `};
 `;
 
+export const EditorInput = styled.input`
+  color: ${theme('colors.text')};
+  &::placeholder {
+    color: ${theme('colors.textLight')};
+  }
+  width: 100%;
+  padding: 5.1rem 4rem;
+`;
+
 export const ImagesIcon = styled(Icon).attrs({ icon: faImages })``;
 
 export const VideoIcon = styled(Icon).attrs({ icon: faVideo })``;
@@ -48,11 +62,6 @@ export const SmileIcon = styled(IconSm).attrs({ icon: faSmile })``;
 
 export const AudioIcon = styled(IconMd).attrs({ icon: faHeadphones })``;
 
-
-export const DropzoneCellTitle = styled.span`
-  padding: 1rem;
-  font-size: 1.4rem;
-`;
 
 export const HiddenFileInput = styled.input.attrs({ type: 'file' })`
   ${absoluteCover};
@@ -84,7 +93,6 @@ export const DeleteIcon = styled(Icon).attrs({ icon: faTimes })`
 `;
 
 export const Body = styled.div`
-  border-bottom: 1px solid ${α('#cfcfcf', .55)};
   display: ${styledMap`
     default: none;
     reveal: default;

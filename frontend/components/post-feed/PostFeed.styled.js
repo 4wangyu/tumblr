@@ -44,8 +44,8 @@ export const CardBar = styled(Card)`
 
 export const CardBarCell = styled.a`
   background-image: radial-gradient(
-    ${α('#dbdbdb', .65)}, 
-    ${({ theme }) => α(theme.colors.secondary, .65)}
+    ${theme('colors.divider')}, 
+    ${theme('colors.secondary')}
   );
   background-size: 1px 100%;
   background-position: 100% 0;

@@ -1,1 +1,1 @@
-json.extract! link, :url, :title, :description, :site_name, :image_url
+json.extract! link, :url, :title, :description, :thumbnail_url
