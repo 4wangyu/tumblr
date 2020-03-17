@@ -16,6 +16,8 @@ class Api::PostsController < ApplicationController
         content = Video.new(video_params)
       when 'Link'
         content = Link.new(link_params)
+      when 'Quote'
+        content = Quote.new(quote_params)
       else
         nil
     end
@@ -44,6 +46,8 @@ class Api::PostsController < ApplicationController
         @post.content.update_attributes(video_params)
       when 'Link'
         @post.content.update_attributes(link_params)
+      when 'Quote'
+        @post.content.update_attributes(quote_params)
       else
         nil
     end
@@ -108,5 +112,9 @@ class Api::PostsController < ApplicationController
 
   def link_params
     params.require(:post).permit(:url, :title, :description, :thumbnail_url)
+  end
+
+  def quote_params
+    params.require(:post).permit(:quote, :source)
   end
 end

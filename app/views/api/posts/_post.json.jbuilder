@@ -9,6 +9,8 @@ case post.content_type
     json.partial! '/api/posts/video', video: post.content
   when 'Link'
     json.partial! '/api/posts/link', link: post.content
+  when 'Quote'
+    json.partial! '/api/posts/quote', link: post.content
 end
 json.tags post.all_tags
 json.extract! post, :user_id, :liker_ids, :created_at
