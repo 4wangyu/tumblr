@@ -11,7 +11,7 @@ import isValidURL from 'util/isValidURL';
 import LinkEditor from './LinkEditor';
 
 const LinkFields = () => {
-  const { url, title, description, thumbnailUrl, formFields, setFormFields, handleTextInput } = useContext(FormContext);
+  const { url, thumbnailUrl, setFormFields } = useContext(FormContext);
   const [isFetchingOG, setIsFetchingOG] = useState(false);
   const siteHostName = useMemo(() => isValidURL(url) && new URL(url).host, [url]);
 
