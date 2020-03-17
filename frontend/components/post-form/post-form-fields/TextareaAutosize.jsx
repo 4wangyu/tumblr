@@ -1,48 +1,62 @@
-import React, { useState, useContext, useMemo } from 'react';
-import { FormContext } from '../PostForm';
+import React, { useState, useContext, useMemo, useEffect, useRef } from 'react';
+import { FormContext } from '../PostForm'
 
-const TextareaAutosize = ({ min = 1, max = 10, fieldName = '', placeholder = 'hi' }) => {
+const TextareaAutosize = ({
+  lineHeight = 24,
+  placeholder,
+  name,
+  ...props }) => {
+  const [{ rows, minRows, maxRows }, setState] = useState({
+    rows: 1,
+    minRows: 1,
+    maxRows: 10
+  });
 
-  const { formFields, setFormFields } = useContext(FormContext);
+  const { formFields, setFormFields } = useContext(FormContext)
 
-  const [[minRows, maxRows], setRowRange] = useState([min, max]);
-  const [rows, setRows] = useState(5);
-  const fieldValue = useMemo(() => formFields[fieldName], [fieldName]);
+  const value = useMemo(() => formFields[name], [formFields, name])
+  const $textarea = useRef();
 
-  const handleChange = e => {
-    const { value, rows: prevRows, scrollHeight } = e.target;
+  useEffect(() => {
+    $textarea.current.focus();
+  }, [])
 
-    const textareaLineHeight = 24;
+  const handleChange = event => {
+    const { rows: previousRows } = event.target;
+    event.target.rows = minRows; // reset number of rows in textarea
 
-    e.target.rows = minRows; // reset number of rows in textarea 
+    const currentRows = ~~(event.target.scrollHeight / lineHeight);
 
-    const currentRows = ~~(scrollHeight / textareaLineHeight);
-
-
-    if (currentRows === prevRows) {
-      e.target.rows = currentRows;
+    if (currentRows === previousRows) {
+      event.target.rows = currentRows;
     }
 
     if (currentRows >= maxRows) {
-      e.target.rows = maxRows;
-      e.target.scrollTop = e.target.scrollHeight;
+      event.target.rows = maxRows;
+      event.target.scrollTop = event.target.scrollHeight;
     }
 
-    setRows(currentRows < maxRows ? currentRows : maxRows);
-    console.log([fieldName], value)
+    const newValue = event.target.value;
 
-    setFormFields(prev => ({ ...prev, [fieldName]: value }));
+    setState(prev => ({
+      ...prev,
+      rows: currentRows < maxRows ? currentRows : maxRows
+    }));
+
+    setFormFields(prev => ({ ...prev, [name]: newValue }))
   };
-
-  return <textarea
-    onChange={handleChange}
-    rows={rows}
-    value={fieldValue}
-    placeholder={placeholder}
-  />;
+  return (
+    <textarea
+      {...props}
+      ref={$textarea}
+      name={name}
+      rows={rows}
+      value={value}
+      placeholder={placeholder}
+      onChange={handleChange}
+      onFocus={handleChange}
+    />
+  );
 };
-
-
-
 
 export default TextareaAutosize;

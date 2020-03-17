@@ -14,14 +14,13 @@ const LinkContent = ({ post: { url, thumbnailUrl, title, description } }) => {
 
   return (
     <CardContent noPadding={true}>
-      <Link>
+      <Link as='a' href={url} target='_blank'>
         {thumbnailUrl && (
           <ThumbnailBox>
             <HostName href={url} imageCaption={true}>{siteHostName}</HostName>
             <ThumbnailImg src={thumbnailUrl} />
           </ThumbnailBox>
-        )
-        }
+        )}
         <LinkInfo>
           {!thumbnailUrl && <HostName href={url}>{siteHostName}</HostName>}
           <TitleText>{title}</TitleText>

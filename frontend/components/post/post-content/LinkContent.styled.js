@@ -42,7 +42,7 @@ export const HostName = styled.a.attrs({ target: '_blank' })`
     }
   ` : css`
     position: relative;
-    &, &:hover {
+    &, &:hover, &:active {
       color: ${({ theme }) => α(theme.colors.text, .65)};
     }
   `};
@@ -60,17 +60,20 @@ export const LinkInfo = styled.div`
 
 const LinkText = styled.span`
   color: ${({ theme }) => α(theme.colors.text, .65)};
-  z-index: 1;
 `;
 
 export const TitleText = styled(LinkText)`
   line-height: 1.4;
   font-size: 2.4rem;
-  font-weight: ${theme('fontWeights.heading')};
+  font-weight: ${theme('fontWeights.title')};
   display: relative;
+  &::after {
+    content: ' \f105';
+    font-family: 'Font Awesome 5 Free';
+  }
 `;
 
 export const DescriptionText = styled(LinkText)`
   line-height: 1.6;
-  font-size: ${theme('fontSizes.md')};
+  font-size: ${theme('fontSizes.sm')};
 `;

@@ -9,9 +9,6 @@ import { TitleTextarea, DescriptionTextarea } from './index.styled'
 import { FormContext } from 'components/post-form/PostForm';
 import isValidURL from 'util/isValidURL';
 import LinkEditor from './LinkEditor';
-import handleAutosizeTextarea from 'util/handleAutosizeTextarea';
-// import TextareaAutosize from '../TextareaAutosize';
-
 
 const LinkFields = () => {
   const { url, title, description, thumbnailUrl, formFields, setFormFields, handleTextInput } = useContext(FormContext);
@@ -47,11 +44,6 @@ const LinkFields = () => {
     };
   };
 
-  const handleTextareaChange = e => {
-    handleAutosizeTextarea(e);
-    handleTextInput(e);
-  };
-  console.log(formFields)
   if (siteHostName) return (
     <Link>
       {thumbnailUrl && (
@@ -64,15 +56,13 @@ const LinkFields = () => {
       <LinkInfo>
         {!thumbnailUrl && <HostName href={url}>{siteHostName}</HostName>}
         <TitleTextarea
+          lineHeight={34}
           name="title"
-          onChange={handleTextareaChange}
-          value={title}
           placeholder="Enter a title"
         />
         <DescriptionTextarea
+          lineHeight={21}
           name='description'
-          onChange={handleTextareaChange}
-          value={description}
           placeholder="Enter a summary"
         />
       </LinkInfo>
