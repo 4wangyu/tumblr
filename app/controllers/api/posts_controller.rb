@@ -20,6 +20,8 @@ class Api::PostsController < ApplicationController
         content = Quote.new(quote_params)
       when 'Text'
         content = Text.new(text_params)
+      when 'Chat'
+        content = Chat.new(chat_params)
       else
         nil
     end
@@ -52,6 +54,8 @@ class Api::PostsController < ApplicationController
         @post.content.update_attributes(quote_params)
       when 'Text'
         @post.content.update_attributes(text_params)
+      when 'Chat'
+        @post.content.update_attributes(chat_params)
       else
         nil
     end
@@ -124,5 +128,9 @@ class Api::PostsController < ApplicationController
 
   def text_params
     params.require(:post).permit(:title, :text)
+  end
+
+  def chat_params
+    params.require(:post).permit(:title, :dialogue)
   end
 end

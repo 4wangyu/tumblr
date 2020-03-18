@@ -13,6 +13,8 @@ case post.content_type
     json.partial! '/api/posts/quote', quote: post.content
   when 'Text'
     json.partial! '/api/posts/text', text: post.content
+  when 'Chat'
+    json.partial! '/api/posts/chat', chat: post.content
 end
 json.tags post.all_tags
 json.extract! post, :user_id, :liker_ids, :created_at
