@@ -1,0 +1,1 @@
+json.extract! text, :title, :text
