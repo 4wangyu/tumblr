@@ -14,7 +14,7 @@ import {
 import { popColors } from 'styled/theme';
 
 export const postTypeIconData = {
-  text: { icon: faFont, color: null },
+  text: { icon: faFont, color: null, postType: 'Text' },
   photo: { icon: faCameraRetro, color: popColors.redOrange, postType: 'ImageGallery' },
   quote: { icon: faQuoteLeft, color: popColors.pizzazz, postType: 'Quote' },
   link: { icon: faLink, color: popColors.malachite, postType: 'Link' },

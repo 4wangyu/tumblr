@@ -11,6 +11,7 @@ import Video from './post-form-fields/VideoFields';
 import Audio from './post-form-fields/AudioFields/index';
 import Link from './post-form-fields/LinkFields/index';
 import Quote from './post-form-fields/QuoteFields/index';
+import Text from './post-form-fields/TextFields/index';
 import TagManager from './TagManager';
 import pojoToFormData from 'util/pojo_to_form_data';
 
@@ -37,7 +38,8 @@ const PostForm = ({ postType, postId = null }) => {
     Video: <Video />,
     Audio: <Audio />,
     Link: <Link />,
-    Quote: <Quote />
+    Quote: <Quote />,
+    Text: <Text />
   });
 
   const handleTextInput = useCallback(e => {
