@@ -1,14 +1,16 @@
 import React, { useMemo } from 'react';
-import { Quote, Source } from './QuoteContent.styled';
-import { CardContent } from 'styled/base/Card.styled';
+import { Quote, QuoteText, SourceText } from './QuoteContent.styled';
+import calcQuoteSizes from 'util/calcQuoteSizes';
 
 const QuoteContent = ({ post: { quote, source } }) => {
 
+  const { fontSize, lineHeight } = calcQuoteSizes(quote);
+
   return (
-    <CardContent as='figcaption'>
-      <Quote>{quote}</Quote>
-      {source && <Source> - {source}</Source>}
-    </CardContent>
+    <Quote>
+      <QuoteText style={{ fontSize, lineHeight: lineHeight + 'px' }}>{quote}</QuoteText>
+      {source && <SourceText>&nbsp;{source}</SourceText>}
+    </Quote>
   )
 };
 

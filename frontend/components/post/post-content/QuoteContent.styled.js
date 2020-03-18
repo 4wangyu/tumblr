@@ -1,16 +1,40 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { key as theme } from 'styled-theme';
-import α from 'color-alpha';
+import styledMap from 'styled-map';
+import { cardPadding } from 'styled/base/Card.styled.js'
+import { flexCol } from 'styled/helpers';
 
-export const Quote = styled.quote`
+export const Quote = styled.figcaption`
+  ${cardPadding};
+  ${flexCol};
+  & > * {
+    color: ${theme('colors.text')};
+    &:not(:first-child) {
+      margin-top: 1rem;
+    }
+  }
+`;
+
+export const QuoteText = styled.blockquote`
   line-height: 1.4;
   font-family: ${theme('titleFont')};
   font-size: 2.6rem;
-  font-weight: ${theme('fontWeights.text')};
+  word-break: break-word;
+  &::before, &::after {
+    font-family: ${theme('font')};
+  }
+  &::before {
+    content: "“";
+  }
+  &::after {
+    content: "”";
+  }
 `;
 
-export const Source = styled.cite`
+export const SourceText = styled.cite`
   line-height: 1.6;
-  font-weight: ${theme('fontWeights.text')};
   font-size: ${theme('fontSizes.sm')};
+  &::before {
+    content: '— ';
+  }
 `;

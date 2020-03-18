@@ -10,7 +10,7 @@ case post.content_type
   when 'Link'
     json.partial! '/api/posts/link', link: post.content
   when 'Quote'
-    json.partial! '/api/posts/quote', link: post.content
+    json.partial! '/api/posts/quote', quote: post.content
 end
 json.tags post.all_tags
 json.extract! post, :user_id, :liker_ids, :created_at
