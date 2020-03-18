@@ -12,6 +12,7 @@ import Video from './post-content/VideoContent';
 import Audio from './post-content/AudioContent';
 import Link from './post-content/LinkContent';
 import Quote from './post-content/QuoteContent';
+import Text from './post-content/TextContent';
 import PostFooter from './PostFooter';
 
 const Post = ({ post }) => {
@@ -27,7 +28,8 @@ const Post = ({ post }) => {
     Video: <Video post={postData} />,
     Audio: <Audio post={postData} />,
     Link: <Link post={postData} />,
-    Quote: <Quote post={postData} />
+    Quote: <Quote post={postData} />,
+    Text: <Text post={postData} />
   });
 
 
