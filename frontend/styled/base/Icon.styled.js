@@ -18,7 +18,7 @@ export const postTypeIconData = {
   photo: { icon: faCameraRetro, color: popColors.redOrange, postType: 'ImageGallery' },
   quote: { icon: faQuoteLeft, color: popColors.pizzazz, postType: 'Quote' },
   link: { icon: faLink, color: popColors.malachite, postType: 'Link' },
-  chat: { icon: faComments, color: popColors.dodgerBlue, postType: 'ImageGallery' },
+  // chat: { icon: faComments, color: popColors.dodgerBlue, postType: 'Chat' },
   audio: { icon: faHeadphones, color: popColors.cornflowerBlue, postType: 'Audio' },
   video: { icon: faVideo, color: popColors.hotPink, postType: 'Video' },
 };
