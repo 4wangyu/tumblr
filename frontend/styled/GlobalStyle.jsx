@@ -5,7 +5,7 @@ const GlobalStyle = createGlobalStyle`
   @import url(${theme('fontUrl')});
   @import url('https://use.fontawesome.com/releases/v5.8.1/css/all.css');
 
-  *, *:before, *:after {
+  *, *::before, *::after {
     box-sizing: border-box; 
     margin: 0px;
     padding: 0px;

@@ -8,6 +8,7 @@ import { Card, CardContent } from 'styled/base/Card.styled';
 export const SidebarWidget = styled.div`
   width: 32rem;
   margin-top: 2rem;
+  color: #fff;
 `;
 
 export const SidebarHeader = styled.h2`

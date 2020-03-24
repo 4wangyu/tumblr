@@ -7,6 +7,7 @@ import { ReblogIcon } from 'styled/base/Icon.styled';
 
 export const CardHeader = styled.div`
   ${flexCenter}
+  color: ${theme('colors.text')};
   justify-content: start;
   border-bottom: .5px solid ${theme('colors.divider')};
   ${cardPadding};
@@ -22,7 +23,9 @@ export const CardHeader = styled.div`
   }
 `;
 
-export const BlogLink = styled(Link)``;
+export const BlogLink = styled(Link)`
+  color: ${theme('colors.text')};
+`;
 
 export const ReblogLink = styled(Link)`
   color: ${theme('colors.textLight')};

@@ -65,7 +65,7 @@ export const CellIcon = styled(IconMd).attrs(props => ({
   icon: props.icon
 }))`
   color: ${styledMap`
-    default: inherit;
+    default: ${theme('colors.text')};
     color: ${props => props.color};
   `};
 `;

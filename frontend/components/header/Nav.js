@@ -6,6 +6,7 @@ import {
 import { privateNavIconData, IconSm } from 'styled/base/Icon.styled';
 import NavPopover from './NavPopover'
 import ThemeToggle from './ThemeToggle';
+
 export const AuthNav = () => (
   <Nav>
     <NavBtn to='/login' >Log In</NavBtn>

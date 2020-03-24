@@ -1,12 +1,15 @@
-import React, { useContext } from 'react';
-import { Toggle, ToggleSwitch } from './ThemeToggle.styled'
+import React, { useContext, useMemo } from 'react';
+import { Toggle, ToggleCheckbox, ToggleLabel } from './ThemeToggle.styled'
 import { ThemeToggleContext } from 'styled/StyleProvider';
 
 const ThemeToggle = () => {
-  const { toggle } = useContext(ThemeToggleContext);
+  const { toggle, mode } = useContext(ThemeToggleContext);
+  const isDarkMode = useMemo(() => mode === 'dark', [mode])
+
   return (
     <Toggle onClick={toggle}>
-      <ToggleSwitch />
+      <ToggleCheckbox checked={isDarkMode} />
+      <ToggleLabel />
     </Toggle>
   );
 };

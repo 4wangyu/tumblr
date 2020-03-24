@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { key as theme } from 'styled-theme';
 import { cardPadding } from 'styled/base/Card.styled.js'
 import { flexCol } from 'styled/helpers';
-import TextareaAutosize from '../TextareaAutosize';
 
 export const Chat = styled.div`
   ${cardPadding}

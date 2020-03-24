@@ -47,9 +47,6 @@ export const Searchbar = styled.form`
     color: ${α('white', .65)};
     font-weight: 600;
   }
-  &, & * {
-    transition: color .3s, background-color .3s ease;
-  }
 
 
   &:hover {

@@ -7,6 +7,7 @@ import Btn from 'styled/base/Btn.styled';
 
 export const AuthForm = styled.div`
   ${flexCenterCol}
+  color: white;
   width: 30rem;
   margin: 0 auto;
   margin-top: 25vh;
@@ -16,7 +17,6 @@ export const AuthForm = styled.div`
 export const Logo = styled.h1`
   text-shadow: 2px 2px 3px ${α('#404040', .15)};
   font-family: ${theme('titleFont')};
-  color: white;
   font-weight: ${theme('fontWeights.title')};
   font-size: ${styledMap`
     default: ${theme('fontSizes.title')};

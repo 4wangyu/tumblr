@@ -26,7 +26,7 @@ const StyleProvider = ({ children }) => {
   }, []);
 
   return (
-    <ThemeToggleContext.Provider value={{ toggle }}>
+    <ThemeToggleContext.Provider value={{ toggle, mode }}>
       <ThemeProvider
         theme={mode === 'light' ? lightTheme : darkTheme}
       >

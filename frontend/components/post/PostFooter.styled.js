@@ -4,7 +4,7 @@ import { key as theme } from 'styled-theme';
 import α from 'color-alpha';
 import { flexCenter, flexCenterCol } from 'styled/helpers';
 import { cardPadding } from 'styled/base/Card.styled';
-import { IconBox } from 'styled/base/Icon.styled';
+import { IconBox, IconSm } from 'styled/base/Icon.styled';
 
 export const CardFooter = styled.div`
   ${flexCenter};
@@ -12,7 +12,8 @@ export const CardFooter = styled.div`
   ${cardPadding}
   border-top: .5px solid ${theme('colors.divider')};
   color: ${theme('colors.textLight')};
-  & > * { 
+  & > * {
+    color: ${theme('colors.textLight')};
     cursor: pointer; 
   }
 `;
@@ -25,10 +26,14 @@ export const Controls = styled.div`
 `;
 
 export const PadBox = styled(IconBox)`
+  color: ${theme('colors.textLight')};
   margin: .8rem;
 
   &:last-child {
     margin-right: none;
+  }
+  ${IconSm} {
+    color: ${theme('colors.textLight')};
   }
 `;
 
