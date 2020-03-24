@@ -2,17 +2,16 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 import { ThemeProvider } from 'styled-components';
 import GlobalStyle from './GlobalStyle';
 import { lightTheme, darkTheme } from './theme';
-const ThemeToggleContext = createContext();
-export const useTheme = () => useContext(ThemeToggleContext);
+export const ThemeToggleContext = createContext();
 
 const StyleProvider = ({ children }) => {
 
-  const [themeState, setThemeState] = useState({ mode: 'light' });
+  const [{ mode }, setThemeState] = useState({ mode: 'light' });
 
   const toggle = () => {
-    const mode = (themeState.mode === 'light' ? 'dark' : 'light');
-    window.localStorage.setItem('theme', mode)
-    setThemeState({ mode });
+    const newMode = (mode === 'light' ? 'dark' : 'light');
+    window.localStorage.setItem('theme', newMode)
+    setThemeState({ mode: newMode });
   };
 
   useEffect(() => {
@@ -24,13 +23,12 @@ const StyleProvider = ({ children }) => {
     } else if (prefersDarkMode) {
       setThemeState({ mode: 'dark' });
     }
-
   }, []);
 
   return (
     <ThemeToggleContext.Provider value={{ toggle }}>
       <ThemeProvider
-        theme={themeState.mode === 'light' ? lightTheme : darkTheme}
+        theme={mode === 'light' ? lightTheme : darkTheme}
       >
         <>
           {children}

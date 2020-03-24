@@ -5,7 +5,7 @@ import {
 } from './Nav.styled';
 import { privateNavIconData, IconSm } from 'styled/base/Icon.styled';
 import NavPopover from './NavPopover'
-
+import ThemeToggle from './ThemeToggle';
 export const AuthNav = () => (
   <Nav>
     <NavBtn to='/login' >Log In</NavBtn>
@@ -18,6 +18,7 @@ export const PrivateNav = ({ openModal }) => {
 
   return (
     <NavTabIndex>
+      <ThemeToggle />
       {Object.entries(privateNavIconData).map(([name, { icon, path }]) => {
         if (name === 'compose') return (
           <ComposeBtn onClick={() => openModal('ComposePost')} key={name}>

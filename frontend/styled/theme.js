@@ -68,7 +68,8 @@ export const lightTheme = {
     ...popColors,
     ...baseColors,
     ...lightPalette
-  }
+  },
+  name: 'light'
 };
 
 export const darkTheme = {
@@ -76,5 +77,6 @@ export const darkTheme = {
   colors: {
     ...lightTheme.colors,
     ...darkPalette
-  }
+  },
+  name: 'dark'
 };

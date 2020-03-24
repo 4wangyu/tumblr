@@ -9,6 +9,7 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box; 
     margin: 0px;
     padding: 0px;
+    transition: color 0.15s ease-in-out;
   }
 
   html {
@@ -41,14 +42,12 @@ const GlobalStyle = createGlobalStyle`
   }
 
   a, button {
-    &, &:focus, &:hover, &:active {
-      appearance: none;
-      border: none;
-      color: inherit;
-      cursor: pointer;
-      outline: none;
-      text-decoration: none;
-    }
+    appearance: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    outline: none;
+    text-decoration: none;
   }
 
   h1, h2, h3, h4, h5, h6 {
