@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import { key as theme } from 'styled-theme';
 
 export const Bg = styled.div`
-  width: 100vw;
+  width: 100% !important;
   min-height: 100vh;
 
   /* background-image: url();*/
