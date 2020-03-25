@@ -87,6 +87,7 @@ export const LikeIcon = styled(IconSm).attrs(props => ({
     default: inherit;
     liked: ${theme('colors.warning')};
   `};
+  transition: none;
 `;
 
 export const ControlsIcon = styled(IconSm).attrs({ icon: faCog })``;

@@ -1,10 +1,9 @@
 import styled from 'styled-components';
 import styledMap from 'styled-map';
 import { key as theme } from 'styled-theme';
-import α from 'color-alpha';
 import { flexCenter, flexCenterCol } from 'styled/helpers';
 import { cardPadding } from 'styled/base/Card.styled';
-import { IconBox, IconSm } from 'styled/base/Icon.styled';
+import { IconBox } from 'styled/base/Icon.styled';
 
 export const CardFooter = styled.div`
   ${flexCenter};
@@ -31,9 +30,6 @@ export const PadBox = styled(IconBox)`
 
   &:last-child {
     margin-right: none;
-  }
-  ${IconSm} {
-    color: ${theme('colors.textLight')};
   }
 `;
 
