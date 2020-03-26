@@ -1,4 +1,4 @@
-import React, { createContext, useState, useRef, useMemo } from 'react'
+import React, { createContext, useState, useRef, useMemo, useEffect } from 'react'
 import { useDispatch } from 'react-redux';
 import { useLocation, useHistory } from 'react-router-dom';
 import { Thunks as Session } from 'store/session/actions';
@@ -10,33 +10,7 @@ import { sleep, ghostType } from 'util/ghostTyper';
 import { StepSlider, StepContainer } from './Auth.styled';
 import SignupSteps from './SignupSteps';
 import LoginSteps from './LoginSteps';
-
-const motionVariants = {
-  enter: direction => {
-    return {
-      x: direction > 0 ? '50vw' : '-50vw',
-      opacity: 0
-    };
-  },
-  center: {
-    zIndex: 1,
-    x: 0,
-    opacity: 1
-  },
-  exit: direction => {
-    return {
-      zIndex: 0,
-      x: direction < 0 ? '50vw' : '-50vw',
-      opacity: 0
-    };
-  }
-};
-const motionTransitions = {
-  delay: .1,
-  duration: .2,
-  type: 'tween',
-  ease: 'easeInOut'
-};
+import { slider } from './motions'
 
 const errorMessages = {
   validateRequired(key) { return `A ${key} is required`; },
@@ -81,8 +55,12 @@ const AuthStepSlider = () => {
 
   const {
     decrement: slideLeft, increment: slideRight,
-    direction, step, stepIndex,
+    direction, step, stepIndex, reset
   } = useSlider({ length: authSteps.length });
+
+  useEffect(() => {
+    reset();
+  }, [atSignup]);
 
   const {
     handleBlur, handleChange, handleSubmit,
@@ -129,11 +107,11 @@ const AuthStepSlider = () => {
         <motion.div
           key={step}
           custom={direction}
-          variants={motionVariants}
+          variants={slider.variants}
           initial="enter"
           animate="center"
           exit="exit"
-          transition={motionTransitions}
+          transition={slider.transitions}
         >
           <StepContainer>
             <AuthFormContext.Provider value={formContextValues}>

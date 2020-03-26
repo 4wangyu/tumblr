@@ -15,10 +15,10 @@ const useSlider = ({ length = 0 }) => {
 
   const increment = () => next(1);
   const decrement = () => next(-1);
-
+  const reset = () => setStep([0, 0]);
 
   return {
-    increment, decrement,
+    increment, decrement, reset,
     step, stepIndex, direction
   };
 };

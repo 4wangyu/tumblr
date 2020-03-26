@@ -1,4 +1,4 @@
-import styled, { css, keyframes } from 'styled-components';
+import styled from 'styled-components';
 import styledMap from 'styled-map';
 import { key as theme } from 'styled-theme';
 import { flexCenterCol } from 'styled/helpers';
@@ -43,6 +43,7 @@ export const FormGroup = styled.div`
   width: 100%;
   border-radius: 2px;
   overflow: hidden;
+  z-index: 1;
 `;
 
 export const InputField = styled.input.attrs(({ name }) => ({
