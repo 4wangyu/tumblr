@@ -28,13 +28,14 @@ module Thumblr
     # the framework and any gems in your application.
 
     # Don't generate system test files.
-    config.generators do |generate|
-      generate.javascripts false
-      generate.template_engine false
-      generate.helper false
-      generate.system_tests false
-      generate.view_specs false
-      generate.helper_specs false
+    config.generators do |g|
+      g.stylesheets false
+      g.javascripts false
+      g.template_engine false
+      g.helper false
+      g.system_tests false
+      g.view_specs false
+      g.helper_specs false
     end
   end
 end
