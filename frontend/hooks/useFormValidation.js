@@ -1,16 +1,40 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
-import Schema from 'form-schema-validation';
+
+const isValidEmail = email => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
+const isEmpty = value => value.length === 0;
+const isSecurePassword = password => /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/.test(password);
+const min = (n = 0, value) => value.length >= n;
+const max = (n = 0, value) => value.length <= n;
 
 const useFormValidation = ({
   onSubmit = () => null,
-  validationSchema = new Schema({}, false, false),
   initialValues = {}
 }) => {
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState({});
   const [isSubmitting, setSubmitting] = useState(false);
   const noErrors = useMemo(() => Object.keys(errors).length === 0, [errors]);
-  const validateValues = useCallback(() => setErrors(validationSchema.validate(values)), [errors, values]);
+
+  const validateValues = () => {
+    const newErrors = {}
+    for (const [name, value] of Object.entries(values)) {
+      newErrors[name] = [];
+      if (isEmpty(value)) newErrors[name].push(`A ${name} is required`);
+      switch (name) {
+        case "email": {
+          if (!isValidEmail(value)) newErrors.email.push(`That's not a valid email address`);
+          break;
+        };
+        case "password": {
+          if (!isSecurePassword(value)) newErrors.password.push(`
+            Password must contain at least one number, one lowercase and one uppercase letter
+          `);
+          break;
+        };
+      }
+    }
+    setErrors(newErrors);
+  };
 
   useEffect(() => {
     if (isSubmitting) {

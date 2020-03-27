@@ -3,18 +3,13 @@ import { useDispatch } from 'react-redux';
 import { useLocation, useHistory } from 'react-router-dom';
 import { Thunks as Session } from 'store/session/actions';
 import { AnimatePresence, motion } from 'framer-motion';
-import Schema from 'form-schema-validation';
 import useSlider from 'hooks/useSlider';
 import useFormValidation from 'hooks/useFormValidation';
 import { sleep, ghostType } from 'util/ghostTyper';
-import { StepSlider, StepContainer } from './Auth.styled';
+import { StepSlider, StepForm } from './Auth.styled';
 import SignupSteps from './SignupSteps';
 import LoginSteps from './LoginSteps';
 import { slider } from './motions'
-
-const errorMessages = {
-  validateRequired(key) { return `A ${key} is required`; },
-};
 
 export const AuthFormContext = createContext();
 
@@ -23,23 +18,6 @@ const AuthStepSlider = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const atSignup = useMemo(() => pathname === '/signup', [pathname])
-  const validationSchema = new Schema({
-    email: {
-      type: String,
-      required: true,
-    },
-    password: {
-      type: String,
-      required: true,
-    },
-    ...(atSignup && {
-      username: {
-        type: String,
-        required: true,
-      }
-    })
-  }, errorMessages);
-
 
   const authSteps = atSignup ? SignupSteps : LoginSteps;
 
@@ -55,7 +33,7 @@ const AuthStepSlider = () => {
 
   const {
     decrement: slideLeft, increment: slideRight,
-    direction, step, stepIndex, reset
+    direction, step, stepIndex, reset, lock: lockSlider, unlock: unlockSlider, isLocked: isSliderLocked
   } = useSlider({ length: authSteps.length });
 
   useEffect(() => {
@@ -65,7 +43,7 @@ const AuthStepSlider = () => {
   const {
     handleBlur, handleChange, handleSubmit,
     values: userFields, setValues: setUserFields, errors, isSubmitting,
-  } = useFormValidation({ validationSchema, initialValues, onSubmit })
+  } = useFormValidation({ initialValues, onSubmit })
 
 
   const [isTyping, setIsTyping] = useState(false);
@@ -93,13 +71,15 @@ const AuthStepSlider = () => {
       .then(() => { setIsTyping(false); $loginBtn.current.click(); });
   };
 
-
   const formContextValues = {
     handleBlur, handleChange, handleSubmit,
     userFields, setUserFields, errors, isSubmitting,
     slideLeft, slideRight,
-    $nextBtn, $enterPassBtn, $loginBtn, startGhostLogin
+    $nextBtn, $enterPassBtn, $loginBtn, startGhostLogin,
+    lockSlider, unlockSlider, isSliderLocked
   };
+
+  const preventDefault = e => e.preventDefault();
 
   return (
     <StepSlider>
@@ -113,11 +93,11 @@ const AuthStepSlider = () => {
           exit="exit"
           transition={slider.transitions}
         >
-          <StepContainer>
+          <StepForm onSubmit={preventDefault}>
             <AuthFormContext.Provider value={formContextValues}>
               {React.createElement(authSteps[stepIndex])}
             </AuthFormContext.Provider>
-          </StepContainer>
+          </StepForm>
         </motion.div>
       </AnimatePresence>
     </StepSlider>

@@ -13,6 +13,7 @@ export const LoginStep1 = () => {
       <FormGroup>
         <AuthField field='email' />
       </FormGroup>
+      <AuthError field='email' />
       <Btn large ref={$nextBtn} onClick={slideRight}>Next</Btn>
       <Btn large quarternary animate onClick={startGhostLogin}>Demo</Btn>
     </>
@@ -38,9 +39,9 @@ export const LoginStep3 = () => {
     <>
       <FormGroup>
         <AuthField field='email' />
-        <AuthField field='password' type="password"/>
+        <AuthField field='password' type="password" />
       </FormGroup>
-      <AuthError field='password' />
+      <AuthError fields={['email', 'password']} />
       <Btn large ref={$loginBtn} onClick={handleSubmit}>Login</Btn>
       <ActionLink to="/">Forgot password?</ActionLink>
     </>

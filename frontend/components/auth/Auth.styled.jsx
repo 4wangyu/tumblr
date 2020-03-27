@@ -26,7 +26,8 @@ export const Logo = styled.h1`
 `;
 
 export const SubHeading = styled.h2`
-  font-size: 1.4rem;
+  font-size: ${theme('fontSizes.md')};
+  font-weight: ${theme('fontWeights.text')};
   line-height: 1.6rem;
   padding: 1rem 3rem;
   text-align: center;
@@ -34,8 +35,6 @@ export const SubHeading = styled.h2`
     display: block;
   }
 `;
-
-
 
 export const FormGroup = styled.div`
   ${flexCenterCol}
@@ -47,7 +46,7 @@ export const FormGroup = styled.div`
 `;
 
 export const InputField = styled.input.attrs(({ name }) => ({
-  autoFocus: true,
+  // autoFocus: true,
   placeholder: name.charAt(0).toUpperCase() + name.slice(1)
 }))`
   padding: 1.1rem 1.3rem;
@@ -73,7 +72,7 @@ export const StepSlider = styled.div`
   width: inherit;
 `;
 
-export const StepContainer = styled.div`
+export const StepForm = styled.form`
   ${flexCenterCol}
   position: absolute;
   z-index: 1;
