@@ -5,6 +5,7 @@ import { key as theme } from 'styled-theme';
 import { flexCenter, flexCenterCol } from 'styled/helpers';
 import { PlusIcon, TimesIcon } from 'styled/base/Icon.styled';
 import { Card, CardContent } from 'styled/base/Card.styled';
+
 export const SidebarWidget = styled.div`
   width: 32rem;
   margin-top: 2rem;

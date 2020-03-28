@@ -10,8 +10,8 @@ import ScrollToTopBtn from './ScrollToTopBtn';
 import Post from 'components/post/Post';
 import compareCreatedAt from 'util/compare_created_at'
 import usePagination from 'hooks/usePagination';
-import RecommendedBlogs from 'components/sidebar-widgets/RecommendedBlogs';
-import Radar from 'components/sidebar-widgets/Radar';
+import Sidebar from 'components/sidebar/Sidebar';
+
 const PostFeed = () => {
 
   const dispatch = useDispatch();
@@ -78,8 +78,7 @@ const PostFeed = () => {
         {knightLoader}
       </FeedCol>
       <FeedCol>
-        <RecommendedBlogs />
-        <Radar />
+        <Sidebar />
       </FeedCol>
       <ScrollToTopBtn />
     </FeedContainer>

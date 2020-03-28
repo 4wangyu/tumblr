@@ -6,6 +6,7 @@ import * as APIUtil from './api_util';
 export const { Types, Creators } = createActions({
   receiveRadarPost: ['radarPostId'],
   receiveRecommendedUsers: ['recommendedUserIds'],
+  removeRecommendedUser: ['recommendedUserId'],
 }, {});
 
 export const Thunks = {};

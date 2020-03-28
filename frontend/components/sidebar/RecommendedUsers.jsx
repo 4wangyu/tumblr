@@ -6,11 +6,9 @@ import usePagination from 'hooks/usePagination';
 import {
   SidebarWidget,
   SidebarHeader, SidebarContent,
-  SidebarBlogList, SidebarBlogItem,
-  BlogAvatar,
-  BlogHeader, BlogHeaderUsername, BlogHeaderTitle,
-  AddBlogIcon, AddBlogBtn, RemoveBlogIcon
-} from './SidebarWidgets.styled';
+  SidebarBlogList,
+} from './Sidebar.styled';
+import BlogBar from './BlogBar';
 
 const RecommendedBlogsWidget = () => {
 
@@ -33,31 +31,18 @@ const RecommendedBlogsWidget = () => {
       });
   };
 
-
-  const handleAddBlog = e => {
-
-  };
-
   return (
     <SidebarWidget>
       <SidebarHeader>Recommended Blogs</SidebarHeader>
       <SidebarContent>
         <SidebarBlogList>
-          {recommendedBlogs && Object.values(recommendedBlogs).slice(0, 5).map(({
-            avatarUrl, username, blogTitle = ''
-          }) => (
-              <SidebarBlogItem key={`blog-${username}`} data-blog={`blog-${username}`}>
-                <BlogAvatar src={avatarUrl} />
-                <BlogHeader>
-                  <BlogHeaderUsername>{username}</BlogHeaderUsername>
-                  <BlogHeaderTitle>{blogTitle}</BlogHeaderTitle>
-                </BlogHeader>
-                <AddBlogBtn>
-                  <AddBlogIcon />
-                </AddBlogBtn>
-                <RemoveBlogIcon />
-              </SidebarBlogItem>
-            ))}
+          {recommendedBlogs && Object.values(recommendedBlogs).slice(0, 5).map(user => (
+            <BlogBar
+              key={user.id}
+              user={user}
+              variant="list_item"
+            />
+          ))}
         </SidebarBlogList>
       </SidebarContent>
     </SidebarWidget>

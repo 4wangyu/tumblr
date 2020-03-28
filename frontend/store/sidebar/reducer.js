@@ -7,7 +7,6 @@ const _initialSidebar = {
 
 const sidebarReducer = (state = _initialSidebar, action) => {
   Object.freeze(state);
-  // const newState = Object.assign({}, state);
   switch (action.type) {
     case Types.RECEIVE_RADAR_POST:
       const { radarPostId } = action;
@@ -17,6 +16,13 @@ const sidebarReducer = (state = _initialSidebar, action) => {
       return ({
         ...state,
         recommendedUserIds: [...state.recommendedUserIds, ...recommendedUserIds]
+      })
+    case Types.REMOVE_RECOMMENDED_USER:
+      const { recommendedUserId } = action;
+      const newRecommendedUserIds = state.recommendedUserIds.filter(id => id != recommendedUserId);
+      return ({
+        ...state,
+        recommendedUserIds: newRecommendedUserIds
       })
     default:
       return state;

@@ -5,14 +5,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
   SidebarWidget,
   SidebarHeader, SidebarContent,
-  SidebarBlog,
-  BlogAvatar,
-  BlogHeader, BlogHeaderUsername, BlogHeaderTitle,
-  AddBlogIcon, AddBlogBtn,
   SidebarCard, SidebarCardImg,
   SidebarCardFooter, FooterNotes, FooterIcons
-} from './SidebarWidgets.styled';
+} from './Sidebar.styled';
 import { ReblogIcon, LikeIcon, IconBox } from 'styled/base/Icon.styled';
+import BlogBar from './BlogBar';
 
 const RadarWidget = () => {
   const { radarPost, radarUser } = useSelector(selectRadarPostAndUser);
@@ -24,32 +21,15 @@ const RadarWidget = () => {
     fetchRadarPost();
   }, []);
 
-  if (!radarPost) return null;
-
-  const { avatarUrl, username, blogTitle = 'test' } = radarUser;
-
-  const handleAddBlog = e => {
-
-  }
-
   return (
     <SidebarWidget>
       <SidebarHeader>Radar</SidebarHeader>
       <SidebarContent>
-        <SidebarBlog>
-          <BlogAvatar src={avatarUrl} />
-          <BlogHeader>
-            <BlogHeaderUsername>{username}</BlogHeaderUsername>
-            <BlogHeaderTitle>{blogTitle}</BlogHeaderTitle>
-          </BlogHeader>
-          <AddBlogBtn onClick={handleAddBlog}>
-            <AddBlogIcon />
-          </AddBlogBtn>
-        </SidebarBlog>
+        <BlogBar user={radarUser} />
       </SidebarContent>
       <SidebarContent padding>
         {<SidebarCard fullWidth={true}>
-          <SidebarCardImg src={radarPost.imageAttachments[0].url} />
+          <SidebarCardImg src={radarPost && radarPost.imageAttachments[0].url} />
           <SidebarCardFooter>
             <FooterNotes>{5} notes</FooterNotes>
             <FooterIcons>
