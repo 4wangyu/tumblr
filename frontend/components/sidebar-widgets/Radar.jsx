@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { selectAllUsers, selectAllPosts } from 'store/selectors';
+import React, { useEffect } from 'react';
+import { selectRadarPostAndUser } from 'store/selectors';
+import { Thunks as Sidebar } from 'store/sidebar/actions';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   SidebarWidget,
@@ -14,9 +15,16 @@ import {
 import { ReblogIcon, LikeIcon, IconBox } from 'styled/base/Icon.styled';
 
 const RadarWidget = () => {
+  const { radarPost, radarUser } = useSelector(selectRadarPostAndUser);
 
-  const [radarUser] = Object.values(useSelector(selectAllUsers));
-  const posts = useSelector(selectAllPosts);
+  const dispatch = useDispatch();
+  const fetchRadarPost = () => dispatch(Sidebar.fetchRadarPost());
+
+  useEffect(() => {
+    fetchRadarPost();
+  }, []);
+
+  if (!radarPost) return null;
 
   const { avatarUrl, username, blogTitle = 'test' } = radarUser;
 
@@ -40,8 +48,8 @@ const RadarWidget = () => {
         </SidebarBlog>
       </SidebarContent>
       <SidebarContent padding>
-        {posts.length && <SidebarCard fullWidth={true}>
-          <SidebarCardImg src={posts[0].imageUrls[0]} />
+        {<SidebarCard fullWidth={true}>
+          <SidebarCardImg src={radarPost.imageAttachments[0].url} />
           <SidebarCardFooter>
             <FooterNotes>{5} notes</FooterNotes>
             <FooterIcons>

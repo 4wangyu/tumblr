@@ -11,6 +11,7 @@ import Post from 'components/post/Post';
 import compareCreatedAt from 'util/compare_created_at'
 import usePagination from 'hooks/usePagination';
 import RecommendedBlogs from 'components/sidebar-widgets/RecommendedBlogs';
+import Radar from 'components/sidebar-widgets/Radar';
 const PostFeed = () => {
 
   const dispatch = useDispatch();
@@ -78,6 +79,7 @@ const PostFeed = () => {
       </FeedCol>
       <FeedCol>
         <RecommendedBlogs />
+        <Radar />
       </FeedCol>
       <ScrollToTopBtn />
     </FeedContainer>

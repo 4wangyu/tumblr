@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { selectRecommendedUsers } from 'store/selectors';
 import { Thunks as Sidebar } from 'store/sidebar/actions';
 import { useSelector, useDispatch } from 'react-redux';
