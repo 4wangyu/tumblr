@@ -1,6 +1,7 @@
 class Api::SidebarController < ApplicationController
   def recommended_users
-    @users = User.includes(:posts, :followees, :followers).where.not(id: current_user.followee_ids)
+    # TODO: sort by most followees and followers in common (with 'self')
+    @users = current_user.recommended_users
 
     headers['X-Recommended-Users-Count'] = @users.count
     if (params[:offset] && params[:limit])
@@ -11,7 +12,6 @@ class Api::SidebarController < ApplicationController
   end
 
   def radar_post
-    @user = User.includes(:posts, :followees, :followers).where.not(id: User.find_by_username('demolicious').followee_ids).last
-    @post = @user.posts.includes(:user, :content, :tags, :likers).where(content_type: :ImageGallery).first
+    @post = User.first.radar_post
   end
 end

@@ -38,4 +38,20 @@ class User < ApplicationRecord
     user.authenticate(password)
   end
 
+  # ----------------------------- Queries
+  def recommended_users
+    User
+      .where.not(id: self.followees.pluck(:id))
+      .where.not(id: self.id)
+  end
+
+  def radar_post
+    Post
+      .where(user_id: self.recommended_users.pluck(:id), content_type: :ImageGallery)
+      .left_joins(:likes)
+      .group(:id)
+      .order(Arel.sql('COUNT(likes.id) DESC'))
+      .first
+  end
+
 end
