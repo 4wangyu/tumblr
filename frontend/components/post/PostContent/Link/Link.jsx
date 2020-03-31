@@ -1,20 +1,20 @@
 import React, { useMemo } from 'react';
 import {
-  Link,
+  Wrapper,
   ThumbnailBox, ThumbnailImg,
   HostName,
   LinkInfo,
   TitleText, DescriptionText
-} from './LinkContent.styled';
+} from './Link.styled';
 import { CardContent } from 'styled/base/Card.styled';
 
 
-const LinkContent = ({ post: { url, thumbnailUrl, title, description } }) => {
+const Link = ({ post: { url, thumbnailUrl, title, description } }) => {
   const siteHostName = useMemo(() => new URL(url).host, [url]);
 
   return (
     <CardContent noPadding={true}>
-      <Link as='a' href={url} target='_blank'>
+      <Wrapper as='a' href={url} target='_blank'>
         {thumbnailUrl && (
           <ThumbnailBox>
             <HostName href={url} imageCaption={true}>{siteHostName}</HostName>
@@ -26,9 +26,9 @@ const LinkContent = ({ post: { url, thumbnailUrl, title, description } }) => {
           <TitleText>{title}</TitleText>
           <DescriptionText>{description}</DescriptionText>
         </LinkInfo>
-      </Link>
+      </Wrapper>
     </CardContent>
   )
 };
 
-export default LinkContent;
+export default Link;

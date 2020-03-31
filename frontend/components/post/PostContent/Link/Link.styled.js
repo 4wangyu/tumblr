@@ -3,7 +3,7 @@ import { key as theme } from 'styled-theme';
 import α from 'color-alpha';
 // import TextAutosize from '../TextAutosize';
 
-export const Link = styled.div`
+export const Wrapper = styled.div`
   background-color: ${theme('colors.tertiary')};
   display: flex;
   flex-direction: column;

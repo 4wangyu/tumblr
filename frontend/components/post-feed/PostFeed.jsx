@@ -7,7 +7,7 @@ import KnightLoader from './Loader';
 import { FeedContainer, FeedCol, FeedColRow, PostBlogImgCube } from './PostFeed.styled';
 import ScrollToTopBtn from './ScrollToTopBtn';
 
-import Post from 'components/post/Post';
+import Post from 'components/Post';
 import compareCreatedAt from 'util/compare_created_at'
 import usePagination from 'hooks/usePagination';
 import Sidebar from 'components/sidebar/Sidebar';

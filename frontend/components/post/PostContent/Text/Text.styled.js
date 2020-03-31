@@ -3,7 +3,7 @@ import { key as theme } from 'styled-theme';
 import { cardPadding } from 'styled/base/Card.styled.js'
 import { flexCol } from 'styled/helpers';
 
-export const Text = styled.div`
+export const Wrapper = styled.div`
   ${cardPadding};
   ${flexCol};
   & > * {
@@ -14,10 +14,10 @@ export const Text = styled.div`
   }
 `;
 
-export const TextTitle = styled.h3`
+export const TitleField = styled.h4`
   font-size: 3.6rem;
   font-weight: ${theme('fontWeights.subHeading')};
 `;
 
-export const TextWrapper = styled.p`
+export const TextField = styled.p`
 `;

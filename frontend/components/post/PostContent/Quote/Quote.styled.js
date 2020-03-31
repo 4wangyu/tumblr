@@ -1,10 +1,9 @@
 import styled from 'styled-components';
 import { key as theme } from 'styled-theme';
-import styledMap from 'styled-map';
 import { cardPadding } from 'styled/base/Card.styled.js'
 import { flexCol } from 'styled/helpers';
 
-export const Quote = styled.figcaption`
+export const Wrapper = styled.figcaption`
   ${cardPadding};
   ${flexCol};
   & > * {

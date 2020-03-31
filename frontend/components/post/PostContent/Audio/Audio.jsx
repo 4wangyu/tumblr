@@ -1,13 +1,13 @@
-import React, { useRef, useEffect, useCallback, useMemo } from 'react';
+import React, { useRef, useCallback, useMemo } from 'react';
 import useAudioPlayer from 'hooks/useAudioPlayer';
 import {
   AudioPlayer, HiddenAudio, AudioProgress,
   PlayPauseBtn, PlayPauseBtnIcon,
   AudioInfo, AudioInfoText,
   AlbumArtBox, AlbumArtImg
-} from './AudioContent.styled';
+} from './Audio.styled';
 
-const AudioContent = ({
+const Audio = ({
   post: {
     track,
     artist,
@@ -40,4 +40,4 @@ const AudioContent = ({
   );
 };
 
-export default AudioContent;
+export default Audio;

@@ -4,7 +4,7 @@ import {
   ThumbnailBox, ThumbnailImg,
   HostName,
   LinkInfo,
-} from 'components/post/post-content/LinkContent.styled';
+} from 'components/Post/PostContent/Link/Link.styled';
 import { TitleTextarea, DescriptionTextarea } from './index.styled'
 import { FormContext } from 'components/post-form/PostForm';
 import isValidURL from 'util/isValidURL';
