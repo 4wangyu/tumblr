@@ -14,7 +14,7 @@ const ComposePost = ({ avatarUrl }) => {
 
   return (
     <FeedColRow>
-      <PostBlogImgCube avatarUrl={avatarUrl} />
+      <PostBlogImgCube src={avatarUrl} />
       <CardBar>
         {Object.entries(postTypeIconData).map(([type, { color, icon, postType }]) => (
           <CardBarCell key={type} onClick={() => openModal('PostForm', { postType })}>

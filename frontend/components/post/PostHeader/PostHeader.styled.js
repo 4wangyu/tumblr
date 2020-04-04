@@ -44,3 +44,10 @@ export const FollowBtn = styled.a`
   }
   
 `;
+
+export const AvatarImg = styled.img`
+  border-radius: 3px;
+  margin-right: 1rem;
+  width: 3rem; 
+`;
+

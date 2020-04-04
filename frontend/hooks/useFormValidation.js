@@ -26,19 +26,22 @@ const useFormValidation = ({
           break;
         };
         case "password": {
-          if (!isSecurePassword(value)) newErrors.password.push(`
-            Password must contain at least one number, one lowercase and one uppercase letter
-          `);
+          // if (!isSecurePassword(value)) newErrors.password.push(`
+          //   Password must contain at least one number, one lowercase and one uppercase letter
+          // `);
           break;
         };
       }
+      if (newErrors[name].length === 0) delete newErrors[name];
     }
     setErrors(newErrors);
   };
 
   useEffect(() => {
     if (isSubmitting) {
+      debugger;
       if (noErrors) {
+        debugger;
         onSubmit(values)
           .fail(({ responseText: errorJSON }) => setErrors(JSON.parse(errorJSON)))
           .always(() => setSubmitting(false));

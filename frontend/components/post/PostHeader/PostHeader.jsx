@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { useDispatch } from 'react-redux';
 import { Thunks as Users } from 'store/users/actions';
-import { CardHeader, BlogLink, FollowBtn } from './PostHeader.styled';
+import { CardHeader, BlogLink, FollowBtn, AvatarImg } from './PostHeader.styled';
 import { PostContext } from '../Post';
 
 const PostHeader = () => {
@@ -12,6 +12,7 @@ const PostHeader = () => {
 
   return (
     <CardHeader>
+      <AvatarImg src={author.avatarUrl} />
       <BlogLink to='/'>{author.username}</BlogLink>
       {userIsAuthor && !isFollowingAuthor && <FollowBtn onClick={handleFollow}>Follow</FollowBtn>}
     </CardHeader>

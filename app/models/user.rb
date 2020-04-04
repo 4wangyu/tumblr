@@ -19,6 +19,20 @@ class User < ApplicationRecord
 
   # ----------------------------- ActiveStorage
   has_one_attached :avatar
+  before_save :enforce_avatar
+
+  def enforce_avatar
+    unless self.avatar.attached?
+      n = rand(1..10)
+      avatar_url = Rails.root.join("app", "assets", "images", "avatar_#{n}.png")
+      self.avatar.attach(
+        io: File.open(avatar_url),
+        filename: "avatar_#{n}.png",
+        content_type: 'image/png'
+      )
+    end
+  end
+
   # ----------------------------- Scope
   default_scope { includes(avatar_attachment: :blob) }
 

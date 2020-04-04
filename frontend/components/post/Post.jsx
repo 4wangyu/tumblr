@@ -12,11 +12,9 @@ export const PostContext = createContext()
 const Post = ({ post }) => {
   const user = useSelector(selectCurrentUser)
   const author = useSelector(state => selectUserById(state, { userId: post.userId }))
-  const authorIsUser = user?.id === author?.id;
+  const authorIsUser = user.id === author.id;
   const isLiked = post.likerIds.includes(user.id);
   const isFollowingAuthor = user.followeeIds.includes(author.id);
-
-  if (!post) return null;
 
   return (
     <Card>

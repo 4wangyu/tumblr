@@ -21,7 +21,7 @@ const sectionTwoData = {
 
 const NavPopover = () => {
 
-  const { username, avatarUrl, id, ...currentUser } = useSelector(selectCurrentUser);
+  const { username, avatarAttachment, id, ...currentUser } = useSelector(selectCurrentUser);
 
   const dispatch = useDispatch();
   const logout = () => dispatch(Session.logout());
@@ -61,7 +61,7 @@ const NavPopover = () => {
         <ThumblrPopoverMenu>
           <MenuItem>
             <MenuItemLink className='avatar' to={`/dashboard`}>
-              <MenuItemAvatar src={avatarUrl} />
+              <MenuItemAvatar src={avatarAttachment.url} />
               <MenuItemText><strong>{username}</strong><br />Untitled </MenuItemText>
             </MenuItemLink>
           </MenuItem>

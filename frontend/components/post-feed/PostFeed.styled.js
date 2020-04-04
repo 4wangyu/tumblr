@@ -23,9 +23,7 @@ export const FeedColRow = styled.div`
   margin: 2rem;
 `;
 
-export const PostBlogImgCube = styled.img.attrs(P => ({
-  src: P.avatarUrl || 'https://assets.tumblr.com/images/default_avatar/cone_open_128.png'
-}))`
+export const PostBlogImgCube = styled.img`
   border-radius: 3px;
   height: 6.4rem;
   margin-right: 2rem;

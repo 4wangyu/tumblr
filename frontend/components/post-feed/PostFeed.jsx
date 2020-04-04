@@ -57,10 +57,10 @@ const PostFeed = () => {
   const feedColumns = posts
     .sort(compareCreatedAt)
     .map((post, listItemIdx, { length: listLength }) => {
-      const { avatarUrl } = users[post.userId];
+      const { avatarAttachment: { url: avatarUrl } } = users[post.userId];
       return (
-        <FeedColRow key={post.id} ref={listItemIdx === listLength - 1 ? lastPost : null}>
-          <PostBlogImgCube avatarUrl={avatarUrl} />
+        <FeedColRow key={post.id} ref={listItemIdx === listLength - 1 ? lastPost : null} style={{ position: 'relative' }}>
+          <PostBlogImgCube src={avatarUrl} />
           <Post post={post} />
         </FeedColRow>
       );
@@ -68,7 +68,7 @@ const PostFeed = () => {
 
   const knightLoader = useMemo(() => loading && KnightLoader, [loading]);
 
-  const { avatarUrl } = currentUser;
+  const { avatarAttachment: { url: avatarUrl } } = currentUser;
 
   return (
     <FeedContainer>
@@ -76,9 +76,6 @@ const PostFeed = () => {
         <ComposePost avatarUrl={avatarUrl} />
         {feedColumns}
         {knightLoader}
-      </FeedCol>
-      <FeedCol>
-        <Sidebar />
       </FeedCol>
       <ScrollToTopBtn />
     </FeedContainer>
