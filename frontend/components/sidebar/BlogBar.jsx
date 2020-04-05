@@ -29,7 +29,7 @@ const BlogBar = ({
 
   const BlogWrapper = useMemo(() => variant === 'list_item' ? SidebarBlogItem : SidebarBlog, [variant])
 
-  const { avatarUrl, username } = user;
+  const { avatarAttachment: {url: avatarUrl}, username } = user;
   return (
     <BlogWrapper>
       <BlogAvatar src={avatarUrl} />

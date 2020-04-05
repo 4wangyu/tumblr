@@ -77,6 +77,10 @@ const PostFeed = () => {
         {feedColumns}
         {knightLoader}
       </FeedCol>
+      <FeedCol>
+        <Sidebar />
+      </FeedCol>
+
       <ScrollToTopBtn />
     </FeedContainer>
   );
