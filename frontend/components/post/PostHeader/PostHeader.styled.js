@@ -6,16 +6,12 @@ import { ReblogIcon } from 'styled/base/Icon.styled';
 
 export const PostHeaderContainer = styled.header`
   ${flexCenter}
+  border-bottom: .5px solid ${theme('colors.divider')};
   color: ${theme('colors.text')};
   justify-content: start;
-  border-bottom: .5px solid ${theme('colors.divider')};
-  & > * {
-    padding-left: .5rem;
-    &:first-child {
-      padding-left: 0;
-    }
+  :not(:last-child) {
+    padding-right: 1rem;
   }
-
   ${ReblogIcon} {
     color: ${theme('colors.textLight')};
   }
@@ -30,17 +26,17 @@ export const ReblogLink = styled(Link)`
 `;
 
 export const FollowBtn = styled.a`
+  color: ${theme('colors.highlight')};
   display: inline-block;
-  &, &:hover {
-    color: ${theme('colors.highlight')};
-  }
-  font-weight: ${theme('fontWeights.text')};
+  font-weight: ${theme('fontWeights.heading')};
   transition: transform .2s, opacity .3s ease-in-out;
-  &:active {
+  :active {
     transform: scale(1.2);
     opacity: 0;
   }
-  
+  :hover {
+    text-decoration: underline;
+  }
 `;
 
 export const UserAvatar = styled.img`

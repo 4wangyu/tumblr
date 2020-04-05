@@ -8,12 +8,13 @@ import { Card, CardContent } from 'styled/base/Card.styled';
 
 export const SidebarWidget = styled.div`
   color: #fff;
+  margin-bottom: 3.8rem;
   width: 32rem;
 `;
 
 export const SidebarHeader = styled.h2`
   padding: 0 1rem .4rem 1rem;
-  font-size: ${theme('fontSizes.lg')};
+  font-size: ${theme('fontSizes.xl')};
   font-weight: ${theme('fontWeights.heading')};
   border-bottom: 2px solid ${α('#fff', .13)};
 `;
@@ -89,22 +90,12 @@ export const BlogHeaderTitle = styled.span`
   font-weight: ${theme('fontWeights.text')};
 `;
 
-export const AddBlogBtn = styled.button`
-  ${flexCenter};
-  border-radius: 3px;
-  border: none;
-  background-color: ${α('#fff', .25)};
-  color: ${theme('colors.primary')};
-  &:hover {
-    background-color: ${theme('colors.highlight')};
-    color: #fff;
-  }
-  height: 2.4rem;
-  width: 2.4rem;
-`;
-
-export const AddBlogIcon = styled(PlusIcon)`
-  font-size: 1.5rem;
+export const FollowBtn = styled.a`
+  color: ${theme('colors.highlight')};
+  font-weight: ${theme('fontWeights.heading')};
+  :hover {
+    text-decoration: underline;
+  } 
 `;
 
 export const SidebarCard = styled(Card)`

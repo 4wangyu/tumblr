@@ -60,6 +60,7 @@ export const lightTheme = {
     md: '1.4rem',
     semiLg: '1.5rem',
     lg: '1.7rem',
+    xl: '2.1rem',
     iconSm: '2rem',
     iconMd: '3.5rem',
     iconLg: '5rem'

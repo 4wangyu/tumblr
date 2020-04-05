@@ -7,7 +7,7 @@ import {
   SidebarBlog, SidebarBlogItem,
   BlogAvatar,
   BlogHeader, BlogHeaderUsername,
-  AddBlogIcon, AddBlogBtn, RemoveBlogIcon
+  FollowBtn, RemoveBlogIcon
 } from './Sidebar.styled';
 
 const BlogBar = ({
@@ -36,9 +36,7 @@ const BlogBar = ({
       <BlogHeader>
         <BlogHeaderUsername>{username}</BlogHeaderUsername>
       </BlogHeader>
-      {!isCurrentUserFollowing && <AddBlogBtn onClick={handleFollow}>
-        <AddBlogIcon />
-      </AddBlogBtn>}
+      {!isCurrentUserFollowing && <FollowBtn>Follow</FollowBtn>}
       {variant === 'list_item' && <RemoveBlogIcon onClick={handleRemoveItem} />}
     </BlogWrapper>
   );
