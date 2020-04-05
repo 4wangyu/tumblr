@@ -16,7 +16,7 @@ const calcQuoteSizes = quote => {
     fontSize = FONT_SIZES[FONT_SIZES.length - 1][1];
   };
 
-  const lineHeight = Math.ceil(fontSize * 1.4);
+  const lineHeight = Math.ceil(fontSize * 1.2);
 
   return { fontSize, lineHeight };
 };

@@ -1,16 +1,14 @@
 import styled from 'styled-components';
 import { key as theme } from 'styled-theme';
 import { Link } from 'react-router-dom';
-import { cardPadding } from 'styled/base/Card.styled';
 import { flexCenter } from 'styled/helpers';
 import { ReblogIcon } from 'styled/base/Icon.styled';
 
-export const CardHeader = styled.div`
+export const PostHeaderContainer = styled.header`
   ${flexCenter}
   color: ${theme('colors.text')};
   justify-content: start;
   border-bottom: .5px solid ${theme('colors.divider')};
-  ${cardPadding};
   & > * {
     padding-left: .5rem;
     &:first-child {
@@ -45,9 +43,8 @@ export const FollowBtn = styled.a`
   
 `;
 
-export const AvatarImg = styled.img`
+export const UserAvatar = styled.img`
   border-radius: 3px;
   margin-right: 1rem;
-  width: 3rem; 
+  width: 3.8rem; 
 `;
-

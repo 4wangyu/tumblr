@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { TagIndex, Tag } from "../Post.styled";
+import { TagIndex, Tag } from "./PostTags.styled";
 import { PostContext } from "../Post";
 
 const PostTags = () => {

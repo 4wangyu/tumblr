@@ -3,18 +3,23 @@ import styledMap from 'styled-map';
 import { key as theme } from 'styled-theme';
 import α from 'color-alpha';
 import { flexCenter, flexCenterCol, absoluteCover } from 'styled/helpers';
-import { IconLg } from 'styled/base/Icon.styled';
 import { faPlayCircle, faPauseCircle } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export const AudioPlayer = styled.div`
-  display: grid;
-  grid-template-columns: 8rem auto 8.5rem;
-  grid-template-rows: 8.5rem;
-  justify-content: stretch;
-
   background-color: ${theme('colors.cornflowerBlue')};
   color: #fff;
+  display: grid;
   font-weight: ${theme('fontWeights.text')};
+  grid-template-columns: ${styledMap('size', {
+  small: '4rem auto 6rem',
+  default: '8rem auto 8.5rem',
+})};
+  grid-template-rows: ${styledMap('size', {
+  small: '6rem',
+  default: '8.5rem',
+})};
+  justify-content: stretch;
   position: relative;
   & * {
     z-index: 2
@@ -39,17 +44,21 @@ export const PlayPauseBtn = styled.button`
   padding-left: 1.5rem;
 `;
 
-export const PlayPauseBtnIcon = styled(IconLg).attrs(props => ({
+export const PlayPauseBtnIcon = styled(FontAwesomeIcon).attrs(props => ({
   icon: props.playing ? faPauseCircle : faPlayCircle
 }))`
   color: white;
+  font-size: ${styledMap('size', {
+  small: '2rem',
+  default: '3.5rem',
+})};
 `;
 
 // -------------------- AudioInfo
 export const AudioInfo = styled.div`
   ${flexCenterCol};
   align-items: start;
-  padding: 1rem;
+  padding: 2rem 1rem;
 `;
 
 export const AudioInfoText = styled.span`

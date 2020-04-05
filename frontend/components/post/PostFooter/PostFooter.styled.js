@@ -2,13 +2,11 @@ import styled from 'styled-components';
 import styledMap from 'styled-map';
 import { key as theme } from 'styled-theme';
 import { flexCenter, flexCenterCol } from 'styled/helpers';
-import { cardPadding } from 'styled/base/Card.styled';
 import { IconBox } from 'styled/base/Icon.styled';
 
-export const CardFooter = styled.div`
+export const PostFooterContainer = styled.footer`
   ${flexCenter};
   justify-content: space-between;
-  ${cardPadding}
   border-top: .5px solid ${theme('colors.divider')};
   color: ${theme('colors.textLight')};
   & > * {

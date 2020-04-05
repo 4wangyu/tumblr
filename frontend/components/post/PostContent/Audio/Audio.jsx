@@ -13,20 +13,21 @@ const Audio = ({
     artist,
     audioAttachment,
     albumArtAttachment
-  }
+  },
+  size
 }) => {
   const $audio = useRef();
   const { time, duration, playing, setPlaying } = useAudioPlayer($audio);
   const trackProgress = useMemo(() => `${time / duration * 100}%`, [time, duration])
   const toggleAudioPlaying = useCallback(() => setPlaying(prev => !prev), [setPlaying]);
-
+  console.log('size prop in avatar:', size);
   return (
-    <AudioPlayer>
+    <AudioPlayer size={size}>
       <HiddenAudio ref={$audio} src={audioAttachment.url} />
       <AudioProgress
         style={{ width: trackProgress }}
       />
-      <PlayPauseBtn onClick={toggleAudioPlaying}>
+      <PlayPauseBtn onClick={toggleAudioPlaying} size={size}>
         <PlayPauseBtnIcon playing={playing} />
       </PlayPauseBtn>
       <AudioInfo>

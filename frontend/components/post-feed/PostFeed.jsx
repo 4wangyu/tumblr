@@ -60,7 +60,6 @@ const PostFeed = () => {
       const { avatarAttachment: { url: avatarUrl } } = users[post.userId];
       return (
         <FeedColRow key={post.id} ref={listItemIdx === listLength - 1 ? lastPost : null} style={{ position: 'relative' }}>
-          <PostBlogImgCube src={avatarUrl} />
           <Post post={post} />
         </FeedColRow>
       );

@@ -1,37 +1,39 @@
 import styled from 'styled-components';
 import { key as theme } from 'styled-theme';
-import { Link } from 'react-router-dom';
+import styledMap from 'styled-map';
+import { Card } from 'styled/base/Card.styled';
+import { PostHeaderContainer, UserAvatar } from "./PostHeader/PostHeader.styled"
+import { PostFooterContainer } from "./PostFooter/PostFooter.styled"
 
-export const ReblogContent = styled.div`
-
-`;
-
-export const ReblogImgCube = styled.img`
-
-`;
-
-export const ReblogContentText = styled.p`
+export const PostBodyText = styled.p`
 
 `;
 
-export const ReblogSourceLink = styled(Link)`
+export const PostContainer = styled(Card).attrs({
+  as: 'article', 'aria-label': 'Post'
+})`
+  line-height: 1.5;
+  width: ${styledMap('size', {
+    small: '30rem',
+    default: '54rem',
+  })};
 
+
+  ${PostHeaderContainer}, ${PostFooterContainer}, ${PostBodyText} {
+    padding: ${styledMap('size', {
+      small: '1rem',
+      default: '1.5rem 2rem',
+    })};
+  }
+
+  ${UserAvatar} {
+    display: ${styledMap('size', {
+      small: 'inline-block',
+      default: 'none;',
+    })};
+  }
 `;
 
-
-export const TagIndex = styled.div`
-color: ${theme('colors.textLight')};
-padding: .5rem 2rem 1rem 1.5rem;
-margin-top: .5rem;
-width: 100%;
-display: flex;
-flex-flow: row wrap;
-align-items: center;
-`;
-
-export const Tag = styled.span`
-cursor: pointer;
-padding: 5px;
-border-radius: 3px;
-margin: 0 1px;
+export const PostMain = styled.div`
+  font-weight: ${theme('fontWeights.text')};
 `;

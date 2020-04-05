@@ -1,5 +1,5 @@
 import React from 'react'
-import { Gallery, Image, Body } from './ImageGallery.styled';
+import { Gallery, Image } from './ImageGallery.styled';
 
 const ImageGallery = ({ post: { imageAttachments, body } }) => (
   <>
@@ -12,7 +12,6 @@ const ImageGallery = ({ post: { imageAttachments, body } }) => (
         />
       ))}
     </Gallery>
-    <Body>{body}</Body>
   </>
 )
 

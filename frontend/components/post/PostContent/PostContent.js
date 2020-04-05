@@ -8,15 +8,15 @@ import Text from './Text';
 import Video from './Video';
 
 const PostContent = () => {
-  const { post } = useContext(PostContext);
+  const { post, size } = useContext(PostContext);
 
   const getContent = post => ({
-    Audio: <Audio post={post} />,
-    ImageGallery: <ImageGallery post={post} />,
-    Link: <Link post={post} />,
-    Quote: <Quote post={post} />,
-    Text: <Text post={post} />,
-    Video: <Video post={post} />,
+    Audio: <Audio post={post} size={size} />,
+    ImageGallery: <ImageGallery post={post} size={size} />,
+    Link: <Link post={post} size={size} />,
+    Quote: <Quote post={post} size={size} />,
+    Text: <Text post={post} size={size} />,
+    Video: <Video post={post} size={size} />,
   });
 
   return (

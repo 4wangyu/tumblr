@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { useDispatch } from 'react-redux';
 import { Thunks as Posts } from 'store/posts/actions';
 import { Creators as Modal } from 'store/modal/actions';
-import { CardFooter, Notes, Controls, PadBox, ControlsPopover, Control } from './PostFooter.styled';
+import { PostFooterContainer, Notes, Controls, PadBox, ControlsPopover, Control } from './PostFooter.styled';
 import { ShareIcon, ReplyIcon, ReblogIcon, LikeIcon, ControlsIcon } from 'styled/base/Icon.styled';
 import { PostContext } from '../Post';
 
@@ -34,7 +34,7 @@ const PostFooter = () => {
   const handleLike = () => togglePostLike(post.id, isLiked);
 
   return (
-    <CardFooter>
+    <PostFooterContainer>
       <Notes>{post.likerIds.length + 1} note{post.likerIds.length > 0 && 's'}</Notes>
       <Controls>
         <PadBox hidden>
@@ -55,7 +55,7 @@ const PostFooter = () => {
           <Control onClick={openConfirmationModal}>Delete</Control>
         </ControlsPopover>
       </Controls>
-    </CardFooter>
+    </PostFooterContainer>
   );
 };
 
