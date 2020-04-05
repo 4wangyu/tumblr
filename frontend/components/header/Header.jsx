@@ -3,10 +3,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectCurrentUser } from 'store/session/selectors';
 import { Thunks as Session } from 'store/session/actions';
 import { Creators as Modal } from 'store/modal/actions';
-import { Header, Logo, Searchbar, SearchbarInput } from './Header.styled';
+import { HeaderContainer, Logo, Searchbar, SearchbarInput } from './Header.styled';
 import { AuthNav, PrivateNav } from './Nav';
 
-const Nav = () => {
+const Header = () => {
   const currentUser = useSelector(state => selectCurrentUser(state))
   const isLoggedIn = Boolean(currentUser);
 
@@ -15,7 +15,7 @@ const Nav = () => {
   const logout = () => dispatch(Session.logout());
 
   return (
-    <Header>
+    <HeaderContainer>
       <Logo>th</Logo>
       <Searchbar>
         <SearchbarInput
@@ -24,8 +24,8 @@ const Nav = () => {
         />
       </Searchbar>
       {isLoggedIn ? <PrivateNav openModal={openModal} logout={logout} /> : <AuthNav />}
-    </Header>
+    </HeaderContainer>
   )
 }
 
-export default Nav;
+export default Header;

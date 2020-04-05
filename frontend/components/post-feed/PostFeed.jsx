@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Thunks as Feed } from 'store/feed/actions';
-import { selectCurrentUser, selectAllUsers, selectAllPosts, selectAllReblogs } from 'store/selectors';
-import ComposePost from './ComposePost/indexgit ';
+import { selectCurrentUser, selectAllUsers, selectAllPosts } from 'store/selectors';
+import ComposePost from './ComposePost/index';
 import KnightLoader from './Loader';
 import { FeedContainer, FeedCol, FeedColRow } from './PostFeed.styled';
 import ScrollToTopBtn from './ScrollToTopBtn';
@@ -13,16 +13,13 @@ import usePagination from 'hooks/usePagination';
 import Sidebar from 'components/sidebar/Sidebar';
 
 const PostFeed = () => {
-
   const dispatch = useDispatch();
   const fetchDashboard = filters => dispatch(Feed.fetchDashboard(filters));
 
-
-  const [currentUser, users, posts, reblogs] = useSelector(state => [
+  const [currentUser, users, posts] = useSelector(state => [
     selectCurrentUser(state),
     selectAllUsers(state),
     selectAllPosts(state),
-    selectAllReblogs(state)
   ]);
 
   const [offset, limit, setCount, end] = usePagination(1);

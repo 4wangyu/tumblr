@@ -7,9 +7,8 @@ import { PlusIcon, TimesIcon } from 'styled/base/Icon.styled';
 import { Card, CardContent } from 'styled/base/Card.styled';
 
 export const SidebarWidget = styled.div`
-  width: 32rem;
-  margin-top: 2rem;
   color: #fff;
+  width: 32rem;
 `;
 
 export const SidebarHeader = styled.h2`

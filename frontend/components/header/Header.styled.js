@@ -2,17 +2,20 @@ import styled from 'styled-components';
 import styledMap from 'styled-map';
 import α from 'color-alpha';
 import { key as theme } from 'styled-theme';
-import { flexCenter } from 'styled/helpers';
 
-export const Header = styled.header`
+export const HeaderContainer = styled.header`
+  align-items: center;
+  background-color: ${theme('colors.primary')};
+  border-bottom: 1px solid ${α('white', .15)};
   display: grid;
   grid-template-columns: min-content minmax(auto, 48rem) auto;
-  align-items: center;
-  justify-content: stretch;
   height: 5.4rem;
-  border-bottom: 1px solid ${α('white', .15)};
+  justify-content: stretch;
   padding: 0 2rem;
+  position: sticky;
+  top: 0;
   transition: default;
+  z-index: 10;
 `;
 
 export const Logo = styled.span`

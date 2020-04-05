@@ -9,16 +9,14 @@ import Auth from './auth/Auth';
 import Dashboard from './post-feed/PostFeed';
 
 const App = () => (
-  <Background style={{ position: 'relative' }}>
+  <Background>
     <Modal />
     <Header />
-    <main>
-      <Switch>
-        <Redirect exact from='/' to='/dashboard' />
-        <AuthRoute exact path={['/login', '/signup']} component={Auth} />
-        <ProtectedRoute exact path='/dashboard' component={Dashboard} />
-      </Switch>
-    </main>
+    <Switch>
+      <Redirect exact from='/' to='/dashboard' />
+      <AuthRoute exact path={['/login', '/signup']} component={Auth} />
+      <ProtectedRoute exact path='/dashboard' component={Dashboard} />
+    </Switch>
     <AuthRoute exact path={['/login', '/signup']} component={Footer} />
   </Background>
 );

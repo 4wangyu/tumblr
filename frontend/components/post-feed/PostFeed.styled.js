@@ -6,6 +6,8 @@ import { blurIn } from 'styled/keyframes';
 export const FeedContainer = styled.div`
   display: flex;
   justify-content: center;
+  position: relative;
+  padding-top: 4rem;
 `;
 
 export const FeedCol = styled.section`
