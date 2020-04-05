@@ -1,12 +1,14 @@
 import styled, { css } from 'styled-components';
 import { key as theme } from 'styled-theme';
 import α from 'color-alpha';
-// import TextAutosize from '../TextAutosize';
 
-export const Wrapper = styled.div`
+export const LinkContainer = styled.a.attrs({
+  target: '_blank', rel: "noopener noreferrer"
+})`
   background-color: ${theme('colors.tertiary')};
   display: flex;
   flex-direction: column;
+  font-weight: ${theme('fontWeights.text')};
   position: relative;
 `;
 export const ThumbnailBox = styled.div`

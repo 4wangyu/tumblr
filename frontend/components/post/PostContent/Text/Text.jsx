@@ -1,11 +1,16 @@
 import React from 'react';
-import { Wrapper, TitleField, TextField } from './Text.styled';
+import { PostContext } from '../../Post';
+import { TextContainer, TitleField, TextField } from './Text.styled';
 
-const Text = ({ post: { title, text } }) => (
-  <Wrapper>
-    {title && <TitleField>{title}</TitleField>}
-    <TextField>{text}</TextField>
-  </Wrapper>
-);
+const Text = () => {
+  const { title, text } = useContext(PostContext);
+
+  return (
+    <TextContainer>
+      {title && <TitleField>{title}</TitleField>}
+      <TextField>{text}</TextField>
+    </TextContainer>
+  )
+};
 
 export default Text;

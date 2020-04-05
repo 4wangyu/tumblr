@@ -6,7 +6,7 @@ import { flexCenter, flexCenterCol, absoluteCover } from 'styled/helpers';
 import { faPlayCircle, faPauseCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export const AudioPlayer = styled.div`
+export const AudioContainer = styled.div`
   background-color: ${theme('colors.cornflowerBlue')};
   color: #fff;
   display: grid;

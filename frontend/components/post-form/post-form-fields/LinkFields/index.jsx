@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState, useMemo } from 'react';
 import {
-  Wrapper,
+  LinkContainer,
   ThumbnailBox, ThumbnailImg,
   HostName,
   LinkInfo,
@@ -45,7 +45,7 @@ const LinkFields = () => {
   };
 
   if (siteHostName) return (
-    <Wrapper>
+    <LinkContainer as="div" >
       {thumbnailUrl && (
         <ThumbnailBox>
           <HostName href={url} imageCaption={true}>{siteHostName}</HostName>
@@ -66,7 +66,7 @@ const LinkFields = () => {
           placeholder="Enter a summary"
         />
       </LinkInfo>
-    </Wrapper>
+    </LinkContainer>
   );
 
   return (

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-export const Gallery = styled.div``;
+export const ImageGalleryContainer = styled.div``;
 
-export const Image = styled.img`
+export const Img = styled.img`
   width: 100%;
 `;

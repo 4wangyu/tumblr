@@ -1,18 +1,20 @@
-import React from 'react'
-import { Gallery, Image } from './ImageGallery.styled';
+import React, { useContext } from 'react';
+import { PostContext } from '../../Post';
+import { ImageGalleryContainer, Img } from './ImageGallery.styled';
 
-const ImageGallery = ({ post: { imageAttachments, body } }) => (
-  <>
-    <Gallery>
+const ImageGallery = () => {
+  const { imageAttachments } = useContext(PostContext);
+
+  return (
+    <ImageGalleryContainer>
       {imageAttachments.map(({ url, filename }, idx) => (
-        <Image
+        <Img
           key={idx}
           src={url}
           alt={filename}
         />
       ))}
-    </Gallery>
-  </>
-)
-
+    </ImageGalleryContainer>
+  )
+}
 export default ImageGallery;

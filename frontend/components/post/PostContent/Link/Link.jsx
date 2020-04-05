@@ -1,33 +1,31 @@
-import React, { useMemo } from 'react';
+import React, { useContext, useMemo } from 'react';
+import { PostContext } from '../../Post';
 import {
-  Wrapper,
+  LinkContainer,
   ThumbnailBox, ThumbnailImg,
   HostName,
   LinkInfo,
   TitleText, DescriptionText
 } from './Link.styled';
-import { CardContent } from 'styled/base/Card.styled';
 
-
-const Link = ({ post: { url, thumbnailUrl, title, description } }) => {
+const Link = () => {
+  const { url, thumbnailUrl, title, description } = useContext(PostContext);
   const siteHostName = useMemo(() => new URL(url).host, [url]);
 
   return (
-    <CardContent noPadding={true}>
-      <Wrapper as='a' href={url} target='_blank'>
-        {thumbnailUrl && (
-          <ThumbnailBox>
-            <HostName href={url} imageCaption={true}>{siteHostName}</HostName>
-            <ThumbnailImg src={thumbnailUrl} />
-          </ThumbnailBox>
-        )}
-        <LinkInfo>
-          {!thumbnailUrl && <HostName href={url}>{siteHostName}</HostName>}
-          <TitleText>{title}</TitleText>
-          <DescriptionText>{description}</DescriptionText>
-        </LinkInfo>
-      </Wrapper>
-    </CardContent>
+    <LinkContainer as='a' href={url} target='_blank'>
+      {thumbnailUrl && (
+        <ThumbnailBox>
+          <HostName href={url} imageCaption={true}>{siteHostName}</HostName>
+          <ThumbnailImg src={thumbnailUrl} />
+        </ThumbnailBox>
+      )}
+      <LinkInfo>
+        {!thumbnailUrl && <HostName href={url}>{siteHostName}</HostName>}
+        <TitleText>{title}</TitleText>
+        <DescriptionText>{description}</DescriptionText>
+      </LinkInfo>
+    </LinkContainer>
   )
 };
 

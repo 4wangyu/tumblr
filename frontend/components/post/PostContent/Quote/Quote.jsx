@@ -1,16 +1,17 @@
-import React from 'react';
-import { Wrapper, QuoteText, SourceText } from './Quote.styled';
+import React, { useContext } from 'react';
+import { PostContext } from '../../Post';
+import { QuoteContainer, QuoteText, SourceText } from './Quote.styled';
 import calcQuoteSizes from 'util/calcQuoteSizes';
 
-const Quote = ({ post: { quote, source } }) => {
-
+const Quote = () => {
+  const { quote, source } = useContext(PostContext);
   const { fontSize, lineHeight } = calcQuoteSizes(quote);
 
   return (
-    <Wrapper>
+    <QuoteContainer>
       <QuoteText style={{ fontSize, lineHeight: lineHeight + 'px' }}>{quote}</QuoteText>
       {source && <SourceText>&nbsp;{source}</SourceText>}
-    </Wrapper>
+    </QuoteContainer>
   )
 };
 

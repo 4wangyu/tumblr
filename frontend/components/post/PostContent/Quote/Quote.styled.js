@@ -3,7 +3,7 @@ import { key as theme } from 'styled-theme';
 import { cardPadding } from 'styled/base/Card.styled.js'
 import { flexCol } from 'styled/helpers';
 
-export const Wrapper = styled.figcaption`
+export const QuoteContainer = styled.figcaption`
   ${cardPadding};
   ${flexCol};
   & > * {

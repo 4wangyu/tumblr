@@ -1,28 +1,24 @@
-import React, { useRef, useCallback, useMemo } from 'react';
+import React, { useContext, useRef, useCallback, useMemo } from 'react';
+import { PostContext } from '../../Post';
 import useAudioPlayer from 'hooks/useAudioPlayer';
 import {
-  AudioPlayer, HiddenAudio, AudioProgress,
+  AudioContainer, HiddenAudio, AudioProgress,
   PlayPauseBtn, PlayPauseBtnIcon,
   AudioInfo, AudioInfoText,
   AlbumArtBox, AlbumArtImg
 } from './Audio.styled';
 
-const Audio = ({
-  post: {
-    track,
-    artist,
-    audioAttachment,
-    albumArtAttachment
-  },
-  size
-}) => {
+const Audio = () => {
+
+  const { size, track, artist, audioAttachment, albumArtAttachment } = useContext(PostContext);
+
   const $audio = useRef();
   const { time, duration, playing, setPlaying } = useAudioPlayer($audio);
   const trackProgress = useMemo(() => `${time / duration * 100}%`, [time, duration])
   const toggleAudioPlaying = useCallback(() => setPlaying(prev => !prev), [setPlaying]);
   console.log('size prop in avatar:', size);
   return (
-    <AudioPlayer size={size}>
+    <AudioContainer size={size}>
       <HiddenAudio ref={$audio} src={audioAttachment.url} />
       <AudioProgress
         style={{ width: trackProgress }}
@@ -37,7 +33,7 @@ const Audio = ({
       {albumArtAttachment && <AlbumArtBox>
         <AlbumArtImg src={albumArtAttachment.url} />
       </AlbumArtBox>}
-    </AudioPlayer>
+    </AudioContainer>
   );
 };
 
