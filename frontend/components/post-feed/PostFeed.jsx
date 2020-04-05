@@ -2,9 +2,9 @@ import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Thunks as Feed } from 'store/feed/actions';
 import { selectCurrentUser, selectAllUsers, selectAllPosts, selectAllReblogs } from 'store/selectors';
-import ComposePost from './ComposePost';
+import ComposePost from './ComposePost/indexgit ';
 import KnightLoader from './Loader';
-import { FeedContainer, FeedCol, FeedColRow, PostBlogImgCube } from './PostFeed.styled';
+import { FeedContainer, FeedCol, FeedColRow } from './PostFeed.styled';
 import ScrollToTopBtn from './ScrollToTopBtn';
 
 import Post from 'components/Post';
