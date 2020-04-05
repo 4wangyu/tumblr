@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 import styledMap from 'styled-map';
 import { key as theme } from 'styled-theme';
-import { flexCenter, flexCenterCol } from 'styled/helpers';
-import { IconBox } from 'styled/base/Icon.styled';
+import { flexCenter } from 'styled/helpers';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart as faHeartS, faPen } from '@fortawesome/free-solid-svg-icons';
+import { faHeart as faHeartR, faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 
 export const PostFooterContainer = styled.footer`
   ${flexCenter};
@@ -15,47 +17,41 @@ export const PostFooterContainer = styled.footer`
   }
 `;
 
-export const Notes = styled.div``;
+export const Notes = styled.div`
+  font-size: 1.6rem;
+`;
 
-export const Controls = styled.div`
+export const ConfigContainer = styled.div`
    display: flex;
    position: relative;
-`;
-
-export const PadBox = styled(IconBox)`
-  color: ${theme('colors.textLight')};
-  margin: .8rem;
-
-  &:last-child {
-    margin-right: none;
+   > * {
+    margin-left: 2rem;
   }
 `;
 
-export const ControlsPopover = styled.div`
-  position: absolute;
-  bottom: 3.5rem;
-  right: -6rem;
-
-  width: 12.8rem;
-
-  background-color: ${theme('colors.secondary')};
-  border-radius: 3px;
-  border: 1px solid ${theme('colors.tertiary')};
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 10px 0px;
+export const ConfigItem = styled.div`
+ ${flexCenter};
   color: ${theme('colors.textLight')};
-  font-weight: ${theme('fontWeights.text')};
-  padding: .4rem 0;
-  display: ${styledMap`
-    default: none;
-    open: default;
+`;
+
+const ConfigIcon = styled(FontAwesomeIcon)`
+  font-size: 2.3rem;
+`;
+
+export const HeartIcon = styled(ConfigIcon).attrs(props => ({
+  icon: (props.fillRed ? faHeartS : faHeartR)
+}))`
+  color: ${styledMap`
+    default: inherit;
+    fillRed: ${theme('colors.warning')};
   `};
+  transition: none;
 `;
 
-export const Control = styled.span`
-  ${flexCenterCol};
-  align-items: start;
-  padding: .5rem 2.5rem .5rem 1.4rem;
-  &:hover {
-    background-color: ${theme('colors.highlightHover')};
-  }
-`;
+export const TrashIcon = styled(ConfigIcon).attrs({
+  icon: faTrashAlt
+})``;
+
+export const PenIcon = styled(ConfigIcon).attrs({
+  icon: faPen
+})``;

@@ -9,7 +9,7 @@ export const PostHeaderContainer = styled.header`
   border-bottom: .5px solid ${theme('colors.divider')};
   color: ${theme('colors.text')};
   justify-content: start;
-  :not(:last-child) {
+  > *:not(:last-child) {
     padding-right: 1rem;
   }
   ${ReblogIcon} {
