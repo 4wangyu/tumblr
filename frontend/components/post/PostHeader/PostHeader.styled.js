@@ -10,7 +10,7 @@ export const PostHeaderContainer = styled.header`
   color: ${theme('colors.text')};
   justify-content: start;
   > *:not(:last-child) {
-    padding-right: 1rem;
+    margin-right: 1rem;
   }
   ${ReblogIcon} {
     color: ${theme('colors.textLight')};
@@ -41,6 +41,6 @@ export const FollowBtn = styled.a`
 
 export const UserAvatar = styled.img`
   border-radius: 3px;
-  margin-right: 1rem;
+  overflow: hidden;
   width: 3.8rem; 
 `;

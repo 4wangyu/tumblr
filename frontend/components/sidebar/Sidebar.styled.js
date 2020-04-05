@@ -2,9 +2,7 @@ import styled from 'styled-components';
 import styledMap from 'styled-map';
 import α from 'color-alpha';
 import { key as theme } from 'styled-theme';
-import { flexCenter, flexCenterCol } from 'styled/helpers';
-import { PlusIcon, TimesIcon } from 'styled/base/Icon.styled';
-import { Card, CardContent } from 'styled/base/Card.styled';
+import { TimesIcon } from 'styled/base/Icon.styled';
 
 export const SidebarWidget = styled.div`
   color: #fff;
@@ -20,9 +18,13 @@ export const SidebarHeader = styled.h2`
 `;
 
 export const SidebarContent = styled.div`
+  margin-top: ${styledMap`
+    default: 0;
+    mT: 1rem;
+  `};
   padding: ${styledMap`
     default: 0;
-    padding: 0 .8rem;
+    pX: 0 .8rem;
   `};
 `;
 
@@ -97,31 +99,4 @@ export const FollowBtn = styled.a`
     text-decoration: underline;
   } 
 `;
-
-export const SidebarCard = styled(Card)`
-  overflow: hidden;
-`;
-
-export const SidebarCardImg = styled.img`
-  width: 100%;
-`;
-
-export const SidebarCardFooter = styled(CardContent)`
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  color: ${theme('colors.textLight')};
-  font-weight: ${theme('fontWeights.heading')};
-`;
-
-export const FooterNotes = styled.span`
-
-`;
-
-export const FooterIcons = styled.span`
-  & > * {
-    margin-left: 1rem;
-  }
-`;
-
 

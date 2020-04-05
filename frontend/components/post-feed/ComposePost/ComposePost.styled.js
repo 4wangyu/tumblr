@@ -33,20 +33,12 @@ export const MenuCellList = styled(Card)`
 `;
 
 export const MenuCellItem = styled.a`
-  background-image: radial-gradient(
-    ${theme('colors.divider')}, 
-    ${theme('colors.secondary')}
-  );
-  background-size: 1px 100%;
-  background-position: 100% 0;
-  background-repeat: no-repeat;
-  cursor: pointer;
-  width: 100%;
   ${flexCenterCol};
+  cursor: pointer;
   justify-content: space-evenly;
   padding: 0 1rem;
+  width: 100%;
 
-  &:last-child {background-image: none;}
   svg {transition: transform ease .3s; }
   &:hover svg { transform: translateY(-.3rem);}
 `;
