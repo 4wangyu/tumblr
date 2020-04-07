@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectCurrentUser } from 'store/session/selectors';
+import { selectCurrentUser } from 'store/selectors';
 import { Thunks as Session } from 'store/session/actions';
 import { Creators as Modal } from 'store/modal/actions';
 import { HeaderContainer, Logo, Searchbar, SearchbarInput } from './Header.styled';

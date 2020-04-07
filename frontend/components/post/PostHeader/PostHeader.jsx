@@ -6,15 +6,15 @@ import { PostContext } from '../Post';
 
 const PostHeader = () => {
   const dispatch = useDispatch();
-  const { post, isLiked, userIsAuthor, author, isFollowingAuthor } = useContext(PostContext)
+  const { userIsAuthor, author, authorIsFollowing } = useContext(PostContext)
   const toggleUserFollow = (userId, isFollowing) => dispatch(Users.toggleUserFollow(userId, isFollowing));
-  const handleFollow = e => toggleUserFollow(author.id, isFollowingAuthor);
+  const handleFollow = e => toggleUserFollow(author.id, authorIsFollowing);
 
   return (
     <PostHeaderContainer>
       <UserAvatar src={author.avatarAttachment.url} />
       <BlogLink to='/'>{author.username}</BlogLink>
-      {userIsAuthor && !isFollowingAuthor && <FollowBtn onClick={handleFollow}>Follow</FollowBtn>}
+      {!userIsAuthor && !authorIsFollowing && <FollowBtn onClick={handleFollow}>Follow</FollowBtn>}
     </PostHeaderContainer>
   )
 };

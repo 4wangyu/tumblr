@@ -16,7 +16,7 @@ const Audio = () => {
   const { time, duration, playing, setPlaying } = useAudioPlayer($audio);
   const trackProgress = useMemo(() => `${time / duration * 100}%`, [time, duration])
   const toggleAudioPlaying = useCallback(() => setPlaying(prev => !prev), [setPlaying]);
-  console.log('size prop in avatar:', size);
+
   return (
     <AudioContainer size={size}>
       <HiddenAudio ref={$audio} src={audioAttachment.url} />

@@ -62,7 +62,7 @@ const NavPopover = () => {
           <MenuItem>
             <MenuItemLink className='avatar' to={`/dashboard`}>
               <MenuItemAvatar src={avatarAttachment.url} />
-              <MenuItemText><strong>{username}</strong><br />Untitled </MenuItemText>
+              <MenuItemText><strong>{username}</strong></MenuItemText>
             </MenuItemLink>
           </MenuItem>
           {Object.entries(sectionTwoData).map(([name, { userProp }]) => (

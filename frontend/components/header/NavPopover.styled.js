@@ -57,7 +57,7 @@ export const MenuItem = styled.li``;
 export const MenuItemLink = styled(Link)`
   display: grid;
   grid-column-gap: 1rem;
-  align-items: end;
+  align-items: center;
   justify-content: stretch;
   padding: 1rem;
   padding-right: 2rem;

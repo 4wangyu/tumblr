@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux';
-import { selectModal } from 'store/modal/selectors';
-import { selectCurrentUser } from 'store/session/selectors';
+import { selectModal } from 'store/selectors';
+import { selectCurrentUser } from 'store/selectors';
 import { Creators } from 'store/modal/actions';
 
 import { ModalBackground, ModalComponentWrapper } from './ModalCore.styled';

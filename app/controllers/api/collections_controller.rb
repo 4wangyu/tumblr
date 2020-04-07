@@ -10,6 +10,19 @@ class Api::CollectionsController < ApplicationController
   end
 
   def explore
+    # @posts = current_user.explore_posts
+
+    # # headers['X-Recommended-Users-Count'] = @users.count
+    # if (params[:offset] && params[:limit])
+    #   @posts = @posts.drop(params[:offset].to_i).first(params[:limit].to_i)
+    # else 
+    #   @posts = @posts.first(5)
+    # end
+    @posts = Post.all
+
+    @users = User.all
+
+    render :collection
   end
 
   def search

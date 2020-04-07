@@ -2,7 +2,7 @@
 import React from 'react'
 import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { selectCurrentUser } from 'store/session/selectors';
+import { selectCurrentUser } from 'store/selectors';
 import { Bg } from './Background.styled';
 
 

@@ -1,1 +1,0 @@
-export const selectCurrentUser = ({ entities: { users }, session: { id } }) => users[id];

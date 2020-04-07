@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Thunks as Feed } from 'store/feed/actions';
-import { selectCurrentUser, selectAllUsers, selectAllPosts } from 'store/selectors';
+import { Thunks as Posts } from 'store/posts/actions';
+import { selectCurrentUser, selectPostsByCollection } from 'store/selectors';
 import ComposePost from './ComposePost/index';
 import KnightLoader from './Loader';
 import { FeedContainer, FeedCol, FeedColRow } from './PostFeed.styled';
@@ -10,16 +10,15 @@ import ScrollToTopBtn from './ScrollToTopBtn';
 import Post from 'components/Post';
 import compareCreatedAt from 'util/compare_created_at'
 import usePagination from 'hooks/usePagination';
-import Sidebar from 'components/sidebar/Sidebar';
+// import Sidebar from 'components/sidebar/Sidebar';
 
 const PostFeed = () => {
   const dispatch = useDispatch();
-  const fetchDashboard = filters => dispatch(Feed.fetchDashboard(filters));
+  const fetchDashboard = filters => dispatch(Posts.fetchPostsCollection('dashboard', filters));
 
-  const [currentUser, users, posts] = useSelector(state => [
+  const [currentUser, posts] = useSelector(state => [
     selectCurrentUser(state),
-    selectAllUsers(state),
-    selectAllPosts(state),
+    selectPostsByCollection(state, { collection: 'dashboard' }),
   ]);
 
   const [offset, limit, setCount, end] = usePagination(1);
@@ -45,8 +44,8 @@ const PostFeed = () => {
     if (loading) return;
     setLoading(true)
     fetchDashboard({ offset, limit })
-      .then(({ count }) => {
-        setCount(count);
+      .then(({ postCount }) => {
+        setCount(postCount);
         setLoading(false)
       });
   };
@@ -54,7 +53,6 @@ const PostFeed = () => {
   const feedColumns = posts
     .sort(compareCreatedAt)
     .map((post, listItemIdx, { length: listLength }) => {
-      const { avatarAttachment: { url: avatarUrl } } = users[post.userId];
       return (
         <FeedColRow key={post.id} ref={listItemIdx === listLength - 1 ? lastPost : null} style={{ position: 'relative' }}>
           <Post post={post} />
@@ -74,7 +72,6 @@ const PostFeed = () => {
         {knightLoader}
       </FeedCol>
       <FeedCol>
-        <Sidebar />
       </FeedCol>
 
       <ScrollToTopBtn />

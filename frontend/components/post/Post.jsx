@@ -15,12 +15,12 @@ const Post = ({ post, size = 'medium' }) => {
   const author = useSelector(state => selectUserById(state, { userId: post.userId }))
   const authorIsUser = user.id === author.id;
   const isLiked = post.likerIds.includes(user.id);
-  const isFollowingAuthor = user.followeeIds.includes(author.id);
+  const authorIsFollowing = user.followeeIds.includes(author.id);
 
   return (
     <PostContainer size={size}>
-      <PostContext.Provider value={{ post, user, author, authorIsUser, userIsAuthor: authorIsUser, isLiked, isFollowingAuthor, size, ...post }}>
-        {size !== 'small' && <PostAvatar />}
+      <PostContext.Provider value={{ post, user, author, authorIsUser, userIsAuthor: authorIsUser, isLiked, authorIsFollowing, size, ...post }}>
+        {size !== 'small' && author && <PostAvatar />}
         <PostHeader />
         <PostMain>
           <PostContent />
@@ -32,13 +32,5 @@ const Post = ({ post, size = 'medium' }) => {
     </PostContainer>
   );
 };
-
-// <CardContent noPadding={true}>
-// <PostContent />
-// <PostTags />
-// </CardContent>
-
-
-
 
 export default Post;

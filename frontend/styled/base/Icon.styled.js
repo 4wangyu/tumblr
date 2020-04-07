@@ -25,7 +25,7 @@ export const postTypeIconData = {
 
 export const privateNavIconData = {
   home: { icon: faHome, path: '/dashboard' },
-  discover: { icon: faCompass, path: '/dashboard' },
+  explore: { icon: faCompass, path: '/explore/trending' },
   inbox: { icon: faEnvelope, path: '/dashboard' },
   messaging: { icon: faCommentDots, path: '/dashboard' },
   activity: { icon: faBolt, path: '/dashboard' },

@@ -2,7 +2,9 @@
 export const selectCurrentUser = ({ users, session }) => users.entities[session.id];
 
 // ---------------------- Users
-export const selectUsersByCollection = ({ users }, { collection = 'dashboard' }) => {
+export const selectAllUsers = ({ users }) => Object.values(users.entities);
+
+export const selectUsersByCollection = ({ users }, { collection = 'recommended' }) => {
   return users.collections[collection].map(userId => users.entities[userId])
 };
 
@@ -13,7 +15,7 @@ export const selectUsersByIds = ({ users }, { userIds = [] }) => {
 };
 
 // ---------------------- Post
-export const selectPostsByCollection = ({ posts }, { collection = 'recommended' }) => {
+export const selectPostsByCollection = ({ posts }, { collection = 'dashboard' }) => {
   return posts.collections[collection].map(postId => posts.entities[postId])
 };
 

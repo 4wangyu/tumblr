@@ -17,7 +17,8 @@ const App = () => (
       <Redirect exact from='/' to='/dashboard' />
       <AuthRoute exact path={['/login', '/signup']} component={Auth} />
       <ProtectedRoute exact path='/dashboard' component={Dashboard} />
-      <ProtectedRoute path='/explore' component={ExplorePage} />
+      <Redirect exact from='/explore' to='/explore/trending' />
+      <ProtectedRoute path='/explore/:filter' component={ExplorePage} />
     </Switch>
     <AuthRoute exact path={['/login', '/signup']} component={Footer} />
   </Background>

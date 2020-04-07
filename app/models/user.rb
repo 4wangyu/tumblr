@@ -68,4 +68,10 @@ class User < ApplicationRecord
       .first
   end
 
+  def explore_posts
+    Post
+      .where.not(user_id: self.followees.pluck(:id))
+      .where.not(user_id: self.id)
+  end
+
 end
