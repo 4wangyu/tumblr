@@ -5,7 +5,7 @@ export const selectCurrentUser = ({ users, session }) => users.entities[session.
 export const selectAllUsers = ({ users }) => Object.values(users.entities);
 
 export const selectUsersByCollection = ({ users }, { collection = 'recommended' }) => {
-  return users.collections[collection].map(userId => users.entities[userId])
+  return Array.from(users.collections[collection]).map(userId => users.entities[userId])
 };
 
 export const selectUserById = ({ users }, { userId = 1 }) => users.entities[userId];
@@ -16,7 +16,7 @@ export const selectUsersByIds = ({ users }, { userIds = [] }) => {
 
 // ---------------------- Post
 export const selectPostsByCollection = ({ posts }, { collection = 'dashboard' }) => {
-  return posts.collections[collection].map(postId => posts.entities[postId])
+  return Array.from(posts.collections[collection]).map(postId => posts.entities[postId])
 };
 
 export const selectPostById = ({ posts }, { postId = 1 }) => posts.entities[postId];

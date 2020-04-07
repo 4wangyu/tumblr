@@ -1,19 +1,21 @@
 import { Types } from './actions';
 
 const _initialCollections = {
-  dashboard: [],
-  explore: [],
-  search: [],
-  likes: [],
+  dashboard: new Set(),
+  explore: new Set(),
+  search: new Set(),
+  likes: new Set(),
 };
 
 const collectionsReducer = (state = _initialCollections, action) => {
   Object.freeze(state);
+  let newState = Object.assign({}, state);
   switch (action.type) {
     case Types.RECEIVE_POSTS_COLLECTION:
       const { posts, collection } = action;
-      const newCollection = [...state[collection], ...Object.keys(posts)]
-      return ({ ...state, [collection]: newCollection });
+      for (const postId of Object.keys(posts))
+        newState[collection].add(postId);
+      return newState;
     // case Types.REMOVE_POST:
     default:
       return state;
