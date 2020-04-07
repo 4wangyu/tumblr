@@ -13,15 +13,16 @@ Rails.application.routes.draw do
 
     resources :reblogs, only: [:create, :show, :update, :destroy]
 
-    namespace :feed do
+    namespace :collections do
       get 'dashboard'
-      get 'trending'
+      get 'explore'
       get 'search'
-    end
+      get 'likes'
+      get 'radar'
 
-    namespace :sidebar do
-      get 'recommended_users'
-      get 'radar_post'
+      get 'recommended'
+      get 'followers'
+      get 'followees'
     end
 
     namespace :open_graph do

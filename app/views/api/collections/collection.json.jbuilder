@@ -13,11 +13,3 @@ json.users do
     end
   end
 end
-
-json.reblogs do 
-  @reblogs.each do |reblog|
-    json.set! reblog.id do
-      json.partial! 'api/reblogs/reblog', reblog: reblog
-    end
-  end
-end
