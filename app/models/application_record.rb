@@ -7,4 +7,12 @@ class ApplicationRecord < ActiveRecord::Base
       obj
     end
   end
+
+  def self.paginate(limit: nil, offset: nil)
+    if limit && offset
+      self.offset(offset.to_i).limit(limit.to_i)
+    else
+      self.limit(50)
+    end
+  end
 end
