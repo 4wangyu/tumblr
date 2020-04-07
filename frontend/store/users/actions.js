@@ -21,7 +21,7 @@ Thunks.toggleUserFollow = (userId, isFollowing = false) => dispatch => {
 
 Thunks.fetchUsersCollection = (collection, filters) => dispatch => {
   return APIUtil.fetchUsersCollection(collection, filters)
-    .then(({ users, posts }, undefined, xhr) => {
+    .then(({ users = [], posts = [] }, undefined, xhr) => {
       let userCount = parseInt(xhr.getResponseHeader('X-User-Count'));
       dispatch(PostCreators.receivePosts(posts));
       dispatch(Creators.receiveUsersCollection(collection, users));
