@@ -1,7 +1,9 @@
 import { createActions } from 'reduxsauce'
 import * as APIUtil from './api_util';
+import { Creators as UserCreators } from 'store/users/actions';
 
 export const { Types, Creators } = createActions({
+  receivePostsCollection: ['collection', 'posts'],
   receivePosts: ['posts'],
   receivePost: ['post'],
   createPost: ['post'],
@@ -10,15 +12,6 @@ export const { Types, Creators } = createActions({
 }, {});
 
 export const Thunks = {};
-// Thunks.fetchPosts = filters => (dispatch, getState) => {
-//   return APIUtil.fetchPosts(filters)
-//     .then((posts, status, xhr) => {
-//       let count = parseInt(xhr.getResponseHeader('X-Post-Count'));
-//       dispatch(Creators.receivePosts(posts))
-//       return ({ count })
-//     });
-// };
-
 Thunks.fetchPost = postId => dispatch => {
   return APIUtil.fetchPost(postId)
     .then(post => dispatch(Creators.receivePost(post)));
@@ -47,4 +40,14 @@ Thunks.togglePostLike = (postId, isLiked = false) => dispatch => {
 Thunks.purgePostAttachment = (postId, attachmentId) => dispatch => {
   return APIUtil.purgePostAttachment(postId, attachmentId)
     .then(post => dispatch(Creators.receivePost(post)));
+};
+
+Thunks.fetchPostsCollection = (collection, filters) => dispatch => {
+  return APIUtil.fetchPostsCollection(collection, filters)
+    .then(({ posts, users }, undefined, xhr) => {
+      let postCount = parseInt(xhr.getResponseHeader('X-Post-Count'));
+      dispatch(UserCreators.receiveUsers(users));
+      dispatch(Creators.receivePostsCollection(collection, posts));
+      return ({ postCount });
+    });
 };

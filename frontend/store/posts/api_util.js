@@ -1,7 +1,3 @@
-// export const fetchPosts = ({ offset, limit }) => {
-//   return $.get({ url: '/api/posts', data: { offset, limit } });
-// };
-
 export const fetchPost = postId => {
   return $.get({ url: '/api/posts', data: { id: postId } });
 };
@@ -25,4 +21,11 @@ export const togglePostLike = (postId, isLiked) => {
 
 export const purgePostAttachment = (postId, attachmentId) => {
   return $.ajax({ method: 'DELETE', url: `/api/posts/${postId}/purge_attachment`, data: { attachment_id: attachmentId } });
+};
+
+export const fetchPostsCollection = (collection, { offset, limit }) => {
+  return $.get({
+    url: `/api/collections/${collection}`,
+    data: { offset, limit }
+  });
 };

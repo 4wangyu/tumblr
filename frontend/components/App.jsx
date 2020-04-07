@@ -7,6 +7,7 @@ import Header from './header/Header';
 import Footer from './footer/Footer';
 import Auth from './auth/Auth';
 import Dashboard from './post-feed/PostFeed';
+import ExplorePage from './pages/ExplorePage';
 
 const App = () => (
   <Background>
@@ -16,6 +17,7 @@ const App = () => (
       <Redirect exact from='/' to='/dashboard' />
       <AuthRoute exact path={['/login', '/signup']} component={Auth} />
       <ProtectedRoute exact path='/dashboard' component={Dashboard} />
+      <ProtectedRoute path='/explore' component={ExplorePage} />
     </Switch>
     <AuthRoute exact path={['/login', '/signup']} component={Footer} />
   </Background>
