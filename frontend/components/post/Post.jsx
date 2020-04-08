@@ -10,7 +10,7 @@ import PostTags from './PostTags';
 
 export const PostContext = createContext()
 
-const Post = ({ post, size = 'medium' }) => {
+const Post = ({ post, size = 'large'}) => {
   const user = useSelector(selectCurrentUser)
   const author = useSelector(state => selectUserById(state, { userId: post.userId }))
   const authorIsUser = user.id === author.id;
@@ -19,8 +19,8 @@ const Post = ({ post, size = 'medium' }) => {
 
   return (
     <PostContainer size={size}>
-      <PostContext.Provider value={{ post, user, author, authorIsUser, userIsAuthor: authorIsUser, isLiked, authorIsFollowing, size, ...post }}>
-        {size !== 'small' && author && <PostAvatar />}
+      <PostContext.Provider value={{ post, user, author, authorIsUser, userIsAuthor: authorIsUser, isLiked, authorIsFollowing, size,...post }}>
+       <PostAvatar />
         <PostHeader />
         <PostMain>
           <PostContent />

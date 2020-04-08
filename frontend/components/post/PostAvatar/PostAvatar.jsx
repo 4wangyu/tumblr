@@ -3,10 +3,10 @@ import { PostContext } from "../Post";
 import { PostAvatarContainer, AvatarImg } from "./PostAvatar.styled";
 
 const PostAvatar = () => {
-  const { size, author } = useContext(PostContext);
+  const { author } = useContext(PostContext);
 
   return (
-    <PostAvatarContainer size={size}>
+    <PostAvatarContainer>
       <AvatarImg src={author.avatarAttachment.url} />
     </PostAvatarContainer>
 

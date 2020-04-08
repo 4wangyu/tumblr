@@ -2,7 +2,7 @@ import React, { useContext, useMemo, useEffect } from 'react'
 import { AuthFormContext } from './AuthStepSlider';
 import { ErrorMsg } from './Auth.styled';
 import { AnimatePresence, motion } from 'framer-motion';
-import { descend } from './motions';
+import { descendAscend } from 'motions';
 
 
 const AuthError = ({ field = null, message, fields = [] }) => {
@@ -21,11 +21,11 @@ const AuthError = ({ field = null, message, fields = [] }) => {
     <AnimatePresence>
       {errorMessage && <ErrorMsg
         as={motion.div}
-        variants={descend.variants}
+        variants={descendAscend.variants}
         initial="enterExit"
         animate="center"
         exit="enterExit"
-        transition={descend.transitions}
+        transition={descendAscend.transitions}
       >
         {errorMessage}
       </ErrorMsg>}

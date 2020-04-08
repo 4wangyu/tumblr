@@ -42,7 +42,7 @@ const PostFeed = () => {
 
   const loadPosts = () => {
     if (loading) return;
-    setLoading(true)
+    setLoading(true);
     fetchDashboard({ offset, limit })
       .then(({ postCount }) => {
         setCount(postCount);

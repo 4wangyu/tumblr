@@ -9,7 +9,7 @@ import { sleep, ghostType } from 'util/ghostTyper';
 import { StepSlider, StepForm } from './Auth.styled';
 import SignupSteps from './SignupSteps';
 import LoginSteps from './LoginSteps';
-import { slider } from './motions'
+import { slider } from 'motions'
 
 export const AuthFormContext = createContext();
 

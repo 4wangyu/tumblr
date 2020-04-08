@@ -2,22 +2,21 @@ import styled from 'styled-components';
 import { key as theme } from 'styled-theme';
 import styledMap from 'styled-map';
 import { Card } from 'styled/base/Card.styled';
-import { PostHeaderContainer, UserAvatar } from "./PostHeader/PostHeader.styled"
-import { PostFooterContainer } from "./PostFooter/PostFooter.styled"
+import { PostAvatarContainer } from './PostAvatar/PostAvatar.styled';
+import { PostFooterContainer } from './PostFooter/PostFooter.styled';
+import { PostHeaderContainer, UserAvatar } from './PostHeader/PostHeader.styled';
 
-export const PostBodyText = styled.p`
-
-`;
+export const PostBodyText = styled.p``;
 
 export const PostContainer = styled(Card).attrs({
   as: 'article', 'aria-label': 'Post'
 })`
   line-height: 1.5;
+  position: relative;
   width: ${styledMap('size', {
     small: '30rem',
     default: '54rem',
   })};
-
 
   ${PostHeaderContainer}, ${PostFooterContainer}, ${PostBodyText} {
     padding: ${styledMap('size', {
@@ -26,10 +25,18 @@ export const PostContainer = styled(Card).attrs({
     })};
   }
 
+  ${PostAvatarContainer} {
+    display: ${styledMap('size', {
+      small: 'none',
+      medium: 'none',
+      default: 'inline-block',
+    })};
+  }
+
   ${UserAvatar} {
     display: ${styledMap('size', {
-      small: 'inline-block',
-      default: 'none;',
+      large: 'none',
+      default: 'inline-block',
     })};
   }
 `;
