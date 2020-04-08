@@ -24,7 +24,7 @@ export const slider = {
   }
 };
 
-export const descend = {
+export const descendAscend = {
   variants: {
     enterExit: {
       y: '-3rem',
@@ -44,6 +44,22 @@ export const descend = {
   transitions: {
     delay: .1,
     duration: .5,
+    type: 'tween',
+    ease: 'easeInOut'
+  }
+};
+
+export const fade = {
+  variants: {
+    enterExit: {
+      opacity: 0
+    },
+    center: {
+      opacity: 1,
+    }
+  },
+  transitions: {
+    duration: .2,
     type: 'tween',
     ease: 'easeInOut'
   }
