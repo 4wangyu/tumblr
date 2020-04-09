@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.3'
+# Execute between when your action is completed and the template is rendered
+gem 'rails5_before_render', require: 'before_render'
 # Fetch and parse OpenGraph properties from an URL or a given string
 gem 'open_graph_reader'
 # Sync active storage w/ AWS S3
