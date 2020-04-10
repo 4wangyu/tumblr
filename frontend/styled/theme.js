@@ -28,7 +28,7 @@ const lightPalette = {
   quaternary: '#8f8f8f',
   border: '#e4e4e4',
   divider: '#e9e9e9',
-  text: '#000',
+  text: α('#121212', .95),
   textLight: α('#000', .50),
 };
 

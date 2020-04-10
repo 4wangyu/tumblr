@@ -9,7 +9,6 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box; 
     margin: 0px;
     padding: 0px;
-    transition: color 0.15s ease-in-out;
   }
 
   html {
