@@ -39,12 +39,12 @@ const ConfigIcon = styled(FontAwesomeIcon)`
 `;
 
 export const HeartIcon = styled(ConfigIcon).attrs(props => ({
-  icon: (props.fillRed ? faHeartS : faHeartR)
+  icon: (props.fillred === 'true' ? faHeartS : faHeartR)
 }))`
-  color: ${styledMap`
-    default: inherit;
-    fillRed: ${theme('colors.warning')};
-  `};
+  color: ${styledMap('fillred', {
+    default: 'inherit',
+    true: theme('colors.warning')
+  })};
   transition: none;
 `;
 

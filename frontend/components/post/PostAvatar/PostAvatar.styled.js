@@ -11,6 +11,6 @@ export const AvatarImg = styled.img`
   height: 6.4rem;
   margin-right: 2rem;
   position: sticky;
-  top: 1.5rem;
+  top: 8rem;
   width: 6.4rem; 
 `;

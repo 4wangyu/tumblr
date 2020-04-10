@@ -35,7 +35,7 @@ const PostFooter = () => {
       <Notes>{post.likerIds.length + 1} note{post.likerIds.length > 0 && 's'}</Notes>
       <ConfigContainer>
         <ConfigItem>
-          <HeartIcon onClick={handleLike} fillRed={isLiked} />
+          <HeartIcon onClick={handleLike} fillred={`${isLiked ? 'true' : 'false'}`} />
         </ConfigItem>
         {userIsAuthor && <>
           <ConfigItem>
