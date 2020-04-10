@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { key as theme } from 'styled-theme';
-import styledMap from 'styled-map'
 import { IconSm } from 'styled/base/Icon.styled.js'
 import { flexCenter } from 'styled/helpers';
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
