@@ -42,7 +42,7 @@ Thunks.purgePostAttachment = (postId, attachmentId) => dispatch => {
     .then(post => dispatch(Creators.receivePost(post)));
 };
 
-Thunks.fetchPostsCollection = (collection, filters) => dispatch => {
+Thunks.fetchPostsCollection = (collection, filters = {}) => dispatch => {
   return APIUtil.fetchPostsCollection(collection, filters)
     .then(({ posts = [], users = [] }, undefined, xhr) => {
       let postCount = parseInt(xhr.getResponseHeader('X-Post-Count'));

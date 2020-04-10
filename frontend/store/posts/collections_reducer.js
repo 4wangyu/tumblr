@@ -5,6 +5,7 @@ const _initialCollections = {
   explore: new Set(),
   search: new Set(),
   likes: new Set(),
+  radar: new Set()
 };
 
 const collectionsReducer = (state = _initialCollections, action) => {
