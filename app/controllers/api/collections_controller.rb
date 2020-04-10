@@ -23,15 +23,16 @@ class Api::CollectionsController < ApplicationController
   end
 
   def radar
-    @posts = [User.first.radar_post]
-    @users = []
+    post = User.first.radar_post
+    @posts = [post]
+    @users = [post.user]
 
     render :collection
   end
 
 
   def recommended
-    @users = User.first.recommended_users
+    @users = current_user.recommended_users.limit(7)
     @posts = []
 
     render :collection
