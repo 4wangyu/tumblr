@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import α from 'color-alpha';
 
 const gridLayout = css`
   column-count: 4;
@@ -28,7 +29,6 @@ export const CollectionItem = styled.li`
 export const CollectionList = styled.ul`
   display: inline-block;
   list-style-type: none;
-  margin: 0 auto;
 `;
 
 export const PostCollectionContainer = styled.div`
@@ -36,8 +36,15 @@ export const PostCollectionContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 3rem;
+
   ${CollectionList} {
     ${props => props.layout === 'grid' ? gridLayout : columnLayout};
   }
 `;
+
+export const EmptyCollectionMsg = styled.p`
+  color: ${α('#fff', .8)};
+  font-size: 2.6rem;
+  margin: 2rem;
+  margin-top: 14rem;
+`

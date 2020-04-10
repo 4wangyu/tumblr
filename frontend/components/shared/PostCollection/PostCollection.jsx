@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Thunks as Posts } from 'store/posts/actions';
 import { selectPostsByCollection } from 'store/selectors';
-import { PostCollectionContainer, CollectionList, CollectionItem } from './PostCollection.styled';
+import { PostCollectionContainer, CollectionList, CollectionItem, EmptyCollectionMsg } from './PostCollection.styled';
 import Post from '../../Post';
 import ScrollBtn from './ScrollBtn';
 import Loader from './Loader';
@@ -19,9 +19,10 @@ const PostCollection = ({
 
   // Redux
   const dispatch = useDispatch();
-  const fetchCollection = filters => dispatch(Posts.fetchPostsCollection('explore', filters));
+  const fetchCollection = filters => dispatch(Posts.fetchPostsCollection(collection, filters));
   let posts = useSelector(state => selectPostsByCollection(state, { collection }));
 
+  // Sort and Filter
   const finalPosts = useMemo(() => {
     if (!(posts instanceof Array)) return [];
     let filteredPosts = filter(posts);
@@ -29,19 +30,24 @@ const PostCollection = ({
   }, [posts]);
   const postSize = useMemo(() => layout === "grid" ? "small" : "large", [layout]);
 
+  // Pagination
+  const { offset, limit, setCount, hasNext } = usePagination({ increment: 3 });
+
   useEffect(() => {
     fetchCollection({ limit: 2, offset: 0 });
   }, []);
 
-  // Pag
-  const [offset, limit, setCount, end] = usePagination(1);
-
-  // Loading
+  // Loading State
   const [isLoading, setLoading] = useState(false);
+ 
+  // Intersection Observer
+  const [$lastPost, entry] = useIntersect({
+    threshold: [0, 0.5]
+  });
 
-  // loadCollection
+  // Infinite Scroll
   const loadCollection = () => {
-    if (loading) return;
+    if (isLoading) return;
     setLoading(true);
     fetchCollection({ offset, limit })
       .then(({ postCount }) => {
@@ -50,26 +56,21 @@ const PostCollection = ({
       });
   };
 
-  // Intersect
-  const [ref, entry] = useIntersect({
-    threshold: [0, 0.5]
-  });
-
   useEffect(() => {
-    if (infiniteScroll && entry.isIntersecting) {
-      () => loadCollection();
+    if (infiniteScroll && entry.isIntersecting && hasNext && !isLoading) {
+      loadCollection();
     }
-  }, [infiniteScroll, entry.isIntersecting])
+  }, [infiniteScroll, entry.isIntersecting, isLoading])
 
   return (
     <PostCollectionContainer layout={layout}>
-      <CollectionList>
-        {finalPosts.map((post, idx, arr) => (
-          <CollectionItem key={idx} ref={idx === arr.length - 1 ? ref : null}>
+      {finalPosts.length > 0 ? <CollectionList>
+        {finalPosts.map((post, idx, { length }) => (
+          <CollectionItem key={idx} ref={idx === length - 1 ? $lastPost : null}>
             <Post post={post} size={postSize} />
           </CollectionItem>
         ))}
-      </CollectionList>
+      </CollectionList> : <EmptyCollectionMsg>That's about it.</EmptyCollectionMsg>}
       <Loader isLoading={isLoading} />
       <ScrollBtn />
     </PostCollectionContainer>

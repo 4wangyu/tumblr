@@ -1,32 +1,28 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
-const usePagination = initial => {
-  const increment = initial;
-  const [offset, setOffset] = useState(0);
-  const [limit, setLimit] = useState(increment);
-  const [count, setCountData] = useState(20);
-  const [end, setEnd] = useState(false);
+const usePagination = ({ limit: _limit = 2, offset: _offset = 0, increment: _increment }) => {
+  const increment = _increment || _limit
+  const [offset, setOffset] = useState(_offset);
+  const [limit, setLimit] = useState(_limit);
+  const [count, _setCount] = useState(20);
+
+  const remaining = useMemo(() => count - (limit + offset), [count, limit, offset]);
+
+  const hasNext = useMemo(() => remaining > 0, [remaining])
 
   const paginate = () => {
-    if (remaining() <= 0) {
-      setEnd(true);
-    } else {
-      setEnd(false);
-      setLimit(Math.min(remaining(), limit));
+    if (hasNext) {
+      setLimit(Math.min(remaining, limit));
       setOffset(prevOffset => prevOffset + increment);
     }
   };
 
   const setCount = val => {
-    setCountData(val);
+    _setCount(val);
     paginate();
   };
 
-  const remaining = () => {
-    return count - (offset + limit);
-  };
-
-  return [offset, limit, setCount, end];
+  return { offset, limit, setCount, hasNext };
 }
 
 export default usePagination;
