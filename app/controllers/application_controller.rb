@@ -5,6 +5,12 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def authenticate_user!
+    unless logged_in?
+      render json: { message: 'Unauthorized.' }, status: :unauthorized and return
+    end
+  end
+
   def logged_in?
     !current_user.nil?
   end
