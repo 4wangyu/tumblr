@@ -3,11 +3,15 @@ import α from 'color-alpha';
 import { key as theme } from 'styled-theme';
 import { NavLink } from 'react-router-dom';
 
-export const ContentFilterContainer = styled.div`
+export const ExploreNavContainer = styled.div`
+  background-color: ${theme('colors.primary')};
   border-bottom: 1px solid ${α('#fff', .15)};
+  position: sticky;
+  top: 5.4rem;
+  z-index: 10;
 `;
 
-export const FilterList = styled.div`
+export const FilterLinkList = styled.div`
   color: ${α('#fff', .5)};
   display: flex;
   font-size: ${theme('fontSizes.md')};
@@ -15,7 +19,7 @@ export const FilterList = styled.div`
   margin: 0 1rem;
 `;
 
-export const FilterLink = styled(NavLink).attrs({
+export const FilterLinkItem = styled(NavLink).attrs({
   activeClassName: 'active'
 })`
   padding: 1rem .8rem;

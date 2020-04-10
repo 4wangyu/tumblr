@@ -1,12 +1,11 @@
 import React from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-import { ContentFilterContainer, FilterList, FilterLink } from './ExplorePage.styled';
-import PostCollection from '../../shared/PostCollection';
 import capitalize from 'util/capitalize';
+import PostCollection from '../../shared/PostCollection';
 
-const FILTERS = Object.freeze([
+export const FILTERS = Object.freeze([
   "trending", "text", "photo", "quote", "link", "audio", "video"
-])
+]);
 
 const ExplorePage = () => {
   const { filter } = useParams()
@@ -22,30 +21,13 @@ const ExplorePage = () => {
   };
 
   return (
-    <div>
-      <ContentFilterContainer>
-        <FilterList>
-          {FILTERS.map(filter => {
-            const path = `/explore/${filter.toLowerCase()}`
-            const innerHTML = capitalize(filter);
-            return (
-              <FilterLink
-                key={filter}
-                to={path}
-              >
-                {innerHTML}
-              </FilterLink>
-            )
-          })}
-        </FilterList>
-      </ContentFilterContainer>
-      <PostCollection
-        collection="explore"
-        layout="row"
-        filter={filterPosts}
-      />
-    </div>
-  )
-}
+    <PostCollection
+      collection="dashboard"
+      filter={filterPosts}
+      infiniteScroll={true}
+      layout="grid" // CAUTION: Changing to layout="row" will cause <PostAvatar>(s) to become partially obscured, due to to <ExploreNAv>
+    />
+  );
+};
 
 export default ExplorePage;
