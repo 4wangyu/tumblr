@@ -20,9 +20,9 @@ const App = () => (
         <AuthRoute exact path={['/login', '/signup']} component={Auth} />
         <Redirect exact from='/' to='/dashboard' />
         <ProtectedRoute exact path='/dashboard' component={DashboardPage} />
-        <Redirect exact from={'/explore', '/search'} to='/explore/trending' />
+        <Redirect exact from={['/explore', '/search']} to='/explore/trending' />
         <ProtectedRoute path='/explore/:filter' component={ExplorePage} />
-        <ProtectedRoute path='/search/:query/:filter' component={SearchPage} />
+        <ProtectedRoute path='/search/:query' component={SearchPage} />
       </Switch>
     </Main>
     <AuthRoute exact path={['/login', '/signup']} component={Footer} />
