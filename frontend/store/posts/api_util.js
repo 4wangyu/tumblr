@@ -25,7 +25,7 @@ export const purgePostAttachment = (postId, attachmentId) => {
 
 export const fetchPostsCollection = (collection, { offset, limit }) => {
   return $.get({
-    url: `/api/collections/${collection}`,
+    url: `/api/posts/${collection}`,
     data: { offset, limit }
   });
 };

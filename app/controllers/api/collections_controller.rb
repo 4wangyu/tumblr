@@ -1,22 +1,28 @@
 class Api::CollectionsController < ApplicationController
-  before_render :paginate_posts, only: [:dashboard, :explore]
+  before_render :paginate_posts, only: [:dashboard, :explore, :search]
   before_render :paginate_users, only: [:recommended]
-  before_render :pluck_users, only: [:dashboard, :explore]
+  before_render :pluck_users, only: [:dashboard, :explore, :search]
 
+  def search
+    # if !params[:query] || params[:query].empty?
+    #   render json: { message: 'Query must be provided.' } , status: :unprocessable_entity
+    # end
+    @posts = Post.tags_like(params[:query])
+
+    render :collection
+  end
 
   def dashboard
     @posts = Post.all
 
-    render :collection
+    render json: @posts
+    # render :collection
   end
 
   def explore
     @posts = User.first.explore_posts
 
     render :collection
-  end
-
-  def search
   end
 
   def likes
@@ -31,22 +37,10 @@ class Api::CollectionsController < ApplicationController
   end
 
 
-  def recommended
-    @users = current_user.recommended_users.limit(7)
-    @posts = []
-
-    render :collection
-  end
-
-  def followers
-  end
-
-  def followees
-  end
-
   private 
 
   def paginate_posts
+    return @posts if @posts.empty?
     @posts = @posts.includes(:user, :content, :tags, :likers)
     headers['X-Post-Count'] = @posts.count
 

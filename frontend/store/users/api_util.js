@@ -9,7 +9,7 @@ export const fetchUser = userId => {
 
 export const fetchUsersCollection = (collection, { offset, limit }) => {
   return $.get({
-    url: `/api/collections/${collection}`,
+    url: `/api/users/${collection}`,
     data: { offset, limit }
   });
 };

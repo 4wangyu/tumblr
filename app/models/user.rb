@@ -74,4 +74,10 @@ class User < ApplicationRecord
       .where.not(user_id: self.id)
   end
 
+  def self.username_like(query)
+    return [] if query.nil? || query.empty?
+    self
+      .where("username LIKE ?", "%#{query.downcase}%")
+  end
+
 end

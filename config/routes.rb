@@ -4,26 +4,29 @@ Rails.application.routes.draw do
 
     resources :users, only: [:create, :show] do 
       resource :follows, only: [:create, :destroy]
+      
+      collection do
+        get 'followees'
+        get 'followers'
+        get 'recommended'
+        get 'search'
+      end
     end
     
     resources :posts, only: [:create, :update, :show, :destroy] do
       resource :likes, only: [:create, :destroy]
       delete :purge_attachment, on: :member
+
+      collection do
+        get 'dashboard' 
+        get 'explore' 
+        get 'likes' 
+        get 'radar' 
+        get 'search'
+      end
     end
 
     resources :reblogs, only: [:create, :show, :update, :destroy]
-
-    namespace :collections do
-      get 'dashboard'
-      get 'explore'
-      get 'search'
-      get 'likes'
-      get 'radar'
-
-      get 'recommended'
-      get 'followers'
-      get 'followees'
-    end
 
     namespace :open_graph do
       post 'fetch'

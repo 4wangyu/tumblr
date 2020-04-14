@@ -1,6 +1,42 @@
 class Api::PostsController < ApplicationController
   before_action :select_post, only: [:show, :update, :destroy, :purge_attachment]
+  before_render :paginate_posts, only: [:dashboard, :explore, :likes, :search]
+  before_render :pluck_users, only: [:dashboard, :explore, :likes, :search]
 
+  # Collection
+  def dashboard
+    @posts = Post.all
+
+    render :index
+  end
+  
+  def explore
+    @posts = current_user.explore_posts
+
+    render :index
+  end
+
+  def likes
+    @posts = current_user.like_ids
+
+    render :index
+  end
+
+  def radar
+    post = current_user.radar_post
+    @posts = [post]
+    @users = [post.user]
+
+    render :index
+  end
+  
+  def search
+    @posts = Post.tags_like(params[:query])
+
+    render :index
+  end
+
+  # Single post
   def show
   end
 
@@ -89,7 +125,29 @@ class Api::PostsController < ApplicationController
     end
   end
 
+
   private
+
+  def paginate_posts
+    return @posts if @posts.empty?
+    @posts = @posts.includes(:user, :content, :tags, :likers)
+    headers['X-Post-Count'] = @posts.count
+
+    if (params[:offset] && params[:limit])
+      @posts = @posts.drop(params[:offset].to_i).first(params[:limit].to_i)
+    else 
+      @posts = @posts.first(5)
+    end
+  end
+
+  def pluck_users
+    if @posts.empty?
+      @users = []
+    else
+      @users = User.where(id: @posts.pluck(:user_id)).includes(:posts, :followees, :followers)
+    end
+    headers['X-User-Count'] = @users.count;
+  end
 
   def content_type_param
     params.require(:post).permit(:content_type)[:content_type]
@@ -100,9 +158,9 @@ class Api::PostsController < ApplicationController
   end
 
   def select_post
-    @post = Post.find_by(id: params[:id])
+    @post = Post.find_by_id(params[:id])
     unless @post 
-      render json: ['Post not found'], status: :not_found and return # 404
+      render json: {message: 'Post not found.'}, status: :not_found and return
     end
   end
 
