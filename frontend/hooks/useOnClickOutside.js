@@ -5,6 +5,7 @@ const useOnClickOutside = ({ ref, onClickOutside }) => {
   useEffect(
     () => {
       const handleClickOutside = e => {
+        e.stopPropagation();
         if (ref.current && !ref.current.contains(e.target)) onClickOutside();
       };
 

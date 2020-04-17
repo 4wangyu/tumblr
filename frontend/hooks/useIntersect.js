@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-const useIntersect = ({ root = null, rootMargin, threshold = 0 }) => {
+const useIntersect = ({ root = null, rootMargin, threshold = 0.9 }) => {
   const [entry, updateEntry] = useState({});
   const [node, setNode] = useState(null);
 

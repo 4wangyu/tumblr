@@ -39,9 +39,7 @@ const useFormValidation = ({
 
   useEffect(() => {
     if (isSubmitting) {
-      debugger;
       if (noErrors) {
-        debugger;
         onSubmit(values)
           .fail(({ responseText: errorJSON }) => setErrors(JSON.parse(errorJSON)))
           .always(() => setSubmitting(false));
