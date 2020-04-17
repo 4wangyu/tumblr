@@ -1,5 +1,6 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectCurrentUser } from 'store/selectors';
 import { Creators as Modal } from 'store/modal/actions';
 import { postTypeIconData } from 'styled/base/Icon.styled';
 import {
@@ -7,9 +8,10 @@ import {
   MenuCellList, MenuCellItem, CellIcon, CellTitle
 } from './ComposePost.styled';
 
-const ComposePost = ({ avatarUrl }) => {
+const ComposePost = () => {
   const dispatch = useDispatch();
   const openModal = (modal, options) => dispatch(Modal.openModal(modal, options));
+  const { avatarAttachment: { url: avatarUrl } } = useSelector(selectCurrentUser);
 
   return (
     <ComposePostContainer>

@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Card } from 'styled/base/Card.styled';
 
 export const ComposePostContainer = styled.div`
+  margin-bottom: 2rem;
   position: relative;
 `;
 
