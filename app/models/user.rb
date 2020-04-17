@@ -53,6 +53,24 @@ class User < ApplicationRecord
   end
 
   # ----------------------------- Queries
+  def self.username_like(query)
+    return [] if query.nil? || query.empty?
+    self
+      .where("username LIKE ?", "%#{query.downcase}%")
+  end
+
+  def dashboard_posts
+    Post
+      .where(user_id: self.followees.pluck(:id))
+      .where(user_id: self.id)
+  end
+  
+  def explore_posts
+    Post
+      .where.not(user_id: self.followees.pluck(:id))
+      .where.not(user_id: self.id)
+  end
+
   def recommended_users
     User
       .where.not(id: self.followees.pluck(:id))
@@ -66,18 +84,6 @@ class User < ApplicationRecord
       .group(:id)
       .order(Arel.sql('COUNT(likes.id) DESC'))
       .first
-  end
-
-  def explore_posts
-    Post
-      .where.not(user_id: self.followees.pluck(:id))
-      .where.not(user_id: self.id)
-  end
-
-  def self.username_like(query)
-    return [] if query.nil? || query.empty?
-    self
-      .where("username LIKE ?", "%#{query.downcase}%")
   end
 
 end

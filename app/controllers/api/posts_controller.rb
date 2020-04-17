@@ -31,14 +31,13 @@ class Api::PostsController < ApplicationController
   end
   
   def search
-    @posts = Post.tags_like(params[:query])
+    @posts = Post.tags_like(query: params[:query], content_type: params[:content_type])
 
     render :index
   end
 
   # Single post
-  def show
-  end
+  def show; end
 
   def create
     content_type = content_type_param

@@ -13,13 +13,7 @@ class Api::UsersController < ApplicationController
     end
   end
 
-  def show
-    if !@user
-      render json: ['User not found'], status: :not_found # 404
-    else
-      render :show
-    end
-  end
+  def show; end
 
   # Collection
   def followees
@@ -49,7 +43,7 @@ class Api::UsersController < ApplicationController
   private
 
   def select_user
-    @user = User.find_by(id: params[:id])
+    @user = User.find_by_id(params[:id])
 
     unless @user
       render json: {message: 'User not found.'}, status: :not_found and return

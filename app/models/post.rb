@@ -30,12 +30,16 @@ class Post < ApplicationRecord
     self.tags.map(&:name)
   end
 
-  def self.tags_like(query)
+  def self.tags_like(query:,content_type: nil)
     return [] if query.nil? || query.empty?
-    self
+    q = self
       .where("tags.name LIKE ?", "%#{query.downcase}%")
       .left_joins(:tags)
       .group(:id)
+    unless content_type.nil? || content_type.empty?
+      q = q.where(content_type: content_type)
+    end
+      q
   end
 
 end
