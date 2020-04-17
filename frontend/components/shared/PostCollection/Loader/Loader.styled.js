@@ -10,6 +10,7 @@ export const LoaderBarIndex = styled.div`
   display: flex;
   height: 3rem;
   justify-content: center;
+  margin: 0 auto;
   width: 10rem;
 `;
 
