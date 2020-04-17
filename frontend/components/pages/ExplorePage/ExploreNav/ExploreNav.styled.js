@@ -8,7 +8,7 @@ export const ExploreNavContainer = styled.div`
   border-bottom: 1px solid ${α('#fff', .15)};
   position: sticky;
   top: 5.4rem;
-  z-index: 10;
+  z-index: 9;
 `;
 
 export const FilterLinkList = styled.div`

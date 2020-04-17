@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { useDispatch } from 'react-redux';
 import { Thunks as Posts } from 'store/posts/actions';
 import { Creators as Modal } from 'store/modal/actions';
@@ -14,7 +14,7 @@ const PostFooter = () => {
 
   const dispatch = useDispatch();
   const togglePostLike = (postId, isLiked) => dispatch(Posts.togglePostLike(postId, isLiked));
-  const destoryPost = () => dispatch(Posts.destroyPost(post.id));
+  const destoryPost = () => dispatch(Posts.destroyPost(post.id.toString()));
   const openConfirmationModal = () => {
     dispatch(Modal.openModal('Confirmation', {
       onConfirm: destoryPost,

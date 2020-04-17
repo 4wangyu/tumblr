@@ -24,7 +24,6 @@ const AuthStepSlider = () => {
   const initialValues = { email: '', password: '', ...(atSignup && { username: '' }) };
 
   const onSubmit = formUser => {
-    debugger;
     return (
       (pathname === '/signup')
         ? dispatch(Session.signup(formUser))

@@ -2,7 +2,8 @@ import styled from 'styled-components';
 import styledMap from 'styled-map';
 import α from 'color-alpha';
 import { key as theme } from 'styled-theme';
-import { TimesIcon } from 'styled/base/Icon.styled';
+import { Link } from 'react-router-dom';
+import { Button } from 'components/atoms/FollowBtn/FollowBtn.styled';
 
 export const WidgetContainer = styled.div`
   color: #fff;
@@ -28,3 +29,8 @@ export const WidgetContent = styled.div`
   `};
 `;
 
+export const WidgetLink = styled(Button).attrs({ as: Link })`
+  font-size: 1.6rem;
+  margin-top: 2rem;
+  margin-left: .5rem;
+`;

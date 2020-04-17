@@ -4,7 +4,7 @@ import styledMap from 'styled-map';
 import { Card } from 'styled/base/Card.styled';
 import { PostAvatarContainer } from './PostAvatar/PostAvatar.styled';
 import { PostFooterContainer } from './PostFooter/PostFooter.styled';
-import { PostHeaderContainer, UserAvatar } from './PostHeader/PostHeader.styled';
+import { PostHeaderContainer, UserAvatar as PostHeaderAvatar } from './PostHeader/PostHeader.styled';
 
 export const PostBodyText = styled.p``;
 
@@ -33,7 +33,7 @@ export const PostContainer = styled(Card).attrs({
     })};
   }
 
-  ${UserAvatar} {
+  ${PostHeaderAvatar} {
     display: ${styledMap('size', {
       large: 'none',
       default: 'inline-block',

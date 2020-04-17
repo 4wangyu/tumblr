@@ -8,14 +8,17 @@ const PopoverContainer = styled.div`
   box-shadow: 0 0 1.5rem 0 rgba(0,0,0,.1);
   overflow: hidden;
   position: absolute;
-  top: 3rem;
+  top: ${P => P.top};
+  width: ${P => P.width};
   z-index: 20;
 `;
 
 const Popover = ({
   children,
   isOpen,
-  onClickOutside = () => { }
+  onClickOutside = () => { },
+  top = '3rem',
+  width = 'initial'
 }) => {
 
   const $container = useRef(null);
@@ -27,7 +30,11 @@ const Popover = ({
 
   return (
     <AnimatePresence>
-      {isOpen && <PopoverContainer ref={$container} as={motion.div}
+      {isOpen && <PopoverContainer
+        ref={$container}
+        as={motion.div}
+        top={top}
+        width={width}
         variants={fade.variants}
         initial="enterExit"
         animate="center"

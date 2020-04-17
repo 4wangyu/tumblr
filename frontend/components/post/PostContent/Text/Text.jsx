@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { PostContext } from '../../Post';
 import { TextContainer, TitleField, TextField } from './Text.styled';
 
