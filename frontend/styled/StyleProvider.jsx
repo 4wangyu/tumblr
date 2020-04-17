@@ -1,41 +1,55 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useMemo, useState, useEffect } from "react";
 import { ThemeProvider } from 'styled-components';
 import GlobalStyle from './GlobalStyle';
-import { lightTheme, darkTheme } from './theme';
-export const ThemeToggleContext = createContext();
+import { themeBase, palettes } from './theme';
+export const PaletteToggleContext = createContext();
+
+const paletteNames = Object.keys(palettes);
 
 const StyleProvider = ({ children }) => {
 
-  const [{ mode }, setThemeState] = useState({ mode: 'light' });
+  const [{ palette }, setThemeState] = useState({ palette: 'True Blue' });
 
   const toggle = () => {
-    const newMode = (mode === 'light' ? 'dark' : 'light');
-    window.localStorage.setItem('theme', newMode)
-    setThemeState({ mode: newMode });
+    const idx = (paletteNames.indexOf(palette) + 1) % paletteNames.length;
+    const newPalette = paletteNames[idx];
+    window.localStorage.setItem('theme-palette', newPalette)
+    setThemeState({ palette: newPalette });
   };
 
+  const theme = useMemo(
+    () => ({
+      ...themeBase,
+      colors: {
+        ...themeBase.colors,
+        ...palettes[palette]
+      }
+    }),
+    [palette]
+  )
+
   useEffect(() => {
-    const localTheme = window.localStorage.getItem('theme');
+    const localTheme = window.localStorage.getItem('theme-palette');
     const prefersDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-    if (localTheme && /^dark$|^light$/.test(localTheme)) {
-      setThemeState({ mode: localTheme });
+    if (localTheme && paletteNames.includes(palette)) {
+      setThemeState({ palette: localTheme });
     } else if (prefersDarkMode) {
-      setThemeState({ mode: 'dark' });
+      setThemeState({ palette: 'Dark Mode' });
     }
   }, []);
 
   return (
-    <ThemeToggleContext.Provider value={{ toggle, mode }}>
+    <PaletteToggleContext.Provider value={{ toggle, palette }}>
       <ThemeProvider
-        theme={mode === 'light' ? lightTheme : darkTheme}
+        theme={theme}
       >
         <>
           {children}
           <GlobalStyle />
         </>
       </ThemeProvider>
-    </ThemeToggleContext.Provider>
+    </PaletteToggleContext.Provider>
   );
 };
 

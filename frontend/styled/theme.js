@@ -12,16 +12,13 @@ export const popColors = {
 };
 
 const baseColors = {
-  highlight: popColors.dodgerBlue,
-  highlightHover: popColors.linkWater,
-  highlightAlt: '#9da6af',
   warning: popColors.redOrange,
   success: popColors.malachite,
   support: α('#444', .5),
   supportLight: '##e7e7e7'
 };
 
-const lightPalette = {
+const trueBluePalette = {
   primary: '#001935',
   secondary: '#fff',
   tertiary: '#f2f2f2',
@@ -30,20 +27,12 @@ const lightPalette = {
   divider: '#e9e9e9',
   text: α('#121212', .95),
   textLight: α('#000', .50),
+  highlight: popColors.dodgerBlue,
+  highlightHover: popColors.linkWater,
+  highlightAlt: '#e5e7ea',
 };
 
-const darkPalette = {
-  primary: '#1A1A1A',
-  secondary: '#222',
-  tertiary: '#1c1c1c',
-  border: '#606060',
-  divider: '#1f1f1f',
-  text: '#fff',
-  textLight: α('#fff', .75),
-  highlightHover: α('#fff', .25),
-};
-
-export const lightTheme = {
+export const themeBase = {
   fontUrl: 'https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,900|Open+Sans:400,600,700,800&display=swap',
   titleFont: "'Open Sans', sans-serif",
   font: "'Montserrat', sans-serif",
@@ -68,16 +57,38 @@ export const lightTheme = {
   colors: {
     ...popColors,
     ...baseColors,
-    ...lightPalette
+    ...trueBluePalette
   },
-  name: 'light'
 };
 
-export const darkTheme = {
-  ...lightTheme,
-  colors: {
-    ...lightTheme.colors,
-    ...darkPalette
-  },
-  name: 'dark'
+
+
+const darkModePalette = {
+  primary: '#1A1A1A',
+  secondary: '#222',
+  tertiary: '#1c1c1c',
+  border: '#606060',
+  divider: '#1f1f1f',
+  text: '#fff',
+  textLight: α('#fff', .75),
+  highlightHover: α('#fff', .25),
+  highlightAlt: '#393939'
+};
+
+const lowContrastPalette = {
+  primary: '#1A2735',
+  secondary: '#36465D',
+  tertiary: '#3F4E64',
+  border: '#bababa',
+  divider: α('#bfbfbf', .1),
+  text: '#bfbfbf',
+  textLight: α('#bfbfbf', .65),
+  highlightHover: α('#bfbfbf', .25),
+  highlightAlt: '#47576d'
+};
+
+export const palettes = {
+  'True Blue': trueBluePalette,
+  'Dark Mode': darkModePalette,
+  'Low-Contrast Classic': lowContrastPalette
 };
