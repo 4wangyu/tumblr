@@ -67,12 +67,3 @@ export const HeaderTitle = styled.span`
   font-size: ${theme('fontSizes.sm')};
   font-weight: ${theme('fontWeights.text')};
 `;
-
-export const FollowBtn = styled.a`
-  color: ${theme('colors.highlight')};
-  font-weight: ${theme('fontWeights.heading')};
-
-  :hover {
-    text-decoration: underline;
-  } 
-`;

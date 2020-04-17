@@ -25,20 +25,6 @@ export const ReblogLink = styled(Link)`
   color: ${theme('colors.textLight')};
 `;
 
-export const FollowBtn = styled.a`
-  color: ${theme('colors.highlight')};
-  display: inline-block;
-  font-weight: ${theme('fontWeights.heading')};
-  transition: transform .2s, opacity .3s ease-in-out;
-  :active {
-    transform: scale(1.2);
-    opacity: 0;
-  }
-  :hover {
-    text-decoration: underline;
-  }
-`;
-
 export const UserAvatar = styled.img`
   border-radius: 3px;
   overflow: hidden;

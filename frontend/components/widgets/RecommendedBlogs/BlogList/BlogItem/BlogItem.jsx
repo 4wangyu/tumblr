@@ -1,32 +1,22 @@
 import React from 'react';
-import { selectCurrentUser } from 'store/selectors';
-import { Thunks as UserThunks } from 'store/users/actions';
-import { useDispatch, useSelector } from 'react-redux';
-import { BlogItemContainer, Avatar, HeaderContainer, HeaderUsername, FollowBtn, TimesIcon } from './BlogItem.styled';
+import { BlogItemContainer, Avatar, HeaderContainer, HeaderUsername, HeaderTitle, TimesIcon } from './BlogItem.styled';
+import FollowBtn from 'components/atoms/FollowBtn';
 
 const BlogItem = ({
   user,
   handleRemove
 }) => {
   if (!user) return null;
-  const { avatarAttachment: { url: avatarUrl }, username, id: userId } = user;
-
-  const currentUser = useSelector(selectCurrentUser);
-  const isCurrentUserFollowing = currentUser.followeeIds.includes(userId);
-
-  const dispatch = useDispatch();
-  const handleFollow = () => {
-    handleRemove();
-    dispatch(UserThunks.toggleUserFollow(userId, isCurrentUserFollowing));
-  };
+  const { avatarAttachment: { url: avatarUrl }, username, title } = user;
 
   return (
     <BlogItemContainer>
       <Avatar src={avatarUrl} />
       <HeaderContainer>
         <HeaderUsername>{username}</HeaderUsername>
+        <HeaderTitle>{title}</HeaderTitle>
       </HeaderContainer>
-      {!isCurrentUserFollowing && <FollowBtn onClick={handleFollow}>Follow</FollowBtn>}
+      <FollowBtn user={user} onClick={handleRemove} />
       <TimesIcon onClick={handleRemove} />
     </BlogItemContainer>
   );

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { BlogListContainer } from './BlogList.styled'
 import BlogItem from './BlogItem';
-
+import { WidgetLink } from '../../widgets.styled';
 const BlogList = ({ users }) => {
 
   const [removedBlogs, setRemovedBlogs] = useState([]);
@@ -22,6 +22,7 @@ const BlogList = ({ users }) => {
           />
         )
       }
+      <WidgetLink to="/explore/trending">Explore all of Tumblr</WidgetLink>
     </BlogListContainer>
   );
 };
