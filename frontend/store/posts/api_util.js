@@ -23,9 +23,9 @@ export const purgePostAttachment = (postId, attachmentId) => {
   return $.ajax({ method: 'DELETE', url: `/api/posts/${postId}/purge_attachment`, data: { attachment_id: attachmentId } });
 };
 
-export const fetchPostsCollection = (collection, { offset, limit }) => {
+export const fetchPostsCollection = (collection, { offset, limit, query, content_type }) => {
   return $.get({
     url: `/api/posts/${collection}`,
-    data: { offset, limit }
+    data: { offset, limit, query, content_type }
   });
 };

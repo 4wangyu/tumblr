@@ -4,6 +4,7 @@ import { Creators as UserCreators } from 'store/users/actions';
 
 export const { Types, Creators } = createActions({
   receivePostsCollection: ['collection', 'posts'],
+  wipePostsCollection: ['collection'],
   receivePosts: ['posts'],
   receivePost: ['post'],
   createPost: ['post'],
