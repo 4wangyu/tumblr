@@ -26,6 +26,10 @@ Rails.application.routes.draw do
       end
     end
 
+    namespace :tags do
+      get 'search'
+    end
+
     resources :reblogs, only: [:create, :show, :update, :destroy]
 
     namespace :open_graph do
