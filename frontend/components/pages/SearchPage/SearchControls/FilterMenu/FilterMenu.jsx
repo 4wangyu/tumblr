@@ -1,35 +1,62 @@
-import React from 'react';
-import { FilterMenuContainer, FilterBtn, FilterName, FilterIconBox, DownChevronIcon } from './FilterMenu.styled';
-import MenuPopover from './MenuPopover';
+import React, { useMemo, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { FilterMenuContainer, FilterBtn, FilterName, FilterIconBox, DownChevronIcon, FilterList, FilterRule, FilterItem, FilterLink, FilterIcon, FilterText, FilterCheckIcon } from './FilterMenu.styled';
+// import MenuPopover from './MenuPopover';
 import { faGem } from '@fortawesome/free-regular-svg-icons';
-import { faClock, faFont, faCameraRetro, faQuoteLeft, faLink, faHeadphones, faVideo } from '@fortawesome/free-solid-svg-icons';
+import { faBorderAll, faClock, faFont, faCameraRetro, faQuoteLeft, faLink, faHeadphones, faVideo } from '@fortawesome/free-solid-svg-icons';
 import { popColors } from 'styled/theme';
+import Popover from 'components/molecules/Popover';
 
-const variantItems = {
-  contentType: [
-    { icon: faFont, name: 'Text' },
-    { color: popColors.redOrange, icon: faCameraRetro, name: 'Photo' },
-    { color: popColors.pizzazz, icon: faQuoteLeft, name: 'Quote', divide: true },
-    { color: popColors.malachite, icon: faLink, name: 'Link' },
-    { color: popColors.cornflowerBlue, icon: faHeadphones, name: 'Audio' },
-    { color: popColors.hotPink, icon: faVideo, name: 'Video' },
-  ],
-  frequency: [
-    { icon: faGem, name: 'Popular', path: '/' },
-    { icon: faClock, name: 'Recent', path: '/' }
-  ],
-}
+const FilterMenu = () => {
+  const { query, filter } = useParams();
+  const filterItems = [
+    { icon: faBorderAll, name: 'All Posts', divide: true, path: `/search/${query}/` },
+    { icon: faFont, name: 'Text', path: `/search/${query}/text` },
+    { color: popColors.redOrange, icon: faCameraRetro, name: 'Photo', path: `/search/${query}/photo` },
+    { color: popColors.pizzazz, icon: faQuoteLeft, name: 'Quote', path: `/search/${query}/quote` },
+    { color: popColors.malachite, icon: faLink, name: 'Link', path: `/search/${query}/link` },
+    { color: popColors.cornflowerBlue, icon: faHeadphones, name: 'Audio', path: `/search/${query}/audio` },
+    { color: popColors.hotPink, icon: faVideo, name: 'Video', path: `/search/${query}/video` },
+  ];
 
-const FilterMenu = ({ variant = 'contentType' }) => {
+  const [popoverOpen, setPopoverOpen] = useState(false);
+  const togglePopover = e => {
+    e.stopPropagation();
+    setPopoverOpen(prev => !prev);
+  };
+  const closePopover = () => setPopoverOpen(false);
+
+  const renderFilterItems = useMemo(() => filterItems.map(({
+    checked,
+    color,
+    icon,
+    name,
+    path = '/',
+    divide = false
+  }) => (
+      <FilterItem key={name} color={color}>
+        <FilterLink to={path}>
+          <FilterIcon icon={icon} />
+          <FilterText>{name}</FilterText>
+          {checked && <FilterCheckIcon />}
+        </FilterLink>
+        {divide && <FilterRule />}
+      </FilterItem>
+    )), [filterItems]);
+
   return (
     <FilterMenuContainer>
-      <FilterBtn>
-        <FilterName>Most popular</FilterName>
+      <FilterBtn onClick={togglePopover}>
+        <FilterName >Post type</FilterName>
         <FilterIconBox>
           <DownChevronIcon />
         </FilterIconBox>
       </FilterBtn>
-      <MenuPopover open={true} filterItems={variantItems[variant]} />
+      <Popover isOpen={popoverOpen} onClickOutside={closePopover}>
+        <FilterList>
+          {renderFilterItems}
+        </FilterList>
+      </Popover>
     </FilterMenuContainer>
   );
 };

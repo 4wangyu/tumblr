@@ -5,7 +5,6 @@ const SearchHeader = ({ query }) => {
   return (
     <SearchHeaderContainer>
       <SearchTitle>{query}</SearchTitle>
-      <SearchSuggestions>Related: Hey Wassup Wasgood</SearchSuggestions>
     </SearchHeaderContainer>
   )
 }
