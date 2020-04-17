@@ -1,23 +1,23 @@
 import styled from 'styled-components';
-import styledMap from 'styled-map';
 import { key as theme } from 'styled-theme'
 import α from 'color-alpha';
 import { NavLink } from 'react-router-dom';
 import { flexCenter } from 'styled/helpers';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 // -------------------- AuthNav
-export const Nav = styled.nav`
+export const AuthNavContainer = styled.nav`
   justify-self: end;
   position: relative;
 `;
 
-export const NavBtn = styled(NavLink).attrs({
+export const AuthBtnLink = styled(NavLink).attrs({
   activeClassName: 'active'
 })`
   background-color: ${α('#fff', .9)};
   &, &:hover {
     color: ${theme('colors.primary')};
   }
-  
 
   &.active{
     background-color: ${α('#000', .1)};
@@ -38,35 +38,44 @@ export const NavBtn = styled(NavLink).attrs({
 `;
 
 // -------------------- PrivateNav
-export const NavTabIndex = styled(Nav)`
+export const PrivateNavContainer = styled(AuthNavContainer)`
   ${flexCenter};
 `;
 
-export const TabLink = styled(NavLink).attrs(props => ({
-  activeClassName: 'selected'
-}))`
-  padding: 0 1.6rem;
+export const PrivateNavLink = styled(NavLink).attrs({
+  activeClassName: 'link-active'
+})`
   color: ${α('#fff', .65)};
-  &.selected {color: #fff;}
+  padding: 0 1.6rem;
+  
+  &.link-active {
+    color: #fff;
+  }
+
+  &.link-hover {
+    :hover {
+      color: #fff;
+    }
+  }
 `;
 
-export const TabBtn = styled(TabLink).attrs(props => ({
-  as: 'a'
-}))`
-  &, &:hover {color: #fff;}
+export const PrivateLink = styled(PrivateNavLink).attrs({ as: 'a' })``;
+
+export const NavIcon = styled(FontAwesomeIcon)`
+  font-size: 2.1rem;
 `;
 
 export const ComposeBtn = styled.button`
-  cursor: pointer;
-  width: 4.5rem;
-  height: 3.2rem;
-  border-radius: 3px;
   background-color: ${theme('colors.highlight')};
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  height: 3.2rem;
+  margin-left: 1rem;
   padding: 0 1rem 0 1rem;
-  color: ${theme('colors.primary')};
-  &:hover {
+  width: 4.5rem;
+
+  &, &:hover {
     color: ${theme('colors.primary')};
   }
-  border: none;
-  margin-left: 1rem;
 `;

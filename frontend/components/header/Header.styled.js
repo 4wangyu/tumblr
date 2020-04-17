@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import styledMap from 'styled-map';
 import α from 'color-alpha';
 import { key as theme } from 'styled-theme';
+import { Link } from 'react-router-dom';
 
 export const HeaderContainer = styled.header`
   align-items: center;
@@ -9,6 +10,7 @@ export const HeaderContainer = styled.header`
   border-bottom: 1px solid ${α('white', .15)};
   display: grid;
   grid-template-columns: min-content minmax(auto, 48rem) auto;
+  grid-column-gap: 2rem;
   height: 5.4rem;
   justify-content: stretch;
   padding: 0 2rem;
@@ -18,8 +20,7 @@ export const HeaderContainer = styled.header`
   z-index: 10;
 `;
 
-export const Logo = styled.span`
-  cursor: default;
+export const Logo = styled(Link).attrs({ to: '/dashboard' })`
   text-shadow: 2px 2px 3px ${α('#404040', .15)};
   font-family: ${theme('titleFont')};
   color: white;
