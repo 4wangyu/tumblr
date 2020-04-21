@@ -9,7 +9,7 @@ export const AuthPageContainer = styled.div`
   color: white;
   width: 30rem;
   margin: 0 auto;
-  margin-top: 25vh;
+  margin-top: 15vh;
   position: relative;
 `;
 

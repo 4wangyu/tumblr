@@ -17,10 +17,9 @@ export const slider = {
     })
   },
   transitions: {
-    delay: .1,
-    duration: .2,
-    type: 'tween',
-    ease: 'easeInOut'
+    type: 'spring',
+    stiffness: 70,
+    damping: 15,
   }
 };
 

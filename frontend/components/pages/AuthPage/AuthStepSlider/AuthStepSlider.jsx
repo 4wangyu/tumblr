@@ -32,17 +32,14 @@ const AuthStepSlider = () => {
 
   const {
     decrement: slideLeft, increment: slideRight,
-    direction, step, stepIndex, reset, lock: lockSlider, unlock: unlockSlider, isLocked: isSliderLocked
+    direction, step, stepIndex, lock: lockSlider, unlock: unlockSlider, isLocked: isSliderLocked
   } = useSlider({ length: authSteps.length });
 
-  useEffect(() => {
-    reset();
-  }, [atSignup]);
 
   const {
     handleBlur, handleChange, handleSubmit,
     values: userFields, setValues: setUserFields, errors, isSubmitting,
-  } = useFormValidation({ initialValues, onSubmit })
+  } = useFormValidation({ initialValues, onSubmit, atSignup })
 
 
   const [isTyping, setIsTyping] = useState(false);

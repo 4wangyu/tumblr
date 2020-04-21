@@ -6,7 +6,8 @@ const isSecurePassword = password => /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/.test(
 
 const useFormValidation = ({
   onSubmit = () => null,
-  initialValues = {}
+  initialValues = {},
+  atSignup
 }) => {
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState({});
@@ -24,7 +25,7 @@ const useFormValidation = ({
           break;
         };
         case "password": {
-          if (!isSecurePassword(value)) newErrors.password.push(`Password must contain at least one number, one lowercase and one uppercase letter`);
+          if (!isSecurePassword(value)) newErrors.password.push(atSignup ? `Password must contain at least one number, one lowercase and one uppercase letter` : `You email or password were incorrect`);
           break;
         };
       }
