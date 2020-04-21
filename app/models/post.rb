@@ -1,3 +1,4 @@
+require 'open-uri'
 class Post < ApplicationRecord
   # ----------------------------- Associations
   belongs_to :user
@@ -9,8 +10,6 @@ class Post < ApplicationRecord
 
   has_many :taggings, as: :taggable, dependent: :destroy
   has_many :tags, through: :taggings
-
-  has_many :reblogs, dependent: :destroy
   # ----------------------------- ActiveStorage
   
   # ----------------------------- Scope
@@ -40,6 +39,27 @@ class Post < ApplicationRecord
       q = q.where(content_type: content_type)
     end
       q
+  end
+
+  def self.from_unsplash(query: '', image_count: 1)
+    raise "Invalid query" if query.nil? || query.empty?
+
+    post = Post.new
+    image_gallery = ImageGallery.new()
+    tags = []
+    body = ''
+
+    photos = Unsplash::Photo.search(query, rand(1..3), 20).sample(image_count)
+    return if photos.empty?
+    photos.each do |photo|
+      urls = photo.urls
+      tags.concat(photo.tags.map { |tag| tag['title']})
+      body = photo.description if body.empty? && !photo.description.nil?
+      filename = photo.alt_description
+      image_gallery.images.attach( io: open(urls.full), filename: filename)
+    end
+
+    Post.new({ content: image_gallery, body: body, all_tags: tags.uniq })
   end
 
 end

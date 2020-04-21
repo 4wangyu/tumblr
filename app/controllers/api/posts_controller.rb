@@ -61,11 +61,15 @@ class Api::PostsController < ApplicationController
         nil
     end
 
+    unless content.valid? 
+      render json: content.group_error_messages, status: :unprocessable_entity and return
+    end
+
     @post = current_user.posts.create(content: content, all_tags: post_params[:all_tags], body: post_params[:body])
     if @post
       render :show, status: :created # 201
     else
-      render json: @post.errors.full_messages, status: :unprocessable_entity # 422
+      render json: @post.group_error_messages, status: :unprocessable_entity # 422
     end
   end
 

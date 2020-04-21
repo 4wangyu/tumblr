@@ -2,6 +2,12 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.3'
+# API for seeding free, high-definition photos
+gem 'unsplash'
+# Structure seed files by environment, tables, and execute in specified order
+gem 'seedbank'
+# Create seed data files from the existing data in the database
+gem 'seed_dump'
 # Execute between when your action is completed and the template is rendered
 gem 'rails5_before_render', require: 'before_render'
 # Fetch and parse OpenGraph properties from an URL or a given string

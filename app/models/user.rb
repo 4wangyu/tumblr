@@ -53,10 +53,11 @@ class User < ApplicationRecord
   end
 
   # ----------------------------- Queries
-  def self.username_like(query)
+  def self.name_like(query)
     return [] if query.nil? || query.empty?
     self
       .where("username LIKE ?", "%#{query.downcase}%")
+      .or(self.where("title LIKE ?", "%#{query.downcase}%"))
   end
 
   def dashboard_posts

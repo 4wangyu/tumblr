@@ -35,7 +35,7 @@ class Api::UsersController < ApplicationController
   end
 
   def search
-    @users = User.username_like(params[:query])
+    @users = User.name_like(params[:query])
 
     render :index
   end

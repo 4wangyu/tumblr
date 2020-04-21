@@ -30,8 +30,6 @@ Rails.application.routes.draw do
       get 'search'
     end
 
-    resources :reblogs, only: [:create, :show, :update, :destroy]
-
     namespace :open_graph do
       post 'fetch'
     end

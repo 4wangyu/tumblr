@@ -104,17 +104,6 @@ ActiveRecord::Schema.define(version: 2020_03_18_034555) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "reblogs", force: :cascade do |t|
-    t.integer "parent_id"
-    t.bigint "user_id", null: false
-    t.bigint "post_id", null: false
-    t.text "caption"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["post_id"], name: "index_reblogs_on_post_id"
-    t.index ["user_id"], name: "index_reblogs_on_user_id"
-  end
-
   create_table "taggings", force: :cascade do |t|
     t.string "taggable_type", null: false
     t.bigint "taggable_id", null: false
@@ -144,11 +133,13 @@ ActiveRecord::Schema.define(version: 2020_03_18_034555) do
     t.string "email", null: false
     t.string "password_digest", null: false
     t.string "username", null: false
+    t.string "title"
     t.string "session_token", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["session_token"], name: "index_users_on_session_token", unique: true
+    t.index ["title"], name: "index_users_on_title", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
@@ -161,7 +152,5 @@ ActiveRecord::Schema.define(version: 2020_03_18_034555) do
   add_foreign_key "likes", "posts"
   add_foreign_key "likes", "users"
   add_foreign_key "posts", "users"
-  add_foreign_key "reblogs", "posts"
-  add_foreign_key "reblogs", "users"
   add_foreign_key "taggings", "tags"
 end
