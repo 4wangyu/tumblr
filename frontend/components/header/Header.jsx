@@ -11,7 +11,7 @@ const Header = () => {
 
   return (
     <HeaderContainer>
-      <Logo>th</Logo>
+      <Logo to='/dashboard'>th</Logo>
       <Searchbar />
       {isLoggedIn ? <PrivateNav /> : <AuthNav />}
     </HeaderContainer>

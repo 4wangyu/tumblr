@@ -24,7 +24,7 @@ const Audio = () => {
         style={{ width: trackProgress }}
       />
       <PlayPauseBtn onClick={toggleAudioPlaying} size={size}>
-        <PlayPauseBtnIcon playing={playing} />
+        <PlayPauseBtnIcon playing={playing ? 'true' : 'false'} />
       </PlayPauseBtn>
       <AudioInfo>
         <AudioInfoText boldText={true}>{track}</AudioInfoText>

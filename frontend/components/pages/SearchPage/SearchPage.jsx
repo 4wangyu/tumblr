@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { SearchPageContainer } from './SearchPage.styled'
-import PostCollection from 'components/shared/PostCollection';
+import PostCollection from 'components/organisms/PostCollection';
 import SearchControls from './SearchControls';
 import SearchHeader from './SearchHeader';
 import capitalize from 'util/capitalize';

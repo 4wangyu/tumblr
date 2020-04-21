@@ -48,7 +48,7 @@ export const PlayPauseBtn = styled.button`
 `;
 
 export const PlayPauseBtnIcon = styled(IconLg).attrs(props => ({
-  icon: props.playing ? faPauseCircle : faPlayCircle
+  icon: props.playing === 'true' ? faPauseCircle : faPlayCircle
 }))`
   color: white;
 `;

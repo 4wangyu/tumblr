@@ -5,13 +5,19 @@ const _initialCollections = {
   explore: new Set(),
   search: new Set(),
   likes: new Set(),
-  radar: new Set()
+  radar: new Set(),
+  authored: new Set()
 };
 
 const collectionsReducer = (state = _initialCollections, action) => {
   Object.freeze(state);
   let newState = Object.assign({}, state);
   switch (action.type) {
+    case Types.RECEIVE_AUTHORED_POST:
+      const { post: { id } } = action;
+      newState.authored.add(`${id}`)
+      newState.dashboard.add(`${id}`)
+      return newState;
     case Types.RECEIVE_POSTS_COLLECTION:
       const { posts, collection } = action;
       for (const postId of Object.keys(posts))
@@ -20,7 +26,7 @@ const collectionsReducer = (state = _initialCollections, action) => {
     case Types.REMOVE_POST:
       const { postId } = action;
       for (const collection of Object.keys(newState))
-        newState[collection].delete(postId);
+        newState[collection].delete(`${postId}`);
       return newState;
     case Types.WIPE_POSTS_COLLECTION:
       const { collection: c } = action;

@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux';
 import { Creators as Modal } from 'store/modal/actions';
 import { Confirmation, ConfirmationMsg, ConfirmationBtns } from './ConfirmationModal.styled'
-import Btn from 'styled/base/Btn.styled';
+import Btn from 'components/atoms/Btn';
 
 const DeletePostModal = ({ onConfirm, message }) => {
   const dispatch = useDispatch();
@@ -17,8 +17,8 @@ const DeletePostModal = ({ onConfirm, message }) => {
     <Confirmation>
       <ConfirmationMsg>{message}</ConfirmationMsg>
       <ConfirmationBtns>
-        <Btn large secondary onClick={closeModal}>Cancel</Btn>
-        <Btn large onClick={handleConfirm}>OK</Btn>
+        <Btn size='large' type='secondary' onClick={closeModal}>Cancel</Btn>
+        <Btn size='large' onClick={handleConfirm}>OK</Btn>
       </ConfirmationBtns>
     </Confirmation>
   )

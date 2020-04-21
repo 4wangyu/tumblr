@@ -3,7 +3,7 @@ import { PostContext } from '../../Post';
 import {
   LinkContainer,
   ThumbnailBox, ThumbnailImg,
-  HostName,
+  HostUrl,
   LinkInfo,
   TitleText, DescriptionText
 } from './Link.styled';
@@ -13,15 +13,15 @@ const Link = () => {
   const siteHostName = useMemo(() => new URL(url).host, [url]);
 
   return (
-    <LinkContainer as='a' href={url} target='_blank'>
+    <LinkContainer href={url}>
       {thumbnailUrl && (
         <ThumbnailBox>
-          <HostName href={url} imageCaption={true}>{siteHostName}</HostName>
+          <HostUrl as='div' imageCaption={true}>{siteHostName}</HostUrl>
           <ThumbnailImg src={thumbnailUrl} />
         </ThumbnailBox>
       )}
       <LinkInfo>
-        {!thumbnailUrl && <HostName href={url}>{siteHostName}</HostName>}
+        {!thumbnailUrl && <HostUrl href={url}>{siteHostName}</HostUrl>}
         <TitleText>{title}</TitleText>
         <DescriptionText>{description}</DescriptionText>
       </LinkInfo>

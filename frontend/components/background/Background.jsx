@@ -3,7 +3,7 @@ import React from 'react'
 import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from 'store/selectors';
-import { Bg } from './Background.styled';
+import { BackgroundContainer } from './Background.styled';
 
 
 const Background = ({ children }) => {
@@ -16,9 +16,9 @@ const Background = ({ children }) => {
   const approvedPaths = ['/login', '/', '/register']
 
   return (
-    <Bg image={approvedPaths.includes(pathname)} src={sources[0]}>
+    <BackgroundContainer>
       {children}
-    </Bg>
+    </BackgroundContainer>
   )
 
 }

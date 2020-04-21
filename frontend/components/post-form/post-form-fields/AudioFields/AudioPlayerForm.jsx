@@ -25,7 +25,7 @@ const AudioPlayerForm = ({
       <AudioProgress style={{ width: trackProgress }}
       />
       <PlayPauseBtn onClick={toggleAudioPlaying}>
-        <PlayPauseBtnIcon playing={playing} />
+        <PlayPauseBtnIcon playing={playing ? 'true' : 'false'} />
       </PlayPauseBtn>
       <AudioInfo>
         <InfoGroup>

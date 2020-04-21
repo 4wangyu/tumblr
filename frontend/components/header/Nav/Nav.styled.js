@@ -42,16 +42,10 @@ export const PrivateNavContainer = styled(AuthNavContainer)`
   ${flexCenter};
 `;
 
-export const PrivateNavLink = styled(NavLink).attrs({
-  activeClassName: 'link-active'
-})`
+export const PrivateLink = styled.a`
   color: ${α('#fff', .65)};
   padding: 0 1.6rem;
   
-  &.link-active {
-    color: #fff;
-  }
-
   &.link-hover {
     :hover {
       color: #fff;
@@ -59,7 +53,13 @@ export const PrivateNavLink = styled(NavLink).attrs({
   }
 `;
 
-export const PrivateLink = styled(PrivateNavLink).attrs({ as: 'a' })``;
+export const PrivateNavLink = styled(PrivateLink).attrs({
+  as: NavLink, activeClassName: 'link-active'
+})`
+  &.link-active {
+    color: #fff;
+  }
+`;
 
 export const NavIcon = styled(FontAwesomeIcon)`
   font-size: 2.1rem;

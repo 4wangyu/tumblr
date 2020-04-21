@@ -20,7 +20,7 @@ export const HeaderContainer = styled.header`
   z-index: 10;
 `;
 
-export const Logo = styled(Link).attrs({ to: '/dashboard' })`
+export const Logo = styled(Link)`
   text-shadow: 2px 2px 3px ${α('#404040', .15)};
   font-family: ${theme('titleFont')};
   color: white;

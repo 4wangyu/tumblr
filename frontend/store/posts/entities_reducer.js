@@ -11,6 +11,7 @@ const entitiesReducer = (state = _initialEntities, action) => {
       const { posts } = action;
       return ({ ...state, ...posts });
     case Types.RECEIVE_POST:
+    case Types.RECEIVE_AUTHORED_POST:
       const { post } = action;
       return ({ ...state, [post.id]: post });
     case Types.REMOVE_POST:

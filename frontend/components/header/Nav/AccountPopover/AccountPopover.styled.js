@@ -39,7 +39,7 @@ export const MenuList = styled.ul`
 
 export const MenuItem = styled.li``;
 
-export const ItemLink = styled(Link)`
+export const ItemBtn = styled.a`
   align-items: center;
   display: flex;
   font-size: ${theme('fontSizes.md')};
@@ -55,7 +55,7 @@ export const ItemLink = styled(Link)`
   }
 `;
 
-export const ItemBtn = styled(ItemLink).attrs({ as: 'a' })``;
+export const ItemLink = styled(ItemBtn).attrs({ as: Link })``;
 
 export const ItemIcon = styled(FontAwesomeIcon)`
   font-size: 1.9rem;

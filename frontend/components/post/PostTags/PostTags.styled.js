@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import { key as theme } from "styled-theme";
+import { Link } from 'react-router-dom';
 
-export const TagIndex = styled.div`
+export const TagList = styled.div`
   color: ${theme('colors.textLight')};
   padding: .5rem 2rem 1rem 1.5rem;
   margin-top: .5rem;
@@ -11,7 +12,7 @@ export const TagIndex = styled.div`
   align-items: center;
 `;
 
-export const Tag = styled.span`
+export const TagLink = styled(Link)`
   cursor: pointer;
   padding: 0 5px;
   border-radius: 3px;

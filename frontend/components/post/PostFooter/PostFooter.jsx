@@ -14,7 +14,7 @@ const PostFooter = () => {
 
   const dispatch = useDispatch();
   const togglePostLike = (postId, isLiked) => dispatch(Posts.togglePostLike(postId, isLiked));
-  const destoryPost = () => dispatch(Posts.destroyPost(post.id.toString()));
+  const destoryPost = () => dispatch(Posts.destroyPost(`${post.id}`));
   const openConfirmationModal = () => {
     dispatch(Modal.openModal('Confirmation', {
       onConfirm: destoryPost,

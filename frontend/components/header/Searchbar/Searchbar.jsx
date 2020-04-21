@@ -3,7 +3,7 @@ import { useHistory, useRouteMatch } from 'react-router-dom';
 import {
   SearchbarContainer, SearchbarInput,
   ResultsContainer, ResultsSection, ResultsHeader,
-  ResultsList, ResultsItem, ResultsItemLink,
+  ResultsList, ResultsItem, ResultsItemLink, Underline as U,
   ResultsTitle, ResultsText, ResultsSubtext, SearchIcon, UserAvatar
 } from './Searchbar.styled';
 import Popover from 'components/molecules/Popover';

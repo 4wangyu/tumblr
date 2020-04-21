@@ -3,7 +3,7 @@ import { key as theme } from 'styled-theme';
 import α from 'color-alpha';
 
 export const LinkContainer = styled.a.attrs({
-  target: '_blank', rel: "noopener noreferrer"
+  target: '_blank', rel: 'noopener noreferrer'
 })`
   background-color: ${theme('colors.tertiary')};
   display: flex;
@@ -31,7 +31,9 @@ export const ThumbnailImg = styled.img`
   width: 100%;
 `;
 
-export const HostName = styled.a.attrs({ target: '_blank' })`
+export const HostUrl = styled.a.attrs({
+  target: '_blank', rel: 'noopener noreferrer'
+})`
   z-index: 1;
   font-size: ${theme('fontSizes.md')};
   font-weight: ${theme('fontWeights.heading')};

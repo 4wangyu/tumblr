@@ -1,10 +1,8 @@
-import { useState, useEffect, useMemo, useCallback } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 const isValidEmail = email => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
 const isEmpty = value => value.length === 0;
 const isSecurePassword = password => /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/.test(password);
-const min = (n = 0, value) => value.length >= n;
-const max = (n = 0, value) => value.length <= n;
 
 const useFormValidation = ({
   onSubmit = () => null,
@@ -19,16 +17,14 @@ const useFormValidation = ({
     const newErrors = {}
     for (const [name, value] of Object.entries(values)) {
       newErrors[name] = [];
-      if (isEmpty(value)) newErrors[name].push(`A ${name} is required`);
+      if (isEmpty(value)) newErrors[name].push(`${name.charAt(0).toUpperCase() + name.slice(1)} can't be blank`);
       switch (name) {
         case "email": {
           if (!isValidEmail(value)) newErrors.email.push(`That's not a valid email address`);
           break;
         };
         case "password": {
-          // if (!isSecurePassword(value)) newErrors.password.push(`
-          //   Password must contain at least one number, one lowercase and one uppercase letter
-          // `);
+          if (!isSecurePassword(value)) newErrors.password.push(`Password must contain at least one number, one lowercase and one uppercase letter`);
           break;
         };
       }

@@ -2,15 +2,27 @@ import styled from 'styled-components';
 import { key as theme } from 'styled-theme';
 import α from 'color-alpha';
 import { cardPadding } from 'styled/base/Card.styled';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 
-// -------------------- Header
-export const CardHeader = styled.div`
+export const FormHeader = styled.div`
   ${cardPadding};
   border-bottom: .5px solid ${theme('colors.divider')};
 `;
 
-// -------------------- Footer
-export const CardFooter = styled.div`
+export const FormError = styled.div`
+  ${cardPadding};
+  background-color: ${theme('colors.warning')};
+  color: #fff;
+  display: flex;
+`;
+
+export const ExclamationIcon = styled(FontAwesomeIcon).attrs({ icon: faExclamationCircle })`
+  font-size: 2rem;
+  margin-right: 1rem;
+`
+
+export const FormFooter = styled.div`
   ${cardPadding};
   border-top: .5px solid ${theme('colors.divider')};
   display: flex;

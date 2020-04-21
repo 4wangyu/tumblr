@@ -4,8 +4,8 @@ import { selectCurrentUser, selectPostById } from 'store/selectors';
 import { Creators as Modal } from 'store/modal/actions';
 import { Thunks as Posts } from 'store/posts/actions';
 import { Card, CardContent } from 'styled/base/Card.styled';
-import { CardHeader, CardFooter } from './PostForm.styled';
-import Btn from 'styled/base/Btn.styled';
+import { FormHeader, FormError, ExclamationIcon,FormFooter } from './PostForm.styled';
+import { Btn } from 'components/atoms/Btn/Btn.styled';
 import ImageGallery from './post-form-fields/ImageGalleryFields';
 import Video from './post-form-fields/VideoFields';
 import Audio from './post-form-fields/AudioFields/index';
@@ -29,6 +29,8 @@ const PostForm = ({ postType, postId = null }) => {
   const createPost = formFields => dispatch(Posts.createPost(formFields));
   const updatePost = (postId, formFields) => dispatch(Posts.updatePost(postId, formFields));
   const [formFields, setFormFields] = useState(post || {});
+  const [errors, setErrors] = useState({})
+  const [required, setRequired] = useState({})
 
   useEffect(() => {
     if (post) setFormFields(prev => ({ ...post, ...prev }));
@@ -49,31 +51,28 @@ const PostForm = ({ postType, postId = null }) => {
     setFormFields(prev => ({ ...prev, [name]: value }));
   }, [formFields]);
 
-  const processFormData = useCallback(() => {
+  const processFormData = () => {
     const newPost = pojoToFormData(formFields);
 
-    if (formFields.id) {
-      updatePost(formFields.id, newPost)
-        .then(() => closeModal());
-    } else {
-      createPost(newPost)
-        .then(() => closeModal());
-    };
-  }, [formFields]);
+    (formFields.id ? updatePost(formFields.id, newPost) : createPost(newPost))
+      .then(() => closeModal())
+      .fail(({ responseText: errorJSON }) => setErrors(JSON.parse(errorJSON)));
+  };
 
   return (
     <Card>
-      <CardHeader>{currentUser.username}</CardHeader>
+      <FormHeader>{currentUser.username}</FormHeader>
+      <FormError><ExclamationIcon /> {errors[Object.keys(errors)[0]]}</FormError>
       <CardContent noPadding>
         <FormContext.Provider value={{ formFields, ...formFields, setFormFields, handleTextInput }}>
           {getFields()[postType]}
           <TagManager />
         </FormContext.Provider>
       </CardContent>
-      <CardFooter>
-        <Btn secondary onClick={closeModal}>Close</Btn>
+      <FormFooter>
+        <Btn type='secondary' onClick={closeModal}>Close</Btn>
         <Btn onClick={processFormData}>Post</Btn>
-      </CardFooter>
+      </FormFooter>
     </Card>
   );
 };

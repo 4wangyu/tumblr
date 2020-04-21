@@ -82,7 +82,7 @@ const AccountPopover = ({ isOpen, close }) => {
             <ThumblrAvatar src={avatarAttachment.url} />
             <ThumblrDetails>
               <ThumblrUsername>{username}</ThumblrUsername>
-              <ThumblrTitle>title</ThumblrTitle>
+              <ThumblrTitle>{title}</ThumblrTitle>
             </ThumblrDetails>
           </Thumblr>
           <MenuSubSection>

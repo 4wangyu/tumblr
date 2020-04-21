@@ -91,6 +91,10 @@ export const ResultsItem = styled.div`
   }
 `;
 
+export const Underline = styled.span`
+  text-decoration: underline;
+`;
+
 export const ResultsItemLink = styled(ResultsItem).attrs({
   as: Link
 })`

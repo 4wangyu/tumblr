@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import capitalize from 'util/capitalize';
-import PostCollection from '../../shared/PostCollection';
+import PostCollection from 'components/organisms/PostCollection';
 
 export const FILTERS = Object.freeze([
   "trending", "text", "photo", "quote", "link", "audio", "video"

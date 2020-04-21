@@ -1,5 +1,5 @@
 import React from 'react'
-import PostCollection from 'components/shared/PostCollection';
+import PostCollection from 'components/organisms/PostCollection';
 import RecommendedBlogs from 'components/widgets/RecommendedBlogs';
 import RadarPost from 'components/widgets/RadarPost';
 import ComposePost from './ComposePost'

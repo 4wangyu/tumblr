@@ -7,6 +7,7 @@ export const { Types, Creators } = createActions({
   wipePostsCollection: ['collection'],
   receivePosts: ['posts'],
   receivePost: ['post'],
+  receiveAuthoredPost: ['post'],
   createPost: ['post'],
   updatePost: ['post'],
   removePost: ['postId']
@@ -20,7 +21,7 @@ Thunks.fetchPost = postId => dispatch => {
 
 Thunks.createPost = formPost => dispatch => {
   return APIUtil.createPost(formPost)
-    .then(post => dispatch(Creators.receivePost(post)));
+    .then(post => dispatch(Creators.receiveAuthoredPost(post)));
 };
 
 Thunks.updatePost = (postId, formPost) => dispatch => {

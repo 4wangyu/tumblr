@@ -1,7 +1,7 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { key as theme } from 'styled-theme';
 
-export const Bg = styled.div`
+export const BackgroundContainer = styled.div`
   width: 100% !important;
   min-height: 100vh;
 

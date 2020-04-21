@@ -45,13 +45,13 @@ export const PlayPauseBtn = styled.button`
 `;
 
 export const PlayPauseBtnIcon = styled(FontAwesomeIcon).attrs(props => ({
-  icon: props.playing ? faPauseCircle : faPlayCircle
+  icon: props.playing === 'true' ? faPauseCircle : faPlayCircle
 }))`
   color: white;
   font-size: ${styledMap('size', {
-  small: '2rem',
-  default: '3.5rem',
-})};
+    small: '2rem',
+    default: '3.5rem',
+  })};
 `;
 
 // -------------------- AudioInfo

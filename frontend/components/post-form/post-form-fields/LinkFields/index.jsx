@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState, useMemo } from 'react';
 import {
   LinkContainer,
   ThumbnailBox, ThumbnailImg,
-  HostName,
+  HostUrl,
   LinkInfo,
 } from 'components/Post/PostContent/Link/Link.styled';
 import { TitleTextarea, DescriptionTextarea } from './index.styled'
@@ -45,16 +45,15 @@ const LinkFields = () => {
   };
 
   if (siteHostName) return (
-    <LinkContainer as="div" >
+    <LinkContainer href={thumbnailUrl ? url : undefined} as={!thumbnailUrl ? 'div' : 'a'} >
       {thumbnailUrl && (
         <ThumbnailBox>
-          <HostName href={url} imageCaption={true}>{siteHostName}</HostName>
+          <HostUrl href={thumbnailUrl ? url: undefined} as={thumbnailUrl ? 'a' : 'div'} imageCaption={true}>{siteHostName}</HostUrl>
           <ThumbnailImg src={thumbnailUrl} />
         </ThumbnailBox>
-      )
-      }
+      )}
       <LinkInfo>
-        {!thumbnailUrl && <HostName href={url}>{siteHostName}</HostName>}
+        {!thumbnailUrl && <HostUrl href={url}>{siteHostName}</HostUrl>}
         <TitleTextarea
           lineHeight={34}
           name="title"

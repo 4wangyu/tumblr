@@ -66,4 +66,7 @@ export const HeaderUsername = styled.span`
 export const HeaderTitle = styled.span`
   font-size: ${theme('fontSizes.sm')};
   font-weight: ${theme('fontWeights.text')};
+  /* text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden; */
 `;

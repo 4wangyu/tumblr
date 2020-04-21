@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { flexCenter, flexCenterCol } from 'styled/helpers';
-import Btn from 'styled/base/Btn.styled';
+import Btn from 'components/atoms/Btn';
 import { pulse } from 'styled/keyframes';
 
 export const Confirmation = styled.div`
