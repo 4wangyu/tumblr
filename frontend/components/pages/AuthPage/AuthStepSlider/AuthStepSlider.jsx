@@ -6,9 +6,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 import useSlider from 'hooks/useSlider';
 import useFormValidation from 'hooks/useFormValidation';
 import { sleep, ghostType } from 'util/ghostTyper';
-import { StepSlider, StepForm } from './Auth.styled';
-import SignupSteps from './SignupSteps';
-import LoginSteps from './LoginSteps';
+import { AuthStepSliderContainer, StepForm } from './AuthStepSlider.styled';
+import { LoginSteps, SignupSteps } from '../AuthSteps';
 import { slider } from 'motions'
 
 export const AuthFormContext = createContext();
@@ -54,7 +53,7 @@ const AuthStepSlider = () => {
     if (isTyping) { return };
     setIsTyping(true);
     setUserFields({});
-    ghostType('demo@bot.com', letter => {
+    ghostType('demo@example.com', letter => {
       setUserFields(({ email = '', ...prev }) => ({ ...prev, email: email + letter }))
     }, 1500)
       .then(() => sleep(500))
@@ -63,7 +62,7 @@ const AuthStepSlider = () => {
       .then(() => $enterPassBtn.current.click())
       .then(() => sleep(1000))
       .then(() => {
-        return ghostType('password', letter => {
+        return ghostType('Password4321!', letter => {
           setUserFields(({ password = '', ...prev }) => ({ ...prev, password: password + letter }))
         }, 1000)
       })
@@ -82,7 +81,7 @@ const AuthStepSlider = () => {
   const preventDefault = e => e.preventDefault();
 
   return (
-    <StepSlider>
+    <AuthStepSliderContainer>
       <AnimatePresence initial={false} custom={direction}>
         <motion.div
           key={step}
@@ -100,7 +99,7 @@ const AuthStepSlider = () => {
           </StepForm>
         </motion.div>
       </AnimatePresence>
-    </StepSlider>
+    </AuthStepSliderContainer>
   )
 }
 

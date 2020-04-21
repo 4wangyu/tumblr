@@ -1,16 +1,16 @@
 import React from 'react';
-import { AuthForm, Logo, SubHeading } from './Auth.styled';
+import { AuthPageContainer, Logo, SubHeading } from './AuthPage.styled';
 import AuthStepSlider from './AuthStepSlider';
 
-const Auth = () => (
-  <AuthForm>
+const AuthPage = () => (
+  <AuthPageContainer>
     <Logo large>thumblr</Logo>
     <SubHeading>
       <span>Come for what you love.</span>
       <span>Stay for what you discover.</span>
     </SubHeading>
     <AuthStepSlider />
-  </AuthForm>
+  </AuthPageContainer>
 );
 
-export default Auth;
+export default AuthPage;

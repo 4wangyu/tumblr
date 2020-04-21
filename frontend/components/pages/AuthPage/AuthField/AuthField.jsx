@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
-import { AuthFormContext } from './AuthStepSlider';
-import { InputField } from './Auth.styled';
+import { AuthFormContext } from '../AuthStepSlider';
+import { InputField } from './AuthField.styled';
 
 const AuthField = ({ field, type = 'text' }) => {
   const {

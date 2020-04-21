@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
-import Btn from 'styled/base/Btn.styled';
-import { FormGroup, ActionLink } from './Auth.styled';
-import AuthField from './AuthField';
-import AuthError from './AuthError';
-import { AuthFormContext } from './AuthStepSlider';
+import Btn from 'components/atoms/Btn';
+import { FormGroup, ActionLink } from './AuthSteps.styled';
+import AuthField from '../AuthField';
+import AuthError from '../AuthError';
+import { AuthFormContext } from '../AuthStepSlider';
 
 export const LoginStep1 = () => {
   const { $nextBtn, slideRight, startGhostLogin } = useContext(AuthFormContext);
@@ -14,8 +14,8 @@ export const LoginStep1 = () => {
         <AuthField field='email' />
       </FormGroup>
       <AuthError field='email' />
-      <Btn large ref={$nextBtn} onClick={slideRight}>Next</Btn>
-      <Btn large quarternary animate onClick={startGhostLogin}>Demo</Btn>
+      <Btn size='large' ref={$nextBtn} onClick={slideRight}>Next</Btn>
+      <Btn size='large' type='quarternary' animate='thump' onClick={startGhostLogin}>Demo</Btn>
     </>
   );
 };
@@ -25,8 +25,8 @@ export const LoginStep2 = () => {
 
   return (
     <>
-      <Btn secondary large>Send me a magic link</Btn>
-      <Btn large ref={$enterPassBtn} onClick={slideRight}>Use password to log in</Btn>
+      <Btn type='secondary' size='large'>Send me a magic link</Btn>
+      <Btn size='large' ref={$enterPassBtn} onClick={slideRight}>Use password to log in</Btn>
       <ActionLink onClick={slideLeft}>back</ActionLink>
     </>
   );
@@ -42,7 +42,7 @@ export const LoginStep3 = () => {
         <AuthField field='password' type="password" />
       </FormGroup>
       <AuthError fields={['email', 'password']} />
-      <Btn large ref={$loginBtn} onClick={handleSubmit}>Login</Btn>
+      <Btn size='large' ref={$loginBtn} onClick={handleSubmit}>Login</Btn>
       <ActionLink to="/">Forgot password?</ActionLink>
     </>
   );

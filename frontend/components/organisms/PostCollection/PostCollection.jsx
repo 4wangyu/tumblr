@@ -4,8 +4,8 @@ import { Thunks as PostsThunks, Creators as PostsCreators } from 'store/posts/ac
 import { selectPostsByCollection } from 'store/selectors';
 import { PostCollectionContainer, CollectionList, CollectionItem, EmptyCollectionMsg } from './PostCollection.styled';
 import Post from '../../Post';
-import ScrollBtn from './ScrollBtn';
-import Loader from './Loader';
+import ScrollBtn from 'components/atoms/ScrollBtn';
+import Loader from 'components/atoms/Loader';
 import compareCreatedAt from 'util/compare_created_at';
 import usePagination from 'hooks/usePagination';
 import useIntersect from 'hooks/useIntersect';
@@ -16,7 +16,7 @@ import Masonry from 'react-masonry-component';
 const masonryOptions = {
   transitionDuration: 0
 };
-const imagesLoadedOptions = { background: '.my-bg-image-el' }
+
 const PostCollection = ({
   collection,
   layout = 'row',
@@ -40,11 +40,13 @@ const PostCollection = ({
   const postSize = useMemo(() => layout === "grid" ? "small" : "large", [layout]);
 
   // Pagination
-  const { offset, limit, setCount, hasNext } = usePagination({ increment: 3 });
+  const { offset, limit, setCount, hasNext } = usePagination({ increment: 2 });
 
   useEffect(() => {
     wipeCollection();
     loadCollection();
+
+    return () => window.scrollTo(0, 0);
   }, []);
 
   // Loading State
@@ -59,8 +61,10 @@ const PostCollection = ({
   const loadCollection = () => {
     if (isLoading) return;
     setLoading(true);
+    console.log('FETCHING')
     fetchCollection({ offset, limit, ...filters })
       .then(({ postCount }) => {
+        console.log('Post count:', postCount)
         setCount(postCount);
         setLoading(false)
       });
@@ -74,7 +78,7 @@ const PostCollection = ({
 
   const renderPosts = () => finalPosts.map((post, idx, { length }) => (
     <CollectionItem
-      key={idx}
+      key={post.id}
       as={motion.li}
       variants={postVariants}
       initial="enter"

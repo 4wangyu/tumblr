@@ -1,0 +1,1 @@
+export { Btn as default } from './Btn.styled'

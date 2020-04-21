@@ -1,6 +1,6 @@
 import React, { useContext, useMemo, useEffect } from 'react'
-import { AuthFormContext } from './AuthStepSlider';
-import { ErrorMsg } from './Auth.styled';
+import { AuthFormContext } from '../AuthStepSlider';
+import { ErrorMsg } from './AuthError.styled';
 import { AnimatePresence, motion } from 'framer-motion';
 import { descendAscend } from 'motions';
 
