@@ -1,5 +1,4 @@
 json.extract! post, :id, :content_type, :body
-json.is_reblog false
 case post.content_type
   when 'ImageGallery'
     json.partial! '/api/posts/image_gallery', image_gallery: post.content
