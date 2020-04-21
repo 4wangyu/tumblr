@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.3'
+# Rails templating system
+gem 'actionview', '>= 5.2.4.2' # Security patch recommended by Dependabot
 # API for seeding free, high-definition photos
 gem 'unsplash'
 # Structure seed files by environment, tables, and execute in specified order
