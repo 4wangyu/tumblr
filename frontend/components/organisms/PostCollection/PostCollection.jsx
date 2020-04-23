@@ -126,7 +126,6 @@ const PostCollection = ({
       </CollectionList>
       {!isLoading && finalPosts.length === 0 && <EmptyCollectionMsg>That's about it</EmptyCollectionMsg>}
       <Loader isLoading={isLoading} />
-      <ScrollBtn />
     </PostCollectionContainer >
   );
 };

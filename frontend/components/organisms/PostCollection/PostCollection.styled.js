@@ -39,4 +39,5 @@ export const EmptyCollectionMsg = styled.p`
   font-size: 2.6rem;
   margin: 2rem;
   margin-top: 14rem;
+  text-align: center;
 `;

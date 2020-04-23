@@ -6,9 +6,8 @@ import { SearchControlsContainer, SearchFiltersBox } from './SearchControls.styl
 const SearchControls = () => (
   <SearchControlsContainer>
     <SearchFiltersBox>
-      <FilterMenu/>
+      <FilterMenu />
     </SearchFiltersBox>
-    <LayoutBtns />
   </SearchControlsContainer>
 );
 
