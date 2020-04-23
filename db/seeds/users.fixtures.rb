@@ -7,7 +7,7 @@ class UsersFixtures
     }, # 2
     { 
       username: 'goofballz', 
-      title: '(✪ฺܫ✪ฺ)', 
+      title: '(✪ܫ✪)', 
       keywords: ['funny', 'funny face', 'funny animals'] 
     }, # 3
     { 
@@ -26,25 +26,35 @@ class UsersFixtures
       keywords: ['fashion', 'fashion runway', 'model', 'high fashion'] 
     }, # 6
     { 
-      username: 'rave.nation', 
-      title: 'Spreading PLUR', 
-      keywords: ['dj', 'concert', 'rave', 'music festival'] 
-    }, # 7
-    { 
       username: 'audition-and-scene', 
-      title: 'Live for the applause', 
+      title: 'THE APPLAUSE', 
       keywords: ['actor', 'actress', 'theatre', 'performance'] 
-    }, # 8
+    }, # 7
     { 
       username: 'retro.tech', 
       title: 'Your trusted source for viral and luxurious technology and inventions in the world.', 
       keywords: ['electronic', 'robot', 'drone', 'tech'] 
-    }, # 9
+    }, # 8
     { 
       username: 'archae-heart', 
       title: 'Bringing Architecture, Design and Art to your Dash.', 
       keywords: ['architecture', 'building', 'skyline',] 
-    } # 10
+    } # 9
+    { 
+      username: 'rave.nation', 
+      title: 'Spreading PLUR', 
+      keywords: ['dj', 'concert', 'rave', 'music festival'] 
+    }, # 10
+    { 
+      username: 'national_parks', 
+      title: 'adventure is worthwhile', 
+      keywords: ['national parks'] 
+    }, # 11
+    { 
+      username: 'wallpaperboss', 
+      title: 'Take your phone / desktop to the next level', 
+      keywords: ['wallpapers', 'desktop background'] 
+    }, # 12
   ]
 
   def self.demo
