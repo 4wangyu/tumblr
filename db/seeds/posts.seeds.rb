@@ -8,12 +8,12 @@ def rand_image_count
   end
 end
 
-after :users do
-  40.times do
+# after :users do
+  10.times do
     fixture = UsersFixtures.random
     user = User.find_by_username(fixture[:username])
     post = Post.from_unsplash(query: fixture[:keywords].sample, image_count: rand_image_count)
     user.posts << post unless post.nil?
-    sleep(2.seconds)
+    sleep(10.seconds)
   end
-end
+# end
