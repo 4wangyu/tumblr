@@ -7,7 +7,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 export const SearchbarContainer = styled.form`
+  align-items: center;
   position: relative;
+  display: flex;
   font-size: 1.4rem;
   height: 3.4rem;
 
@@ -54,6 +56,10 @@ export const SearchbarInput = styled.input.attrs({
     }
   }
 `;
+export const LoaderBox = styled.div`
+  color: ${α('black', .65)};
+  margin-left: -6rem;
+`;
 
 export const ResultsContainer = styled.div`
   ${flexCol};
@@ -61,7 +67,8 @@ export const ResultsContainer = styled.div`
   border-radius: 3px;
   color:  ${theme('colors.text')};
   font-weight: ${theme('fontWeights.subHeading')};
-  overflow: hidden;
+  max-height: 51rem;
+  overflow: scroll;
   width: 100%;
 `;
 

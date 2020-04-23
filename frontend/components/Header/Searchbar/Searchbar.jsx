@@ -1,14 +1,14 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import {
-  SearchbarContainer, SearchbarInput,
+  SearchbarContainer, SearchbarInput, LoaderBox,
   ResultsContainer, ResultsSection, ResultsHeader,
   ResultsList, ResultsItem, ResultsItemLink, Underline as U,
   ResultsTitle, ResultsText, ResultsSubtext, SearchIcon, UserAvatar
 } from './Searchbar.styled';
 import Popover from 'components/molecules/Popover';
 import FollowBtn from 'components/atoms/FollowBtn';
-
+import Loader from 'components/atoms/Loader';
 const Searchbar = () => {
 
   const match = useRouteMatch('/search/:query');
@@ -34,16 +34,18 @@ const Searchbar = () => {
   const loadData = ({ query }) => {
     if (isLoading) return;
     startLoading();
-    $.get({ url: '/api/users/search', data: { query } })
-      .then(freshUsers => {
-        setEntities(prev => ({ ...prev, users: Object.values(freshUsers) }))
-        usersLoaded();
-      });
-    $.get({ url: '/api/tags/search', data: { query, limit: 6, } })
-      .then(freshTags => {
-        setEntities(prev => ({ ...prev, tags: freshTags }))
-        tagsLoaded();
-      });
+    setTimeout(() => {
+      $.get({ url: '/api/users/search', data: { query } })
+        .then(freshUsers => {
+          setEntities(prev => ({ ...prev, users: Object.values(freshUsers) }))
+          usersLoaded();
+        });
+      $.get({ url: '/api/tags/search', data: { query, limit: 6, } })
+        .then(freshTags => {
+          setEntities(prev => ({ ...prev, tags: freshTags }))
+          tagsLoaded();
+        });
+    }, 300)
   }
 
   const [popoverOpen, setPopoverOpen] = useState(false);
@@ -101,6 +103,9 @@ const Searchbar = () => {
         onChange={handleInput}
         value={searchField}
       />
+      <LoaderBox>
+        <Loader isLoading={isLoading} size='small' />
+      </LoaderBox>
       <Popover
         isOpen={popoverOpen}
         onClickOutside={closePopover}

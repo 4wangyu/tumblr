@@ -4,7 +4,7 @@ import { selectCurrentUser, selectPostById } from 'store/selectors';
 import { Creators as Modal } from 'store/modal/actions';
 import { Thunks as Posts } from 'store/posts/actions';
 import { Card, CardContent } from 'styled/base/Card.styled';
-import { FormHeader, FormError, ExclamationIcon,FormFooter } from './PostForm.styled';
+import { FormHeader, FormFooter } from './PostForm.styled';
 import { Btn } from 'components/atoms/Btn/Btn.styled';
 import ImageGallery from './post-form-fields/ImageGalleryFields';
 import Video from './post-form-fields/VideoFields';
@@ -15,6 +15,8 @@ import Text from './post-form-fields/TextFields/index';
 import Chat from './post-form-fields/ChatFields/index';
 import TagManager from './TagManager';
 import pojoToFormData from 'util/pojo_to_form_data';
+import Loader from 'components/atoms/Loader';
+import FormError from './FormError';
 
 export const FormContext = createContext();
 
@@ -30,11 +32,16 @@ const PostForm = ({ postType, postId = null }) => {
   const updatePost = (postId, formFields) => dispatch(Posts.updatePost(postId, formFields));
   const [formFields, setFormFields] = useState(post || {});
   const [errors, setErrors] = useState({})
+  const [isLoading, setLoading] = useState(false)
   const [required, setRequired] = useState({})
 
   useEffect(() => {
     if (post) setFormFields(prev => ({ ...post, ...prev }));
   }, [post])
+
+  useEffect(() => {
+    setErrors({})
+  }, [formFields])
 
   const getFields = () => ({
     ImageGallery: <ImageGallery />,
@@ -52,17 +59,21 @@ const PostForm = ({ postType, postId = null }) => {
   }, [formFields]);
 
   const processFormData = () => {
+    setLoading(true)
     const newPost = pojoToFormData(formFields);
-
     (formFields.id ? updatePost(formFields.id, newPost) : createPost(newPost))
       .then(() => closeModal())
-      .fail(({ responseText: errorJSON }) => setErrors(JSON.parse(errorJSON)));
+      .fail(({ responseText: errorJSON }) => setErrors(JSON.parse(errorJSON)))
+      .always(() => setLoading(false));
   };
 
   return (
     <Card>
-      <FormHeader>{currentUser.username}</FormHeader>
-      <FormError><ExclamationIcon /> {errors[Object.keys(errors)[0]]}</FormError>
+      <FormHeader>
+        <span>{currentUser.username}</span>
+        <Loader isLoading={isLoading} size='small' />
+      </FormHeader>
+      <FormError errors={errors} />
       <CardContent noPadding>
         <FormContext.Provider value={{ formFields, ...formFields, setFormFields, handleTextInput }}>
           {getFields()[postType]}

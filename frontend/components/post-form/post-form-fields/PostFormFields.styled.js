@@ -76,12 +76,14 @@ export const DeleteBtn = styled.button`
   border: none;
   background-color: ${theme('colors.warning')};
   border-radius: 50%;
+  height: 2rem;
   position: absolute;
-  right: -1rem;
-  top: -1rem;
-  height: 2.3rem;
-  width: 2.3rem;
+  right: -.8rem;
+  top: -.8rem;
   transition: all ease .1s; 
+  width: 2rem;
+  z-index: 1;
+
   &:hover {
     transform: scale(1.1);
   }
@@ -114,6 +116,7 @@ export const BodyTextarea = styled.textarea.attrs({
 // -------------------- Preview
 export const PreviewIndex = styled.div`
   overflow: hidden;
+  padding: .5rem .8rem;
 `;
 
 export const Preview = styled.div`
@@ -123,9 +126,10 @@ export const Preview = styled.div`
   `};
   position: relative;
   margin: ${styledMap`
-    default: 1.7rem;
+    default: .5rem;
     video: 0;
   `};
+  max-height: 15rem;
   & ${DeleteBtn} {
     opacity: 0;
   }
@@ -135,6 +139,7 @@ export const Preview = styled.div`
 `;
 
 export const PreviewImg = styled.img.attrs({ alt: 'image preview' })`
+  border-radius: 1px;
   height: 15rem;
   max-width: 100%;
 `;
