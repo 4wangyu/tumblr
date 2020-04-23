@@ -1,4 +1,5 @@
 require_relative './users.fixtures'
+pre_count = Post.count
 
 def rand_image_count
   case rand*100
@@ -17,3 +18,5 @@ end
     sleep(10.seconds)
   end
 # end
+
+p "Created #{Post.count-pre_count} Posts"

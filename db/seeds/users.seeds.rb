@@ -13,3 +13,5 @@ UsersFixtures.all.each do |user|
     password: Rails.application.credentials.user_seeds[:password]
   )
 end
+
+puts "Created #{User.count} users"
