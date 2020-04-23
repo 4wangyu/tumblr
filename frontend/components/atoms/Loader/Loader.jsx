@@ -3,10 +3,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { LoaderContainer, LoaderBarIndex, LoaderBar } from "./Loader.styled";
 import * as FM from './motions';
 
-const Loader = ({ isLoading }) => (
-  <AnimatePresence>
+const Loader = ({ isLoading, size = 'large' }) => (
+  <AnimatePresence
+    custom={size}
+  >
     {isLoading && (
-      <LoaderContainer>
+      <LoaderContainer size={size}>
         <LoaderBarIndex
           as={motion.div}
           variants={FM.containerVariants}
@@ -16,16 +18,19 @@ const Loader = ({ isLoading }) => (
           exit="leave"
         >
           <LoaderBar
+            custom={size}
             as={motion.span}
             variants={FM.barVariants}
             transition={FM.barTransition}
           />
           <LoaderBar
+            custom={size}
             as={motion.span}
             variants={FM.barVariants}
             transition={FM.barTransition}
           />
           <LoaderBar
+            custom={size}
             as={motion.span}
             variants={FM.barVariants}
             transition={FM.barTransition}

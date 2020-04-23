@@ -17,19 +17,19 @@ export const containerVariants = {
 };
 
 export const containerTransition = {
-  duration: 0.2,
+  duration: 0.25,
   ease: "easeInOut"
 };
 
 export const barVariants = {
-  start: {
-    height: '1.8rem',
+  start: size => ({
+    height: size === 'small' ? '0.9rem' : '1.8rem',
     opacity: 0.45
-  },
-  end: {
-    height: '3rem',
+  }),
+  end: size => ({
+    height: size === 'small' ? '1.5rem' : '3rem',
     opacity: 1
-  }
+  })
 };
 
 export const barTransition = {
