@@ -69,7 +69,7 @@ class Api::PostsController < ApplicationController
     if @post
       render :show, status: :created # 201
     else
-      render json: @post.group_error_messages, status: :unprocessable_entity # 422
+      render json: @post.content.group_error_messages || @post.group_error_messages, status: :unprocessable_entity # 422
     end
   end
 
