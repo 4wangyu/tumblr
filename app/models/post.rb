@@ -52,11 +52,11 @@ class Post < ApplicationRecord
     photos = Unsplash::Photo.search(query, rand(1..3), 20).sample(image_count)
     return if photos.empty?
     photos.each do |photo|
-      urls = photo.urls
+      url = photo.urls.regular
       tags.concat(photo.tags.map { |tag| tag['title']})
       body = photo.description if body.empty? && !photo.description.nil?
       filename = photo.alt_description
-      image_gallery.images.attach( io: open(urls.full), filename: filename)
+      image_gallery.images.attach( io: open(url), filename: filename)
     end
 
     Post.new({ content: image_gallery, body: body, all_tags: tags.uniq })
