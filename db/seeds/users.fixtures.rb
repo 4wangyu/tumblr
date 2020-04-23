@@ -39,7 +39,7 @@ class UsersFixtures
       username: 'archae-heart', 
       title: 'Bringing Architecture, Design and Art to your Dash.', 
       keywords: ['architecture', 'building', 'skyline',] 
-    } # 9
+    }, # 9
     { 
       username: 'rave.nation', 
       title: 'Spreading PLUR', 
@@ -54,7 +54,7 @@ class UsersFixtures
       username: 'wallpaperboss', 
       title: 'Take your phone / desktop to the next level', 
       keywords: ['wallpapers', 'desktop background'] 
-    }, # 12
+    } # 12
   ]
 
   def self.demo
