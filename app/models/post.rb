@@ -10,14 +10,9 @@ class Post < ApplicationRecord
 
   has_many :taggings, as: :taggable, dependent: :destroy
   has_many :tags, through: :taggings
-  # ----------------------------- ActiveStorage
-  
   # ----------------------------- Scope
   default_scope { order(created_at: :desc) }
-  # ----------------------------- Validations
-   
   # ----------------------------- Queries
-
   def all_tags=(names)
     return if names.nil?
     self.tags = names.map do |name|

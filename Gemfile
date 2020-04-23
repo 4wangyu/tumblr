@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.3'
+# Validate ActiveStorage attachments
+gem 'active_storage_validations'
 # Rails templating system
 gem 'actionview', '>= 5.2.4.2' # Security patch recommended by Dependabot
 # API for seeding free, high-definition photos

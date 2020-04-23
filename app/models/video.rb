@@ -8,6 +8,8 @@ class Video < ApplicationRecord
   # ----------------------------- Scope
   default_scope { includes(video_attachment: :blob) }
   # ----------------------------- Validations
-  
-  
+  validates :video, 
+    attached: true, 
+    content_type: 'video/mp4',
+    size: { less_than: 100.megabytes , message: 'must be 100MB or less' }
 end

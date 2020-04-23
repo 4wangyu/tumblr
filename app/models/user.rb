@@ -1,25 +1,43 @@
 class User < ApplicationRecord
   # ----------------------------- Associations
   has_many :posts, dependent: :destroy
-
   has_many :likes,
     class_name: :Like,
     foreign_key: :user_id,
     dependent: :destroy
-
   has_many :liked_posts,
     through: :likes,
     source: :post
-
-  has_many :followed_users, foreign_key: :follower_id, class_name: :Follow
-  has_many :followees, through: :followed_users
-  
-  has_many :following_users, foreign_key: :followee_id, class_name: :Follow
-  has_many :followers, through: :following_users
-
-  # ----------------------------- ActiveStorage
+  has_many :followed_users, 
+    foreign_key: :follower_id, 
+    class_name: :Follow
+  has_many :followees, 
+    through: :followed_users
+  has_many :following_users, 
+    foreign_key: :followee_id, 
+    class_name: :Follow
+  has_many :followers, 
+    through: :following_users
   has_one_attached :avatar
-  before_save :enforce_avatar
+  # ----------------------------- Scope
+  default_scope { includes(avatar_attachment: :blob) }
+  # ----------------------------- Validations
+  validates :email, 
+    :username, 
+    presence: true, 
+    uniqueness: true
+  validates :session_token, 
+    uniqueness: true
+  validates :username, 
+    length: { minimum: 3 }
+  validates :password, 
+    length: { minimum: 6 }, 
+    allow_nil: true
+  validates :avatar, 
+    attached: true, 
+    content_type: ['image/png', 'image/jpg', 'image/jpeg'],
+    size: { less_than: 300.kilobytes , message: 'is too large (must be less than 300KB)' }
+  before_validation :enforce_avatar
 
   def enforce_avatar
     unless self.avatar.attached?
@@ -32,16 +50,6 @@ class User < ApplicationRecord
       )
     end
   end
-
-  # ----------------------------- Scope
-  default_scope { includes(avatar_attachment: :blob) }
-
-  # ----------------------------- Validations
-  validates :email, :username, presence: true, uniqueness: true
-  validates :session_token, uniqueness: true
-  validates :username, length: { minimum: 3 }
-  validates :password, length: { minimum: 6 }, allow_nil: true
-  
   # ----------------------------- Auth
   has_secure_password
   has_secure_token :session_token
@@ -51,7 +59,6 @@ class User < ApplicationRecord
     return nil unless user
     user.authenticate(password)
   end
-
   # ----------------------------- Queries
   def self.name_like(query)
     return [] if query.nil? || query.empty?
@@ -86,5 +93,4 @@ class User < ApplicationRecord
       .order(Arel.sql('COUNT(likes.id) DESC'))
       .first
   end
-
 end
