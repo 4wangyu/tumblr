@@ -15,7 +15,7 @@ end
     user = User.find_by_username(fixture[:username])
     post = Post.from_unsplash(query: fixture[:keywords].sample, image_count: rand_image_count)
     user.posts << post unless post.nil?
-    sleep(10.seconds)
+    sleep(2.seconds)
   end
 # end
 

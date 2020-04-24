@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.3'
+# A dependency for ActiveStorage::Analyzer::ImageAnalyzer, which extracts width and height in pixels from an image blob
+gem 'mini_magick'
 # Validate ActiveStorage attachments
 gem 'active_storage_validations'
 # Rails templating system

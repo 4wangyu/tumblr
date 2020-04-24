@@ -36,7 +36,7 @@ class User < ApplicationRecord
   validates :avatar, 
     attached: true, 
     content_type: ['image/png', 'image/jpg', 'image/jpeg'],
-    size: { less_than: 300.kilobytes , message: 'is too large (must be less than 300KB)' }
+    dimension: { width: { in: 50..200 } }
   before_validation :enforce_avatar
 
   def enforce_avatar

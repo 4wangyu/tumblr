@@ -4,7 +4,7 @@ class CreatePosts < ActiveRecord::Migration[5.2]
       t.references :user, index: true, foreign_key: true, null: false
       t.text :body
       t.references :content, index: true, polymorphic: true, null: false
-      
+      t.boolean :approved, default: false
       
       t.timestamps
     end

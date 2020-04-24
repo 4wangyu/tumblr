@@ -10,5 +10,5 @@ class ImageGallery < ApplicationRecord
     attached: true, 
     content_type: /\Aimage\/.*\z/,
     limit: { min: 1, max: 5 },
-    size: { less_than: 2.megabytes , message: 'must be 2MB or less' }
+    dimension: { width: { in: 400..1080 } }
 end

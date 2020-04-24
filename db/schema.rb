@@ -91,6 +91,7 @@ ActiveRecord::Schema.define(version: 2020_03_18_034555) do
     t.text "body"
     t.string "content_type", null: false
     t.bigint "content_id", null: false
+    t.boolean "approved", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["content_type", "content_id"], name: "index_posts_on_content_type_and_content_id"

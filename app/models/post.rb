@@ -51,7 +51,7 @@ class Post < ApplicationRecord
       tags.concat(photo.tags.map { |tag| tag['title']})
       body = photo.description if body.empty? && !photo.description.nil?
       filename = photo.alt_description
-      image_gallery.images.attach( io: open(url), filename: filename)
+      image_gallery.images.attach(io: open(url), filename: filename)
     end
 
     Post.new({ content: image_gallery, body: body, all_tags: tags.uniq })
