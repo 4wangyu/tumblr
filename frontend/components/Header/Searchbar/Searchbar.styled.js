@@ -129,11 +129,3 @@ export const SearchIcon = styled(FontAwesomeIcon).attrs({
 })`
   font-size: 1.4rem;
 `;
-
-
-export const UserAvatar = styled.img`
-  border-radius: 3px;
-  height: 4rem;
-  width: 4rem;
-`;
-

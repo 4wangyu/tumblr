@@ -9,10 +9,11 @@ import {
   AccountMenu, MenuSection, MenuSubSection,
   MenuHeader, HeaderText, HeaderBtn,
   MenuList, MenuItem, ItemLink, ItemBtn, ItemIcon, ItemText, ItemStat,
-  Thumblr, ThumblrAvatar, ThumblrDetails, ThumblrUsername, ThumblrTitle
+  Thumblr, ThumblrDetails, ThumblrUsername, ThumblrTitle
 } from './AccountPopover.styled';
 import { faHeart, faUserPlus, faPalette } from '@fortawesome/free-solid-svg-icons';
 import { PaletteToggleContext } from 'styled/StyleProvider';
+import UserAvatar from 'components/atoms/UserAvatar';
 
 const AccountPopover = ({ isOpen, close }) => {
 
@@ -79,7 +80,7 @@ const AccountPopover = ({ isOpen, close }) => {
             <HeaderText>thumblr</HeaderText>
           </MenuHeader>
           <Thumblr to="/">
-            <ThumblrAvatar src={avatarAttachment.url} />
+            <UserAvatar avatarAttachment={avatarAttachment} size='small' />
             <ThumblrDetails>
               <ThumblrUsername>{username}</ThumblrUsername>
               <ThumblrTitle>{title}</ThumblrTitle>

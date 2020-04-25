@@ -45,12 +45,6 @@ export const BlogItemContainer = styled.li`
   }
 `;
 
-export const Avatar = styled.img`
-  border-radius: 3px;
-  height: 3.7rem;
-  width: 3.7rem;
-`;
-
 export const HeaderContainer = styled.div`
   align-items: start;
   display: flex;
@@ -66,7 +60,4 @@ export const HeaderUsername = styled.span`
 export const HeaderTitle = styled.span`
   font-size: ${theme('fontSizes.sm')};
   font-weight: ${theme('fontWeights.text')};
-  /* text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden; */
 `;

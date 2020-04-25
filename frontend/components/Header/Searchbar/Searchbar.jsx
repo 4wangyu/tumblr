@@ -4,11 +4,13 @@ import {
   SearchbarContainer, SearchbarInput, LoaderBox,
   ResultsContainer, ResultsSection, ResultsHeader,
   ResultsList, ResultsItem, ResultsItemLink, Underline as U,
-  ResultsTitle, ResultsText, ResultsSubtext, SearchIcon, UserAvatar
+  ResultsTitle, ResultsText, ResultsSubtext, SearchIcon
 } from './Searchbar.styled';
 import Popover from 'components/molecules/Popover';
 import FollowBtn from 'components/atoms/FollowBtn';
 import Loader from 'components/atoms/Loader';
+import UserAvatar from 'components/atoms/UserAvatar';
+
 const Searchbar = () => {
 
   const match = useRouteMatch('/search/:query');
@@ -84,10 +86,10 @@ const Searchbar = () => {
   ))
 
   const renderUserResults = () => users.map(user => {
-    const { id, username, title, avatarAttachment: { url } } = user;
+    const { id, username, title, avatarAttachment } = user;
     return (
       <ResultsItem key={id}>
-        <UserAvatar src={url} />
+        <UserAvatar avatarAttachment={avatarAttachment} size='medium'/>
         <ResultsTitle>
           <ResultsText>{username}</ResultsText>
           <ResultsSubtext>{title}</ResultsSubtext>

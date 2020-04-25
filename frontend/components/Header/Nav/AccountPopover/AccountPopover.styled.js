@@ -81,14 +81,7 @@ export const MenuSubSection = styled.div`
   }
 `;
 
-
 export const Thumblr = styled(ItemLink)``;
-
-export const ThumblrAvatar = styled.img`
-  border-radius: 3px; 
-  height: 3.5rem;
-  width: 3.5rem;
-`;
 
 export const ThumblrDetails = styled.div`
   ${flexCol}
@@ -102,5 +95,3 @@ export const ThumblrUsername = styled.span`
 `;
 
 export const ThumblrTitle = styled.span``;
-
-
