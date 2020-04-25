@@ -27,6 +27,6 @@ const useIntersect = ({ root = null, rootMargin, threshold = 0.9 }) => {
   return [setNode, entry];
 };
 
-useIntersect.buildThresholdArray = () => Array.from(Array(100).keys(), i => i / 100);
+export const buildThresholdArray = () => Array.from(Array(100).keys(), i => i / 100);
 
 export default useIntersect;
