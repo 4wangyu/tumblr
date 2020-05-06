@@ -6,7 +6,7 @@ const MenuPopover = ({ filterItems = [] }) => {
 
   const [popoverOpen, setPopoverOpen] = useState(false);
   const togglePopover = () => setPopoverOpen(prev => !prev);
-  const closePopover = () => { console.log('HH'); setPopoverOpen(false); }
+  const closePopover = () => setPopoverOpen(false);
 
   const renderFilterItems = useMemo(() => filterItems.map(({
     checked,

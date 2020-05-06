@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import α from 'color-alpha';
 
-export const CollectionItem = styled.li`
+export const CollectionItem = styled.div`
   break-inside: avoid-column;
   margin-bottom: 2rem;
 `;
@@ -15,7 +15,7 @@ const gridLayout = css`
   justify-content: center;
 `;
 
-export const CollectionList = styled.ul`
+export const CollectionList = styled.div`
   align-items: center;
   display: flex;
   flex-direction: column;

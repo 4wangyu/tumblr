@@ -13,7 +13,6 @@ const AuthError = ({ field = null, message, fields = [] }) => {
   const errorMessage = useMemo(() => fieldErrors && (message || fieldErrors[0]), [fieldErrors]);
 
   useEffect(() => {
-    console.log(errorMessage)
     Boolean(errorMessage) ? lockSlider() : unlockSlider();
   }, [errorMessage])
 

@@ -9,8 +9,4 @@ export const DashboardPageContainer = styled.div`
   }
 `;
 
-export const Sidebar = styled.div`
-  @media only screen and (max-width: 990px) {
-    display: none;
-  }
-`;
+export const Sidebar = styled.div``;

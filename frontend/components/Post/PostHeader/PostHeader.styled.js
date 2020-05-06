@@ -24,9 +24,3 @@ export const BlogLink = styled(Link)`
 export const ReblogLink = styled(Link)`
   color: ${theme('colors.textLight')};
 `;
-
-export const UserAvatar = styled.img`
-  border-radius: 3px;
-  overflow: hidden;
-  width: 3.8rem; 
-`;

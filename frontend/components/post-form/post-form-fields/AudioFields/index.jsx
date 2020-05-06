@@ -16,7 +16,6 @@ const AudioFields = () => {
       ...prev,
     }));
     const { audioAttachment } = formFields;
-    console.log(audioAttachment)
     if (audioAttachment) setAudioPreview(audioAttachment.url);
   }, []);
 

@@ -8,7 +8,12 @@ import {
   MenuCellList, MenuCellItem, CellIcon, CellTitle
 } from './ComposePost.styled';
 
+import { useBreakpoint } from 'contexts/BreakpointContext';
+
 const ComposePost = () => {
+
+  const { md } = useBreakpoint();
+  if (md) return null;
   const dispatch = useDispatch();
   const openModal = (modal, options) => dispatch(Modal.openModal(modal, options));
   const { avatarAttachment: { url: avatarUrl } } = useSelector(selectCurrentUser);

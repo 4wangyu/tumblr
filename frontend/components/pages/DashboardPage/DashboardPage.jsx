@@ -4,8 +4,11 @@ import RecommendedBlogs from 'components/widgets/RecommendedBlogs';
 import RadarPost from 'components/widgets/RadarPost';
 import ComposePost from './ComposePost'
 import { DashboardPageContainer, Sidebar } from './DashboardPage.styled';
+import { useBreakpoint } from 'contexts/BreakpointContext';
 
 const DashboardPage = () => {
+
+  const { md } = useBreakpoint();
   return (
     <DashboardPageContainer>
       <div>
@@ -16,10 +19,10 @@ const DashboardPage = () => {
           layout="row"
         />
       </div>
-      <Sidebar>
+      {!md && <Sidebar>
         <RecommendedBlogs />
         <RadarPost />
-      </Sidebar>
+      </Sidebar>}
     </DashboardPageContainer>
   );
 };

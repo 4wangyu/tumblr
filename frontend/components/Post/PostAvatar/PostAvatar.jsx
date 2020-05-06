@@ -1,15 +1,19 @@
 import React, { useContext } from 'react';
 import { PostContext } from "../Post";
-import { PostAvatarContainer, AvatarImg } from "./PostAvatar.styled";
+import { PostAvatarContainer, AvatarBox } from "./PostAvatar.styled";
+import UserAvatar from 'components/atoms/UserAvatar';
 
 const PostAvatar = () => {
-  const { author } = useContext(PostContext);
+  const { author, avatarPosition } = useContext(PostContext);
 
+  if (avatarPosition === 'inner') return null;
+  
   return (
     <PostAvatarContainer>
-      <AvatarImg src={author.avatarAttachment.url} />
+      <AvatarBox>
+        <UserAvatar avatarAttachment={author.avatarAttachment} size='large' />
+      </AvatarBox>
     </PostAvatarContainer>
-
   )
 }
 

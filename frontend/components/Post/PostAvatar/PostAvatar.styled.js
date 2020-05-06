@@ -6,11 +6,8 @@ export const PostAvatarContainer = styled.div`
   position: absolute;
 `;
 
-export const AvatarImg = styled.img`
-  border-radius: 3px;
-  height: 6.4rem;
+export const AvatarBox = styled.div`
   margin-right: 2rem;
   position: sticky;
   top: 8rem;
-  width: 6.4rem; 
 `;
