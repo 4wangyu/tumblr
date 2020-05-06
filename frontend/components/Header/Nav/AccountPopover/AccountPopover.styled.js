@@ -41,21 +41,21 @@ export const MenuItem = styled.li``;
 
 export const ItemBtn = styled.a`
   align-items: center;
-  display: flex;
+  display: grid;
   font-size: ${theme('fontSizes.md')};
+  grid-column-gap: 1rem;
+  grid-template-columns: 2rem auto min-content;
+  justify-content: stretch;
   padding: 1rem;
   padding-right: 2rem;
 
   :hover {
     background-color: ${theme('colors.highlightAlt')}
   }
-
-  > *:not(:first-child) {
-    margin-left: 1rem;
-  }
 `;
 
-export const ItemLink = styled(ItemBtn).attrs({ as: Link })``;
+export const ItemLink = styled(ItemBtn).attrs({ as: Link })`
+`;
 
 export const ItemIcon = styled(FontAwesomeIcon)`
   font-size: 1.9rem;
@@ -74,6 +74,7 @@ export const MenuSubSection = styled.div`
 
   ${ItemLink} {
     padding: .5rem;
+    grid-template-columns: auto min-content;
   }
 
   ${ItemText} {
@@ -81,17 +82,35 @@ export const MenuSubSection = styled.div`
   }
 `;
 
-export const Thumblr = styled(ItemLink)``;
+export const Thumblr = styled(ItemLink)`
+  align-items: center;
+  display: grid;
+  grid-column-gap: 1rem;
+  grid-template-columns: min-content auto;
+  justify-content: stretch;
+  padding: 1.2rem 1rem;
+  padding-right: 3rem;
+  position: relative;
+`;
 
 export const ThumblrDetails = styled.div`
-  ${flexCol}
+  /* ${flexCol} */
   flex-grow: 1;
   font-size: ${theme('fontSizes.sm')};
+  margin-left: 0 !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const ThumblrUsername = styled.span`
   color: ${theme('colors.text')};
   font-weight: ${theme('fontWeights.heading')};
+  overflow-wrap: break-word;
 `;
 
-export const ThumblrTitle = styled.span``;
+export const ThumblrTitle = styled.span`
+  font-weight: ${theme('fontWeights.text')};
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;

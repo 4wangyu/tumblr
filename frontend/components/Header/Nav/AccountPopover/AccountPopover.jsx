@@ -82,8 +82,9 @@ const AccountPopover = ({ isOpen, close }) => {
           <Thumblr to="/">
             <UserAvatar avatarAttachment={avatarAttachment} size='small' />
             <ThumblrDetails>
-              <ThumblrUsername>{username}</ThumblrUsername>
-              <ThumblrTitle>{title}</ThumblrTitle>
+              <ThumblrUsername>{username}
+                <ThumblrTitle><br />{title}</ThumblrTitle>
+              </ThumblrUsername>
             </ThumblrDetails>
           </Thumblr>
           <MenuSubSection>

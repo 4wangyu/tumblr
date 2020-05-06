@@ -14,8 +14,13 @@ const BlogItem = ({
     <BlogItemContainer>
       <UserAvatar avatarAttachment={avatarAttachment} />
       <HeaderContainer>
-        <HeaderUsername>{username}</HeaderUsername>
-        <HeaderTitle>{title}</HeaderTitle>
+        <HeaderUsername>{username}
+          <HeaderTitle>
+            <br />
+            {title}
+          </HeaderTitle>
+        </HeaderUsername>
+
       </HeaderContainer>
       <FollowBtn user={user} onClick={handleRemove} />
       <TimesIcon onClick={handleRemove} />

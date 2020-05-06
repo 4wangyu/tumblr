@@ -46,18 +46,18 @@ export const BlogItemContainer = styled.li`
 `;
 
 export const HeaderContainer = styled.div`
-  align-items: start;
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const HeaderUsername = styled.span`
   font-size: ${theme('fontSizes.md')};
   font-weight: ${theme('fontWeights.heading')};
+  overflow-wrap: break-word;
 `;
 
 export const HeaderTitle = styled.span`
   font-size: ${theme('fontSizes.sm')};
   font-weight: ${theme('fontWeights.text')};
+  white-space: nowrap;
 `;

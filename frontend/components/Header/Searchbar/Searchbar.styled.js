@@ -31,7 +31,7 @@ export const SearchbarContainer = styled.form`
 `;
 
 export const SearchbarInput = styled.input.attrs({
-  name: 'searchbar', placeholder: 'Search Tumblr', autoComplete: 'off'
+  name: 'searchbar', placeholder: 'Search Thumblr', autoComplete: 'off'
 })`
   background-color: ${α('white', .25)};
   border: none;
@@ -88,10 +88,14 @@ export const ResultsList = styled.div`
 `;
 
 export const ResultsItem = styled.div`
-  display: flex;
   align-items: center;
+  display: grid;
+  grid-column-gap: 1rem;
+  grid-template-columns: min-content auto min-content;
+  justify-content: stretch;
   padding: 1.2rem 1rem;
   padding-right: 3rem;
+  position: relative;
 
   :hover {
     background-color: ${theme('colors.highlightAlt')}
@@ -104,24 +108,26 @@ export const Underline = styled.span`
 
 export const ResultsItemLink = styled(ResultsItem).attrs({
   as: Link
-})`
-
-`;
+})``;
 
 export const ResultsTitle = styled.div`
-  ${flexCol};
   flex-grow: 1;
   padding: 0 1rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 
 export const ResultsText = styled.span`
-
+  overflow-wrap: break-word;
 `;
 
 export const ResultsSubtext = styled.span`
   color:  ${theme('colors.textLight')};
   font-weight: ${theme('fontWeights.text')};
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 export const SearchIcon = styled(FontAwesomeIcon).attrs({

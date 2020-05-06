@@ -91,8 +91,9 @@ const Searchbar = () => {
       <ResultsItem key={id}>
         <UserAvatar avatarAttachment={avatarAttachment} size='medium'/>
         <ResultsTitle>
-          <ResultsText>{username}</ResultsText>
-          <ResultsSubtext>{title}</ResultsSubtext>
+          <ResultsText>{username}
+            <ResultsSubtext><br/>{title}</ResultsSubtext>
+          </ResultsText>
         </ResultsTitle>
         <FollowBtn user={user}>Follow</FollowBtn>
       </ResultsItem>
