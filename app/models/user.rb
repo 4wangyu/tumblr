@@ -26,18 +26,22 @@ class User < ApplicationRecord
     :username, 
     presence: true, 
     uniqueness: true
+  validates_length_of :username, 
+    minimum: 3, 
+    maximum: 12
+  validates_length_of :title, 
+    maximum: 90
   validates :session_token, 
     uniqueness: true
-  validates :username, 
-    length: { minimum: 3 }
   validates :password, 
-    length: { minimum: 6 }, 
+    length: { minimum: 6,  maximum: 25 }, 
     allow_nil: true
   validates :avatar, 
     attached: true, 
     content_type: ['image/png', 'image/jpg', 'image/jpeg'],
     dimension: { width: { in: 50..200 } }
   before_validation :enforce_avatar
+
 
   def enforce_avatar
     unless self.avatar.attached?
