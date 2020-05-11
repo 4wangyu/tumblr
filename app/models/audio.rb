@@ -10,6 +10,6 @@ class Audio < ApplicationRecord
   validates_presence_of :track
   validates :audio, 
     attached: true, 
-    content_type: 'audio/mp3',
-    size: { less_than: 1.megabytes , message: 'must be 1MB or less' }
+    content_type: /\Aaudio\/.*\z/,
+    size: { less_than: 15.megabytes , message: 'must be 15MB or less' }
 end
