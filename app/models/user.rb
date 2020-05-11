@@ -73,8 +73,7 @@ class User < ApplicationRecord
 
   def dashboard_posts
     Post
-      .where(user_id: self.followees.pluck(:id))
-      .where(user_id: self.id)
+      .where(user_id: self.followees.pluck(:id) + [self.id])
   end
   
   def explore_posts

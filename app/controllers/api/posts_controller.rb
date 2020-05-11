@@ -5,7 +5,7 @@ class Api::PostsController < ApplicationController
 
   # Collection
   def dashboard
-    @posts = Post.all
+    @posts = current_user.dashboard_posts
 
     render :index
   end
