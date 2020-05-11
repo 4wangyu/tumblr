@@ -28,7 +28,7 @@ class User < ApplicationRecord
     uniqueness: true
   validates_length_of :username, 
     minimum: 3, 
-    maximum: 12
+    maximum: 18
   validates_length_of :title, 
     maximum: 90
   validates :session_token, 
