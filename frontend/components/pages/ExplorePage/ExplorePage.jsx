@@ -22,7 +22,7 @@ const ExplorePage = () => {
 
   return (
     <PostCollection
-      collection="dashboard"
+      collection="explore"
       filter={filterPosts}
       infiniteScroll={true}
       layout="grid" // CAUTION: Changing to layout="row" will cause <PostAvatar>(s) to become partially obscured, due to to <ExploreNAv>
