@@ -63,3 +63,25 @@ export const fade = {
     ease: 'easeInOut'
   }
 };
+
+export const riseFall = {
+  transitions: {
+    delay: .1,
+    duration: .2,
+    type: 'tween',
+    ease: 'easeInOut'
+  },
+  variants: {
+    enter: {
+      y: '100px',
+      opacity: 0
+    },
+    center: {
+      y: 0,
+      opacity: 1
+    },
+    exit: {
+      opacity: 0
+    }
+  }
+};

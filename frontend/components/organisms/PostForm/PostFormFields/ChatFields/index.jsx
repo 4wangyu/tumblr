@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useMemo } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Chat, TitleInput, DialogueTextarea } from './ChatFields.styled'
-import { FormContext } from 'components/post-form/PostForm';
+import { FormContext } from 'components/organisms/PostForm';
 
 const ChatFields = () => {
 

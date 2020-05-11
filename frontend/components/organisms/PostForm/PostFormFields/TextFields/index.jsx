@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useMemo } from 'react';
 import { Text, TitleInput, TextTextareaAutosize } from './TextFields.styled'
-import { FormContext } from 'components/post-form/PostForm';
+import { FormContext } from '../../PostForm';
 
 const TextFields = () => {
 

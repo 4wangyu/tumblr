@@ -4,7 +4,7 @@ import {
   QuoteWrapper, QuoteTextareaAutosize,
   SourceWrapper, SourceTextarea
 } from './QuoteFields.styled'
-import { FormContext } from 'components/post-form/PostForm';
+import { FormContext } from '../../PostForm';
 import calcQuoteSizes from 'util/calcQuoteSizes';
 
 const QuoteFields = () => {

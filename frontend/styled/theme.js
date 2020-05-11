@@ -61,8 +61,6 @@ export const themeBase = {
   },
 };
 
-
-
 const darkModePalette = {
   primary: '#1A1A1A',
   secondary: '#222',

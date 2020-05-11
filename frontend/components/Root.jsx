@@ -2,6 +2,7 @@ import React from 'react'
 import { Provider as StoreProvider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { BreakpointProvider } from 'contexts/BreakpointContext';
+import { ModalProvider } from 'contexts/ModalContext';
 import App from './App.jsx';
 
 const queries = {
@@ -16,7 +17,9 @@ const Root = ({ store }) => (
   <StoreProvider store={store}>
     <BrowserRouter>
       <BreakpointProvider queries={queries}>
-        <App />
+        <ModalProvider>
+          <App />
+        </ModalProvider>
       </BreakpointProvider>
     </BrowserRouter>
   </StoreProvider>

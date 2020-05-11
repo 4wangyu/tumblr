@@ -1,10 +1,9 @@
-import React, { useContext } from 'react'
+import React from 'react';
 import {
   Editor, EditorInput
-} from 'components/post-form/post-form-fields/PostFormFields.styled';
+} from '../PostFormFields.styled';
 
-const LinkEditor = ({ handleUrlInput }) => {
-  return (
+const LinkEditor = ({ handleUrlInput }) => (
     <Editor>
       <EditorInput
         name="url"
@@ -12,8 +11,7 @@ const LinkEditor = ({ handleUrlInput }) => {
         placeholder="Type or paste URL"
       />
     </Editor >
-  )
-};
+  );
 
 export default LinkEditor;
 

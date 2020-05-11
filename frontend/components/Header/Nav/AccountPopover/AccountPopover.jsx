@@ -1,8 +1,9 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { AnimatePresence } from 'framer-motion';
+
 import { Thunks as Users } from 'store/users/actions';
 import { Thunks as Session } from 'store/session/actions';
-import { Creators as Modal } from 'store/modal/actions';
 import { selectCurrentUser } from 'store/selectors';
 import Popover from 'components/molecules/Popover';
 import {
@@ -14,6 +15,8 @@ import {
 import { faHeart, faUserPlus, faPalette } from '@fortawesome/free-solid-svg-icons';
 import { PaletteToggleContext } from 'styled/StyleProvider';
 import UserAvatar from 'components/atoms/UserAvatar';
+import { Modal } from 'contexts/ModalContext';
+import ConfirmationModal from 'components/molecules/ConfirmationModal';
 
 const AccountPopover = ({ isOpen, close }) => {
 
@@ -23,7 +26,6 @@ const AccountPopover = ({ isOpen, close }) => {
 
   const dispatch = useDispatch();
   const logout = () => dispatch(Session.logout());
-  const openConfirmationModal = () => dispatch(Modal.openModal('Confirmation', { onConfirm: logout, message: 'Are you sure you want to log out?' }));
   const fetchCurrentUser = () => dispatch(Users.fetchUser(id));
 
   useEffect(() => {
@@ -52,6 +54,10 @@ const AccountPopover = ({ isOpen, close }) => {
     </MenuItem>
   ));
 
+  const [isModalOpen, setModalOpen] = useState(false);
+  const openModal = () => setModalOpen(true);
+  const closeModal = () => setModalOpen(false);
+
   return (
     <Popover
       isOpen={isOpen}
@@ -63,7 +69,7 @@ const AccountPopover = ({ isOpen, close }) => {
         <MenuSection>
           <MenuHeader>
             <HeaderText>account</HeaderText>
-            <HeaderBtn onClick={openConfirmationModal}>Log out</HeaderBtn>
+            <HeaderBtn onClick={openModal}>Log out</HeaderBtn>
           </MenuHeader>
           <MenuList>
             {renderItems(accountItems)}
@@ -94,6 +100,19 @@ const AccountPopover = ({ isOpen, close }) => {
           </MenuSubSection>
         </MenuSection>
       </AccountMenu>
+      <AnimatePresence>
+        {isModalOpen ? (
+          <Modal
+            onClose={closeModal}
+          >
+            <ConfirmationModal
+              message="Are you sure you want to logout?"
+              onConfirm={logout}
+              onClose={closeModal}
+            /> 
+          </Modal>
+        ) : null}
+      </AnimatePresence>
     </Popover>
   );
 };

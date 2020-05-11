@@ -3,27 +3,30 @@ import { flexCenter, flexCenterCol } from 'styled/helpers';
 import Btn from 'components/atoms/Btn';
 import { pulse } from 'styled/keyframes';
 
-export const Confirmation = styled.div`
+export const ConfirmationModalContainer = styled.div`
   ${flexCenterCol};
   width: 35rem;
 `;
 
-export const ConfirmationMsg = styled.p`
-  text-align: center;
-  line-height: 1.6;
+export const Message = styled.p`
   color: #fff;
   font-size: 2.6rem;
+  line-height: 1.6;
   margin-bottom: 1rem;
+  text-align: center;
 `;
 
-export const ConfirmationBtns = styled.div`
+export const BtnContainer = styled.div`
   ${flexCenter};
-  & ${Btn} {
+
+  ${Btn} {
     height: 4.5rem;
-    width: 14rem;
     padding: .5rem .7rem;
-    &:last-child { 
+    width: 14rem;
+  
+    :last-child { 
       animation: ${pulse} 1s ease infinite both;
-      margin-left: 1rem; }
+      margin-left: 1rem; 
+    }
   }
 `;

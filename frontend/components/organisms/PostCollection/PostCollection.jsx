@@ -9,8 +9,8 @@ import Loader from 'components/atoms/Loader';
 import compareCreatedAt from 'util/compare_created_at';
 import usePagination from 'hooks/usePagination';
 import useIntersect, { buildThresholdArray } from 'hooks/useIntersect';
-import { postTransitions, postVariants } from './motions';
 import { AnimatePresence, motion } from 'framer-motion';
+import { riseFall } from 'motions';
 import MasonryLayout from 'components/molecules/MasonryLayout';
 import { useBreakpoint } from 'contexts/BreakpointContext';
 
@@ -94,11 +94,11 @@ const PostCollection = ({
     <CollectionItem
       key={post.id}
       as={motion.div}
-      variants={postVariants}
+      variants={riseFall.variants}
       initial="enter"
       animate="center"
       exit="exit"
-      transition={postTransitions}
+      transition={riseFall.transitions}
     >
       <div ref={idx !== length - 1 ? null : $lastPost}>
         <Post

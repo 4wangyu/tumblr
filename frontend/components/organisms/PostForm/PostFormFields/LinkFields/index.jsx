@@ -6,7 +6,7 @@ import {
   LinkInfo,
 } from 'components/Post/PostContent/Link/Link.styled';
 import { TitleTextarea, DescriptionTextarea } from './index.styled'
-import { FormContext } from 'components/post-form/PostForm';
+import { FormContext } from '../../PostForm';
 import isValidURL from 'util/isValidURL';
 import LinkEditor from './LinkEditor';
 
@@ -38,6 +38,7 @@ const LinkFields = () => {
   };
 
   const handleUrlInput = e => {
+    e.stopPropagation();
     const { value: url } = e.target;
     if (isValidURL(url) && !isFetchingOG) {
       fetchOpenGraph(url)
@@ -48,7 +49,7 @@ const LinkFields = () => {
     <LinkContainer href={thumbnailUrl ? url : undefined} as={!thumbnailUrl ? 'div' : 'a'} >
       {thumbnailUrl && (
         <ThumbnailBox>
-          <HostUrl href={thumbnailUrl ? url: undefined} as={thumbnailUrl ? 'a' : 'div'} imageCaption={true}>{siteHostName}</HostUrl>
+          <HostUrl href={thumbnailUrl ? url : undefined} as={thumbnailUrl ? 'a' : 'div'} imageCaption={true}>{siteHostName}</HostUrl>
           <ThumbnailImg src={thumbnailUrl} />
         </ThumbnailBox>
       )}
