@@ -45,6 +45,7 @@ const ImageGalleryFields = () => {
     e.stopPropagation();
     const attachmentId = parseInt(e.currentTarget.dataset.attachmentId);
     purgeAttachment(attachmentId)
+      .then(() => setFormFields(prev => ({ ...prev, imageAttachments: imageAttachments.filter(a => a.id !== attachmentId) })));
   };
 
   const renderFilePreviews = () => images.map((file, idx) => {

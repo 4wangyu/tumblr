@@ -115,21 +115,24 @@ export const BodyTextarea = styled.textarea.attrs({
 
 // -------------------- Preview
 export const PreviewIndex = styled.div`
-  overflow: hidden;
+  overflow: scroll;
   padding: .5rem .8rem;
 `;
 
 export const Preview = styled.div`
-  display: ${styledMap`
-    default: inline-block;
-    video: block;
-  `};
+  display: ${styledMap('variant', {
+    default: 'inline-block',
+    video: 'block'
+  })};
   position: relative;
-  margin: ${styledMap`
-    default: .5rem;
-    video: 0;
-  `};
-  max-height: 15rem;
+  margin: ${styledMap('variant', {
+    default: '.5rem',
+    video: '0'
+  })};
+  max-height: ${styledMap('variant', {
+    default: '15rem',
+    video: '100%'
+  })};
   & ${DeleteBtn} {
     opacity: 0;
   }

@@ -15,8 +15,9 @@ export const TextContainer = styled.div`
 `;
 
 export const TitleField = styled.h4`
-  font-size: 3.6rem;
+  font-size: 3.4rem;
   font-weight: ${theme('fontWeights.subHeading')};
+  line-height: 1.1;
 `;
 
 export const TextField = styled.p`

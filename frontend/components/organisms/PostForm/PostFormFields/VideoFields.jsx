@@ -30,7 +30,7 @@ const VideoFields = () => {
     const { videoAttachment } = formFields;
     const url = previewUrl || videoAttachment.url;
     return (
-      <Preview video key={url}>
+      <Preview variant="video" key={url}>
         <PreviewVideo src={url} type="video/mp4">Your browser does not support the video tag.</PreviewVideo>
       </Preview>
     );
@@ -41,7 +41,7 @@ const VideoFields = () => {
 
   return (
     <>
-      <PreviewIndex active>{inPreview && renderPreview()}</PreviewIndex>
+      {inPreview && renderPreview()}
       <Editor>
         <EditorCell minimize={inPreview}>
           <HiddenFileInput
