@@ -43,10 +43,10 @@ export const LoginStep3 = () => {
       </FormGroup>
       <AuthError fields={['email', 'password']} />
       <Btn size='large' ref={$loginBtn} onClick={handleSubmit}>Login</Btn>
-      <ActionLink to="/">Forgot password?</ActionLink>
     </>
   );
 };
+// <ActionLink to="/">Forgot password?</ActionLink>
 
-export default [LoginStep1, LoginStep2, LoginStep3];
+export default [LoginStep1, LoginStep3];
 

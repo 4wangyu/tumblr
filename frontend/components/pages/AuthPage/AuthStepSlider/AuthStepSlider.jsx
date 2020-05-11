@@ -56,8 +56,8 @@ const AuthStepSlider = () => {
       .then(() => sleep(500))
       .then(() => $nextBtn.current.click())
       .then(() => sleep(1000))
-      .then(() => $enterPassBtn.current.click())
-      .then(() => sleep(1000))
+      // .then(() => $enterPassBtn.current.click())
+      // .then(() => sleep(1000))
       .then(() => {
         return ghostType('Password4321!', letter => {
           setUserFields(({ password = '', ...prev }) => ({ ...prev, password: password + letter }))
