@@ -6,6 +6,22 @@ Thumblr, a Tumblr clone, is a social media platform allowing users to post multi
 
 ## [Try out Thumblr](https://thumblr-segersalex.herokuapp.com/)
 
+## Technologies
+
+### Backend
+
+* Ruby On Rails
+* Amazon S3
+* PostgresSQL
+
+### Frontend
+
+* Node
+* React (w/ Context API and Hooks)
+* Redux
+* React Router
+* Styled Components
+
 ### Multiple Multimedia Types
 
 Choose from a plethora of multimedia types: text, photo, quote, link, audio, and video.
@@ -28,22 +44,6 @@ Search for tagged posts and blogs to follow live
 ....
 ![Search](https://user-images.githubusercontent.com/32560551/81610803-f13a7280-938e-11ea-96de-332db4fc4e13.gif)
 
-
-## Technologies
-
-### Backend
-
-* Ruby On Rails
-* Amazon S3
-* PostgresSQL
-
-### Frontend
-
-* Node
-* React (w/ Context API and Hooks)
-* Redux
-* React Router
-* Styled Components
 
 ## Technical Challenges
 
