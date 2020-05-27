@@ -1,7 +1,5 @@
 # Thumblr
 
-<img src="https://thumblr-segersalex.herokuapp.com/assets/favicon-b6c3f109064a25705ebf63afa372cf4f1512971eaffd6a1464fd03c07e75ecbc.png" align="right" alt="Thumblr logo by Alex Segers" width="60" height="60">
-
 Thumblr, a Tumblr clone, is a social media platform allowing users to post multimedia content to personal blogs. Users can follow other users' blogs and like each others posts.
 
 ## [Try out Thumblr](https://thumblr-segersalex.herokuapp.com/)
