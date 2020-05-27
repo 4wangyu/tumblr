@@ -2,12 +2,7 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.3'
-# RoR gem responsible for providing Ruby language extensions, by adding utility methods to core classes like Date and String
-gem "activesupport", ">= 5.2.4.3"  # Security patch
-# Facilitates uploading files to a cloud storage services (like Amazon S3) and attaching those files to Active Record objects
-gem "activestorage", ">= 5.2.4.3" # Security patch 
-# RoR gem that consists of the Action_dispatch and Action_controller modules
-gem "actionpack", ">= 5.2.4.3" # Security patch
+
 # A dependency for ActiveStorage::Analyzer::ImageAnalyzer, which extracts width and height in pixels from an image blob
 gem 'mini_magick'
 # Validate ActiveStorage attachments
@@ -33,7 +28,7 @@ gem 'rails', '~> 5.2.3'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
-gem 'puma', '~> 3.12'
+gem "puma", ">= 3.12.6" # Security patch
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
