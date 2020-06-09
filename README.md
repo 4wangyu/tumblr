@@ -2,7 +2,7 @@
 
 Thumblr, a Tumblr clone, is a social media platform allowing users to post multimedia content to personal blogs. Users can follow other users' blogs and like each others posts.
 
-## [Try out Thumblr](https://thumblr-segersalex.herokuapp.com/)
+[Try out Thumblr](https://thumblr-segersalex.herokuapp.com/)
 
 ## Technologies
 
