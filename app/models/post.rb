@@ -24,6 +24,10 @@ class Post < ApplicationRecord
     self.tags.map(&:name)
   end
 
+  def self.approved_first_image_in_galleries
+    self.where(content_type: :ImageGallery, approved: true)
+  end
+
   def self.tags_like(query:,content_type: nil)
     return [] if query.nil? || query.empty?
     q = self
