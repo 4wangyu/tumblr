@@ -23,6 +23,7 @@ Rails.application.routes.draw do
         get 'likes' 
         get 'radar' 
         get 'search'
+        get 'approved'
       end
     end
 

@@ -1,7 +1,7 @@
 class Api::PostsController < ApplicationController
   before_action :select_post, only: [:show, :update, :destroy, :purge_attachment]
   before_render :paginate_posts, only: [:dashboard, :explore, :likes, :search]
-  before_render :pluck_users, only: [:dashboard, :explore, :likes, :search]
+  before_render :pluck_users, only: [:dashboard, :explore, :likes, :search, :approved]
 
   # Collection
   def dashboard
@@ -32,6 +32,12 @@ class Api::PostsController < ApplicationController
   
   def search
     @posts = Post.tags_like(query: params[:query], content_type: params[:content_type])
+
+    render :index
+  end
+
+  def approved
+    @posts = Post.approved_first_image_in_galleries
 
     render :index
   end
