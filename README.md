@@ -4,21 +4,65 @@ Thumblr, a Tumblr clone, is a social media platform allowing users to post multi
 
 [Try out Thumblr](https://thumblr-segersalex.herokuapp.com/)
 
+## Local development
+
+BE
+
+```
+# Install rbenv
+brew install rbenv
+
+# Install Ruby 2.6.6
+rbenv install 2.6.6
+
+# Set a default version.
+rbenv global 2.6.6
+
+# Install bundler
+gem install bundler -v 2.0.2
+
+# Install required gems
+bundle
+
+# Bring up local server
+bundle e rails s
+```
+
+FE
+
+```
+# Install npm packages
+npm install
+
+# Start FE hot-reload
+npm run dev
+```
+
+DB
+
+```
+# following command will create databases based on database.yml , load schema.rb , and seed the data by running seeds.rb
+bundle e rails db:setup
+
+# Run migrations
+bundle e rails db:migrate
+```
+
 ## Technologies
 
 ### Backend
 
-* Ruby On Rails
-* Amazon S3
-* PostgresSQL
+- Ruby On Rails
+- Amazon S3
+- PostgresSQL
 
 ### Frontend
 
-* Node
-* React (w/ Context API and Hooks)
-* Redux
-* React Router
-* Styled Components
+- Node
+- React (w/ Context API and Hooks)
+- Redux
+- React Router
+- Styled Components
 
 ### Multiple Multimedia Types
 
@@ -38,64 +82,87 @@ Posts loads continuously as the user scrolls down the page, reducing the initial
 ![Infinite Scroll](https://user-images.githubusercontent.com/32560551/81610658-b9cbc600-938e-11ea-879f-4fd32b1d104d.gif)
 
 ### Real-time Search
+
 Search for tagged posts and blogs to follow live
 ....
 ![Search](https://user-images.githubusercontent.com/32560551/81610803-f13a7280-938e-11ea-96de-332db4fc4e13.gif)
 
-
 ## Technical Challenges
 
 ### Demo Login
+
 ```javascript
 // -- util/ghostTyper.js --
-const sleep = ms => new Promise((resolve) => setTimeout(resolve, ms));
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-const ghostType = (text, cb, duration = 1000) => new Promise((resolve) => {
-  let current = 0;
-  const len = text.length;
-  const speed = duration / len
-  const _typeNextLetter = () => {
-    let letter = text[current];
-    if (current < len) {
-      current++;
-      setTimeout(() => { cb(letter); _typeNextLetter(); }, speed);
-    } else {
-      resolve()
-    }
-  }
+const ghostType = (text, cb, duration = 1000) =>
+  new Promise((resolve) => {
+    let current = 0;
+    const len = text.length;
+    const speed = duration / len;
+    const _typeNextLetter = () => {
+      let letter = text[current];
+      if (current < len) {
+        current++;
+        setTimeout(() => {
+          cb(letter);
+          _typeNextLetter();
+        }, speed);
+      } else {
+        resolve();
+      }
+    };
 
-  _typeNextLetter();
-});
+    _typeNextLetter();
+  });
 
 // -- component/pages/AuthPage/AuthStepSilder.jsx --
 import { sleep, ghostType } from 'util/ghostTyper';
 
 // ...
 const startGhostLogin = () => {
-    if (isTyping) return;
-    setIsTyping(true);
-    setUserFields({});
-    ghostType('demo@example.com', letter => {
-      setUserFields(({ email = '', ...prev }) => ({ ...prev, email: email + letter }))
-    }, 1500)
-      .then(() => sleep(500))
-      .then(() => $nextBtn.current.click())
-      .then(() => sleep(1000))
+  if (isTyping) return;
+  setIsTyping(true);
+  setUserFields({});
+  ghostType(
+    'demo@example.com',
+    (letter) => {
+      setUserFields(({ email = '', ...prev }) => ({
+        ...prev,
+        email: email + letter,
+      }));
+    },
+    1500
+  )
+    .then(() => sleep(500))
+    .then(() => $nextBtn.current.click())
+    .then(() => sleep(1000))
 
-      .then(() => {
-        return ghostType('Password4321!', letter => {
-          setUserFields(({ password = '', ...prev }) => ({ ...prev, password: password + letter }))
-        }, 1000)
-      })
-      .then(() => sleep(400))
-      .then(() => { setIsTyping(false); $loginBtn.current.click(); });
-  };
+    .then(() => {
+      return ghostType(
+        'Password4321!',
+        (letter) => {
+          setUserFields(({ password = '', ...prev }) => ({
+            ...prev,
+            password: password + letter,
+          }));
+        },
+        1000
+      );
+    })
+    .then(() => sleep(400))
+    .then(() => {
+      setIsTyping(false);
+      $loginBtn.current.click();
+    });
+};
 ```
 
 ### Theming system
+
 ```javascript
 // -- styled/StyleProvider.jsx --
-import React, { createContext, useMemo, useState, useEffect } from "react";
+import React, { createContext, useMemo, useState, useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyle from './GlobalStyle';
 import { themeBase, palettes } from './theme';
@@ -104,13 +171,12 @@ export const PaletteToggleContext = createContext();
 const paletteNames = Object.keys(palettes);
 
 const StyleProvider = ({ children }) => {
-
   const [{ palette }, setThemeState] = useState({ palette: 'True Blue' });
 
   const toggle = () => {
     const idx = (paletteNames.indexOf(palette) + 1) % paletteNames.length;
     const newPalette = paletteNames[idx];
-    window.localStorage.setItem('theme-palette', newPalette)
+    window.localStorage.setItem('theme-palette', newPalette);
     setThemeState({ palette: newPalette });
   };
 
@@ -119,15 +185,17 @@ const StyleProvider = ({ children }) => {
       ...themeBase,
       colors: {
         ...themeBase.colors,
-        ...palettes[palette]
-      }
+        ...palettes[palette],
+      },
     }),
     [palette]
-  )
+  );
 
   useEffect(() => {
     const localTheme = window.localStorage.getItem('theme-palette');
-    const prefersDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const prefersDarkMode =
+      window.matchMedia &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches;
 
     if (localTheme && paletteNames.includes(palette)) {
       setThemeState({ palette: localTheme });
@@ -138,9 +206,7 @@ const StyleProvider = ({ children }) => {
 
   return (
     <PaletteToggleContext.Provider value={{ toggle, palette }}>
-      <ThemeProvider
-        theme={theme}
-      >
+      <ThemeProvider theme={theme}>
         <>
           {children}
           <GlobalStyle />
@@ -154,6 +220,7 @@ export default StyleProvider;
 ```
 
 ### Creating reusable post and form component
+
 ```javascript
 // -- components/PostForm
 import React, { useState, useEffect, useCallback, createContext } from 'react';
@@ -166,7 +233,14 @@ import { Thunks as Posts } from 'store/posts/actions';
 import { Card, CardContent } from 'styled/base/Card.styled';
 import { FormHeader, FormFooter } from './PostForm.styled';
 import { Btn } from 'components/atoms/Btn/Btn.styled';
-import { ImageGallery, Video, Audio, Link, Quote, Text } from './PostFormFields';
+import {
+  ImageGallery,
+  Video,
+  Audio,
+  Link,
+  Quote,
+  Text,
+} from './PostFormFields';
 import TagManager from './TagManager';
 import pojoToFormData from 'util/pojo_to_form_data';
 import Loader from 'components/atoms/Loader';
@@ -175,26 +249,27 @@ import FormError from './FormError';
 export const FormContext = createContext();
 
 const PostForm = ({ postType, postId = null, onClose: closeModal }) => {
-  const { currentUser, post } = useSelector(state => ({
+  const { currentUser, post } = useSelector((state) => ({
     currentUser: selectCurrentUser(state),
-    post: selectPostById(state, { postId })
+    post: selectPostById(state, { postId }),
   }));
 
   const dispatch = useDispatch();
-  const createPost = formFields => dispatch(Posts.createPost(formFields));
-  const updatePost = (postId, formFields) => dispatch(Posts.updatePost(postId, formFields));
+  const createPost = (formFields) => dispatch(Posts.createPost(formFields));
+  const updatePost = (postId, formFields) =>
+    dispatch(Posts.updatePost(postId, formFields));
   const [formFields, setFormFields] = useState(post || {});
-  const [errors, setErrors] = useState({})
-  const [isLoading, setLoading] = useState(false)
+  const [errors, setErrors] = useState({});
+  const [isLoading, setLoading] = useState(false);
   // const [required, setRequired] = useState({})
 
   useEffect(() => {
-    if (post) setFormFields(prev => ({ ...post, ...prev }));
-  }, [post])
+    if (post) setFormFields((prev) => ({ ...post, ...prev }));
+  }, [post]);
 
   useEffect(() => {
-    setErrors({})
-  }, [formFields])
+    setErrors({});
+  }, [formFields]);
 
   const getFields = () => ({
     ImageGallery: <ImageGallery />,
@@ -203,16 +278,19 @@ const PostForm = ({ postType, postId = null, onClose: closeModal }) => {
     Link: <Link />,
     Quote: <Quote />,
     Text: <Text />,
-    Chat: <Chat />
+    Chat: <Chat />,
   });
 
-  const handleTextInput = useCallback(e => {
-    const { name, value } = e.target;
-    setFormFields(prev => ({ ...prev, [name]: value }));
-  }, [formFields]);
+  const handleTextInput = useCallback(
+    (e) => {
+      const { name, value } = e.target;
+      setFormFields((prev) => ({ ...prev, [name]: value }));
+    },
+    [formFields]
+  );
 
   const processFormData = () => {
-    setLoading(true)
+    setLoading(true);
     const newPost = pojoToFormData(formFields);
     (formFields.id ? updatePost(formFields.id, newPost) : createPost(newPost))
       .then(() => closeModal())
@@ -220,7 +298,12 @@ const PostForm = ({ postType, postId = null, onClose: closeModal }) => {
       .always(() => setLoading(false));
   };
 
-  const contextValue = { formFields, ...formFields, setFormFields, handleTextInput };
+  const contextValue = {
+    formFields,
+    ...formFields,
+    setFormFields,
+    handleTextInput,
+  };
 
   return (
     <Card
@@ -233,7 +316,7 @@ const PostForm = ({ postType, postId = null, onClose: closeModal }) => {
     >
       <FormHeader>
         <span>{currentUser.username}</span>
-        <Loader isLoading={isLoading} size='small' />
+        <Loader isLoading={isLoading} size="small" />
       </FormHeader>
       <FormError errors={errors} />
       <CardContent noPadding>
@@ -243,7 +326,9 @@ const PostForm = ({ postType, postId = null, onClose: closeModal }) => {
         </FormContext.Provider>
       </CardContent>
       <FormFooter>
-        <Btn type='secondary' onClick={closeModal}>Close</Btn>
+        <Btn type="secondary" onClick={closeModal}>
+          Close
+        </Btn>
         <Btn onClick={processFormData}>Post</Btn>
       </FormFooter>
     </Card>
