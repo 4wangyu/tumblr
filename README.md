@@ -48,6 +48,8 @@ bundle e rails db:setup
 bundle e rails db:migrate
 ```
 
+Refer to this [medium article](https://medium.com/@dyanagi/how-to-run-an-existing-ruby-on-rails-project-after-cloning-a-repository-8535e4f14bc9) on how to run a RoR project.
+
 ## Technologies
 
 ### Backend
